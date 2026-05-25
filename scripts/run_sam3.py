@@ -11,11 +11,12 @@ Hugging Face access to facebook/sam3 for the SAM3-large checkpoint (sam3.pt).
 import argparse
 import json
 import sys
-from pathlib import Path
-
 import cv2
 import numpy as np
 import torch
+import traceback
+
+from pathlib import Path
 
 # Project root on path when invoked as a script
 ROOT = Path(__file__).resolve().parents[1]
@@ -54,6 +55,7 @@ def load_sam3_predictor(checkpoint_path=None):
         print("Downloading SAM3-large checkpoint from Hugging Face...")
         checkpoint_path = download_ckpt_from_hf(version="sam3")
 
+    # Remove comments after GPU has been acquired
     if torch.cuda.is_available():
         gpus_to_use = [torch.cuda.current_device()]
     else:
@@ -64,6 +66,32 @@ def load_sam3_predictor(checkpoint_path=None):
         checkpoint_path=checkpoint_path,
         gpus_to_use=gpus_to_use,
     )
+
+
+def extract_frames(video_path, output_dir, fps=5):
+    Path(output_dir).mkdir(parents=True, exist_ok=True)
+    cap = cv2.VideoCapture(video_path)
+
+    video_fps = cap.get(cv2.CAP_PROP_FPS)
+    frame_interval = int(video_fps / fps) if fps else 1  # None = every frame
+
+    frame_paths = []
+    frame_count = 0
+    saved_count = 0
+
+    while cap.isOpened():
+        ret, frame = cap.read()
+        if not ret:
+            break
+        if frame_count % frame_interval == 0:
+            path = f"{output_dir}/{saved_count}.jpg"
+            cv2.imwrite(path, frame)
+            frame_paths.append(path)
+            saved_count += 1
+        frame_count += 1
+
+    cap.release()
+    return frame_paths
 
 
 def start_video_session(predictor, frames_dir):
@@ -92,9 +120,14 @@ def prompt_players_on_first_frame(predictor, session_id, frame_paths):
 
     print(f"Adding {len(grid_points)} court grid points on frame 0...")
     for i, (x, y) in enumerate(grid_points):
-        rel_point = abs_to_rel_points([(x, y)], width, height)
-        points_tensor = torch.tensor(rel_point, dtype=torch.float32)
-        labels_tensor = torch.tensor([1], dtype=torch.int32)
+        box_size = 20  # pixels
+        x1 = (x - box_size) / width
+        y1 = (y - box_size) / height
+        x2 = (x + box_size) / width
+        y2 = (y + box_size) / height
+
+        box_tensor = torch.tensor([[x1, y1, x2 - x1, y2 - y1]], dtype=torch.float32)
+        box_labels_tensor = torch.tensor([1], dtype=torch.int32)
 
         try:
             predictor.handle_request(
@@ -102,12 +135,14 @@ def prompt_players_on_first_frame(predictor, session_id, frame_paths):
                     "type": "add_prompt",
                     "session_id": session_id,
                     "frame_index": 0,
-                    "points": points_tensor,
-                    "point_labels": labels_tensor,
+                    "bounding_boxes": box_tensor,
+                    "bounding_box_labels": box_labels_tensor,
                 }
             )
         except Exception as exc:
             print(f"  Warning: grid point {i + 1} at ({x}, {y}) failed: {exc}")
+            traceback.print_exc()
+            raise
 
 
 def propagate_tracking(predictor, session_id):
@@ -221,9 +256,9 @@ def main():
         description="Track basketball players with SAM3 on extracted frames."
     )
     parser.add_argument(
-        "--frames_dir",
-        required=True,
-        help="Directory of JPEG frames from utils/video_utils.py extract_frames",
+        "--video_path",
+        required=False,
+        help="Path of video from where the frames are to be extracted",
     )
     parser.add_argument(
         "--output",
@@ -236,7 +271,11 @@ def main():
         help="Optional local path to SAM3-large checkpoint (sam3.pt)",
     )
     args = parser.parse_args()
-    run_tracking(args.frames_dir, args.output, checkpoint_path=args.checkpoint)
+
+    output_dir = "data/frames_dir/"
+
+    extract_frames(args.video_path, output_dir)
+    run_tracking(output_dir, args.output, checkpoint_path=args.checkpoint)
 
 
 if __name__ == "__main__":
