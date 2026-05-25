@@ -5,7 +5,7 @@ Usage:
     python scripts/run_sam3.py --frames_dir data/frames/clip1 --output data/outputs/tracks.json
 
 Requires: pip install sam3  (CONTEXT.md: segment-anything-3)
-Hugging Face access to facebook/sam3 for the SAM3-large checkpoint (sam3.pt).
+Hugging Face access to facebook/sam3.1 for the SAM 3.1 multiplex checkpoint.
 """
 
 import argparse
@@ -23,37 +23,19 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 try:
-    from sam3.model_builder import build_sam3_video_predictor, download_ckpt_from_hf
+    # SAM 3.1 Multiplex: recommended builder for multi-object video tracking
+    from sam3.model_builder import build_sam3_multiplex_video_predictor, download_ckpt_from_hf
 except ImportError as exc:
     raise ImportError(
         "SAM3 not found. Install with: pip install sam3"
     ) from exc
 
 
-def abs_to_rel_points(points_xy, width, height):
-    """Convert absolute pixel points to relative [0, 1] coordinates."""
-    return [[x / width, y / height] for x, y in points_xy]
-
-
-def court_point_grid(width, height, cols=10, rows=6):
-    """
-    Build a grid of positive-click points over the main court area.
-
-    Margins exclude sidelines and scoreboard regions typical in broadcast views.
-    """
-    x_min, x_max = int(0.08 * width), int(0.92 * width)
-    y_min, y_max = int(0.22 * height), int(0.92 * height)
-
-    xs = np.linspace(x_min, x_max, cols, dtype=int)
-    ys = np.linspace(y_min, y_max, rows, dtype=int)
-    return [(int(x), int(y)) for y in ys for x in xs]
-
-
 def load_sam3_predictor(checkpoint_path=None):
-    """Load SAM3-large (default facebook/sam3 checkpoint)."""
+    """Load SAM 3.1 Multiplex video predictor (facebook/sam3.1 checkpoint)."""
     if checkpoint_path is None:
-        print("Downloading SAM3-large checkpoint from Hugging Face...")
-        checkpoint_path = download_ckpt_from_hf(version="sam3")
+        print("Downloading SAM 3.1 multiplex checkpoint from Hugging Face...")
+        checkpoint_path = download_ckpt_from_hf(version="sam3.1")
 
     # Remove comments after GPU has been acquired
     if torch.cuda.is_available():
@@ -61,11 +43,18 @@ def load_sam3_predictor(checkpoint_path=None):
     else:
         raise RuntimeError("SAM3 video tracking requires a CUDA GPU.")
 
-    print(f"Loading SAM3 video predictor (checkpoint: {checkpoint_path})...")
-    return build_sam3_video_predictor(
-        checkpoint_path=checkpoint_path,
-        gpus_to_use=gpus_to_use,
-    )
+    print(f"Loading SAM 3.1 multiplex video predictor (checkpoint: {checkpoint_path})...")
+    try:
+        return build_sam3_multiplex_video_predictor(
+            checkpoint_path=checkpoint_path,
+            gpus_to_use=gpus_to_use,
+        )
+    except TypeError:
+        print("gpus_to_use not supported, loading without it...")
+        return build_sam3_multiplex_video_predictor(
+            checkpoint_path=checkpoint_path,
+        )
+    
 
 
 def extract_frames(video_path, output_dir, fps=5):
@@ -107,43 +96,26 @@ def start_video_session(predictor, frames_dir):
 
 def prompt_players_on_first_frame(predictor, session_id, frame_paths):
     """
-    Prompt SAM3 on frame 0 with a court grid to seed player detections.
+    Prompt SAM 3.1 Multiplex on frame 0 with a text concept to detect basketball players.
 
-    Each grid point is added separately so SAM3 can assign distinct object IDs.
+    Uses PCS (Promptable Concept Segmentation): a single text prompt asks the
+    multiplex detector to find all instances of "basketball players" and assign
+    each a unique object ID before temporal propagation.
     """
-    first_frame = cv2.imread(str(frame_paths[0]))
-    if first_frame is None:
-        raise ValueError(f"Could not read first frame: {frame_paths[0]}")
+    prompt_text = "basketball players"
+    print(f'Adding text prompt "{prompt_text}" on frame 0...')
 
-    height, width = first_frame.shape[:2]
-    grid_points = court_point_grid(width, height)
-
-    print(f"Adding {len(grid_points)} court grid points on frame 0...")
-    for i, (x, y) in enumerate(grid_points):
-        box_size = 20  # pixels
-        x1 = (x - box_size) / width
-        y1 = (y - box_size) / height
-        x2 = (x + box_size) / width
-        y2 = (y + box_size) / height
-
-        box_tensor = torch.tensor([[x1, y1, x2 - x1, y2 - y1]], dtype=torch.float32)
-        box_labels_tensor = torch.tensor([1], dtype=torch.int32)
-
-        try:
-            predictor.handle_request(
-                request={
-                    "type": "add_prompt",
-                    "session_id": session_id,
-                    "frame_index": 0,
-                    "obj_id": i + 1,
-                    "bounding_boxes": box_tensor,
-                    "bounding_box_labels": box_labels_tensor,
-                }
-            )
-        except Exception as exc:
-            print(f"  Warning: grid point {i + 1} at ({x}, {y}) failed: {exc}")
-            traceback.print_exc()
-            raise
+    try:
+        predictor.handle_request(
+            request={
+                "type": "add_prompt",
+                "session_id": session_id,
+                "frame_index": 0,
+                "text": prompt_text,
+            }
+        )
+    except Exception as exc:
+        print(f"  Warning: text prompt failed: {exc}")
 
 
 def propagate_tracking(predictor, session_id):
@@ -217,6 +189,7 @@ def run_tracking(frames_dir, output_path, checkpoint_path=None):
     height, width = first_frame.shape[:2]
 
     predictor = load_sam3_predictor(checkpoint_path=checkpoint_path)
+    session_id = None
 
     try:
         session_id = start_video_session(predictor, frames_dir)
@@ -247,7 +220,13 @@ def run_tracking(frames_dir, output_path, checkpoint_path=None):
         print(f"Saved tracks for {len(results['frames'])} frames to {output_path}")
     finally:
         try:
-            predictor.shutdown()
+            predictor.handle_request(
+                request=dict(
+                    type="close_session",
+                    session_id=session_id,
+                )
+            )
+            print("Session closed.")
         except Exception:
             pass
 
