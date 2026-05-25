@@ -135,6 +135,7 @@ def prompt_players_on_first_frame(predictor, session_id, frame_paths):
                     "type": "add_prompt",
                     "session_id": session_id,
                     "frame_index": 0,
+                    "obj_id": i + 1,
                     "bounding_boxes": box_tensor,
                     "bounding_box_labels": box_labels_tensor,
                 }
