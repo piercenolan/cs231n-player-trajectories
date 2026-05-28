@@ -207,7 +207,7 @@ def compute_id_consistency(frames):
     )
 
 
-def summary_report(tracks_path, expected_players=10, frames=None):
+def summary_report(tracks_path, expected_players=10, frames=None, label="SAM3.1 BASELINE"):
     """
     Run all baseline metrics and print a formatted research report.
 
@@ -240,7 +240,7 @@ def summary_report(tracks_path, expected_players=10, frames=None):
 
     print()
     print("=" * 42)
-    print("SAM3.1 BASELINE METRICS REPORT")
+    print(f"{label} METRICS REPORT")
     print("=" * 42)
     print(f"Total frames analyzed: {total_frames}")
     print()
@@ -266,7 +266,7 @@ def summary_report(tracks_path, expected_players=10, frames=None):
     print(f"Min track streak: {min_streak} frames")
     print()
     print("=" * 42)
-    print("These are SAM3.1 baseline numbers.")
+    print(f"These are {label} numbers.")
     print("Target: augmentation layer should reduce")
     print("ID switches and increase mean streak.")
     print("=" * 42)
@@ -302,6 +302,7 @@ def plot_metrics(
     frames,
     output_path="data/outputs/baseline_metrics.png",
     expected_players=10,
+    label="SAM3.1 BASELINE",
 ):
     """
     Save a two-panel baseline figure for the research paper.
@@ -336,7 +337,7 @@ def plot_metrics(
     ax1.set_ylim(0, 12)
     ax1.set_xlabel("Frame number")
     ax1.set_ylabel("Player count")
-    ax1.set_title("SAM3.1 Baseline: Players Tracked Per Frame")
+    ax1.set_title(f"{label}: Players Tracked Per Frame")
     ax1.grid(True, alpha=0.3)
 
     legend_elements = [
@@ -370,7 +371,7 @@ def plot_metrics(
         ax2.bar(ids, streaks, color="#1f77b4", edgecolor="white", linewidth=0.5)
     ax2.set_xlabel("Player ID")
     ax2.set_ylabel("Longest streak (frames)")
-    ax2.set_title("SAM3.1 Baseline: Track Continuity Per Player")
+    ax2.set_title(f"{label}: Track Continuity Per Player")
     ax2.grid(True, axis="y", alpha=0.3)
 
     fig.tight_layout()
@@ -399,6 +400,11 @@ def main():
         default=10,
         help="Roster size for full-coverage reporting and plot thresholds",
     )
+    parser.add_argument(
+        "--label",
+        default="SAM3.1 BASELINE",
+        help="Label for the metrics report and plot",
+    )
     args = parser.parse_args()
 
     frames = load_tracks(args.tracks)
@@ -406,11 +412,13 @@ def main():
         args.tracks,
         expected_players=args.expected_players,
         frames=frames,
+        label=args.label,
     )
     plot_metrics(
         frames,
         output_path=args.output_figure,
         expected_players=args.expected_players,
+        label=args.label,
     )
 
 
