@@ -37,7 +37,7 @@ def _sorted_frames(frames):
     """Return frames sorted by frame_number; empty list if no frames."""
     if not frames:
         return []
-    return sorted(frames, key=lambda f: f["frame_number"])
+    return sorted(frames, key=lambda f: int(f["frame_number"]))
 
 
 def _players_per_frame(frames):
@@ -218,6 +218,8 @@ def summary_report(tracks_path, expected_players=10, frames=None):
         Dict with fixed keys for Weights & Biases logging.
     """
     if frames is None:
+        if tracks_path is None:
+            raise ValueError("tracks_path is required when frames is None")
         frames = load_tracks(tracks_path)
 
     mean_players, std_players, min_players, max_players = compute_id_consistency(
@@ -270,6 +272,15 @@ def summary_report(tracks_path, expected_players=10, frames=None):
     print("=" * 42)
     print()
 
+    # Smart loss detection — handles camera pans and fast breaks
+    loss_frames, loss_count = count_tracking_loss(frames)
+    sudden_drop_frames, sudden_drop_count = count_sudden_drops(frames)
+    print()
+    print("--- Smart Loss Detection ---")
+    print(f"Rolling-window loss events: {loss_count} frames")
+    print(f"Sudden drop events (3+ players): {sudden_drop_count} frames")
+    print("(These exclude camera pans and fast breaks)")
+
     metrics = {
         "total_frames": total_frames,
         "mean_players_per_frame": mean_players,
@@ -281,6 +292,8 @@ def summary_report(tracks_path, expected_players=10, frames=None):
         "total_id_switches": total_id_switches,
         "mean_track_streak": mean_streak,
         "min_track_streak": min_streak,
+        "rolling_loss_frames": loss_count,
+        "sudden_drop_frames": sudden_drop_count,
     }
     return metrics
 
