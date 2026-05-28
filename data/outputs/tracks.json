@@ -1,0 +1,5280 @@
+{
+  "frames": [
+    {
+      "frame_number": 1,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 568,
+            "y": 312,
+            "w": 22,
+            "h": 37
+          },
+          "mask_center": {
+            "x": 582.1,
+            "y": 329.1
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 2,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 580,
+            "y": 315,
+            "w": 20,
+            "h": 35
+          },
+          "mask_center": {
+            "x": 593.1,
+            "y": 330.7
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 3,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 591,
+            "y": 317,
+            "w": 20,
+            "h": 34
+          },
+          "mask_center": {
+            "x": 603.0,
+            "y": 333.7
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 4,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 599,
+            "y": 319,
+            "w": 21,
+            "h": 33
+          },
+          "mask_center": {
+            "x": 612.3,
+            "y": 335.2
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 5,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 610,
+            "y": 321,
+            "w": 20,
+            "h": 34
+          },
+          "mask_center": {
+            "x": 622.1,
+            "y": 337.5
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 6,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 620,
+            "y": 323,
+            "w": 19,
+            "h": 34
+          },
+          "mask_center": {
+            "x": 632.4,
+            "y": 338.9
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 7,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 629,
+            "y": 326,
+            "w": 10,
+            "h": 27
+          },
+          "mask_center": {
+            "x": 636.7,
+            "y": 335.3
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 8,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 635,
+            "y": 326,
+            "w": 4,
+            "h": 5
+          },
+          "mask_center": {
+            "x": 637.5,
+            "y": 327.9
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 9,
+      "players": []
+    },
+    {
+      "frame_number": 10,
+      "players": []
+    },
+    {
+      "frame_number": 11,
+      "players": []
+    },
+    {
+      "frame_number": 12,
+      "players": []
+    },
+    {
+      "frame_number": 13,
+      "players": []
+    },
+    {
+      "frame_number": 14,
+      "players": []
+    },
+    {
+      "frame_number": 15,
+      "players": []
+    },
+    {
+      "frame_number": 16,
+      "players": []
+    },
+    {
+      "frame_number": 17,
+      "players": []
+    },
+    {
+      "frame_number": 18,
+      "players": []
+    },
+    {
+      "frame_number": 19,
+      "players": []
+    },
+    {
+      "frame_number": 20,
+      "players": []
+    },
+    {
+      "frame_number": 21,
+      "players": []
+    },
+    {
+      "frame_number": 22,
+      "players": []
+    },
+    {
+      "frame_number": 23,
+      "players": []
+    },
+    {
+      "frame_number": 24,
+      "players": []
+    },
+    {
+      "frame_number": 25,
+      "players": []
+    },
+    {
+      "frame_number": 26,
+      "players": []
+    },
+    {
+      "frame_number": 27,
+      "players": []
+    },
+    {
+      "frame_number": 28,
+      "players": []
+    },
+    {
+      "frame_number": 29,
+      "players": []
+    },
+    {
+      "frame_number": 30,
+      "players": []
+    },
+    {
+      "frame_number": 31,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 585,
+            "y": 342,
+            "w": 14,
+            "h": 17
+          },
+          "mask_center": {
+            "x": 592.0,
+            "y": 350.6
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 32,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 544,
+            "y": 335,
+            "w": 16,
+            "h": 24
+          },
+          "mask_center": {
+            "x": 552.1,
+            "y": 347.4
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 33,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 502,
+            "y": 328,
+            "w": 13,
+            "h": 30
+          },
+          "mask_center": {
+            "x": 509.5,
+            "y": 341.5
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 34,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 463,
+            "y": 324,
+            "w": 12,
+            "h": 27
+          },
+          "mask_center": {
+            "x": 469.2,
+            "y": 336.7
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 35,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 430,
+            "y": 323,
+            "w": 8,
+            "h": 27
+          },
+          "mask_center": {
+            "x": 434.3,
+            "y": 336.8
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 36,
+      "players": []
+    },
+    {
+      "frame_number": 37,
+      "players": []
+    },
+    {
+      "frame_number": 38,
+      "players": []
+    },
+    {
+      "frame_number": 39,
+      "players": []
+    },
+    {
+      "frame_number": 40,
+      "players": []
+    },
+    {
+      "frame_number": 41,
+      "players": []
+    },
+    {
+      "frame_number": 42,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 173,
+            "y": 332,
+            "w": 16,
+            "h": 26
+          },
+          "mask_center": {
+            "x": 183.4,
+            "y": 342.9
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 43,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 143,
+            "y": 337,
+            "w": 13,
+            "h": 21
+          },
+          "mask_center": {
+            "x": 151.8,
+            "y": 347.1
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 44,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 114,
+            "y": 341,
+            "w": 12,
+            "h": 18
+          },
+          "mask_center": {
+            "x": 121.5,
+            "y": 349.0
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 45,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 79,
+            "y": 345,
+            "w": 17,
+            "h": 13
+          },
+          "mask_center": {
+            "x": 89.2,
+            "y": 351.4
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 46,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 45,
+            "y": 350,
+            "w": 18,
+            "h": 9
+          },
+          "mask_center": {
+            "x": 55.2,
+            "y": 354.2
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 47,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 15,
+            "y": 356,
+            "w": 19,
+            "h": 3
+          },
+          "mask_center": {
+            "x": 24.9,
+            "y": 357.6
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 48,
+      "players": []
+    },
+    {
+      "frame_number": 49,
+      "players": []
+    },
+    {
+      "frame_number": 50,
+      "players": []
+    },
+    {
+      "frame_number": 51,
+      "players": []
+    },
+    {
+      "frame_number": 52,
+      "players": []
+    },
+    {
+      "frame_number": 53,
+      "players": []
+    },
+    {
+      "frame_number": 54,
+      "players": []
+    },
+    {
+      "frame_number": 55,
+      "players": []
+    },
+    {
+      "frame_number": 56,
+      "players": []
+    },
+    {
+      "frame_number": 57,
+      "players": []
+    },
+    {
+      "frame_number": 58,
+      "players": []
+    },
+    {
+      "frame_number": 59,
+      "players": []
+    },
+    {
+      "frame_number": 60,
+      "players": []
+    },
+    {
+      "frame_number": 61,
+      "players": []
+    },
+    {
+      "frame_number": 62,
+      "players": []
+    },
+    {
+      "frame_number": 63,
+      "players": []
+    },
+    {
+      "frame_number": 64,
+      "players": []
+    },
+    {
+      "frame_number": 65,
+      "players": []
+    },
+    {
+      "frame_number": 66,
+      "players": []
+    },
+    {
+      "frame_number": 67,
+      "players": []
+    },
+    {
+      "frame_number": 68,
+      "players": []
+    },
+    {
+      "frame_number": 69,
+      "players": []
+    },
+    {
+      "frame_number": 70,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 76,
+            "y": 350,
+            "w": 7,
+            "h": 9
+          },
+          "mask_center": {
+            "x": 79.8,
+            "y": 354.6
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 71,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 118,
+            "y": 335,
+            "w": 4,
+            "h": 7
+          },
+          "mask_center": {
+            "x": 120.0,
+            "y": 337.8
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 72,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 151,
+            "y": 331,
+            "w": 5,
+            "h": 8
+          },
+          "mask_center": {
+            "x": 153.3,
+            "y": 334.8
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 73,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 178,
+            "y": 329,
+            "w": 9,
+            "h": 20
+          },
+          "mask_center": {
+            "x": 182.6,
+            "y": 339.1
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 74,
+      "players": []
+    },
+    {
+      "frame_number": 75,
+      "players": []
+    },
+    {
+      "frame_number": 76,
+      "players": []
+    },
+    {
+      "frame_number": 77,
+      "players": []
+    },
+    {
+      "frame_number": 78,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 566,
+            "y": 319,
+            "w": 19,
+            "h": 27
+          },
+          "mask_center": {
+            "x": 576.5,
+            "y": 330.1
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 79,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 566,
+            "y": 319,
+            "w": 18,
+            "h": 29
+          },
+          "mask_center": {
+            "x": 576.2,
+            "y": 331.9
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 80,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 567,
+            "y": 319,
+            "w": 18,
+            "h": 29
+          },
+          "mask_center": {
+            "x": 576.7,
+            "y": 331.6
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 81,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 567,
+            "y": 319,
+            "w": 18,
+            "h": 31
+          },
+          "mask_center": {
+            "x": 577.6,
+            "y": 332.9
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 82,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 569,
+            "y": 320,
+            "w": 18,
+            "h": 33
+          },
+          "mask_center": {
+            "x": 579.4,
+            "y": 335.0
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 83,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 571,
+            "y": 320,
+            "w": 20,
+            "h": 35
+          },
+          "mask_center": {
+            "x": 582.3,
+            "y": 336.1
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 84,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 575,
+            "y": 321,
+            "w": 19,
+            "h": 34
+          },
+          "mask_center": {
+            "x": 585.5,
+            "y": 337.3
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 85,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 579,
+            "y": 323,
+            "w": 20,
+            "h": 35
+          },
+          "mask_center": {
+            "x": 590.2,
+            "y": 339.1
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 86,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 585,
+            "y": 325,
+            "w": 19,
+            "h": 33
+          },
+          "mask_center": {
+            "x": 595.3,
+            "y": 340.6
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 87,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 590,
+            "y": 326,
+            "w": 20,
+            "h": 33
+          },
+          "mask_center": {
+            "x": 600.5,
+            "y": 342.3
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 88,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 594,
+            "y": 328,
+            "w": 22,
+            "h": 31
+          },
+          "mask_center": {
+            "x": 606.1,
+            "y": 343.0
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 89,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 600,
+            "y": 330,
+            "w": 22,
+            "h": 29
+          },
+          "mask_center": {
+            "x": 611.8,
+            "y": 344.6
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 90,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 605,
+            "y": 333,
+            "w": 23,
+            "h": 26
+          },
+          "mask_center": {
+            "x": 618.3,
+            "y": 345.9
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 91,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 611,
+            "y": 335,
+            "w": 25,
+            "h": 24
+          },
+          "mask_center": {
+            "x": 624.9,
+            "y": 347.0
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 92,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 618,
+            "y": 338,
+            "w": 21,
+            "h": 21
+          },
+          "mask_center": {
+            "x": 629.9,
+            "y": 348.7
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 93,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 622,
+            "y": 340,
+            "w": 17,
+            "h": 19
+          },
+          "mask_center": {
+            "x": 631.9,
+            "y": 349.1
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 94,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 627,
+            "y": 341,
+            "w": 12,
+            "h": 18
+          },
+          "mask_center": {
+            "x": 633.9,
+            "y": 349.7
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 95,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 630,
+            "y": 343,
+            "w": 9,
+            "h": 16
+          },
+          "mask_center": {
+            "x": 635.7,
+            "y": 349.7
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 96,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 633,
+            "y": 344,
+            "w": 6,
+            "h": 13
+          },
+          "mask_center": {
+            "x": 637.1,
+            "y": 348.6
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 97,
+      "players": []
+    },
+    {
+      "frame_number": 98,
+      "players": []
+    },
+    {
+      "frame_number": 99,
+      "players": []
+    },
+    {
+      "frame_number": 100,
+      "players": []
+    },
+    {
+      "frame_number": 101,
+      "players": []
+    },
+    {
+      "frame_number": 102,
+      "players": []
+    },
+    {
+      "frame_number": 103,
+      "players": []
+    },
+    {
+      "frame_number": 104,
+      "players": []
+    },
+    {
+      "frame_number": 105,
+      "players": []
+    },
+    {
+      "frame_number": 106,
+      "players": []
+    },
+    {
+      "frame_number": 107,
+      "players": []
+    },
+    {
+      "frame_number": 108,
+      "players": []
+    },
+    {
+      "frame_number": 109,
+      "players": []
+    },
+    {
+      "frame_number": 110,
+      "players": []
+    },
+    {
+      "frame_number": 111,
+      "players": []
+    },
+    {
+      "frame_number": 112,
+      "players": []
+    },
+    {
+      "frame_number": 113,
+      "players": []
+    },
+    {
+      "frame_number": 114,
+      "players": []
+    },
+    {
+      "frame_number": 115,
+      "players": []
+    },
+    {
+      "frame_number": 116,
+      "players": []
+    },
+    {
+      "frame_number": 117,
+      "players": []
+    },
+    {
+      "frame_number": 118,
+      "players": []
+    },
+    {
+      "frame_number": 119,
+      "players": []
+    },
+    {
+      "frame_number": 120,
+      "players": []
+    },
+    {
+      "frame_number": 121,
+      "players": []
+    },
+    {
+      "frame_number": 122,
+      "players": []
+    },
+    {
+      "frame_number": 123,
+      "players": []
+    },
+    {
+      "frame_number": 124,
+      "players": []
+    },
+    {
+      "frame_number": 125,
+      "players": []
+    },
+    {
+      "frame_number": 126,
+      "players": []
+    },
+    {
+      "frame_number": 127,
+      "players": []
+    },
+    {
+      "frame_number": 128,
+      "players": []
+    },
+    {
+      "frame_number": 129,
+      "players": []
+    },
+    {
+      "frame_number": 130,
+      "players": []
+    },
+    {
+      "frame_number": 131,
+      "players": []
+    },
+    {
+      "frame_number": 132,
+      "players": []
+    },
+    {
+      "frame_number": 133,
+      "players": []
+    },
+    {
+      "frame_number": 134,
+      "players": []
+    },
+    {
+      "frame_number": 135,
+      "players": []
+    },
+    {
+      "frame_number": 136,
+      "players": []
+    },
+    {
+      "frame_number": 137,
+      "players": []
+    },
+    {
+      "frame_number": 138,
+      "players": []
+    },
+    {
+      "frame_number": 139,
+      "players": []
+    },
+    {
+      "frame_number": 140,
+      "players": []
+    },
+    {
+      "frame_number": 141,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 540,
+            "y": 324,
+            "w": 22,
+            "h": 34
+          },
+          "mask_center": {
+            "x": 552.5,
+            "y": 338.3
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 142,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 551,
+            "y": 323,
+            "w": 24,
+            "h": 35
+          },
+          "mask_center": {
+            "x": 564.7,
+            "y": 338.1
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 143,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 562,
+            "y": 324,
+            "w": 24,
+            "h": 35
+          },
+          "mask_center": {
+            "x": 575.4,
+            "y": 339.2
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 144,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 570,
+            "y": 324,
+            "w": 25,
+            "h": 35
+          },
+          "mask_center": {
+            "x": 584.2,
+            "y": 340.1
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 145,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 577,
+            "y": 325,
+            "w": 25,
+            "h": 34
+          },
+          "mask_center": {
+            "x": 591.1,
+            "y": 340.9
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 146,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 582,
+            "y": 325,
+            "w": 25,
+            "h": 34
+          },
+          "mask_center": {
+            "x": 596.2,
+            "y": 341.1
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 147,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 585,
+            "y": 326,
+            "w": 26,
+            "h": 33
+          },
+          "mask_center": {
+            "x": 599.6,
+            "y": 341.6
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 148,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 587,
+            "y": 327,
+            "w": 25,
+            "h": 32
+          },
+          "mask_center": {
+            "x": 601.4,
+            "y": 342.0
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 149,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 589,
+            "y": 327,
+            "w": 26,
+            "h": 32
+          },
+          "mask_center": {
+            "x": 603.4,
+            "y": 342.4
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 150,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 592,
+            "y": 328,
+            "w": 26,
+            "h": 31
+          },
+          "mask_center": {
+            "x": 606.8,
+            "y": 343.0
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 151,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 595,
+            "y": 330,
+            "w": 27,
+            "h": 29
+          },
+          "mask_center": {
+            "x": 610.0,
+            "y": 343.9
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 152,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 597,
+            "y": 330,
+            "w": 27,
+            "h": 29
+          },
+          "mask_center": {
+            "x": 611.8,
+            "y": 344.2
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 153,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 598,
+            "y": 331,
+            "w": 27,
+            "h": 28
+          },
+          "mask_center": {
+            "x": 613.0,
+            "y": 344.7
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 154,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 600,
+            "y": 332,
+            "w": 26,
+            "h": 27
+          },
+          "mask_center": {
+            "x": 614.4,
+            "y": 345.3
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 155,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 602,
+            "y": 333,
+            "w": 26,
+            "h": 26
+          },
+          "mask_center": {
+            "x": 616.5,
+            "y": 345.8
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 156,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 605,
+            "y": 335,
+            "w": 27,
+            "h": 24
+          },
+          "mask_center": {
+            "x": 619.6,
+            "y": 347.0
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 157,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 609,
+            "y": 335,
+            "w": 26,
+            "h": 24
+          },
+          "mask_center": {
+            "x": 622.4,
+            "y": 347.7
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 158,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 611,
+            "y": 338,
+            "w": 28,
+            "h": 21
+          },
+          "mask_center": {
+            "x": 626.0,
+            "y": 348.9
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 159,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 614,
+            "y": 340,
+            "w": 25,
+            "h": 19
+          },
+          "mask_center": {
+            "x": 627.3,
+            "y": 350.0
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 160,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 616,
+            "y": 341,
+            "w": 23,
+            "h": 18
+          },
+          "mask_center": {
+            "x": 628.4,
+            "y": 350.3
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 161,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 619,
+            "y": 342,
+            "w": 20,
+            "h": 17
+          },
+          "mask_center": {
+            "x": 629.9,
+            "y": 350.5
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 162,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 622,
+            "y": 343,
+            "w": 17,
+            "h": 16
+          },
+          "mask_center": {
+            "x": 631.5,
+            "y": 351.0
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 163,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 626,
+            "y": 345,
+            "w": 13,
+            "h": 14
+          },
+          "mask_center": {
+            "x": 633.5,
+            "y": 351.8
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 164,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 631,
+            "y": 347,
+            "w": 8,
+            "h": 12
+          },
+          "mask_center": {
+            "x": 635.6,
+            "y": 352.8
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 165,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 636,
+            "y": 350,
+            "w": 3,
+            "h": 9
+          },
+          "mask_center": {
+            "x": 638.0,
+            "y": 353.9
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 166,
+      "players": []
+    },
+    {
+      "frame_number": 167,
+      "players": []
+    },
+    {
+      "frame_number": 168,
+      "players": []
+    },
+    {
+      "frame_number": 169,
+      "players": []
+    },
+    {
+      "frame_number": 170,
+      "players": []
+    },
+    {
+      "frame_number": 171,
+      "players": []
+    },
+    {
+      "frame_number": 172,
+      "players": []
+    },
+    {
+      "frame_number": 173,
+      "players": []
+    },
+    {
+      "frame_number": 174,
+      "players": []
+    },
+    {
+      "frame_number": 175,
+      "players": []
+    },
+    {
+      "frame_number": 176,
+      "players": []
+    },
+    {
+      "frame_number": 177,
+      "players": []
+    },
+    {
+      "frame_number": 178,
+      "players": []
+    },
+    {
+      "frame_number": 179,
+      "players": []
+    },
+    {
+      "frame_number": 180,
+      "players": []
+    },
+    {
+      "frame_number": 181,
+      "players": []
+    },
+    {
+      "frame_number": 182,
+      "players": []
+    },
+    {
+      "frame_number": 183,
+      "players": []
+    },
+    {
+      "frame_number": 184,
+      "players": []
+    },
+    {
+      "frame_number": 185,
+      "players": []
+    },
+    {
+      "frame_number": 186,
+      "players": []
+    },
+    {
+      "frame_number": 187,
+      "players": []
+    },
+    {
+      "frame_number": 188,
+      "players": []
+    },
+    {
+      "frame_number": 189,
+      "players": []
+    },
+    {
+      "frame_number": 190,
+      "players": []
+    },
+    {
+      "frame_number": 191,
+      "players": []
+    },
+    {
+      "frame_number": 192,
+      "players": []
+    },
+    {
+      "frame_number": 193,
+      "players": []
+    },
+    {
+      "frame_number": 194,
+      "players": []
+    },
+    {
+      "frame_number": 195,
+      "players": []
+    },
+    {
+      "frame_number": 196,
+      "players": []
+    },
+    {
+      "frame_number": 197,
+      "players": []
+    },
+    {
+      "frame_number": 198,
+      "players": []
+    },
+    {
+      "frame_number": 199,
+      "players": []
+    },
+    {
+      "frame_number": 200,
+      "players": []
+    },
+    {
+      "frame_number": 201,
+      "players": []
+    },
+    {
+      "frame_number": 202,
+      "players": []
+    },
+    {
+      "frame_number": 203,
+      "players": []
+    },
+    {
+      "frame_number": 204,
+      "players": []
+    },
+    {
+      "frame_number": 205,
+      "players": []
+    },
+    {
+      "frame_number": 206,
+      "players": []
+    },
+    {
+      "frame_number": 207,
+      "players": []
+    },
+    {
+      "frame_number": 208,
+      "players": []
+    },
+    {
+      "frame_number": 209,
+      "players": []
+    },
+    {
+      "frame_number": 210,
+      "players": []
+    },
+    {
+      "frame_number": 211,
+      "players": []
+    },
+    {
+      "frame_number": 212,
+      "players": []
+    },
+    {
+      "frame_number": 213,
+      "players": []
+    },
+    {
+      "frame_number": 214,
+      "players": []
+    },
+    {
+      "frame_number": 215,
+      "players": []
+    },
+    {
+      "frame_number": 216,
+      "players": []
+    },
+    {
+      "frame_number": 217,
+      "players": []
+    },
+    {
+      "frame_number": 218,
+      "players": []
+    },
+    {
+      "frame_number": 219,
+      "players": []
+    },
+    {
+      "frame_number": 220,
+      "players": []
+    },
+    {
+      "frame_number": 221,
+      "players": []
+    },
+    {
+      "frame_number": 222,
+      "players": []
+    },
+    {
+      "frame_number": 223,
+      "players": []
+    },
+    {
+      "frame_number": 224,
+      "players": []
+    },
+    {
+      "frame_number": 225,
+      "players": []
+    },
+    {
+      "frame_number": 226,
+      "players": []
+    },
+    {
+      "frame_number": 227,
+      "players": []
+    },
+    {
+      "frame_number": 228,
+      "players": []
+    },
+    {
+      "frame_number": 229,
+      "players": []
+    },
+    {
+      "frame_number": 230,
+      "players": []
+    },
+    {
+      "frame_number": 231,
+      "players": []
+    },
+    {
+      "frame_number": 232,
+      "players": []
+    },
+    {
+      "frame_number": 233,
+      "players": []
+    },
+    {
+      "frame_number": 234,
+      "players": []
+    },
+    {
+      "frame_number": 235,
+      "players": []
+    },
+    {
+      "frame_number": 236,
+      "players": []
+    },
+    {
+      "frame_number": 237,
+      "players": []
+    },
+    {
+      "frame_number": 238,
+      "players": []
+    },
+    {
+      "frame_number": 239,
+      "players": []
+    },
+    {
+      "frame_number": 240,
+      "players": []
+    },
+    {
+      "frame_number": 241,
+      "players": []
+    },
+    {
+      "frame_number": 242,
+      "players": []
+    },
+    {
+      "frame_number": 243,
+      "players": []
+    },
+    {
+      "frame_number": 244,
+      "players": []
+    },
+    {
+      "frame_number": 245,
+      "players": []
+    },
+    {
+      "frame_number": 246,
+      "players": []
+    },
+    {
+      "frame_number": 247,
+      "players": []
+    },
+    {
+      "frame_number": 248,
+      "players": []
+    },
+    {
+      "frame_number": 249,
+      "players": []
+    },
+    {
+      "frame_number": 250,
+      "players": []
+    },
+    {
+      "frame_number": 251,
+      "players": []
+    },
+    {
+      "frame_number": 252,
+      "players": []
+    },
+    {
+      "frame_number": 253,
+      "players": []
+    },
+    {
+      "frame_number": 254,
+      "players": []
+    },
+    {
+      "frame_number": 255,
+      "players": []
+    },
+    {
+      "frame_number": 256,
+      "players": []
+    },
+    {
+      "frame_number": 257,
+      "players": []
+    },
+    {
+      "frame_number": 258,
+      "players": []
+    },
+    {
+      "frame_number": 259,
+      "players": []
+    },
+    {
+      "frame_number": 260,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 97,
+            "y": 334,
+            "w": 23,
+            "h": 24
+          },
+          "mask_center": {
+            "x": 108.9,
+            "y": 344.8
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 261,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 121,
+            "y": 328,
+            "w": 22,
+            "h": 31
+          },
+          "mask_center": {
+            "x": 134.4,
+            "y": 341.7
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 262,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 151,
+            "y": 322,
+            "w": 25,
+            "h": 36
+          },
+          "mask_center": {
+            "x": 165.9,
+            "y": 340.2
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 263,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 182,
+            "y": 318,
+            "w": 23,
+            "h": 36
+          },
+          "mask_center": {
+            "x": 195.2,
+            "y": 335.8
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 264,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 201,
+            "y": 310,
+            "w": 7,
+            "h": 9
+          },
+          "mask_center": {
+            "x": 205.0,
+            "y": 314.9
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 265,
+      "players": []
+    },
+    {
+      "frame_number": 266,
+      "players": []
+    },
+    {
+      "frame_number": 267,
+      "players": []
+    },
+    {
+      "frame_number": 268,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 307,
+            "y": 302,
+            "w": 13,
+            "h": 3
+          },
+          "mask_center": {
+            "x": 313.0,
+            "y": 303.6
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 269,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 331,
+            "y": 301,
+            "w": 13,
+            "h": 6
+          },
+          "mask_center": {
+            "x": 337.8,
+            "y": 303.9
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 270,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 350,
+            "y": 301,
+            "w": 12,
+            "h": 3
+          },
+          "mask_center": {
+            "x": 356.5,
+            "y": 302.8
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 271,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 368,
+            "y": 301,
+            "w": 10,
+            "h": 3
+          },
+          "mask_center": {
+            "x": 373.0,
+            "y": 302.6
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 272,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 385,
+            "y": 300,
+            "w": 11,
+            "h": 4
+          },
+          "mask_center": {
+            "x": 390.4,
+            "y": 302.3
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 273,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 405,
+            "y": 301,
+            "w": 8,
+            "h": 3
+          },
+          "mask_center": {
+            "x": 409.3,
+            "y": 302.7
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 274,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 425,
+            "y": 302,
+            "w": 18,
+            "h": 34
+          },
+          "mask_center": {
+            "x": 435.2,
+            "y": 319.1
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 275,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 442,
+            "y": 302,
+            "w": 18,
+            "h": 33
+          },
+          "mask_center": {
+            "x": 452.2,
+            "y": 317.3
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 276,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 460,
+            "y": 302,
+            "w": 18,
+            "h": 34
+          },
+          "mask_center": {
+            "x": 470.1,
+            "y": 318.5
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 277,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 477,
+            "y": 304,
+            "w": 19,
+            "h": 36
+          },
+          "mask_center": {
+            "x": 487.2,
+            "y": 320.9
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 278,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 494,
+            "y": 305,
+            "w": 16,
+            "h": 34
+          },
+          "mask_center": {
+            "x": 503.2,
+            "y": 321.5
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 279,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 507,
+            "y": 307,
+            "w": 17,
+            "h": 34
+          },
+          "mask_center": {
+            "x": 517.8,
+            "y": 322.2
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 280,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 518,
+            "y": 308,
+            "w": 18,
+            "h": 33
+          },
+          "mask_center": {
+            "x": 528.9,
+            "y": 324.1
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 281,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 526,
+            "y": 311,
+            "w": 18,
+            "h": 32
+          },
+          "mask_center": {
+            "x": 537.0,
+            "y": 326.0
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 282,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 530,
+            "y": 312,
+            "w": 18,
+            "h": 32
+          },
+          "mask_center": {
+            "x": 541.6,
+            "y": 326.8
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 283,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 536,
+            "y": 314,
+            "w": 18,
+            "h": 34
+          },
+          "mask_center": {
+            "x": 547.2,
+            "y": 330.1
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 284,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 542,
+            "y": 317,
+            "w": 19,
+            "h": 32
+          },
+          "mask_center": {
+            "x": 554.0,
+            "y": 331.6
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 285,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 551,
+            "y": 319,
+            "w": 19,
+            "h": 32
+          },
+          "mask_center": {
+            "x": 562.9,
+            "y": 334.3
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 286,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 559,
+            "y": 322,
+            "w": 19,
+            "h": 31
+          },
+          "mask_center": {
+            "x": 571.1,
+            "y": 336.3
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 287,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 567,
+            "y": 325,
+            "w": 21,
+            "h": 32
+          },
+          "mask_center": {
+            "x": 579.5,
+            "y": 339.0
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 288,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 577,
+            "y": 331,
+            "w": 21,
+            "h": 26
+          },
+          "mask_center": {
+            "x": 589.2,
+            "y": 343.6
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 289,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 587,
+            "y": 338,
+            "w": 16,
+            "h": 20
+          },
+          "mask_center": {
+            "x": 595.6,
+            "y": 347.5
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 290,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 597,
+            "y": 344,
+            "w": 14,
+            "h": 15
+          },
+          "mask_center": {
+            "x": 604.6,
+            "y": 351.5
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 291,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 607,
+            "y": 348,
+            "w": 15,
+            "h": 11
+          },
+          "mask_center": {
+            "x": 614.1,
+            "y": 353.9
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 292,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 618,
+            "y": 354,
+            "w": 10,
+            "h": 5
+          },
+          "mask_center": {
+            "x": 622.8,
+            "y": 356.6
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 293,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 629,
+            "y": 357,
+            "w": 10,
+            "h": 2
+          },
+          "mask_center": {
+            "x": 633.7,
+            "y": 358.1
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 294,
+      "players": []
+    },
+    {
+      "frame_number": 295,
+      "players": []
+    },
+    {
+      "frame_number": 296,
+      "players": []
+    },
+    {
+      "frame_number": 297,
+      "players": []
+    },
+    {
+      "frame_number": 298,
+      "players": []
+    },
+    {
+      "frame_number": 299,
+      "players": []
+    },
+    {
+      "frame_number": 300,
+      "players": []
+    },
+    {
+      "frame_number": 301,
+      "players": []
+    },
+    {
+      "frame_number": 302,
+      "players": []
+    },
+    {
+      "frame_number": 303,
+      "players": []
+    },
+    {
+      "frame_number": 304,
+      "players": []
+    },
+    {
+      "frame_number": 305,
+      "players": []
+    },
+    {
+      "frame_number": 306,
+      "players": []
+    },
+    {
+      "frame_number": 307,
+      "players": []
+    },
+    {
+      "frame_number": 308,
+      "players": []
+    },
+    {
+      "frame_number": 309,
+      "players": []
+    },
+    {
+      "frame_number": 310,
+      "players": []
+    },
+    {
+      "frame_number": 311,
+      "players": []
+    },
+    {
+      "frame_number": 312,
+      "players": []
+    },
+    {
+      "frame_number": 313,
+      "players": []
+    },
+    {
+      "frame_number": 314,
+      "players": []
+    },
+    {
+      "frame_number": 315,
+      "players": []
+    },
+    {
+      "frame_number": 316,
+      "players": []
+    },
+    {
+      "frame_number": 317,
+      "players": []
+    },
+    {
+      "frame_number": 318,
+      "players": []
+    },
+    {
+      "frame_number": 319,
+      "players": []
+    },
+    {
+      "frame_number": 320,
+      "players": []
+    },
+    {
+      "frame_number": 321,
+      "players": []
+    },
+    {
+      "frame_number": 322,
+      "players": []
+    },
+    {
+      "frame_number": 323,
+      "players": []
+    },
+    {
+      "frame_number": 324,
+      "players": []
+    },
+    {
+      "frame_number": 325,
+      "players": []
+    },
+    {
+      "frame_number": 326,
+      "players": []
+    },
+    {
+      "frame_number": 327,
+      "players": []
+    },
+    {
+      "frame_number": 328,
+      "players": []
+    },
+    {
+      "frame_number": 329,
+      "players": []
+    },
+    {
+      "frame_number": 330,
+      "players": []
+    },
+    {
+      "frame_number": 331,
+      "players": []
+    },
+    {
+      "frame_number": 332,
+      "players": []
+    },
+    {
+      "frame_number": 333,
+      "players": []
+    },
+    {
+      "frame_number": 334,
+      "players": []
+    },
+    {
+      "frame_number": 335,
+      "players": []
+    },
+    {
+      "frame_number": 336,
+      "players": []
+    },
+    {
+      "frame_number": 337,
+      "players": []
+    },
+    {
+      "frame_number": 338,
+      "players": []
+    },
+    {
+      "frame_number": 339,
+      "players": []
+    },
+    {
+      "frame_number": 340,
+      "players": []
+    },
+    {
+      "frame_number": 341,
+      "players": []
+    },
+    {
+      "frame_number": 342,
+      "players": []
+    },
+    {
+      "frame_number": 343,
+      "players": []
+    },
+    {
+      "frame_number": 344,
+      "players": []
+    },
+    {
+      "frame_number": 345,
+      "players": []
+    },
+    {
+      "frame_number": 346,
+      "players": []
+    },
+    {
+      "frame_number": 347,
+      "players": []
+    },
+    {
+      "frame_number": 348,
+      "players": []
+    },
+    {
+      "frame_number": 349,
+      "players": []
+    },
+    {
+      "frame_number": 350,
+      "players": []
+    },
+    {
+      "frame_number": 351,
+      "players": []
+    },
+    {
+      "frame_number": 352,
+      "players": []
+    },
+    {
+      "frame_number": 353,
+      "players": []
+    },
+    {
+      "frame_number": 354,
+      "players": []
+    },
+    {
+      "frame_number": 355,
+      "players": []
+    },
+    {
+      "frame_number": 356,
+      "players": []
+    },
+    {
+      "frame_number": 357,
+      "players": []
+    },
+    {
+      "frame_number": 358,
+      "players": []
+    },
+    {
+      "frame_number": 359,
+      "players": []
+    },
+    {
+      "frame_number": 360,
+      "players": []
+    },
+    {
+      "frame_number": 361,
+      "players": []
+    },
+    {
+      "frame_number": 362,
+      "players": []
+    },
+    {
+      "frame_number": 363,
+      "players": []
+    },
+    {
+      "frame_number": 364,
+      "players": []
+    },
+    {
+      "frame_number": 365,
+      "players": []
+    },
+    {
+      "frame_number": 366,
+      "players": []
+    },
+    {
+      "frame_number": 367,
+      "players": []
+    },
+    {
+      "frame_number": 368,
+      "players": []
+    },
+    {
+      "frame_number": 369,
+      "players": []
+    },
+    {
+      "frame_number": 370,
+      "players": []
+    },
+    {
+      "frame_number": 371,
+      "players": []
+    },
+    {
+      "frame_number": 372,
+      "players": []
+    },
+    {
+      "frame_number": 373,
+      "players": []
+    },
+    {
+      "frame_number": 374,
+      "players": []
+    },
+    {
+      "frame_number": 375,
+      "players": []
+    },
+    {
+      "frame_number": 376,
+      "players": []
+    },
+    {
+      "frame_number": 377,
+      "players": []
+    },
+    {
+      "frame_number": 378,
+      "players": []
+    },
+    {
+      "frame_number": 379,
+      "players": []
+    },
+    {
+      "frame_number": 380,
+      "players": []
+    },
+    {
+      "frame_number": 381,
+      "players": []
+    },
+    {
+      "frame_number": 382,
+      "players": []
+    },
+    {
+      "frame_number": 383,
+      "players": []
+    },
+    {
+      "frame_number": 384,
+      "players": []
+    },
+    {
+      "frame_number": 385,
+      "players": []
+    },
+    {
+      "frame_number": 386,
+      "players": []
+    },
+    {
+      "frame_number": 387,
+      "players": []
+    },
+    {
+      "frame_number": 388,
+      "players": []
+    },
+    {
+      "frame_number": 389,
+      "players": []
+    },
+    {
+      "frame_number": 390,
+      "players": []
+    },
+    {
+      "frame_number": 391,
+      "players": []
+    },
+    {
+      "frame_number": 392,
+      "players": []
+    },
+    {
+      "frame_number": 393,
+      "players": []
+    },
+    {
+      "frame_number": 394,
+      "players": []
+    },
+    {
+      "frame_number": 395,
+      "players": []
+    },
+    {
+      "frame_number": 396,
+      "players": []
+    },
+    {
+      "frame_number": 397,
+      "players": []
+    },
+    {
+      "frame_number": 398,
+      "players": []
+    },
+    {
+      "frame_number": 399,
+      "players": []
+    },
+    {
+      "frame_number": 400,
+      "players": []
+    },
+    {
+      "frame_number": 401,
+      "players": []
+    },
+    {
+      "frame_number": 402,
+      "players": []
+    },
+    {
+      "frame_number": 403,
+      "players": []
+    },
+    {
+      "frame_number": 404,
+      "players": []
+    },
+    {
+      "frame_number": 405,
+      "players": []
+    },
+    {
+      "frame_number": 406,
+      "players": []
+    },
+    {
+      "frame_number": 407,
+      "players": []
+    },
+    {
+      "frame_number": 408,
+      "players": []
+    },
+    {
+      "frame_number": 409,
+      "players": []
+    },
+    {
+      "frame_number": 410,
+      "players": []
+    },
+    {
+      "frame_number": 411,
+      "players": []
+    },
+    {
+      "frame_number": 412,
+      "players": []
+    },
+    {
+      "frame_number": 413,
+      "players": []
+    },
+    {
+      "frame_number": 414,
+      "players": []
+    },
+    {
+      "frame_number": 415,
+      "players": []
+    },
+    {
+      "frame_number": 416,
+      "players": []
+    },
+    {
+      "frame_number": 417,
+      "players": []
+    },
+    {
+      "frame_number": 418,
+      "players": []
+    },
+    {
+      "frame_number": 419,
+      "players": []
+    },
+    {
+      "frame_number": 420,
+      "players": []
+    },
+    {
+      "frame_number": 421,
+      "players": []
+    },
+    {
+      "frame_number": 422,
+      "players": []
+    },
+    {
+      "frame_number": 423,
+      "players": []
+    },
+    {
+      "frame_number": 424,
+      "players": []
+    },
+    {
+      "frame_number": 425,
+      "players": []
+    },
+    {
+      "frame_number": 426,
+      "players": []
+    },
+    {
+      "frame_number": 427,
+      "players": []
+    },
+    {
+      "frame_number": 428,
+      "players": []
+    },
+    {
+      "frame_number": 429,
+      "players": []
+    },
+    {
+      "frame_number": 430,
+      "players": []
+    },
+    {
+      "frame_number": 431,
+      "players": []
+    },
+    {
+      "frame_number": 432,
+      "players": []
+    },
+    {
+      "frame_number": 433,
+      "players": []
+    },
+    {
+      "frame_number": 434,
+      "players": []
+    },
+    {
+      "frame_number": 435,
+      "players": []
+    },
+    {
+      "frame_number": 436,
+      "players": []
+    },
+    {
+      "frame_number": 437,
+      "players": []
+    },
+    {
+      "frame_number": 438,
+      "players": []
+    },
+    {
+      "frame_number": 439,
+      "players": []
+    },
+    {
+      "frame_number": 440,
+      "players": []
+    },
+    {
+      "frame_number": 441,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 404,
+            "y": 275,
+            "w": 30,
+            "h": 19
+          },
+          "mask_center": {
+            "x": 418.0,
+            "y": 283.1
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 442,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 405,
+            "y": 267,
+            "w": 31,
+            "h": 35
+          },
+          "mask_center": {
+            "x": 418.3,
+            "y": 283.3
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 443,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 406,
+            "y": 268,
+            "w": 28,
+            "h": 34
+          },
+          "mask_center": {
+            "x": 416.5,
+            "y": 284.2
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 444,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 408,
+            "y": 272,
+            "w": 22,
+            "h": 30
+          },
+          "mask_center": {
+            "x": 418.7,
+            "y": 287.2
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 445,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 414,
+            "y": 272,
+            "w": 20,
+            "h": 30
+          },
+          "mask_center": {
+            "x": 422.3,
+            "y": 286.1
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 446,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 410,
+            "y": 272,
+            "w": 26,
+            "h": 31
+          },
+          "mask_center": {
+            "x": 423.0,
+            "y": 288.3
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 447,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 410,
+            "y": 273,
+            "w": 26,
+            "h": 30
+          },
+          "mask_center": {
+            "x": 422.0,
+            "y": 289.8
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 448,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 410,
+            "y": 275,
+            "w": 30,
+            "h": 28
+          },
+          "mask_center": {
+            "x": 423.9,
+            "y": 293.5
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 449,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 411,
+            "y": 272,
+            "w": 32,
+            "h": 32
+          },
+          "mask_center": {
+            "x": 426.1,
+            "y": 290.6
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 450,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 413,
+            "y": 285,
+            "w": 30,
+            "h": 19
+          },
+          "mask_center": {
+            "x": 427.9,
+            "y": 294.3
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 451,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 414,
+            "y": 283,
+            "w": 33,
+            "h": 23
+          },
+          "mask_center": {
+            "x": 430.1,
+            "y": 294.1
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 452,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 416,
+            "y": 280,
+            "w": 33,
+            "h": 27
+          },
+          "mask_center": {
+            "x": 432.8,
+            "y": 294.3
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 453,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 417,
+            "y": 284,
+            "w": 33,
+            "h": 24
+          },
+          "mask_center": {
+            "x": 434.3,
+            "y": 295.3
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 454,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 418,
+            "y": 285,
+            "w": 34,
+            "h": 23
+          },
+          "mask_center": {
+            "x": 435.2,
+            "y": 295.6
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 455,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 420,
+            "y": 285,
+            "w": 33,
+            "h": 24
+          },
+          "mask_center": {
+            "x": 438.0,
+            "y": 295.7
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 456,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 421,
+            "y": 285,
+            "w": 34,
+            "h": 25
+          },
+          "mask_center": {
+            "x": 440.1,
+            "y": 296.2
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 457,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 430,
+            "y": 285,
+            "w": 26,
+            "h": 26
+          },
+          "mask_center": {
+            "x": 443.8,
+            "y": 296.9
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 458,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 431,
+            "y": 285,
+            "w": 26,
+            "h": 26
+          },
+          "mask_center": {
+            "x": 444.1,
+            "y": 297.1
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 459,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 431,
+            "y": 285,
+            "w": 27,
+            "h": 25
+          },
+          "mask_center": {
+            "x": 445.4,
+            "y": 297.4
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 460,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 431,
+            "y": 288,
+            "w": 25,
+            "h": 22
+          },
+          "mask_center": {
+            "x": 444.5,
+            "y": 298.7
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 461,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 434,
+            "y": 291,
+            "w": 21,
+            "h": 21
+          },
+          "mask_center": {
+            "x": 445.4,
+            "y": 300.3
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 462,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 438,
+            "y": 289,
+            "w": 18,
+            "h": 23
+          },
+          "mask_center": {
+            "x": 448.1,
+            "y": 300.0
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 463,
+      "players": []
+    },
+    {
+      "frame_number": 464,
+      "players": []
+    },
+    {
+      "frame_number": 465,
+      "players": []
+    },
+    {
+      "frame_number": 466,
+      "players": []
+    },
+    {
+      "frame_number": 467,
+      "players": []
+    },
+    {
+      "frame_number": 468,
+      "players": []
+    },
+    {
+      "frame_number": 469,
+      "players": []
+    },
+    {
+      "frame_number": 470,
+      "players": []
+    },
+    {
+      "frame_number": 471,
+      "players": []
+    },
+    {
+      "frame_number": 472,
+      "players": []
+    },
+    {
+      "frame_number": 473,
+      "players": []
+    },
+    {
+      "frame_number": 474,
+      "players": []
+    },
+    {
+      "frame_number": 475,
+      "players": []
+    },
+    {
+      "frame_number": 476,
+      "players": []
+    },
+    {
+      "frame_number": 477,
+      "players": []
+    },
+    {
+      "frame_number": 478,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 627,
+            "y": 267,
+            "w": 12,
+            "h": 21
+          },
+          "mask_center": {
+            "x": 635.3,
+            "y": 274.2
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 479,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 622,
+            "y": 252,
+            "w": 17,
+            "h": 27
+          },
+          "mask_center": {
+            "x": 632.3,
+            "y": 262.3
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 480,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 602,
+            "y": 249,
+            "w": 23,
+            "h": 19
+          },
+          "mask_center": {
+            "x": 613.4,
+            "y": 257.0
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 481,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 596,
+            "y": 248,
+            "w": 23,
+            "h": 24
+          },
+          "mask_center": {
+            "x": 607.7,
+            "y": 256.7
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 482,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 596,
+            "y": 248,
+            "w": 19,
+            "h": 22
+          },
+          "mask_center": {
+            "x": 605.0,
+            "y": 255.2
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 483,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 589,
+            "y": 247,
+            "w": 23,
+            "h": 26
+          },
+          "mask_center": {
+            "x": 601.2,
+            "y": 257.8
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 484,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 547,
+            "y": 253,
+            "w": 23,
+            "h": 19
+          },
+          "mask_center": {
+            "x": 558.7,
+            "y": 262.0
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 485,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 564,
+            "y": 246,
+            "w": 21,
+            "h": 21
+          },
+          "mask_center": {
+            "x": 574.8,
+            "y": 254.9
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 486,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 552,
+            "y": 246,
+            "w": 22,
+            "h": 25
+          },
+          "mask_center": {
+            "x": 562.9,
+            "y": 256.8
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 487,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 540,
+            "y": 250,
+            "w": 21,
+            "h": 25
+          },
+          "mask_center": {
+            "x": 551.1,
+            "y": 260.2
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 488,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 524,
+            "y": 259,
+            "w": 23,
+            "h": 23
+          },
+          "mask_center": {
+            "x": 535.4,
+            "y": 269.8
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 489,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 508,
+            "y": 272,
+            "w": 22,
+            "h": 25
+          },
+          "mask_center": {
+            "x": 519.1,
+            "y": 283.5
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 490,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 490,
+            "y": 285,
+            "w": 22,
+            "h": 25
+          },
+          "mask_center": {
+            "x": 501.4,
+            "y": 296.8
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 491,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 472,
+            "y": 289,
+            "w": 20,
+            "h": 25
+          },
+          "mask_center": {
+            "x": 482.2,
+            "y": 300.4
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 492,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 447,
+            "y": 284,
+            "w": 24,
+            "h": 28
+          },
+          "mask_center": {
+            "x": 459.4,
+            "y": 296.0
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 493,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 429,
+            "y": 281,
+            "w": 19,
+            "h": 16
+          },
+          "mask_center": {
+            "x": 438.9,
+            "y": 288.2
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 494,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 418,
+            "y": 283,
+            "w": 19,
+            "h": 21
+          },
+          "mask_center": {
+            "x": 429.0,
+            "y": 291.8
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 495,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 411,
+            "y": 273,
+            "w": 16,
+            "h": 23
+          },
+          "mask_center": {
+            "x": 420.2,
+            "y": 283.7
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 496,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 407,
+            "y": 269,
+            "w": 16,
+            "h": 22
+          },
+          "mask_center": {
+            "x": 414.7,
+            "y": 279.4
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 497,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 406,
+            "y": 276,
+            "w": 16,
+            "h": 13
+          },
+          "mask_center": {
+            "x": 414.2,
+            "y": 281.9
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 498,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 405,
+            "y": 275,
+            "w": 17,
+            "h": 17
+          },
+          "mask_center": {
+            "x": 413.8,
+            "y": 282.0
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 499,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 401,
+            "y": 266,
+            "w": 20,
+            "h": 16
+          },
+          "mask_center": {
+            "x": 411.0,
+            "y": 274.2
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 500,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 401,
+            "y": 262,
+            "w": 21,
+            "h": 17
+          },
+          "mask_center": {
+            "x": 410.7,
+            "y": 271.9
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 501,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 400,
+            "y": 262,
+            "w": 20,
+            "h": 20
+          },
+          "mask_center": {
+            "x": 408.8,
+            "y": 272.8
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 502,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 400,
+            "y": 262,
+            "w": 19,
+            "h": 18
+          },
+          "mask_center": {
+            "x": 408.1,
+            "y": 271.5
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 503,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 401,
+            "y": 261,
+            "w": 18,
+            "h": 18
+          },
+          "mask_center": {
+            "x": 410.4,
+            "y": 270.7
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 504,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 409,
+            "y": 267,
+            "w": 12,
+            "h": 12
+          },
+          "mask_center": {
+            "x": 414.7,
+            "y": 273.2
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 505,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 401,
+            "y": 260,
+            "w": 19,
+            "h": 13
+          },
+          "mask_center": {
+            "x": 408.9,
+            "y": 267.2
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 506,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 401,
+            "y": 260,
+            "w": 20,
+            "h": 18
+          },
+          "mask_center": {
+            "x": 409.9,
+            "y": 268.6
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 507,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 403,
+            "y": 260,
+            "w": 20,
+            "h": 19
+          },
+          "mask_center": {
+            "x": 411.9,
+            "y": 269.5
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 508,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 402,
+            "y": 260,
+            "w": 20,
+            "h": 16
+          },
+          "mask_center": {
+            "x": 411.4,
+            "y": 267.6
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 509,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 403,
+            "y": 262,
+            "w": 20,
+            "h": 13
+          },
+          "mask_center": {
+            "x": 412.7,
+            "y": 268.6
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 510,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 403,
+            "y": 259,
+            "w": 22,
+            "h": 16
+          },
+          "mask_center": {
+            "x": 414.6,
+            "y": 267.1
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 511,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 404,
+            "y": 260,
+            "w": 21,
+            "h": 14
+          },
+          "mask_center": {
+            "x": 414.1,
+            "y": 266.7
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 512,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 412,
+            "y": 259,
+            "w": 15,
+            "h": 13
+          },
+          "mask_center": {
+            "x": 420.5,
+            "y": 265.9
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 513,
+      "players": []
+    },
+    {
+      "frame_number": 514,
+      "players": []
+    },
+    {
+      "frame_number": 515,
+      "players": []
+    },
+    {
+      "frame_number": 516,
+      "players": []
+    },
+    {
+      "frame_number": 517,
+      "players": []
+    },
+    {
+      "frame_number": 518,
+      "players": []
+    },
+    {
+      "frame_number": 519,
+      "players": []
+    },
+    {
+      "frame_number": 520,
+      "players": []
+    },
+    {
+      "frame_number": 521,
+      "players": []
+    },
+    {
+      "frame_number": 522,
+      "players": []
+    },
+    {
+      "frame_number": 523,
+      "players": []
+    },
+    {
+      "frame_number": 524,
+      "players": []
+    },
+    {
+      "frame_number": 525,
+      "players": []
+    },
+    {
+      "frame_number": 526,
+      "players": []
+    },
+    {
+      "frame_number": 527,
+      "players": []
+    },
+    {
+      "frame_number": 528,
+      "players": []
+    },
+    {
+      "frame_number": 529,
+      "players": []
+    },
+    {
+      "frame_number": 530,
+      "players": []
+    },
+    {
+      "frame_number": 531,
+      "players": []
+    },
+    {
+      "frame_number": 532,
+      "players": []
+    },
+    {
+      "frame_number": 533,
+      "players": []
+    },
+    {
+      "frame_number": 534,
+      "players": []
+    },
+    {
+      "frame_number": 535,
+      "players": []
+    },
+    {
+      "frame_number": 536,
+      "players": []
+    },
+    {
+      "frame_number": 537,
+      "players": []
+    },
+    {
+      "frame_number": 538,
+      "players": []
+    },
+    {
+      "frame_number": 539,
+      "players": []
+    },
+    {
+      "frame_number": 540,
+      "players": []
+    },
+    {
+      "frame_number": 541,
+      "players": []
+    },
+    {
+      "frame_number": 542,
+      "players": []
+    },
+    {
+      "frame_number": 543,
+      "players": []
+    },
+    {
+      "frame_number": 544,
+      "players": []
+    },
+    {
+      "frame_number": 545,
+      "players": []
+    },
+    {
+      "frame_number": 546,
+      "players": []
+    },
+    {
+      "frame_number": 547,
+      "players": []
+    },
+    {
+      "frame_number": 548,
+      "players": []
+    },
+    {
+      "frame_number": 549,
+      "players": []
+    },
+    {
+      "frame_number": 550,
+      "players": []
+    },
+    {
+      "frame_number": 551,
+      "players": []
+    },
+    {
+      "frame_number": 552,
+      "players": []
+    },
+    {
+      "frame_number": 553,
+      "players": []
+    },
+    {
+      "frame_number": 554,
+      "players": []
+    },
+    {
+      "frame_number": 555,
+      "players": []
+    },
+    {
+      "frame_number": 556,
+      "players": []
+    },
+    {
+      "frame_number": 557,
+      "players": []
+    },
+    {
+      "frame_number": 558,
+      "players": []
+    },
+    {
+      "frame_number": 559,
+      "players": []
+    },
+    {
+      "frame_number": 560,
+      "players": []
+    },
+    {
+      "frame_number": 561,
+      "players": []
+    },
+    {
+      "frame_number": 562,
+      "players": []
+    },
+    {
+      "frame_number": 563,
+      "players": []
+    },
+    {
+      "frame_number": 564,
+      "players": []
+    },
+    {
+      "frame_number": 565,
+      "players": []
+    },
+    {
+      "frame_number": 566,
+      "players": []
+    },
+    {
+      "frame_number": 567,
+      "players": []
+    },
+    {
+      "frame_number": 568,
+      "players": []
+    },
+    {
+      "frame_number": 569,
+      "players": []
+    },
+    {
+      "frame_number": 570,
+      "players": []
+    },
+    {
+      "frame_number": 571,
+      "players": []
+    },
+    {
+      "frame_number": 572,
+      "players": []
+    },
+    {
+      "frame_number": 573,
+      "players": []
+    },
+    {
+      "frame_number": 574,
+      "players": []
+    },
+    {
+      "frame_number": 575,
+      "players": []
+    },
+    {
+      "frame_number": 576,
+      "players": []
+    },
+    {
+      "frame_number": 577,
+      "players": []
+    },
+    {
+      "frame_number": 578,
+      "players": []
+    },
+    {
+      "frame_number": 579,
+      "players": []
+    },
+    {
+      "frame_number": 580,
+      "players": []
+    },
+    {
+      "frame_number": 581,
+      "players": []
+    },
+    {
+      "frame_number": 582,
+      "players": []
+    },
+    {
+      "frame_number": 583,
+      "players": []
+    },
+    {
+      "frame_number": 584,
+      "players": []
+    },
+    {
+      "frame_number": 585,
+      "players": []
+    },
+    {
+      "frame_number": 586,
+      "players": []
+    },
+    {
+      "frame_number": 587,
+      "players": []
+    },
+    {
+      "frame_number": 588,
+      "players": []
+    },
+    {
+      "frame_number": 589,
+      "players": []
+    },
+    {
+      "frame_number": 590,
+      "players": []
+    },
+    {
+      "frame_number": 591,
+      "players": []
+    },
+    {
+      "frame_number": 592,
+      "players": []
+    },
+    {
+      "frame_number": 593,
+      "players": []
+    },
+    {
+      "frame_number": 594,
+      "players": []
+    },
+    {
+      "frame_number": 595,
+      "players": []
+    },
+    {
+      "frame_number": 596,
+      "players": []
+    },
+    {
+      "frame_number": 597,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 487,
+            "y": 228,
+            "w": 9,
+            "h": 12
+          },
+          "mask_center": {
+            "x": 492.3,
+            "y": 233.7
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 598,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 490,
+            "y": 230,
+            "w": 16,
+            "h": 21
+          },
+          "mask_center": {
+            "x": 498.8,
+            "y": 240.2
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 599,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 486,
+            "y": 225,
+            "w": 19,
+            "h": 29
+          },
+          "mask_center": {
+            "x": 496.4,
+            "y": 239.9
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 600,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 487,
+            "y": 230,
+            "w": 18,
+            "h": 24
+          },
+          "mask_center": {
+            "x": 495.6,
+            "y": 242.7
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 601,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 484,
+            "y": 226,
+            "w": 16,
+            "h": 28
+          },
+          "mask_center": {
+            "x": 492.4,
+            "y": 240.7
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 602,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 481,
+            "y": 234,
+            "w": 16,
+            "h": 21
+          },
+          "mask_center": {
+            "x": 490.0,
+            "y": 244.9
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 603,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 479,
+            "y": 228,
+            "w": 17,
+            "h": 28
+          },
+          "mask_center": {
+            "x": 488.2,
+            "y": 242.1
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 604,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 478,
+            "y": 230,
+            "w": 18,
+            "h": 26
+          },
+          "mask_center": {
+            "x": 487.3,
+            "y": 242.8
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 605,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 476,
+            "y": 227,
+            "w": 18,
+            "h": 26
+          },
+          "mask_center": {
+            "x": 485.7,
+            "y": 240.0
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 606,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 476,
+            "y": 227,
+            "w": 18,
+            "h": 20
+          },
+          "mask_center": {
+            "x": 486.2,
+            "y": 237.7
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 607,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 478,
+            "y": 228,
+            "w": 18,
+            "h": 18
+          },
+          "mask_center": {
+            "x": 487.0,
+            "y": 237.5
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 608,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 480,
+            "y": 227,
+            "w": 16,
+            "h": 19
+          },
+          "mask_center": {
+            "x": 488.5,
+            "y": 236.6
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 609,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 480,
+            "y": 228,
+            "w": 18,
+            "h": 18
+          },
+          "mask_center": {
+            "x": 489.8,
+            "y": 236.9
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 610,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 482,
+            "y": 228,
+            "w": 19,
+            "h": 17
+          },
+          "mask_center": {
+            "x": 491.4,
+            "y": 236.6
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 611,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 485,
+            "y": 228,
+            "w": 19,
+            "h": 20
+          },
+          "mask_center": {
+            "x": 494.4,
+            "y": 237.3
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 612,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 488,
+            "y": 229,
+            "w": 19,
+            "h": 16
+          },
+          "mask_center": {
+            "x": 497.7,
+            "y": 237.0
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 613,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 491,
+            "y": 231,
+            "w": 19,
+            "h": 16
+          },
+          "mask_center": {
+            "x": 500.5,
+            "y": 238.4
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 614,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 494,
+            "y": 231,
+            "w": 20,
+            "h": 15
+          },
+          "mask_center": {
+            "x": 503.6,
+            "y": 238.4
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 615,
+      "players": [
+        {
+          "id": 3,
+          "bbox": {
+            "x": 498,
+            "y": 232,
+            "w": 21,
+            "h": 17
+          },
+          "mask_center": {
+            "x": 508.2,
+            "y": 240.1
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 616,
+      "players": []
+    },
+    {
+      "frame_number": 617,
+      "players": []
+    },
+    {
+      "frame_number": 618,
+      "players": []
+    },
+    {
+      "frame_number": 619,
+      "players": []
+    },
+    {
+      "frame_number": 620,
+      "players": []
+    },
+    {
+      "frame_number": 621,
+      "players": []
+    },
+    {
+      "frame_number": 622,
+      "players": []
+    },
+    {
+      "frame_number": 623,
+      "players": []
+    },
+    {
+      "frame_number": 624,
+      "players": []
+    },
+    {
+      "frame_number": 625,
+      "players": []
+    },
+    {
+      "frame_number": 626,
+      "players": []
+    },
+    {
+      "frame_number": 627,
+      "players": []
+    },
+    {
+      "frame_number": 628,
+      "players": []
+    },
+    {
+      "frame_number": 629,
+      "players": []
+    },
+    {
+      "frame_number": 630,
+      "players": []
+    },
+    {
+      "frame_number": 631,
+      "players": []
+    },
+    {
+      "frame_number": 632,
+      "players": []
+    },
+    {
+      "frame_number": 633,
+      "players": []
+    },
+    {
+      "frame_number": 634,
+      "players": []
+    },
+    {
+      "frame_number": 635,
+      "players": []
+    },
+    {
+      "frame_number": 636,
+      "players": []
+    },
+    {
+      "frame_number": 637,
+      "players": []
+    },
+    {
+      "frame_number": 638,
+      "players": []
+    },
+    {
+      "frame_number": 639,
+      "players": []
+    },
+    {
+      "frame_number": 640,
+      "players": []
+    },
+    {
+      "frame_number": 641,
+      "players": []
+    },
+    {
+      "frame_number": 642,
+      "players": []
+    },
+    {
+      "frame_number": 643,
+      "players": []
+    },
+    {
+      "frame_number": 644,
+      "players": []
+    },
+    {
+      "frame_number": 645,
+      "players": []
+    },
+    {
+      "frame_number": 646,
+      "players": []
+    },
+    {
+      "frame_number": 647,
+      "players": []
+    },
+    {
+      "frame_number": 648,
+      "players": []
+    },
+    {
+      "frame_number": 649,
+      "players": []
+    },
+    {
+      "frame_number": 650,
+      "players": []
+    },
+    {
+      "frame_number": 651,
+      "players": []
+    },
+    {
+      "frame_number": 652,
+      "players": []
+    },
+    {
+      "frame_number": 653,
+      "players": []
+    },
+    {
+      "frame_number": 654,
+      "players": []
+    },
+    {
+      "frame_number": 655,
+      "players": []
+    },
+    {
+      "frame_number": 656,
+      "players": []
+    },
+    {
+      "frame_number": 657,
+      "players": []
+    },
+    {
+      "frame_number": 658,
+      "players": []
+    },
+    {
+      "frame_number": 659,
+      "players": []
+    },
+    {
+      "frame_number": 660,
+      "players": []
+    },
+    {
+      "frame_number": 661,
+      "players": []
+    },
+    {
+      "frame_number": 662,
+      "players": []
+    },
+    {
+      "frame_number": 663,
+      "players": []
+    },
+    {
+      "frame_number": 664,
+      "players": []
+    },
+    {
+      "frame_number": 665,
+      "players": []
+    },
+    {
+      "frame_number": 666,
+      "players": []
+    },
+    {
+      "frame_number": 667,
+      "players": []
+    },
+    {
+      "frame_number": 668,
+      "players": []
+    },
+    {
+      "frame_number": 669,
+      "players": []
+    },
+    {
+      "frame_number": 670,
+      "players": []
+    },
+    {
+      "frame_number": 671,
+      "players": []
+    },
+    {
+      "frame_number": 672,
+      "players": []
+    },
+    {
+      "frame_number": 673,
+      "players": []
+    },
+    {
+      "frame_number": 674,
+      "players": []
+    },
+    {
+      "frame_number": 675,
+      "players": []
+    },
+    {
+      "frame_number": 676,
+      "players": []
+    },
+    {
+      "frame_number": 677,
+      "players": []
+    },
+    {
+      "frame_number": 678,
+      "players": []
+    },
+    {
+      "frame_number": 679,
+      "players": []
+    },
+    {
+      "frame_number": 680,
+      "players": []
+    },
+    {
+      "frame_number": 681,
+      "players": []
+    },
+    {
+      "frame_number": 682,
+      "players": []
+    },
+    {
+      "frame_number": 683,
+      "players": []
+    },
+    {
+      "frame_number": 684,
+      "players": []
+    },
+    {
+      "frame_number": 685,
+      "players": []
+    },
+    {
+      "frame_number": 686,
+      "players": []
+    },
+    {
+      "frame_number": 687,
+      "players": []
+    },
+    {
+      "frame_number": 688,
+      "players": []
+    },
+    {
+      "frame_number": 689,
+      "players": []
+    },
+    {
+      "frame_number": 690,
+      "players": []
+    },
+    {
+      "frame_number": 691,
+      "players": []
+    },
+    {
+      "frame_number": 692,
+      "players": []
+    },
+    {
+      "frame_number": 693,
+      "players": []
+    },
+    {
+      "frame_number": 694,
+      "players": []
+    },
+    {
+      "frame_number": 695,
+      "players": []
+    },
+    {
+      "frame_number": 696,
+      "players": []
+    },
+    {
+      "frame_number": 697,
+      "players": []
+    },
+    {
+      "frame_number": 698,
+      "players": []
+    },
+    {
+      "frame_number": 699,
+      "players": []
+    },
+    {
+      "frame_number": 700,
+      "players": []
+    },
+    {
+      "frame_number": 701,
+      "players": []
+    },
+    {
+      "frame_number": 702,
+      "players": []
+    },
+    {
+      "frame_number": 703,
+      "players": []
+    },
+    {
+      "frame_number": 704,
+      "players": []
+    },
+    {
+      "frame_number": 705,
+      "players": []
+    },
+    {
+      "frame_number": 706,
+      "players": []
+    },
+    {
+      "frame_number": 707,
+      "players": []
+    },
+    {
+      "frame_number": 708,
+      "players": []
+    },
+    {
+      "frame_number": 709,
+      "players": []
+    },
+    {
+      "frame_number": 710,
+      "players": []
+    }
+  ]
+}
