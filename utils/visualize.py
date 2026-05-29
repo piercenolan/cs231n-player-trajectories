@@ -64,22 +64,20 @@ def draw_tracks_on_frame(frame_bgr, frame_tracks):
         w = int(round(bbox.get("w", 0)))
         h = int(round(bbox.get("h", 0)))
 
+        center = player.get("mask_center", {})
+        cx = int(round(center.get("x", x + w / 2.0)))
+        cy = int(round(center.get("y", y + h / 2.0)))
+
         # Draw bbox border
         if w > 0 and h > 0:
             cv2.rectangle(out, (x, y), (x + w, y + h), color, 2, cv2.LINE_AA)
         else:
             # For predicted players with no bbox, draw a small diamond at center
-                pts = np.array([
-                    [cx, cy - 8],
-                    [cx + 8, cy],
-                    [cx, cy + 8],
-                    [cx - 8, cy]
-                ], dtype=np.int32)
-                cv2.polylines(out, [pts], True, color, 2, cv2.LINE_AA)
-        # Draw mask center
-        center = player.get("mask_center", {})
-        cx = int(round(center.get("x", x + w / 2.0)))
-        cy = int(round(center.get("y", y + h / 2.0)))
+            pts = np.array(
+                [[cx, cy - 8], [cx + 8, cy], [cx, cy + 8], [cx - 8, cy]],
+                dtype=np.int32,
+            )
+            cv2.polylines(out, [pts], True, color, 2, cv2.LINE_AA)
         cv2.circle(out, (cx, cy), 4, color, -1, cv2.LINE_AA)
 
         # Draw label with black outline then white text
