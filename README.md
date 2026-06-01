@@ -89,6 +89,17 @@ pip install opencv-python
 - `tracks.json` frame numbering is 1-indexed:
   - `frame_number=1` corresponds to `0.jpg`
 
+## Alternate tracks.json format
+
+If your tracks file uses `"frame"` instead of `"frame_number"` or lacks `mask_center`,
+normalize it before running the pipeline:
+
+```bash
+python utils/convert_tracks.py --input tracks.json --output data/outputs/tracks.json
+```
+
+This sets `frame_number`, derives `mask_center` from each bbox center, and preserves `predicted` flags.
+
 ## Quick Start (End-to-End)
 
 ### 1) Run SAM3.1 tracking

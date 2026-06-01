@@ -334,7 +334,11 @@ def plot_metrics(
             label=f"Full coverage ({expected_players})",
         )
     ax1.set_xlim(left=0)
-    ax1.set_ylim(0, 12)
+    if counts:
+        ymax = max(12, int(max(counts) + 2))
+        ax1.set_ylim(0, ymax)
+    else:
+        ax1.set_ylim(0, 12)
     ax1.set_xlabel("Frame number")
     ax1.set_ylabel("Player count")
     ax1.set_title(f"{label}: Players Tracked Per Frame")
