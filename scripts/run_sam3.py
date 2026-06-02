@@ -18,19 +18,9 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from sam3.model_builder import (
-    build_sam3_video_predictor,
+    build_sam3_multiplex_video_predictor,
     download_ckpt_from_hf,
 )
-
-
-# -----------------------------
-# dtype helper (IMPORTANT FIX)
-# -----------------------------
-def get_autocast_dtype():
-    """Use bf16 if supported, else fp16."""
-    if torch.cuda.is_available() and torch.cuda.is_bf16_supported():
-        return torch.bfloat16
-    return torch.float16
 
 
 # -----------------------------
@@ -39,19 +29,25 @@ def get_autocast_dtype():
 def load_sam3_predictor(checkpoint_path=None):
     if checkpoint_path is None:
         print("Downloading SAM3 checkpoint...")
-        checkpoint_path = download_ckpt_from_hf()
+        checkpoint_path = download_ckpt_from_hf(version="sam3.1")
 
     if not torch.cuda.is_available():
         raise RuntimeError("CUDA GPU required for SAM3")
 
     print(f"Loading checkpoint: {checkpoint_path}")
 
-    predictor = build_sam3_video_predictor(
-        checkpoint_path=checkpoint_path,
-    )
+    try:
+        predictor = build_sam3_multiplex_video_predictor(
+            checkpoint_path=checkpoint_path,
+            gpus_to_use=[torch.cuda.current_device()],
+        )
+    except TypeError:
+        predictor = build_sam3_multiplex_video_predictor(
+            checkpoint_path=checkpoint_path,
+        )
 
-    # IMPORTANT: keep FP32 weights, move to GPU only
-    predictor.model = predictor.model.cuda()
+    # IMPORTANT: half weights + fp16 autocast must match for stable memory attention
+    predictor.model = predictor.model.cuda().half()
     predictor.model.eval()
 
     return predictor
@@ -95,7 +91,7 @@ def extract_frames(video_path, output_dir, fps=1, max_frames=150, resize_scale=1
                     interpolation=cv2.INTER_AREA,
                 )
 
-            path = f"{output_dir}/{saved}.jpg"
+            path = f"{output_dir}/{saved:05d}.jpg"
             cv2.imwrite(path, frame)
             frame_paths.append(path)
             saved += 1
@@ -133,7 +129,7 @@ def add_prompt(predictor, session_id):
         "type": "add_prompt",
         "session_id": session_id,
         "frame_index": 0,
-        "text": "basketball players",
+        "text": "basketball player",
     })
 
     if not resp:
@@ -163,7 +159,7 @@ def to_numpy(x):
 def box_xywh(box, w, h):
     x, y, bw, bh = to_numpy(box).reshape(-1).tolist()
 
-    if max(abs(x), abs(y), abs(bw), abs(bh)) <= 1.0:
+    if max(abs(bw), abs(bh)) < 2.0:
         x, y, bw, bh = x * w, y * h, bw * w, bh * h
 
     return int(x), int(y), int(bw), int(bh)
@@ -172,16 +168,41 @@ def box_xywh(box, w, h):
 def parse_outputs(outputs, w, h):
     obj_ids = to_numpy(outputs["out_obj_ids"]).astype(int).tolist()
     boxes = outputs["out_boxes_xywh"]
+    masks = outputs.get("out_binary_masks") or []
 
     players = []
 
     for i, oid in enumerate(obj_ids):
         try:
             x, y, bw, bh = box_xywh(boxes[i], w, h)
+            cx = x + bw / 2.0
+            cy = y + bh / 2.0
+            mask_center = {"x": round(cx, 1), "y": round(cy, 1)}
+            mask_area = int(bw * bh)
+
+            if i < len(masks):
+                try:
+                    mask = to_numpy(masks[i])
+                    while mask.ndim > 2:
+                        mask = mask[0]
+                    if mask.ndim == 2:
+                        binary = mask > 0
+                        area = int(np.sum(binary))
+                        if area > 0:
+                            ys, xs = np.where(binary)
+                            mask_center = {
+                                "x": round(float(xs.mean()), 1),
+                                "y": round(float(ys.mean()), 1),
+                            }
+                            mask_area = area
+                except Exception as mask_exc:
+                    print(f"  mask parse warning id={oid}: {mask_exc}")
 
             players.append({
                 "id": int(oid),
                 "bbox": {"x": x, "y": y, "w": bw, "h": bh},
+                "mask_center": mask_center,
+                "mask_area": mask_area,
             })
         except Exception as e:
             print("parse warning:", e)
@@ -189,17 +210,82 @@ def parse_outputs(outputs, w, h):
     return players
 
 
+def filter_detections(
+    players,
+    frame_width,
+    frame_height,
+    top_y_fraction=0.14,
+    min_area_fraction=0.0008,
+    max_area_fraction=0.015,
+    max_objects=13,
+):
+    """
+    Filter SAM3.1 detections using mask geometry only — no court calibration.
+
+    All thresholds are relative to frame dimensions so the filter works
+    correctly across different broadcast resolutions (360p, 720p, 1080p)
+    and camera zoom levels without any modification.
+
+    Filters applied in sequence:
+    1. Top-band removal: drops detections whose mask center y is in the
+       upper top_y_fraction of the frame. Crowd, scoreboards, and
+       upper-bowl fans dominate this region in broadcast views.
+
+    2. Minimum area: removes tiny detections (distant fans, noise).
+       Threshold is min_area_fraction * frame_area pixels — scales
+       automatically with resolution. At 720p (921600px) this is ~737px.
+       At 360p (230400px) this is ~184px.
+
+    3. Maximum area: removes oversized blobs — merged detections,
+       court graphics, and scoreboards. Threshold is max_area_fraction
+       * frame_area pixels. At 720p this is ~13824px. At 360p ~3456px.
+
+    4. Top-N cap: after size and position filtering, keep at most
+       max_objects detections sorted by mask_area descending. On-court
+       players tend to have larger visible mask area than partially
+       visible crowd members that survive the earlier filters.
+    """
+    if not players:
+        return []
+
+    frame_area = frame_width * frame_height
+    top_y_limit = top_y_fraction * frame_height
+    min_mask_area = int(min_area_fraction * frame_area)
+    max_mask_area = int(max_area_fraction * frame_area)
+
+    kept = []
+    for p in players:
+        cy = float(p["mask_center"]["y"])
+        area = int(p["mask_area"])
+
+        if cy < top_y_limit:
+            continue
+        if area < min_mask_area:
+            continue
+        if area > max_mask_area:
+            continue
+        kept.append(p)
+
+    kept.sort(key=lambda p: p["mask_area"], reverse=True)
+    return kept[:max_objects]
+
+
 # -----------------------------
 # Main pipeline
 # -----------------------------
 def run_tracking(frames_dir, output_path, checkpoint=None):
     frames_dir = Path(frames_dir)
-    frames = sorted(frames_dir.glob("*.jpg"))
+    frames = sorted(frames_dir.glob("*.jpg"), key=lambda p: int(p.stem))
 
     if not frames:
         raise FileNotFoundError("No frames found")
 
     img = cv2.imread(str(frames[0]))
+    if img is None:
+        raise RuntimeError(
+            f"Could not read first frame: {frames[0]}. "
+            "Check that the file exists and is a valid JPEG."
+        )
     h, w = img.shape[:2]
 
     predictor = load_sam3_predictor(checkpoint)
@@ -212,23 +298,22 @@ def run_tracking(frames_dir, output_path, checkpoint=None):
 
         results = {"frames": []}
 
-        amp_dtype = get_autocast_dtype()
-        print(f"Using autocast dtype: {amp_dtype}")
+        print("Using autocast dtype: torch.float16")
 
-        # CRITICAL FIX: only use autocast, NOT model half()
-        with torch.autocast(device_type="cuda", dtype=amp_dtype):
+        # CRITICAL FIX: fp16 weights and fp16 autocast must match
+        with torch.autocast(device_type="cuda", dtype=torch.float16):
             for frame_idx, outputs in propagate_tracking(predictor, session_id):
 
                 frame_num = frame_idx + 1
                 players = parse_outputs(outputs, w, h)
+                raw_count = len(players)
+                players = filter_detections(players, frame_width=w, frame_height=h)
+                print(f"Frame {frame_num}: {raw_count} raw -> {len(players)} filtered detections")
 
                 results["frames"].append({
-                    "frame": frame_num,
+                    "frame_number": frame_num,
                     "players": players
                 })
-
-                if frame_num % 10 == 0:
-                    print(f"Frame {frame_num}: {len(players)} players")
 
         Path(output_path).parent.mkdir(parents=True, exist_ok=True)
 
@@ -256,11 +341,45 @@ def main():
     parser.add_argument("--video_path", required=True)
     parser.add_argument("--output", default="tracks.json")
     parser.add_argument("--checkpoint", default=None)
+    parser.add_argument(
+        "--fps",
+        type=float,
+        default=1,
+        help="Frames per second to extract from video (default: 1)",
+    )
+    parser.add_argument(
+        "--max-frames",
+        type=int,
+        default=150,
+        help="Maximum number of frames to extract (default: 150)",
+    )
+    parser.add_argument(
+        "--resize-scale",
+        type=float,
+        default=1.0,
+        help="Optional downscale factor when saving frames (default: 1.0)",
+    )
     args = parser.parse_args()
 
     frames_dir = "data/frames"
 
-    extract_frames(args.video_path, frames_dir)
+    # Clear frames directory before extraction so old frames from
+    # previous runs do not mix with new ones. SAM3 loads all JPEGs
+    # in the directory — stale frames from a prior run with different
+    # max_frames would be included silently.
+    frames_path = Path(frames_dir)
+    if frames_path.exists():
+        for old_frame in frames_path.glob("*.jpg"):
+            old_frame.unlink()
+        print(f"[INFO] Cleared {frames_dir} before extraction.")
+
+    extract_frames(
+        args.video_path,
+        frames_dir,
+        fps=args.fps,
+        max_frames=args.max_frames,
+        resize_scale=args.resize_scale,
+    )
 
     run_tracking(
         frames_dir=frames_dir,
