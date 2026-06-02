@@ -129,7 +129,7 @@ def add_prompt(predictor, session_id):
         "type": "add_prompt",
         "session_id": session_id,
         "frame_index": 0,
-        "text": "basketball players",
+        "text": "basketball player",
     })
 
     if not resp:
@@ -281,6 +281,11 @@ def run_tracking(frames_dir, output_path, checkpoint=None):
         raise FileNotFoundError("No frames found")
 
     img = cv2.imread(str(frames[0]))
+    if img is None:
+        raise RuntimeError(
+            f"Could not read first frame: {frames[0]}. "
+            "Check that the file exists and is a valid JPEG."
+        )
     h, w = img.shape[:2]
 
     predictor = load_sam3_predictor(checkpoint)
