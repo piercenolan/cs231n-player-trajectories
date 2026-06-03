@@ -102,7 +102,7 @@ def run_pipeline(
     print(
         f"Memory settings: max_frames={max_frames}, resize_scale={resize_scale}, "
         f"max_num_objects={max_num_objects}, offload_video_to_cpu=True, "
-        f"use_fp16_weights=True"
+        f"dtype=bf16 (multiplex)"
     )
 
     print(f"Extracting frames from {video_path} (max={max_frames})...")
@@ -123,7 +123,7 @@ def run_pipeline(
     run_tracking(
         frames_dir="/data/frames",
         output_path=output_path,
-        use_fp16_weights=True,
+        use_fp16_weights=False,
         use_fa3=False,
         offload_video_to_cpu=True,
         max_num_objects=max_num_objects,

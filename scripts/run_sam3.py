@@ -149,11 +149,16 @@ def load_sam3_predictor(
     except TypeError:
         predictor = build_sam3_multiplex_video_predictor(**predictor_kwargs)
 
-    # IMPORTANT: half weights + fp16 autocast must match for stable memory attention
+    # Sam3MultiplexVideoPredictor runs with bf16 autocast internally. Converting
+    # weights to half() causes Float/Half mismatches in the decoder (e.g. mat1
+    # Float vs mat2 Half). Keep fp32 weights; memory is managed via frame count,
+    # resolution, offload_video_to_cpu, and max_num_objects instead.
     if use_fp16_weights:
-        predictor.model = predictor.model.cuda().half()
-    else:
-        predictor.model = predictor.model.cuda()
+        print(
+            "Note: model.half() skipped for multiplex predictor "
+            "(incompatible with internal bf16 path)."
+        )
+    predictor.model = predictor.model.cuda()
     predictor.model.eval()
     free_cuda_memory("After model load")
 
@@ -428,10 +433,10 @@ def run_tracking(
 
         results = {"frames": []}
 
-        autocast_dtype = torch.float16 if use_fp16_weights else torch.bfloat16
+        # Match Sam3MultiplexVideoPredictor's internal bf16 inference path.
+        autocast_dtype = torch.bfloat16
         print(f"Using autocast dtype: {autocast_dtype}")
 
-        # CRITICAL FIX: fp16 weights and fp16 autocast must match
         with torch.autocast(device_type="cuda", dtype=autocast_dtype):
             for frame_idx, outputs in propagate_tracking(predictor, session_id):
 
