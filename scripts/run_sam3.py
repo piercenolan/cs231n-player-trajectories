@@ -14,6 +14,31 @@ import torch
 torch.backends.cuda.matmul.allow_tf32 = True
 torch.backends.cudnn.allow_tf32 = True
 
+
+def configure_cuda_memory():
+    """Reduce fragmentation-related OOMs (see PyTorch CUDA memory notes)."""
+    import os
+
+    os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
+
+
+def free_cuda_memory(label=""):
+    """Release cached GPU allocations before loading the model."""
+    import gc
+
+    gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+        free_bytes, total_bytes = torch.cuda.mem_get_info()
+        prefix = f"[INFO] {label} " if label else "[INFO] "
+        print(
+            f"{prefix}GPU memory: "
+            f"{free_bytes / 1e9:.2f} GB free / {total_bytes / 1e9:.2f} GB total"
+        )
+
+
+configure_cuda_memory()
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
@@ -81,7 +106,13 @@ def patch_sam3_start_session():
 # -----------------------------
 # Model loading
 # -----------------------------
-def load_sam3_predictor(checkpoint_path=None, use_fp16_weights=True, use_fa3=True):
+def load_sam3_predictor(
+    checkpoint_path=None,
+    use_fp16_weights=True,
+    use_fa3=True,
+    max_num_objects=16,
+    async_loading_frames=True,
+):
     patch_sam3_start_session()
 
     if checkpoint_path is None:
@@ -91,14 +122,23 @@ def load_sam3_predictor(checkpoint_path=None, use_fp16_weights=True, use_fa3=Tru
     if not torch.cuda.is_available():
         raise RuntimeError("CUDA GPU required for SAM3")
 
+    free_cuda_memory("Before model load")
+
     print(f"Loading checkpoint: {checkpoint_path}")
     if not use_fa3:
         print("Flash Attention 3 disabled (use_fa3=False); using PyTorch SDPA fallback.")
+    print(
+        f"Model memory settings: max_num_objects={max_num_objects}, "
+        f"async_loading_frames={async_loading_frames}, "
+        f"use_fp16_weights={use_fp16_weights}"
+    )
 
     predictor_kwargs = {
         "checkpoint_path": checkpoint_path,
         "use_fa3": use_fa3,
         "use_rope_real": use_fa3,
+        "max_num_objects": max_num_objects,
+        "async_loading_frames": async_loading_frames,
     }
 
     try:
@@ -115,6 +155,7 @@ def load_sam3_predictor(checkpoint_path=None, use_fp16_weights=True, use_fa3=Tru
     else:
         predictor.model = predictor.model.cuda()
     predictor.model.eval()
+    free_cuda_memory("After model load")
 
     return predictor
 
@@ -176,10 +217,11 @@ def extract_frames(video_path, output_dir, fps=1, max_frames=150, resize_scale=1
 # -----------------------------
 # Session
 # -----------------------------
-def start_video_session(predictor, frames_dir):
+def start_video_session(predictor, frames_dir, offload_video_to_cpu=False):
     resp = predictor.handle_request({
         "type": "start_session",
         "resource_path": str(frames_dir),
+        "offload_video_to_cpu": offload_video_to_cpu,
     })
 
     if not resp or "session_id" not in resp:
@@ -345,6 +387,9 @@ def run_tracking(
     checkpoint=None,
     use_fp16_weights=True,
     use_fa3=True,
+    offload_video_to_cpu=False,
+    max_num_objects=16,
+    async_loading_frames=True,
 ):
     frames_dir = Path(frames_dir)
     frames = sorted(frames_dir.glob("*.jpg"), key=lambda p: int(p.stem))
@@ -359,17 +404,26 @@ def run_tracking(
             "Check that the file exists and is a valid JPEG."
         )
     h, w = img.shape[:2]
+    print(f"Frame dimensions: {w}x{h} ({len(frames)} frames)")
+
+    free_cuda_memory("Before tracking")
 
     predictor = load_sam3_predictor(
         checkpoint,
         use_fp16_weights=use_fp16_weights,
         use_fa3=use_fa3,
+        max_num_objects=max_num_objects,
+        async_loading_frames=async_loading_frames,
     )
 
     session_id = None
 
     try:
-        session_id = start_video_session(predictor, frames_dir)
+        session_id = start_video_session(
+            predictor,
+            frames_dir,
+            offload_video_to_cpu=offload_video_to_cpu,
+        )
         add_prompt(predictor, session_id)
 
         results = {"frames": []}
