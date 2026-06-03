@@ -104,6 +104,7 @@ def run_pipeline(
         frames_dir="/data/frames",
         output_path=output_path,
         use_fp16_weights=False,
+        use_fa3=False,
     )
 
     volume.commit()
@@ -127,7 +128,7 @@ def main(
     remote_video_abs = f"/data/{remote_video}"
 
     print(f"Uploading {local_video} -> volume:{remote_video} ...")
-    with volume.batch_upload() as batch:
+    with volume.batch_upload(force=True) as batch:
         batch.put_file(str(local_video), remote_video)
 
     run_pipeline.remote(

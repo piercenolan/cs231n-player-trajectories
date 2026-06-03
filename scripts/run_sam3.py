@@ -81,7 +81,7 @@ def patch_sam3_start_session():
 # -----------------------------
 # Model loading
 # -----------------------------
-def load_sam3_predictor(checkpoint_path=None, use_fp16_weights=True):
+def load_sam3_predictor(checkpoint_path=None, use_fp16_weights=True, use_fa3=True):
     patch_sam3_start_session()
 
     if checkpoint_path is None:
@@ -92,16 +92,22 @@ def load_sam3_predictor(checkpoint_path=None, use_fp16_weights=True):
         raise RuntimeError("CUDA GPU required for SAM3")
 
     print(f"Loading checkpoint: {checkpoint_path}")
+    if not use_fa3:
+        print("Flash Attention 3 disabled (use_fa3=False); using PyTorch SDPA fallback.")
+
+    predictor_kwargs = {
+        "checkpoint_path": checkpoint_path,
+        "use_fa3": use_fa3,
+        "use_rope_real": use_fa3,
+    }
 
     try:
         predictor = build_sam3_multiplex_video_predictor(
-            checkpoint_path=checkpoint_path,
             gpus_to_use=[torch.cuda.current_device()],
+            **predictor_kwargs,
         )
     except TypeError:
-        predictor = build_sam3_multiplex_video_predictor(
-            checkpoint_path=checkpoint_path,
-        )
+        predictor = build_sam3_multiplex_video_predictor(**predictor_kwargs)
 
     # IMPORTANT: half weights + fp16 autocast must match for stable memory attention
     if use_fp16_weights:
@@ -333,7 +339,13 @@ def filter_detections(
 # -----------------------------
 # Main pipeline
 # -----------------------------
-def run_tracking(frames_dir, output_path, checkpoint=None, use_fp16_weights=True):
+def run_tracking(
+    frames_dir,
+    output_path,
+    checkpoint=None,
+    use_fp16_weights=True,
+    use_fa3=True,
+):
     frames_dir = Path(frames_dir)
     frames = sorted(frames_dir.glob("*.jpg"), key=lambda p: int(p.stem))
 
@@ -348,7 +360,11 @@ def run_tracking(frames_dir, output_path, checkpoint=None, use_fp16_weights=True
         )
     h, w = img.shape[:2]
 
-    predictor = load_sam3_predictor(checkpoint, use_fp16_weights=use_fp16_weights)
+    predictor = load_sam3_predictor(
+        checkpoint,
+        use_fp16_weights=use_fp16_weights,
+        use_fa3=use_fa3,
+    )
 
     session_id = None
 
