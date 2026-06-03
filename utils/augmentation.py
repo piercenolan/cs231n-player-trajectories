@@ -1070,7 +1070,7 @@ def apply_augmentation(frames, frame_width, frame_height, level="full"):
     return augmented, correction_log
 
 
-def save_augmented_tracks(frames, correction_log, output_path):
+def save_augmented_tracks(frames, correction_log, output_path, meta=None):
     """
     Save augmented tracks and correction log.
 
@@ -1080,8 +1080,12 @@ def save_augmented_tracks(frames, correction_log, output_path):
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
+    payload = {"frames": frames}
+    if meta:
+        payload["meta"] = meta
+
     with open(output_path, "w", encoding="utf-8") as f:
-        json.dump({"frames": frames}, f, indent=2)
+        json.dump(payload, f, indent=2)
 
     corrections_path = output_path.parent / "corrections.json"
     with open(corrections_path, "w", encoding="utf-8") as f:
@@ -1094,11 +1098,21 @@ def run_augmentation(input_path, output_path, frame_width, frame_height, level="
     """
     Run full augmentation pipeline: load, augment, save, and print summary.
     """
-    frames = load_tracks(input_path)
+    input_path = Path(input_path)
+    with open(input_path, encoding="utf-8") as f:
+        input_data = json.load(f)
+    frames = sorted(
+        input_data.get("frames", []),
+        key=lambda fr: int(fr.get("frame_number", 0)),
+    )
+    meta = input_data.get("meta")
+
     augmented_frames, correction_log = apply_augmentation(
         frames, frame_width=frame_width, frame_height=frame_height, level=level
     )
-    corrections_path = save_augmented_tracks(augmented_frames, correction_log, output_path)
+    corrections_path = save_augmented_tracks(
+        augmented_frames, correction_log, output_path, meta=meta
+    )
 
     counts = defaultdict(int)
     predicted_count = 0
@@ -1151,8 +1165,8 @@ def main():
         default="data/outputs/augmented_tracks.json",
         help="Output augmented tracks.json path",
     )
-    parser.add_argument("--frame-width", type=int, required=True, help="Frame width in pixels")
-    parser.add_argument("--frame-height", type=int, required=True, help="Frame height in pixels")
+    parser.add_argument("--frame-width", type=int, default=None, help="Frame width in pixels (auto from tracks meta if omitted)")
+    parser.add_argument("--frame-height", type=int, default=None, help="Frame height in pixels (auto from tracks meta if omitted)")
     parser.add_argument(
         "--level",
         choices=["physical", "game", "full"],
@@ -1161,11 +1175,24 @@ def main():
     )
     args = parser.parse_args()
 
+    frame_width = args.frame_width
+    frame_height = args.frame_height
+    if frame_width is None or frame_height is None:
+        with open(args.tracks, encoding="utf-8") as f:
+            meta = json.load(f).get("meta", {})
+        frame_width = frame_width or meta.get("frame_width")
+        frame_height = frame_height or meta.get("frame_height")
+    if not frame_width or not frame_height:
+        raise ValueError(
+            "frame width/height required. Pass --frame-width/--frame-height or "
+            "re-run tracking so tracks.json includes meta.frame_width/frame_height."
+        )
+
     run_augmentation(
         input_path=args.tracks,
         output_path=args.output,
-        frame_width=args.frame_width,
-        frame_height=args.frame_height,
+        frame_width=int(frame_width),
+        frame_height=int(frame_height),
         level=args.level,
     )
 

@@ -1,12 +1,13 @@
 """
 Run the SAM3.1 tracking pipeline on Modal GPU.
 
-Memory-conscious defaults for A10G (24 GB): downscaled frames, fewer frames,
-fp16 weights, CPU video offload, and capped object count.
+Tuned for A10G (24 GB): ~67% resolution and 45 frames balances detection
+quality against VRAM. Uses CPU video offload and bf16 multiplex inference.
 
 Usage:
     py -m modal run scripts/run_modal.py
-    py -m modal run scripts/run_modal.py --video-path data/videos/video_1.mp4 --max-frames 30 --resize-scale 0.5
+    py -m modal run scripts/run_modal.py --video-path data/videos/video_1.mp4
+    py -m modal run scripts/run_modal.py --max-frames 45 --resize-scale 0.67
 """
 
 import modal
@@ -65,13 +66,14 @@ image = (
 )
 def run_pipeline(
     video_path: str = "/data/videos/video_1.mp4",
-    max_frames: int = 30,
-    resize_scale: float = 0.5,
+    max_frames: int = 45,
+    resize_scale: float = 0.67,
     output_path: str = "/data/outputs/baseline_tracks.json",
-    max_num_objects: int = 13,
+    max_num_objects: int = 14,
 ):
     import gc
     import glob
+    import json
     import os
     import sys
 
@@ -101,8 +103,7 @@ def run_pipeline(
 
     print(
         f"Memory settings: max_frames={max_frames}, resize_scale={resize_scale}, "
-        f"max_num_objects={max_num_objects}, offload_video_to_cpu=True, "
-        f"dtype=bf16 (multiplex)"
+        f"max_num_objects={max_num_objects}, offload_video_to_cpu=True"
     )
 
     print(f"Extracting frames from {video_path} (max={max_frames})...")
@@ -128,7 +129,12 @@ def run_pipeline(
         offload_video_to_cpu=True,
         max_num_objects=max_num_objects,
         async_loading_frames=True,
+        resize_scale=resize_scale,
     )
+
+    with open(output_path, encoding="utf-8") as f:
+        meta = json.load(f).get("meta", {})
+    print(f"Track metadata: {meta}")
 
     volume.commit()
     print(f"Done. Results saved to {output_path}")
@@ -137,10 +143,10 @@ def run_pipeline(
 @app.local_entrypoint()
 def main(
     video_path: str = "data/videos/video_1.mp4",
-    max_frames: int = 30,
-    resize_scale: float = 0.5,
+    max_frames: int = 45,
+    resize_scale: float = 0.67,
     output_path: str = "/data/outputs/baseline_tracks.json",
-    max_num_objects: int = 13,
+    max_num_objects: int = 14,
     skip_upload: bool = False,
 ):
     local_video = Path(video_path)
@@ -169,7 +175,9 @@ def main(
     )
 
     print(
-        "Pipeline finished. Download results with:\n"
-        f"  py -m modal volume get sports-data {output_path.lstrip('/data/')} "
-        f"data/outputs/{Path(output_path).name}"
+        "Pipeline finished. Download results:\n"
+        f"  py -m modal volume get sports-data outputs/baseline_tracks.json data/outputs/baseline_tracks.json\n"
+        "Download matching frames for visualization (same run resolution):\n"
+        "  py -m modal volume get sports-data frames data/frames --force\n"
+        "Then run metrics / augmentation / visualize using data/frames and the tracks meta dimensions."
     )

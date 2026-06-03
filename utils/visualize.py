@@ -8,6 +8,7 @@ Supports:
 """
 
 import argparse
+import copy
 import json
 from pathlib import Path
 
@@ -31,14 +32,14 @@ def get_player_color(player_id, predicted=False):
     )
 
 
-def draw_tracks_on_frame(frame_bgr, frame_tracks):
+def draw_tracks_on_frame(frame_bgr, frame_tracks, scale_x=1.0, scale_y=1.0):
     """
     Draw tracking annotations for one frame.
 
     Works on a copy and returns the annotated frame.
     """
     out = frame_bgr.copy()
-    players = frame_tracks or []
+    players = scale_players_to_image(frame_tracks or [], scale_x, scale_y)
 
     if not players:
         cv2.putText(
@@ -128,6 +129,69 @@ def load_tracks_by_frame(tracks_path):
     return mapping
 
 
+def load_tracks_meta(tracks_path):
+    """Load optional metadata written by run_sam3.py."""
+    tracks_path = Path(tracks_path)
+    with open(tracks_path, encoding="utf-8") as f:
+        data = json.load(f)
+    return data.get("meta", {})
+
+
+def scale_players_to_image(players, scale_x, scale_y):
+    """Scale bbox and mask_center coordinates to match display image size."""
+    if scale_x == 1.0 and scale_y == 1.0:
+        return players
+
+    scaled = []
+    for player in players:
+        p = copy.deepcopy(player)
+        bbox = p.get("bbox", {})
+        bbox["x"] = int(round(float(bbox.get("x", 0)) * scale_x))
+        bbox["y"] = int(round(float(bbox.get("y", 0)) * scale_y))
+        bbox["w"] = int(round(float(bbox.get("w", 0)) * scale_x))
+        bbox["h"] = int(round(float(bbox.get("h", 0)) * scale_y))
+        p["bbox"] = bbox
+
+        center = p.get("mask_center", {})
+        if center:
+            p["mask_center"] = {
+                "x": round(float(center.get("x", 0)) * scale_x, 1),
+                "y": round(float(center.get("y", 0)) * scale_y, 1),
+            }
+        if "mask_area" in p:
+            p["mask_area"] = int(float(p["mask_area"]) * scale_x * scale_y)
+        scaled.append(p)
+    return scaled
+
+
+def _track_display_scales(meta, image_bgr):
+    """Return scale factors from track coordinate space to image pixels."""
+    if image_bgr is None:
+        return 1.0, 1.0
+
+    img_h, img_w = image_bgr.shape[:2]
+    track_w = int(meta.get("frame_width", img_w))
+    track_h = int(meta.get("frame_height", img_h))
+    if track_w <= 0 or track_h <= 0:
+        return 1.0, 1.0
+    if track_w == img_w and track_h == img_h:
+        return 1.0, 1.0
+    return img_w / track_w, img_h / track_h
+
+
+def _frame_path_for_number(frame_paths, frame_number):
+    """Map 1-based frame_number to sorted JPEG path."""
+    idx = int(frame_number) - 1
+    if 0 <= idx < len(frame_paths):
+        return frame_paths[idx]
+    return None
+
+
+def _tracked_frame_numbers(tracks_by_frame):
+    """Sorted frame numbers that have track entries."""
+    return sorted(int(n) for n in tracks_by_frame.keys() if int(n) > 0)
+
+
 def _get_sorted_frame_paths(frames_dir):
     """Return JPEG frame paths sorted numerically by stem."""
     frames_dir = Path(frames_dir)
@@ -147,16 +211,28 @@ def save_annotated_frames(frames_dir, tracks_path, output_dir, every_n=1):
     """
     frame_paths = _get_sorted_frame_paths(frames_dir)
     tracks_by_frame = load_tracks_by_frame(tracks_path)
+    meta = load_tracks_meta(tracks_path)
+    tracked_numbers = _tracked_frame_numbers(tracks_by_frame)
+
+    if len(frame_paths) != len(tracked_numbers):
+        print(
+            f"[WARN] Frame count mismatch: {len(frame_paths)} JPEGs vs "
+            f"{len(tracked_numbers)} tracked frames. Visualizing tracked frames only."
+        )
 
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
     saved = []
-    total_to_process = len(frame_paths)
-    print(f"Annotating {total_to_process} source frames (every_n={every_n})...")
+    print(f"Annotating {len(tracked_numbers)} tracked frames (every_n={every_n})...")
 
-    for i, frame_path in enumerate(frame_paths):
-        if every_n > 1 and (i % every_n) != 0:
+    for frame_number in tracked_numbers:
+        if every_n > 1 and ((frame_number - 1) % every_n) != 0:
+            continue
+
+        frame_path = _frame_path_for_number(frame_paths, frame_number)
+        if frame_path is None:
+            print(f"Skipping frame {frame_number}: no matching JPEG")
             continue
 
         frame = cv2.imread(str(frame_path))
@@ -164,9 +240,9 @@ def save_annotated_frames(frames_dir, tracks_path, output_dir, every_n=1):
             print(f"Skipping unreadable frame: {frame_path}")
             continue
 
-        frame_number = i + 1
+        sx, sy = _track_display_scales(meta, frame)
         frame_tracks = tracks_by_frame.get(frame_number, [])
-        annotated = draw_tracks_on_frame(frame, frame_tracks)
+        annotated = draw_tracks_on_frame(frame, frame_tracks, scale_x=sx, scale_y=sy)
 
         out_name = f"annotated_{frame_number:04d}.jpg"
         out_path = output_dir / out_name
@@ -219,15 +295,28 @@ def save_comparison_frames(frames_dir, baseline_path, augmented_path, output_dir
     frame_paths = _get_sorted_frame_paths(frames_dir)
     baseline = load_tracks_by_frame(baseline_path)
     augmented = load_tracks_by_frame(augmented_path)
+    meta = load_tracks_meta(baseline_path)
+    tracked_numbers = _tracked_frame_numbers(baseline)
+
+    if len(frame_paths) != len(tracked_numbers):
+        print(
+            f"[WARN] Frame count mismatch: {len(frame_paths)} JPEGs vs "
+            f"{len(tracked_numbers)} tracked frames. Visualizing tracked frames only."
+        )
 
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
     saved = []
-    print(f"Creating comparison frames from {len(frame_paths)} source frames...")
+    print(f"Creating comparison frames for {len(tracked_numbers)} tracked frames...")
 
-    for i, frame_path in enumerate(frame_paths):
-        if every_n > 1 and (i % every_n) != 0:
+    for frame_number in tracked_numbers:
+        if every_n > 1 and ((frame_number - 1) % every_n) != 0:
+            continue
+
+        frame_path = _frame_path_for_number(frame_paths, frame_number)
+        if frame_path is None:
+            print(f"Skipping frame {frame_number}: no matching JPEG")
             continue
 
         frame = cv2.imread(str(frame_path))
@@ -235,9 +324,13 @@ def save_comparison_frames(frames_dir, baseline_path, augmented_path, output_dir
             print(f"Skipping unreadable frame: {frame_path}")
             continue
 
-        frame_number = i + 1
-        left = draw_tracks_on_frame(frame, baseline.get(frame_number, []))
-        right = draw_tracks_on_frame(frame, augmented.get(frame_number, []))
+        sx, sy = _track_display_scales(meta, frame)
+        left = draw_tracks_on_frame(
+            frame, baseline.get(frame_number, []), scale_x=sx, scale_y=sy
+        )
+        right = draw_tracks_on_frame(
+            frame, augmented.get(frame_number, []), scale_x=sx, scale_y=sy
+        )
         comparison = np.hstack([left, right])
         comparison = _add_comparison_label_bar(
             comparison, "SAM3.1 Raw", "SAM3.1 + Augmentation"
@@ -259,33 +352,46 @@ def create_summary_figure(frames_dir, baseline_path, augmented_path, output_path
     """
     Create publication-quality figure with baseline vs augmentation pairs.
 
-    Frame rows are evenly spaced across the source sequence.
+    Frame rows are evenly spaced across tracked frame numbers (not orphan JPEGs).
     """
     frame_paths = _get_sorted_frame_paths(frames_dir)
     baseline = load_tracks_by_frame(baseline_path)
     augmented = load_tracks_by_frame(augmented_path)
+    meta = load_tracks_meta(baseline_path)
+    tracked_numbers = _tracked_frame_numbers(baseline)
 
     if not frame_paths:
         raise ValueError("No JPEG frames found for summary figure.")
+    if not tracked_numbers:
+        raise ValueError("No tracked frames found in baseline tracks.json.")
 
-    n_total = len(frame_paths)
-    n_rows = max(1, min(int(n_frames), n_total))
-    indices = np.linspace(0, n_total - 1, n_rows, dtype=int)
+    if len(frame_paths) != len(tracked_numbers):
+        print(
+            f"[WARN] Frame count mismatch: {len(frame_paths)} JPEGs vs "
+            f"{len(tracked_numbers)} tracked frames."
+        )
+
+    n_rows = max(1, min(int(n_frames), len(tracked_numbers)))
+    pick_idx = np.linspace(0, len(tracked_numbers) - 1, n_rows, dtype=int)
+    summary_frame_numbers = [tracked_numbers[int(i)] for i in pick_idx]
 
     fig, axes = plt.subplots(n_rows, 2, figsize=(10, 2.8 * n_rows))
     if n_rows == 1:
         axes = np.array([axes])
 
-    for row_idx, idx in enumerate(indices):
-        frame_path = frame_paths[int(idx)]
-        frame = cv2.imread(str(frame_path))
+    for row_idx, frame_number in enumerate(summary_frame_numbers):
+        frame_path = _frame_path_for_number(frame_paths, frame_number)
+        frame = cv2.imread(str(frame_path)) if frame_path else None
         if frame is None:
-            # fallback blank panel
             frame = np.zeros((270, 480, 3), dtype=np.uint8)
 
-        frame_number = int(idx) + 1
-        left = draw_tracks_on_frame(frame, baseline.get(frame_number, []))
-        right = draw_tracks_on_frame(frame, augmented.get(frame_number, []))
+        sx, sy = _track_display_scales(meta, frame)
+        left = draw_tracks_on_frame(
+            frame, baseline.get(frame_number, []), scale_x=sx, scale_y=sy
+        )
+        right = draw_tracks_on_frame(
+            frame, augmented.get(frame_number, []), scale_x=sx, scale_y=sy
+        )
 
         left = cv2.resize(left, (480, 270), interpolation=cv2.INTER_AREA)
         right = cv2.resize(right, (480, 270), interpolation=cv2.INTER_AREA)

@@ -242,7 +242,7 @@ def add_prompt(predictor, session_id):
         "type": "add_prompt",
         "session_id": session_id,
         "frame_index": 0,
-        "text": "basketball player",
+        "text": "basketball players on the court",
     })
 
     if not resp:
@@ -281,7 +281,9 @@ def box_xywh(box, w, h):
 def parse_outputs(outputs, w, h):
     obj_ids = to_numpy(outputs["out_obj_ids"]).astype(int).tolist()
     boxes = outputs["out_boxes_xywh"]
-    masks = outputs.get("out_binary_masks") or []
+    masks = outputs.get("out_binary_masks")
+    if masks is None:
+        masks = []
 
     players = []
 
@@ -321,6 +323,31 @@ def parse_outputs(outputs, w, h):
             print("parse warning:", e)
 
     return players
+
+
+def filter_defaults_for_resolution(frame_width, frame_height):
+    """
+    Resolution-aware filter defaults.
+
+    Smaller frames (Modal downscale) need a lower min_area_fraction so
+    on-court players are not removed as noise.
+    """
+    frame_area = frame_width * frame_height
+    if frame_area <= 280_000:
+        min_area_fraction = 0.00030
+        top_y_fraction = 0.11
+    elif frame_area <= 450_000:
+        min_area_fraction = 0.00040
+        top_y_fraction = 0.12
+    else:
+        min_area_fraction = 0.00055
+        top_y_fraction = 0.13
+    return {
+        "top_y_fraction": top_y_fraction,
+        "min_area_fraction": min_area_fraction,
+        "max_area_fraction": 0.018,
+        "max_objects": 14,
+    }
 
 
 def filter_detections(
@@ -395,6 +422,7 @@ def run_tracking(
     offload_video_to_cpu=False,
     max_num_objects=16,
     async_loading_frames=True,
+    resize_scale=1.0,
 ):
     frames_dir = Path(frames_dir)
     frames = sorted(frames_dir.glob("*.jpg"), key=lambda p: int(p.stem))
@@ -431,7 +459,18 @@ def run_tracking(
         )
         add_prompt(predictor, session_id)
 
-        results = {"frames": []}
+        filter_kwargs = filter_defaults_for_resolution(w, h)
+        print(f"Filter settings for {w}x{h}: {filter_kwargs}")
+
+        results = {
+            "meta": {
+                "frame_width": w,
+                "frame_height": h,
+                "num_source_frames": len(frames),
+                "resize_scale": resize_scale,
+            },
+            "frames": [],
+        }
 
         # Match Sam3MultiplexVideoPredictor's internal bf16 inference path.
         autocast_dtype = torch.bfloat16
@@ -443,7 +482,12 @@ def run_tracking(
                 frame_num = frame_idx + 1
                 players = parse_outputs(outputs, w, h)
                 raw_count = len(players)
-                players = filter_detections(players, frame_width=w, frame_height=h)
+                players = filter_detections(
+                    players,
+                    frame_width=w,
+                    frame_height=h,
+                    **filter_kwargs,
+                )
                 print(f"Frame {frame_num}: {raw_count} raw -> {len(players)} filtered detections")
 
                 results["frames"].append({
@@ -520,7 +564,8 @@ def main():
     run_tracking(
         frames_dir=frames_dir,
         output_path=args.output,
-        checkpoint=args.checkpoint
+        checkpoint=args.checkpoint,
+        resize_scale=args.resize_scale,
     )
 
 
