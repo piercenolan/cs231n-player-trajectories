@@ -14,11 +14,15 @@ image = (
         index_url="https://download.pytorch.org/whl/cu128"
     )
     .pip_install(
-        "opencv-python-headless",
-        "numpy",
-        "huggingface_hub",
-        "hf_transfer",
-    )
+    "opencv-python-headless",
+    "numpy",
+    "huggingface_hub",
+    "hf_transfer",
+    "einops",
+    "timm",
+    "hydra-core",
+    "omegaconf",
+)
     .run_commands(
         "git clone https://github.com/facebookresearch/sam3.git /sam3",
         "cd /sam3 && pip install -e .",
