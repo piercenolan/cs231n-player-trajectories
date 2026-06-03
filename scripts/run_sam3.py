@@ -23,10 +23,67 @@ from sam3.model_builder import (
 )
 
 
+def patch_sam3_start_session():
+    """
+    Filter init_state kwargs for SAM3.1 multiplex predictors.
+
+    Upstream sam3#544: start_session() forwards offload_state_to_cpu to
+    init_state(), but Sam3MultiplexTrackingWithInteractivity does not
+    accept that argument. add_prompt/propagate_in_video already filter
+    kwargs; this applies the same pattern to start_session.
+    """
+    import inspect
+    import time
+    import uuid
+
+    from sam3.model.sam3_base_predictor import Sam3BasePredictor
+
+    if getattr(Sam3BasePredictor, "_start_session_patched", False):
+        return
+
+    def start_session(
+        self,
+        resource_path,
+        session_id=None,
+        offload_video_to_cpu=False,
+        offload_state_to_cpu=False,
+    ):
+        init_kwargs = dict(
+            resource_path=resource_path,
+            offload_video_to_cpu=offload_video_to_cpu,
+            offload_state_to_cpu=offload_state_to_cpu,
+        )
+        if hasattr(self, "async_loading_frames"):
+            init_kwargs["async_loading_frames"] = self.async_loading_frames
+        if hasattr(self, "video_loader_type"):
+            init_kwargs["video_loader_type"] = self.video_loader_type
+
+        sig = inspect.signature(self.model.init_state)
+        valid_params = set(sig.parameters.keys())
+        init_kwargs = {k: v for k, v in init_kwargs.items() if k in valid_params}
+
+        inference_state = self.model.init_state(**init_kwargs)
+
+        if not session_id:
+            session_id = str(uuid.uuid4())
+        self._all_inference_states[session_id] = {
+            "state": inference_state,
+            "session_id": session_id,
+            "start_time": time.time(),
+            "last_use_time": time.time(),
+        }
+        return {"session_id": session_id}
+
+    Sam3BasePredictor.start_session = start_session
+    Sam3BasePredictor._start_session_patched = True
+
+
 # -----------------------------
 # Model loading
 # -----------------------------
-def load_sam3_predictor(checkpoint_path=None):
+def load_sam3_predictor(checkpoint_path=None, use_fp16_weights=True):
+    patch_sam3_start_session()
+
     if checkpoint_path is None:
         print("Downloading SAM3 checkpoint...")
         checkpoint_path = download_ckpt_from_hf(version="sam3.1")
@@ -47,7 +104,10 @@ def load_sam3_predictor(checkpoint_path=None):
         )
 
     # IMPORTANT: half weights + fp16 autocast must match for stable memory attention
-    predictor.model = predictor.model.cuda().half()
+    if use_fp16_weights:
+        predictor.model = predictor.model.cuda().half()
+    else:
+        predictor.model = predictor.model.cuda()
     predictor.model.eval()
 
     return predictor
@@ -273,7 +333,7 @@ def filter_detections(
 # -----------------------------
 # Main pipeline
 # -----------------------------
-def run_tracking(frames_dir, output_path, checkpoint=None):
+def run_tracking(frames_dir, output_path, checkpoint=None, use_fp16_weights=True):
     frames_dir = Path(frames_dir)
     frames = sorted(frames_dir.glob("*.jpg"), key=lambda p: int(p.stem))
 
@@ -288,7 +348,7 @@ def run_tracking(frames_dir, output_path, checkpoint=None):
         )
     h, w = img.shape[:2]
 
-    predictor = load_sam3_predictor(checkpoint)
+    predictor = load_sam3_predictor(checkpoint, use_fp16_weights=use_fp16_weights)
 
     session_id = None
 
@@ -298,10 +358,11 @@ def run_tracking(frames_dir, output_path, checkpoint=None):
 
         results = {"frames": []}
 
-        print("Using autocast dtype: torch.float16")
+        autocast_dtype = torch.float16 if use_fp16_weights else torch.bfloat16
+        print(f"Using autocast dtype: {autocast_dtype}")
 
         # CRITICAL FIX: fp16 weights and fp16 autocast must match
-        with torch.autocast(device_type="cuda", dtype=torch.float16):
+        with torch.autocast(device_type="cuda", dtype=autocast_dtype):
             for frame_idx, outputs in propagate_tracking(predictor, session_id):
 
                 frame_num = frame_idx + 1
