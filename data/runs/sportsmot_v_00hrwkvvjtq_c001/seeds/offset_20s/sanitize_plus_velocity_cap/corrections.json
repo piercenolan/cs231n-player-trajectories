@@ -1,0 +1,28 @@
+{
+  "corrections": [
+    {
+      "frame_number": 2,
+      "player_id": 10,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "crowd_rim_bleed",
+      "predicted": false
+    },
+    {
+      "frame_number": 3,
+      "player_id": 10,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "crowd_rim_bleed",
+      "predicted": false
+    },
+    {
+      "frame_number": 4,
+      "player_id": 10,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "crowd_rim_bleed",
+      "predicted": false
+    }
+  ]
+}

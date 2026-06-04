@@ -1,0 +1,9 @@
+{
+  "extract": [
+    "v_-6Os86HzwCs_c001",
+    "v_-6Os86HzwCs_c003",
+    "v_00HRwkvvjtQ_c001"
+  ],
+  "holdout_sequence_id": "v_00HRwkvvjtQ_c001",
+  "notes": "LSTM trained on sportsmot_example only; these clips are transfer eval."
+}

@@ -1,0 +1,9 @@
+{
+  "status": "complete_transfer_eval",
+  "modal_seeds": "done",
+  "tensor_export_with_rule_features": "done",
+  "transfer_eval": "done",
+  "multiseq_csv": "data/runs/multiseq_transfer_summary.csv",
+  "paper_results": "docs/PAPER_RESULTS.md",
+  "note": "LSTM trained locally on sportsmot_example only; no Modal LSTM trainer in repo."
+}

@@ -1,0 +1,17 @@
+{
+  "dataset": "sportsmot_v_6os86hzwcs_c003",
+  "ablation": "sanitize_plus_velocity_cap",
+  "with_rule_features": true,
+  "exported": {
+    "offset_0s": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_6os86hzwcs_c003\\seeds\\offset_0s\\trajectory_tensors.json",
+    "offset_2s": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_6os86hzwcs_c003\\seeds\\offset_2s\\trajectory_tensors.json",
+    "offset_4s": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_6os86hzwcs_c003\\seeds\\offset_4s\\trajectory_tensors.json",
+    "offset_6s": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_6os86hzwcs_c003\\seeds\\offset_6s\\trajectory_tensors.json",
+    "offset_8s": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_6os86hzwcs_c003\\seeds\\offset_8s\\trajectory_tensors.json",
+    "offset_10s": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_6os86hzwcs_c003\\seeds\\offset_10s\\trajectory_tensors.json",
+    "offset_12s": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_6os86hzwcs_c003\\seeds\\offset_12s\\trajectory_tensors.json"
+  },
+  "failed": {
+    "offset_14s": "Validation failed for C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_6os86hzwcs_c003\\seeds\\offset_14s\\trajectory_tensors.json: {'global_visibility_fraction': 0.8377777777777777, 'frames_with_zero_visible': 0, 'per_slot_visibility': [1.0, 1.0, 0.9777777777777777, 0.9777777777777777, 0.9333333333333333, 0.8888888888888888, 0.8222222222222222, 0.7555555555555555, 0.7111111111111111, 0.3111111111111111], 'per_slot_empty_fraction': [0.0, 0.0, 0.022222222222222254, 0.022222222222222254, 0.06666666666666665, 0.11111111111111116, 0.1777777777777778, 0.24444444444444446, 0.28888888888888886, 0.6888888888888889], 'min_global_visibility_threshold': 0.7, 'max_slot_empty_fraction_threshold': 0.6, 'passed': False}"
+  }
+}

@@ -52,6 +52,9 @@ flowchart LR
 | 11 | **Rule-aware LSTM** (A0–A3 ablations) | Done | `lstm/lstm_ablation_summary.csv`, `figures/lstm_rule_ablation_bar.png` |
 | 12 | **Rule feature export** (15-dim) | Done | `utils/rule_features.py`; tensors include `rule_features` |
 | 13 | **Step-sec 2 multi-seed (12 windows)** | Done | 12 seeds @ 2s step; tensors + rule features exported |
+| 14 | **A1 residual LSTM** (forecast ADE, ties linear) | Done | `lstm/lstm_rule_features_residual/`; see `docs/PAPER_RESULTS.md` |
+| 15 | **36h sprint infra** (register, batch Modal, transfer CSV) | Done | `scripts/register_sportsmot_sequence.py`, `MODAL_SPRINT_RUNBOOK.md` |
+| 16 | **Cross-sequence transfer (3 clips)** | Done | `multiseq_transfer_summary.csv`; holdout residual 4.99 vs linear 5.01 |
 
 ---
 
@@ -95,9 +98,11 @@ flowchart LR
 
 | Variant | Median forecast ADE (px) | Mean forecast ADE (px) | Notes |
 |---------|-------------------------|------------------------|--------|
-| **A1 rule features** | **7.51** | 17.0 | Beats A0 on **10/12** seeds (`lstm_per_seed_delta.csv`) |
+| **A1 residual (headline)** | **5.81** | 5.62 | Ties linear median; beats linear on **5/12** seeds |
+| A1 rule features | 7.51 | 17.0 | Beats A0 on **10/12** seeds |
 | A3 graph | 8.67 | 16.3 | Best mean on held-out training |
 | A0 plain | 10.68 | 17.0 | Positions-only |
+| Linear baseline | 5.81 | 5.60 | Primary forecast comparison |
 | A1b (+ rule loss) | — | — | `lstm/lstm_rule_features_a1b/` |
 
 **Held-out `offset_0s`:** A0/A1 degrade (not in training); report **median over train seeds** for generalization.

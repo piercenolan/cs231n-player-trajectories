@@ -1,0 +1,45 @@
+{
+  "dataset": "sportsmot_v_6os86hzwcs_c003",
+  "num_frames": 403,
+  "step_sec": 2.0,
+  "max_frames": 45,
+  "resize_scale": 0.5,
+  "seeds": [
+    {
+      "seed_id": "offset_0s",
+      "start_time_sec": 0.0
+    },
+    {
+      "seed_id": "offset_2s",
+      "start_time_sec": 2.0
+    },
+    {
+      "seed_id": "offset_4s",
+      "start_time_sec": 4.0
+    },
+    {
+      "seed_id": "offset_6s",
+      "start_time_sec": 6.0
+    },
+    {
+      "seed_id": "offset_8s",
+      "start_time_sec": 8.0
+    },
+    {
+      "seed_id": "offset_10s",
+      "start_time_sec": 10.0
+    },
+    {
+      "seed_id": "offset_12s",
+      "start_time_sec": 12.0
+    },
+    {
+      "seed_id": "offset_14s",
+      "start_time_sec": 14.0
+    }
+  ],
+  "source_fps": 25.0,
+  "extract_fps": 25.0,
+  "max_start_time_sec": 14.32,
+  "modal_volume": "sports-data"
+}
