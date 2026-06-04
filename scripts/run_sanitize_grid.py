@@ -17,18 +17,26 @@ from utils.trajectory_metrics import compute_ade_fde, find_sportsmot_gt
 
 def main():
     parser = argparse.ArgumentParser(description="Sanitize parameter grid search")
-    parser.add_argument("--baseline", default="data/outputs/baseline_tracks.json")
-    parser.add_argument("--output-root", default="data/outputs/sanitize_grid")
+    parser.add_argument("--dataset", default="sportsmot_example")
+    parser.add_argument("--baseline", default=None)
+    parser.add_argument("--output-root", default=None)
     parser.add_argument("--gt", default=None)
-    parser.add_argument("--sequence", default="video_1")
+    parser.add_argument("--sequence", default=None)
     parser.add_argument("--rules", default="velocity_cap")
     args = parser.parse_args()
 
-    with open(args.baseline, encoding="utf-8") as f:
+    from utils.datasets import baseline_tracks_path, find_gt_path, runs_dir
+
+    sequence = args.sequence or args.dataset
+    baseline = args.baseline or str(baseline_tracks_path(args.dataset))
+    out_root_default = runs_dir(args.dataset) / "sanitize_grid"
+    args.output_root = args.output_root or str(out_root_default)
+
+    with open(baseline, encoding="utf-8") as f:
         meta = json.load(f).get("meta", {})
     fw = meta.get("frame_width")
     fh = meta.get("frame_height")
-    gt = args.gt or find_sportsmot_gt(args.sequence)
+    gt = args.gt or find_gt_path(args.dataset) or find_sportsmot_gt(sequence)
 
     grid = []
     for max_w in (0.40, 0.35, 0.30):
@@ -53,7 +61,7 @@ def main():
         aug_path = out_dir / "augmented_tracks.json"
 
         run_augmentation(
-            input_path=args.baseline,
+            input_path=baseline,
             output_path=aug_path,
             frame_width=int(fw),
             frame_height=int(fh),
@@ -70,7 +78,7 @@ def main():
         row = {**params, **tm, "tag": tag}
         if gt:
             row["ade"] = compute_ade_fde(str(aug_path), gt)["ade"]
-            row["baseline_ade"] = compute_ade_fde(args.baseline, gt)["ade"]
+            row["baseline_ade"] = compute_ade_fde(baseline, gt)["ade"]
             row["delta_ade"] = row["ade"] - row["baseline_ade"]
         rows.append(row)
 

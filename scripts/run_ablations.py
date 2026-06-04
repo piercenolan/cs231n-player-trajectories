@@ -140,17 +140,25 @@ def pick_best_by_ade(summary_rows):
 
 def main():
     parser = argparse.ArgumentParser(description="Run augmentation ablations")
-    parser.add_argument("--baseline", default="data/outputs/baseline_tracks.json")
-    parser.add_argument("--output-root", default="data/outputs/ablations")
+    parser.add_argument("--dataset", default="sportsmot_example")
+    parser.add_argument("--baseline", default=None)
+    parser.add_argument("--output-root", default=None)
     parser.add_argument("--frame-width", type=int, default=None)
     parser.add_argument("--frame-height", type=int, default=None)
     parser.add_argument("--expected-players", type=int, default=10)
     parser.add_argument("--gt", default=None)
-    parser.add_argument("--sequence", default="video_1")
+    parser.add_argument("--sequence", default=None, help="GT lookup key (default: --dataset)")
     parser.add_argument("--only", default=None)
     args = parser.parse_args()
 
-    baseline_path = Path(args.baseline)
+    from utils.datasets import ablations_dir, baseline_tracks_path, find_gt_path
+
+    sequence = args.sequence or args.dataset
+    baseline_path = Path(args.baseline or baseline_tracks_path(args.dataset))
+    output_root = Path(args.output_root or ablations_dir(args.dataset))
+    if args.gt is None:
+        gt_default = find_gt_path(args.dataset)
+        args.gt = str(gt_default) if gt_default else None
     if not baseline_path.exists():
         raise FileNotFoundError(baseline_path)
 
@@ -181,7 +189,7 @@ def main():
             gap_fill=gap_fill,
             expected_players=args.expected_players,
             gt_path=args.gt,
-            gt_sequence=args.sequence,
+            gt_sequence=sequence,
             extra_kwargs=extra,
         )
         tm = m.get("track_metrics", {})

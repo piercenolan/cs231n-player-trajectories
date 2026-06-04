@@ -169,11 +169,20 @@ def compute_ade_fde(tracks_path, gt_path, max_distance=80.0, gt_format="auto"):
     }
 
 
-def find_sportsmot_gt(sequence_name, gt_root="data/gt/sportsmot"):
+def find_sportsmot_gt(sequence_name="sportsmot_example", gt_root=None):
     """
-    Resolve SportsMOT gt.txt for a sequence name (e.g. video_1 or MOT sequence folder).
+    Resolve aligned GT for a dataset or legacy SportsMOT sequence folder.
+
+    Prefer aligned gt.json, then raw gt.txt.
     """
-    root = Path(gt_root)
+    from utils.datasets import DATASETS, find_gt_path
+
+    if sequence_name in DATASETS:
+        path = find_gt_path(sequence_name)
+        if path is not None:
+            return path
+
+    root = Path(gt_root or "data/gt/sportsmot")
     candidates = [
         root / sequence_name / "gt" / "gt.json",
         root / sequence_name / "gt" / "gt.txt",
@@ -193,22 +202,29 @@ def main():
     parser.add_argument("--gt", default=None, help="Ground truth path (MOT txt or JSON)")
     parser.add_argument(
         "--sequence",
-        default="video_1",
-        help="SportsMOT sequence name when --gt omitted",
+        default="sportsmot_example",
+        help="Dataset key or legacy SportsMOT sequence when --gt omitted",
+    )
+    parser.add_argument(
+        "--dataset",
+        default=None,
+        help="Alias for --sequence (dataset key from utils.datasets)",
     )
     parser.add_argument("--gt-root", default="data/gt/sportsmot")
     parser.add_argument("--gt-format", default="auto", choices=["auto", "mot", "json"])
     parser.add_argument("--max-distance", type=float, default=80.0)
     parser.add_argument("--output", default=None, help="Save metrics JSON")
     args = parser.parse_args()
+    sequence = args.dataset or args.sequence
 
     gt_path = args.gt
     if gt_path is None:
-        gt_path = find_sportsmot_gt(args.sequence, args.gt_root)
+        gt_path = find_sportsmot_gt(sequence, args.gt_root)
         if gt_path is None:
             raise FileNotFoundError(
-                f"No GT found for sequence '{args.sequence}' under {args.gt_root}. "
-                "Download SportsMOT labels or pass --gt explicitly."
+                f"No GT found for '{sequence}'. Place gt.txt under "
+                f"data/datasets/{sequence}/gt/ and run setup_sportsmot_gt.py, "
+                "or pass --gt explicitly."
             )
 
     result = compute_ade_fde(

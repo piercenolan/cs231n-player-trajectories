@@ -120,8 +120,9 @@ def validate_export(export, min_global_visibility=0.7, max_slot_empty_frac=0.30)
 
 def main():
     parser = argparse.ArgumentParser(description="Export tracks to LSTM tensor JSON")
-    parser.add_argument("--tracks", default="data/outputs/augmented_tracks.json")
-    parser.add_argument("--output", default="data/outputs/trajectory_tensors.json")
+    parser.add_argument("--dataset", default="sportsmot_example")
+    parser.add_argument("--tracks", default=None)
+    parser.add_argument("--output", default=None)
     parser.add_argument("--max-players", type=int, default=10)
     parser.add_argument(
         "--validate",
@@ -132,7 +133,12 @@ def main():
     parser.add_argument("--max-slot-empty-frac", type=float, default=0.30)
     args = parser.parse_args()
 
-    export = export_trajectories(args.tracks, args.output, max_players=args.max_players)
+    from utils.datasets import augmented_tracks_path, runs_dir
+
+    tracks_path = args.tracks or str(augmented_tracks_path(args.dataset))
+    output_path = args.output or str(runs_dir(args.dataset) / "trajectory_tensors.json")
+
+    export = export_trajectories(tracks_path, output_path, max_players=args.max_players)
 
     if args.validate:
         passed, report = validate_export(
@@ -140,7 +146,7 @@ def main():
             min_global_visibility=args.min_global_visibility,
             max_slot_empty_frac=args.max_slot_empty_frac,
         )
-        report_path = Path(args.output).with_name("trajectory_validation.json")
+        report_path = Path(output_path).with_name("trajectory_validation.json")
         with open(report_path, "w", encoding="utf-8") as f:
             json.dump(report, f, indent=2)
 

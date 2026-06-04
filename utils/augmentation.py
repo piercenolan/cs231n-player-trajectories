@@ -1508,10 +1508,11 @@ def run_augmentation(
 
 def main():
     parser = argparse.ArgumentParser(description="Run geometry-free basketball augmentation on SAM3.1 tracks.")
-    parser.add_argument("--tracks", default="data/outputs/tracks.json", help="Input tracks.json path")
+    parser.add_argument("--dataset", default="sportsmot_example")
+    parser.add_argument("--tracks", default=None, help="Input tracks.json path")
     parser.add_argument(
         "--output",
-        default="data/outputs/augmented_tracks.json",
+        default=None,
         help="Output augmented tracks.json path",
     )
     parser.add_argument("--frame-width", type=int, default=None, help="Frame width in pixels (auto from tracks meta if omitted)")
@@ -1542,10 +1543,15 @@ def main():
     parser.add_argument("--max-players", type=int, default=12)
     args = parser.parse_args()
 
+    from utils.datasets import augmented_tracks_path, baseline_tracks_path
+
+    tracks_path = args.tracks or str(baseline_tracks_path(args.dataset))
+    output_path = args.output or str(augmented_tracks_path(args.dataset))
+
     frame_width = args.frame_width
     frame_height = args.frame_height
     if frame_width is None or frame_height is None:
-        with open(args.tracks, encoding="utf-8") as f:
+        with open(tracks_path, encoding="utf-8") as f:
             meta = json.load(f).get("meta", {})
         frame_width = frame_width or meta.get("frame_width")
         frame_height = frame_height or meta.get("frame_height")
@@ -1556,8 +1562,8 @@ def main():
         )
 
     run_augmentation(
-        input_path=args.tracks,
-        output_path=args.output,
+        input_path=tracks_path,
+        output_path=output_path,
         frame_width=int(frame_width),
         frame_height=int(frame_height),
         level=args.level,

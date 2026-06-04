@@ -43,18 +43,26 @@ End-to-end pipeline:
 ```text
 cs231n-player-trajectories/
 ├── scripts/
-│   └── run_sam3.py
+│   ├── run_sam3.py              # SAM3 tracking (video or SportsMOT frames)
+│   ├── run_modal.py             # Modal GPU runner
+│   ├── setup_sportsmot_gt.py    # Align gt.txt → gt.json
+│   └── run_ablations.py         # Per-rule ablation sweep
 ├── utils/
+│   ├── datasets.py              # Canonical paths (use --dataset)
 │   ├── augmentation.py
 │   ├── metrics.py
-│   ├── video_utils.py
 │   └── visualize.py
 ├── data/
-│   ├── clips/                 # input .mp4 clips (not committed)
-│   ├── frames_dir/            # extracted JPEG frames (generated)
-│   └── outputs/               # tracks, metrics, visualizations (generated)
+│   ├── datasets/
+│   │   └── sportsmot_example/   # PRIMARY: upload zip frames + gt.txt here
+│   ├── runs/
+│   │   └── sportsmot_example/   # SAM3 + augmentation outputs (generated)
+│   ├── archive/                 # Legacy video_1 era artifacts
+│   └── outputs/                 # Old run outputs (deprecated)
 └── CONTEXT.md
 ```
+
+See `data/datasets/sportsmot_example/README.md` for upload instructions.
 
 ## Requirements
 
@@ -83,11 +91,18 @@ pip install opencv-python
 
 ## Data Expectations
 
-- Input videos in `data/clips/` (example names in `CONTEXT.md`).
-- Extracted frames are saved by `run_sam3.py` to `data/frames_dir/` as:
-  - `0.jpg`, `1.jpg`, `2.jpg`, ...
-- `tracks.json` frame numbering is 1-indexed:
-  - `frame_number=1` corresponds to `0.jpg`
+**Primary dataset:** SportsMOT example zip → `data/datasets/sportsmot_example/`
+
+| Zip contents | Repo path |
+|--------------|-----------|
+| `img1/*.jpg` | `data/datasets/sportsmot_example/frames/` |
+| `gt/gt.txt` | `data/datasets/sportsmot_example/gt/gt.txt` |
+| `seqinfo.ini` | `data/datasets/sportsmot_example/seqinfo.ini` |
+
+Legacy `data/videos/video_1.mp4` has unknown provenance — do not use for ADE/FDE.
+
+Prepared SAM frames for a run live at `data/runs/sportsmot_example/frames/` (`00000.jpg`, …).
+Track `frame_number` is 1-indexed: frame 1 = first prepared JPEG.
 
 ## Alternate tracks.json format
 
@@ -100,153 +115,80 @@ python utils/convert_tracks.py --input tracks.json --output data/outputs/tracks.
 
 This sets `frame_number`, derives `mask_center` from each bbox center, and preserves `predicted` flags.
 
-## Quick Start (End-to-End)
+## Quick Start (SportsMOT example)
 
-### 1) Run SAM3.1 tracking
+### 0) Upload data from the SportsMOT example zip
+
+Copy `img1/*.jpg` and `gt/gt.txt` into `data/datasets/sportsmot_example/` (see README there).
+
+### 1) Run SAM3.1 tracking (Modal or local)
+
+Modal (uploads frames, runs on GPU):
+
+```bash
+py -m modal run scripts/run_modal.py --dataset sportsmot_example --max-frames 45 --resize-scale 0.67
+```
+
+Local (if you have a GPU):
+
+```bash
+python scripts/run_sam3.py --dataset sportsmot_example --skip-extract --max-frames 45 --resize-scale 0.67
+```
+
+### 2) Align ground truth
+
+```bash
+python scripts/setup_sportsmot_gt.py --dataset sportsmot_example --start-time-sec 0
+```
+
+Uses real `gt.txt` (not proxy). For consecutive SportsMOT frames, alignment uses 25 FPS by default.
+
+### 3) Augmentation + ablations
+
+```bash
+python utils/augmentation.py --dataset sportsmot_example
+python scripts/run_ablations.py --dataset sportsmot_example
+python scripts/run_sanitize_grid.py --dataset sportsmot_example
+python scripts/run_multi_seed.py --dataset sportsmot_example
+python utils/trajectory_export.py --dataset sportsmot_example --validate
+```
+
+### 4) Metrics and visualization
+
+```bash
+python utils/metrics.py --tracks data/runs/sportsmot_example/baseline_tracks.json \
+  --compare data/runs/sportsmot_example/augmented_tracks.json --exclude-predicted
+
+python utils/trajectory_metrics.py --tracks data/runs/sportsmot_example/augmented_tracks.json
+
+python utils/visualize.py \
+  --frames data/runs/sportsmot_example/frames \
+  --baseline data/runs/sportsmot_example/baseline_tracks.json \
+  --augmented data/runs/sportsmot_example/augmented_tracks.json \
+  --output data/runs/sportsmot_example/figures/summary_figure.png \
+  --summary --n-frames 4
+```
+
+## Quick Start (custom video clip)
 
 ```bash
 python scripts/run_sam3.py \
+  --dataset sportsmot_example \
   --video_path data/clips/60.0_clip.mp4 \
-  --output data/outputs/tracks.json
-```
-
-Optional local checkpoint:
-
-```bash
-python scripts/run_sam3.py \
-  --video_path data/clips/60.0_clip.mp4 \
-  --output data/outputs/tracks.json \
-  --checkpoint /path/to/sam3.1_multiplex.pt
-```
-
-### 2) Compute baseline metrics
-
-```bash
-python utils/metrics.py \
-  --tracks data/outputs/tracks.json \
-  --output-figure data/outputs/baseline_metrics.png \
-  --label "SAM3.1 BASELINE"
-```
-
-### 3) Run augmentation
-
-```bash
-python utils/augmentation.py \
-  --tracks data/outputs/tracks.json \
-  --output data/outputs/augmented_tracks.json \
-  --frame-width 1280 \
-  --frame-height 720 \
-  --level full
-```
-
-Ablation modes:
-- `--level physical` / `--level game` / `--level full`
-- `--rules velocity_cap` — single rule (comma-separated for small combos)
-- `--no-sanitize` / `--no-gap-fill` — stage ablations
-
-Per-rule ablation sweep:
-
-```bash
-python scripts/setup_sportsmot_gt.py --tracks data/outputs/baseline_tracks.json --proxy-smooth
-python scripts/run_ablations.py --baseline data/outputs/baseline_tracks.json
-python scripts/run_sanitize_grid.py --baseline data/outputs/baseline_tracks.json
-python scripts/aggregate_experiments.py --root data/outputs/ablations
-```
-
-Multi-seed validation (bootstrap from one baseline, or run SAM3 with `--seed-id`):
-
-```bash
-python scripts/run_multi_seed.py --bootstrap-from data/outputs/baseline_tracks.json
-```
-
-LSTM export + validation gate:
-
-```bash
-python utils/trajectory_export.py --tracks data/outputs/augmented_tracks.json --validate
-```
-
-Compare baseline vs augmented metrics (observed players only):
-
-```bash
-python utils/metrics.py --tracks data/outputs/baseline_tracks.json \
-  --compare data/outputs/augmented_tracks.json --exclude-predicted
-```
-
-SportsMOT ADE/FDE on `video_1` (place GT at `data/gt/sportsmot/<sequence>/gt/gt.txt`):
-
-```bash
-python utils/trajectory_metrics.py --tracks data/outputs/augmented_tracks.json --sequence video_1
-```
-
-Multi-seed tracking (local):
-
-```bash
-python scripts/run_sam3.py --video_path data/clips/60.0_clip.mp4 \
-  --seed-id offset_10s --start-time-sec 10 --max-frames 45
-```
-
-Export LSTM-ready tensors:
-
-```bash
-python utils/trajectory_export.py --tracks data/outputs/augmented_tracks.json
-```
-
-### 4) Compute augmented metrics
-
-```bash
-python utils/metrics.py \
-  --tracks data/outputs/augmented_tracks.json \
-  --output-figure data/outputs/augmented_metrics.png \
-  --label "SAM3.1 + AUGMENTATION"
-```
-
-### 5) Visualize qualitative results
-
-Annotate one tracks file:
-
-```bash
-python utils/visualize.py \
-  --frames data/frames/frames_dir \
-  --tracks data/outputs/tracks.json \
-  --output data/outputs/annotated_baseline \
-  --every-n 5
-```
-
-Baseline vs augmented side-by-side:
-
-```bash
-python utils/visualize.py \
-  --frames data/frames/frames_dir \
-  --baseline data/outputs/tracks.json \
-  --augmented data/outputs/augmented_tracks.json \
-  --output data/outputs/comparison \
-  --compare \
-  --every-n 5
-```
-
-Paper summary figure:
-
-```bash
-python utils/visualize.py \
-  --frames data/frames/frames_dir \
-  --baseline data/outputs/tracks.json \
-  --augmented data/outputs/augmented_tracks.json \
-  --output data/outputs/summary_figure.png \
-  --summary \
-  --n-frames 4
+  --max-frames 45
 ```
 
 ## Output Files
 
-Typical generated artifacts:
+Typical generated artifacts under `data/runs/sportsmot_example/`:
 
-- `data/outputs/tracks.json` – raw SAM3.1 tracks
-- `data/outputs/augmented_tracks.json` – augmented tracks
-- `data/outputs/corrections.json` – augmentation correction log
-- `data/outputs/baseline_metrics.png` – baseline metric figure
-- `data/outputs/augmented_metrics.png` – augmented metric figure
-- `data/outputs/comparison/*.jpg` – side-by-side qualitative frames
-- `data/outputs/summary_figure.png` – paper-ready summary panel
+- `baseline_tracks.json` – raw SAM3.1 tracks
+- `augmented_tracks.json` – augmented tracks
+- `ablations/` – per-rule metrics + `recommended_config.json`
+- `frames/` – prepared JPEGs used for that SAM run
+- `figures/summary_figure.png` – paper-ready summary panel
+
+Legacy paths under `data/outputs/` are from the old `video_1` layout.
 
 ## Notes on Methodology
 

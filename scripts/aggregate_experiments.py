@@ -80,12 +80,12 @@ def main():
     parser = argparse.ArgumentParser(description="Aggregate experiment metrics")
     parser.add_argument(
         "--root",
-        default="data/outputs",
+        default="data/runs/sportsmot_example",
         help="Search root for metrics.json files",
     )
     parser.add_argument(
         "--output",
-        default="data/outputs/aggregated_metrics.json",
+        default="data/runs/sportsmot_example/aggregated_metrics.json",
         help="Write aggregated summary JSON",
     )
     parser.add_argument(

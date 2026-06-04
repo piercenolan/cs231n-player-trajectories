@@ -66,9 +66,10 @@ def bootstrap_seed_baselines(source_baseline, seeds_root, num_frames=45):
 
 def main():
     parser = argparse.ArgumentParser(description="Multi-seed augmentation validation")
+    parser.add_argument("--dataset", default="sportsmot_example")
     parser.add_argument(
         "--seeds-root",
-        default="data/outputs/seeds",
+        default=None,
         help="Root directory for per-seed outputs",
     )
     parser.add_argument(
@@ -78,15 +79,21 @@ def main():
     )
     parser.add_argument(
         "--recommended-config",
-        default="data/outputs/ablations/recommended_config.json",
+        default=None,
         help="JSON with recommended_ablation name",
     )
     parser.add_argument("--gt", default=None)
-    parser.add_argument("--sequence", default="video_1")
+    parser.add_argument("--sequence", default=None)
     args = parser.parse_args()
 
-    seeds_root = Path(args.seeds_root)
-    gt = args.gt or find_sportsmot_gt(args.sequence)
+    from utils.datasets import ablations_dir, baseline_tracks_path, find_gt_path, runs_dir
+
+    sequence = args.sequence or args.dataset
+    seeds_root = Path(args.seeds_root or runs_dir(args.dataset) / "seeds")
+    gt = args.gt or find_gt_path(args.dataset) or find_sportsmot_gt(sequence)
+    rec_path = Path(
+        args.recommended_config or ablations_dir(args.dataset) / "recommended_config.json"
+    )
 
     if args.bootstrap_from:
         seed_list = bootstrap_seed_baselines(args.bootstrap_from, seeds_root)
@@ -104,7 +111,6 @@ def main():
             )
 
     rec_name = "sanitize_plus_velocity_cap"
-    rec_path = Path(args.recommended_config)
     if rec_path.exists():
         with open(rec_path, encoding="utf-8") as f:
             rec = json.load(f)
@@ -137,7 +143,7 @@ def main():
             sanitize=cfg[2],
             gap_fill=cfg[3],
             gt_path=gt,
-            gt_sequence=args.sequence,
+            gt_sequence=sequence,
             extra_kwargs=cfg[4],
         )
         m["seed_id"] = seed_id
