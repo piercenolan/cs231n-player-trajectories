@@ -1,0 +1,31 @@
+{
+  "global_visibility_fraction": 0.96,
+  "frames_with_zero_visible": 0,
+  "per_slot_visibility": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.9777777777777777,
+    0.9777777777777777,
+    0.6444444444444445
+  ],
+  "per_slot_empty_fraction": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.022222222222222254,
+    0.022222222222222254,
+    0.3555555555555555
+  ],
+  "min_global_visibility_threshold": 0.7,
+  "max_slot_empty_fraction_threshold": 0.6,
+  "passed": true
+}

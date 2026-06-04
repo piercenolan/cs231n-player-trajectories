@@ -1,0 +1,3612 @@
+{
+  "corrections": [
+    {
+      "frame_number": 3,
+      "player_id": 1,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 5,
+      "player_id": 1,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 7,
+      "player_id": 1,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 7,
+      "player_id": 0,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 8,
+      "player_id": 1,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 14,
+      "player_id": 6,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 15,
+      "player_id": 1,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 21,
+      "player_id": 1,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 29,
+      "player_id": 0,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 40,
+      "player_id": 6,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 43,
+      "player_id": 6,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 43,
+      "player_id": 0,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 44,
+      "player_id": 6,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 44,
+      "player_id": 0,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 45,
+      "player_id": 0,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 2,
+      "player_id": 5,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7777777777777778,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 190.4,
+        "y": 311.0
+      },
+      "corrected_pos": {
+        "x": 238.1,
+        "y": 297.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 2,
+      "player_id": 3,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7777777777777778,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 238.3,
+        "y": 346.5
+      },
+      "corrected_pos": {
+        "x": 276.6,
+        "y": 327.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 2,
+      "player_id": 1,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7777777777777778,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 712.6,
+        "y": 289.3
+      },
+      "corrected_pos": {
+        "x": 649.9,
+        "y": 282.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 2,
+      "player_id": 6,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7777777777777778,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 531.3,
+        "y": 277.3
+      },
+      "corrected_pos": {
+        "x": 507.4,
+        "y": 273.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 2,
+      "player_id": 2,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7777777777777778,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 87.5,
+        "y": 225.6
+      },
+      "corrected_pos": {
+        "x": 152.2,
+        "y": 230.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 2,
+      "player_id": 8,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7777777777777778,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 586.7,
+        "y": 217.0
+      },
+      "corrected_pos": {
+        "x": 549.0,
+        "y": 223.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 2,
+      "player_id": 7,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7777777777777778,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 277.3,
+        "y": 205.4
+      },
+      "corrected_pos": {
+        "x": 302.8,
+        "y": 213.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 2,
+      "player_id": 0,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7777777777777778,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 646.0,
+        "y": 197.2
+      },
+      "corrected_pos": {
+        "x": 598.3,
+        "y": 207.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 2,
+      "player_id": 4,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7777777777777778,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 269.1,
+        "y": 175.4
+      },
+      "corrected_pos": {
+        "x": 295.7,
+        "y": 189.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 3,
+      "player_id": 5,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7777777777777778,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 201.1,
+        "y": 309.4
+      },
+      "corrected_pos": {
+        "x": 240.8,
+        "y": 294.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 3,
+      "player_id": 3,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7777777777777778,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 248.9,
+        "y": 345.5
+      },
+      "corrected_pos": {
+        "x": 279.2,
+        "y": 324.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 3,
+      "player_id": 6,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7777777777777778,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 533.7,
+        "y": 278.1
+      },
+      "corrected_pos": {
+        "x": 502.7,
+        "y": 272.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 3,
+      "player_id": 2,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7777777777777778,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 94.5,
+        "y": 224.4
+      },
+      "corrected_pos": {
+        "x": 151.9,
+        "y": 227.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 3,
+      "player_id": 8,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7777777777777778,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 586.4,
+        "y": 216.1
+      },
+      "corrected_pos": {
+        "x": 542.5,
+        "y": 221.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 3,
+      "player_id": 7,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7777777777777778,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 280.9,
+        "y": 206.5
+      },
+      "corrected_pos": {
+        "x": 299.5,
+        "y": 213.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 3,
+      "player_id": 0,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7777777777777778,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 647.1,
+        "y": 196.5
+      },
+      "corrected_pos": {
+        "x": 592.8,
+        "y": 205.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 3,
+      "player_id": 9,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7777777777777778,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 101.4,
+        "y": 190.4
+      },
+      "corrected_pos": {
+        "x": 152.0,
+        "y": 200.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 3,
+      "player_id": 4,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7777777777777778,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 272.6,
+        "y": 173.1
+      },
+      "corrected_pos": {
+        "x": 292.5,
+        "y": 185.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 4,
+      "player_id": 5,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 210.9,
+        "y": 307.8
+      },
+      "corrected_pos": {
+        "x": 247.6,
+        "y": 294.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 4,
+      "player_id": 3,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 259.2,
+        "y": 343.4
+      },
+      "corrected_pos": {
+        "x": 287.5,
+        "y": 324.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 4,
+      "player_id": 1,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 710.7,
+        "y": 289.7
+      },
+      "corrected_pos": {
+        "x": 637.8,
+        "y": 280.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 4,
+      "player_id": 6,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 536.4,
+        "y": 278.2
+      },
+      "corrected_pos": {
+        "x": 510.1,
+        "y": 272.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 4,
+      "player_id": 2,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 101.0,
+        "y": 222.0
+      },
+      "corrected_pos": {
+        "x": 153.9,
+        "y": 224.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 4,
+      "player_id": 8,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 585.7,
+        "y": 214.9
+      },
+      "corrected_pos": {
+        "x": 548.0,
+        "y": 219.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 4,
+      "player_id": 7,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 284.7,
+        "y": 204.3
+      },
+      "corrected_pos": {
+        "x": 303.0,
+        "y": 210.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 4,
+      "player_id": 0,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 648.1,
+        "y": 196.1
+      },
+      "corrected_pos": {
+        "x": 600.9,
+        "y": 203.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 4,
+      "player_id": 9,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 108.1,
+        "y": 188.5
+      },
+      "corrected_pos": {
+        "x": 118.1,
+        "y": 187.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 4,
+      "player_id": 4,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 275.6,
+        "y": 173.5
+      },
+      "corrected_pos": {
+        "x": 295.1,
+        "y": 184.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 8,
+      "player_id": 5,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 249.4,
+        "y": 309.6
+      },
+      "corrected_pos": {
+        "x": 284.4,
+        "y": 296.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 8,
+      "player_id": 3,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 297.7,
+        "y": 335.0
+      },
+      "corrected_pos": {
+        "x": 322.9,
+        "y": 314.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 8,
+      "player_id": 6,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 545.4,
+        "y": 275.9
+      },
+      "corrected_pos": {
+        "x": 515.5,
+        "y": 268.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 8,
+      "player_id": 2,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 124.1,
+        "y": 218.6
+      },
+      "corrected_pos": {
+        "x": 181.3,
+        "y": 222.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 8,
+      "player_id": 8,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 579.3,
+        "y": 215.3
+      },
+      "corrected_pos": {
+        "x": 539.5,
+        "y": 220.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 8,
+      "player_id": 7,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 297.3,
+        "y": 201.9
+      },
+      "corrected_pos": {
+        "x": 317.7,
+        "y": 208.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 8,
+      "player_id": 0,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 648.4,
+        "y": 195.3
+      },
+      "corrected_pos": {
+        "x": 608.7,
+        "y": 202.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 8,
+      "player_id": 9,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 132.1,
+        "y": 186.2
+      },
+      "corrected_pos": {
+        "x": 187.9,
+        "y": 196.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 8,
+      "player_id": 4,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 289.9,
+        "y": 171.0
+      },
+      "corrected_pos": {
+        "x": 311.7,
+        "y": 184.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 9,
+      "player_id": 5,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 257.9,
+        "y": 311.3
+      },
+      "corrected_pos": {
+        "x": 288.7,
+        "y": 300.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 9,
+      "player_id": 3,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 306.8,
+        "y": 338.1
+      },
+      "corrected_pos": {
+        "x": 328.9,
+        "y": 320.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 9,
+      "player_id": 1,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 706.7,
+        "y": 287.9
+      },
+      "corrected_pos": {
+        "x": 659.2,
+        "y": 280.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 9,
+      "player_id": 6,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 546.7,
+        "y": 275.6
+      },
+      "corrected_pos": {
+        "x": 520.9,
+        "y": 268.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 9,
+      "player_id": 2,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 129.4,
+        "y": 218.9
+      },
+      "corrected_pos": {
+        "x": 179.6,
+        "y": 221.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 9,
+      "player_id": 7,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 299.9,
+        "y": 200.6
+      },
+      "corrected_pos": {
+        "x": 318.0,
+        "y": 207.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 9,
+      "player_id": 8,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 576.4,
+        "y": 213.5
+      },
+      "corrected_pos": {
+        "x": 542.1,
+        "y": 217.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 9,
+      "player_id": 9,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 136.7,
+        "y": 184.3
+      },
+      "corrected_pos": {
+        "x": 185.6,
+        "y": 193.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 9,
+      "player_id": 0,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 649.1,
+        "y": 194.5
+      },
+      "corrected_pos": {
+        "x": 609.6,
+        "y": 201.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 9,
+      "player_id": 4,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 294.6,
+        "y": 165.4
+      },
+      "corrected_pos": {
+        "x": 314.3,
+        "y": 176.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 10,
+      "player_id": 5,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 267.0,
+        "y": 311.7
+      },
+      "corrected_pos": {
+        "x": 296.5,
+        "y": 299.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 10,
+      "player_id": 3,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 315.6,
+        "y": 335.9
+      },
+      "corrected_pos": {
+        "x": 336.5,
+        "y": 319.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 10,
+      "player_id": 1,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 705.6,
+        "y": 287.1
+      },
+      "corrected_pos": {
+        "x": 669.0,
+        "y": 281.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 10,
+      "player_id": 6,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 548.5,
+        "y": 275.2
+      },
+      "corrected_pos": {
+        "x": 522.7,
+        "y": 268.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 10,
+      "player_id": 2,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 134.1,
+        "y": 218.3
+      },
+      "corrected_pos": {
+        "x": 183.8,
+        "y": 221.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 10,
+      "player_id": 8,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 575.5,
+        "y": 213.0
+      },
+      "corrected_pos": {
+        "x": 542.0,
+        "y": 217.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 10,
+      "player_id": 7,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 303.1,
+        "y": 200.3
+      },
+      "corrected_pos": {
+        "x": 321.4,
+        "y": 206.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 10,
+      "player_id": 0,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 649.2,
+        "y": 194.8
+      },
+      "corrected_pos": {
+        "x": 610.3,
+        "y": 201.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 10,
+      "player_id": 9,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 141.8,
+        "y": 183.3
+      },
+      "corrected_pos": {
+        "x": 190.3,
+        "y": 191.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 10,
+      "player_id": 4,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 296.8,
+        "y": 168.6
+      },
+      "corrected_pos": {
+        "x": 316.4,
+        "y": 180.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 14,
+      "player_id": 5,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 305.0,
+        "y": 310.3
+      },
+      "corrected_pos": {
+        "x": 329.6,
+        "y": 292.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 14,
+      "player_id": 1,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 699.6,
+        "y": 289.9
+      },
+      "corrected_pos": {
+        "x": 634.5,
+        "y": 277.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 14,
+      "player_id": 3,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 347.5,
+        "y": 329.2
+      },
+      "corrected_pos": {
+        "x": 362.1,
+        "y": 306.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 14,
+      "player_id": 2,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 151.7,
+        "y": 214.7
+      },
+      "corrected_pos": {
+        "x": 203.3,
+        "y": 216.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 14,
+      "player_id": 8,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 570.0,
+        "y": 212.5
+      },
+      "corrected_pos": {
+        "x": 531.6,
+        "y": 215.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 14,
+      "player_id": 7,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 312.1,
+        "y": 199.4
+      },
+      "corrected_pos": {
+        "x": 329.6,
+        "y": 204.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 14,
+      "player_id": 0,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 649.1,
+        "y": 193.1
+      },
+      "corrected_pos": {
+        "x": 595.5,
+        "y": 199.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 14,
+      "player_id": 4,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 304.7,
+        "y": 166.0
+      },
+      "corrected_pos": {
+        "x": 323.4,
+        "y": 177.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 14,
+      "player_id": 11,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 225.6,
+        "y": 124.1
+      },
+      "corrected_pos": {
+        "x": 262.0,
+        "y": 144.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 15,
+      "player_id": 5,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 312.5,
+        "y": 309.7
+      },
+      "corrected_pos": {
+        "x": 334.6,
+        "y": 291.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 15,
+      "player_id": 6,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 551.9,
+        "y": 274.9
+      },
+      "corrected_pos": {
+        "x": 518.2,
+        "y": 264.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 15,
+      "player_id": 3,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 357.7,
+        "y": 324.0
+      },
+      "corrected_pos": {
+        "x": 370.2,
+        "y": 301.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 15,
+      "player_id": 2,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 155.6,
+        "y": 214.3
+      },
+      "corrected_pos": {
+        "x": 205.7,
+        "y": 215.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 15,
+      "player_id": 8,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 566.3,
+        "y": 211.4
+      },
+      "corrected_pos": {
+        "x": 527.3,
+        "y": 213.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 15,
+      "player_id": 7,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 314.3,
+        "y": 200.3
+      },
+      "corrected_pos": {
+        "x": 330.5,
+        "y": 205.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 15,
+      "player_id": 0,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 648.8,
+        "y": 191.9
+      },
+      "corrected_pos": {
+        "x": 594.5,
+        "y": 198.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 15,
+      "player_id": 4,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 306.3,
+        "y": 168.4
+      },
+      "corrected_pos": {
+        "x": 323.5,
+        "y": 180.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 15,
+      "player_id": 11,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 230.5,
+        "y": 123.5
+      },
+      "corrected_pos": {
+        "x": 265.5,
+        "y": 143.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 16,
+      "player_id": 5,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 322.1,
+        "y": 309.9
+      },
+      "corrected_pos": {
+        "x": 343.8,
+        "y": 292.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 16,
+      "player_id": 6,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 552.2,
+        "y": 275.9
+      },
+      "corrected_pos": {
+        "x": 524.6,
+        "y": 267.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 16,
+      "player_id": 1,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 696.3,
+        "y": 290.4
+      },
+      "corrected_pos": {
+        "x": 624.1,
+        "y": 275.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 16,
+      "player_id": 2,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 159.3,
+        "y": 211.5
+      },
+      "corrected_pos": {
+        "x": 210.3,
+        "y": 213.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 16,
+      "player_id": 8,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 564.0,
+        "y": 211.4
+      },
+      "corrected_pos": {
+        "x": 526.9,
+        "y": 213.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 16,
+      "player_id": 3,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 370.0,
+        "y": 315.4
+      },
+      "corrected_pos": {
+        "x": 382.8,
+        "y": 292.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 16,
+      "player_id": 7,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 316.0,
+        "y": 200.3
+      },
+      "corrected_pos": {
+        "x": 333.5,
+        "y": 205.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 16,
+      "player_id": 0,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 647.3,
+        "y": 193.0
+      },
+      "corrected_pos": {
+        "x": 594.5,
+        "y": 199.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 16,
+      "player_id": 4,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 308.8,
+        "y": 166.6
+      },
+      "corrected_pos": {
+        "x": 327.5,
+        "y": 178.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 16,
+      "player_id": 11,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 234.1,
+        "y": 123.5
+      },
+      "corrected_pos": {
+        "x": 269.9,
+        "y": 144.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 20,
+      "player_id": 6,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 550.5,
+        "y": 275.8
+      },
+      "corrected_pos": {
+        "x": 519.3,
+        "y": 265.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 20,
+      "player_id": 5,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 350.4,
+        "y": 310.2
+      },
+      "corrected_pos": {
+        "x": 365.8,
+        "y": 292.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 20,
+      "player_id": 1,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 687.6,
+        "y": 291.3
+      },
+      "corrected_pos": {
+        "x": 626.9,
+        "y": 278.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 20,
+      "player_id": 3,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 398.0,
+        "y": 326.9
+      },
+      "corrected_pos": {
+        "x": 403.9,
+        "y": 308.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 20,
+      "player_id": 2,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 172.0,
+        "y": 210.5
+      },
+      "corrected_pos": {
+        "x": 220.9,
+        "y": 212.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 20,
+      "player_id": 8,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 555.1,
+        "y": 212.4
+      },
+      "corrected_pos": {
+        "x": 521.5,
+        "y": 215.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 20,
+      "player_id": 0,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 644.8,
+        "y": 191.6
+      },
+      "corrected_pos": {
+        "x": 594.2,
+        "y": 198.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 20,
+      "player_id": 7,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 321.2,
+        "y": 199.3
+      },
+      "corrected_pos": {
+        "x": 338.0,
+        "y": 204.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 20,
+      "player_id": 11,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 248.2,
+        "y": 121.6
+      },
+      "corrected_pos": {
+        "x": 282.0,
+        "y": 142.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 20,
+      "player_id": 4,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.8181818181818182,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 315.7,
+        "y": 159.8
+      },
+      "corrected_pos": {
+        "x": 334.1,
+        "y": 171.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 21,
+      "player_id": 5,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 360.5,
+        "y": 313.3
+      },
+      "corrected_pos": {
+        "x": 373.0,
+        "y": 297.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 21,
+      "player_id": 6,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 550.6,
+        "y": 275.2
+      },
+      "corrected_pos": {
+        "x": 522.3,
+        "y": 265.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 21,
+      "player_id": 3,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 405.8,
+        "y": 330.0
+      },
+      "corrected_pos": {
+        "x": 410.1,
+        "y": 313.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 21,
+      "player_id": 2,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 174.7,
+        "y": 213.8
+      },
+      "corrected_pos": {
+        "x": 217.4,
+        "y": 215.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 21,
+      "player_id": 8,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 552.2,
+        "y": 210.5
+      },
+      "corrected_pos": {
+        "x": 521.7,
+        "y": 213.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 21,
+      "player_id": 7,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 322.2,
+        "y": 199.5
+      },
+      "corrected_pos": {
+        "x": 336.4,
+        "y": 204.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 21,
+      "player_id": 0,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 644.4,
+        "y": 190.8
+      },
+      "corrected_pos": {
+        "x": 598.7,
+        "y": 196.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 21,
+      "player_id": 11,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 251.0,
+        "y": 121.2
+      },
+      "corrected_pos": {
+        "x": 279.9,
+        "y": 139.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 21,
+      "player_id": 4,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 317.9,
+        "y": 156.9
+      },
+      "corrected_pos": {
+        "x": 333.0,
+        "y": 167.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 22,
+      "player_id": 5,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 366.7,
+        "y": 313.1
+      },
+      "corrected_pos": {
+        "x": 377.6,
+        "y": 296.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 22,
+      "player_id": 3,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 412.6,
+        "y": 332.2
+      },
+      "corrected_pos": {
+        "x": 415.0,
+        "y": 313.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 22,
+      "player_id": 6,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 550.2,
+        "y": 273.0
+      },
+      "corrected_pos": {
+        "x": 521.2,
+        "y": 261.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 22,
+      "player_id": 1,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 680.7,
+        "y": 292.2
+      },
+      "corrected_pos": {
+        "x": 617.7,
+        "y": 277.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 22,
+      "player_id": 2,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 177.0,
+        "y": 211.1
+      },
+      "corrected_pos": {
+        "x": 218.3,
+        "y": 212.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 22,
+      "player_id": 8,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 548.8,
+        "y": 211.7
+      },
+      "corrected_pos": {
+        "x": 518.1,
+        "y": 213.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 22,
+      "player_id": 7,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 322.9,
+        "y": 199.4
+      },
+      "corrected_pos": {
+        "x": 336.4,
+        "y": 202.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 22,
+      "player_id": 0,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 642.8,
+        "y": 189.4
+      },
+      "corrected_pos": {
+        "x": 596.5,
+        "y": 193.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 22,
+      "player_id": 11,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 253.2,
+        "y": 121.5
+      },
+      "corrected_pos": {
+        "x": 280.6,
+        "y": 138.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 22,
+      "player_id": 4,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 318.8,
+        "y": 156.6
+      },
+      "corrected_pos": {
+        "x": 333.3,
+        "y": 166.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 22,
+      "player_id": 10,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 292.2,
+        "y": 122.1
+      },
+      "corrected_pos": {
+        "x": 310.5,
+        "y": 139.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 26,
+      "player_id": 5,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6923076923076923,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 403.2,
+        "y": 311.4
+      },
+      "corrected_pos": {
+        "x": 407.1,
+        "y": 293.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 26,
+      "player_id": 3,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6923076923076923,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 441.0,
+        "y": 337.0
+      },
+      "corrected_pos": {
+        "x": 436.6,
+        "y": 315.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 26,
+      "player_id": 6,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6923076923076923,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 542.8,
+        "y": 276.6
+      },
+      "corrected_pos": {
+        "x": 513.4,
+        "y": 266.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 26,
+      "player_id": 1,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6923076923076923,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 671.1,
+        "y": 290.0
+      },
+      "corrected_pos": {
+        "x": 618.8,
+        "y": 275.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 26,
+      "player_id": 2,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6923076923076923,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 184.0,
+        "y": 211.1
+      },
+      "corrected_pos": {
+        "x": 219.7,
+        "y": 210.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 26,
+      "player_id": 8,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6923076923076923,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 535.6,
+        "y": 214.3
+      },
+      "corrected_pos": {
+        "x": 506.3,
+        "y": 213.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 26,
+      "player_id": 7,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6923076923076923,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 325.8,
+        "y": 200.0
+      },
+      "corrected_pos": {
+        "x": 335.9,
+        "y": 201.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 26,
+      "player_id": 0,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6923076923076923,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 634.7,
+        "y": 190.1
+      },
+      "corrected_pos": {
+        "x": 589.1,
+        "y": 193.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 26,
+      "player_id": 13,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6923076923076923,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 187.2,
+        "y": 117.6
+      },
+      "corrected_pos": {
+        "x": 222.5,
+        "y": 133.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 26,
+      "player_id": 4,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6923076923076923,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 319.6,
+        "y": 163.4
+      },
+      "corrected_pos": {
+        "x": 330.4,
+        "y": 171.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 26,
+      "player_id": 11,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6923076923076923,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 263.4,
+        "y": 120.4
+      },
+      "corrected_pos": {
+        "x": 285.5,
+        "y": 135.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 27,
+      "player_id": 5,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6923076923076923,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 409.9,
+        "y": 312.1
+      },
+      "corrected_pos": {
+        "x": 409.0,
+        "y": 294.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 27,
+      "player_id": 3,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6923076923076923,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 447.8,
+        "y": 336.0
+      },
+      "corrected_pos": {
+        "x": 440.2,
+        "y": 313.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 27,
+      "player_id": 6,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6923076923076923,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 540.6,
+        "y": 277.2
+      },
+      "corrected_pos": {
+        "x": 509.5,
+        "y": 265.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 27,
+      "player_id": 1,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6923076923076923,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 667.7,
+        "y": 289.4
+      },
+      "corrected_pos": {
+        "x": 613.4,
+        "y": 273.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 27,
+      "player_id": 2,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6923076923076923,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 185.2,
+        "y": 210.9
+      },
+      "corrected_pos": {
+        "x": 218.4,
+        "y": 209.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 27,
+      "player_id": 8,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6923076923076923,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 532.8,
+        "y": 214.0
+      },
+      "corrected_pos": {
+        "x": 502.1,
+        "y": 212.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 27,
+      "player_id": 7,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6923076923076923,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 325.8,
+        "y": 200.0
+      },
+      "corrected_pos": {
+        "x": 333.7,
+        "y": 200.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 27,
+      "player_id": 0,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6923076923076923,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 633.1,
+        "y": 190.4
+      },
+      "corrected_pos": {
+        "x": 586.0,
+        "y": 192.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 27,
+      "player_id": 4,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6923076923076923,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 319.7,
+        "y": 162.7
+      },
+      "corrected_pos": {
+        "x": 328.7,
+        "y": 170.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 27,
+      "player_id": 13,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6923076923076923,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 189.1,
+        "y": 117.4
+      },
+      "corrected_pos": {
+        "x": 222.0,
+        "y": 132.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 27,
+      "player_id": 11,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6923076923076923,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 264.5,
+        "y": 120.4
+      },
+      "corrected_pos": {
+        "x": 284.3,
+        "y": 134.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 27,
+      "player_id": 12,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6923076923076923,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 216.8,
+        "y": 118.3
+      },
+      "corrected_pos": {
+        "x": 243.3,
+        "y": 133.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 28,
+      "player_id": 5,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6428571428571429,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 415.4,
+        "y": 311.8
+      },
+      "corrected_pos": {
+        "x": 413.4,
+        "y": 295.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 28,
+      "player_id": 3,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6428571428571429,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 454.2,
+        "y": 335.1
+      },
+      "corrected_pos": {
+        "x": 446.3,
+        "y": 313.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 28,
+      "player_id": 1,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6428571428571429,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 662.8,
+        "y": 290.4
+      },
+      "corrected_pos": {
+        "x": 612.5,
+        "y": 276.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 28,
+      "player_id": 6,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6428571428571429,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 537.7,
+        "y": 276.1
+      },
+      "corrected_pos": {
+        "x": 509.1,
+        "y": 264.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 28,
+      "player_id": 2,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6428571428571429,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 186.3,
+        "y": 211.3
+      },
+      "corrected_pos": {
+        "x": 216.9,
+        "y": 210.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 28,
+      "player_id": 8,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6428571428571429,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 529.4,
+        "y": 214.6
+      },
+      "corrected_pos": {
+        "x": 501.3,
+        "y": 213.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 28,
+      "player_id": 7,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6428571428571429,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 326.1,
+        "y": 200.0
+      },
+      "corrected_pos": {
+        "x": 333.4,
+        "y": 200.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 28,
+      "player_id": 0,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6428571428571429,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 631.2,
+        "y": 190.9
+      },
+      "corrected_pos": {
+        "x": 587.8,
+        "y": 193.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 28,
+      "player_id": 4,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6428571428571429,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 319.7,
+        "y": 162.9
+      },
+      "corrected_pos": {
+        "x": 328.3,
+        "y": 169.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 28,
+      "player_id": 13,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6428571428571429,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 190.4,
+        "y": 117.2
+      },
+      "corrected_pos": {
+        "x": 220.7,
+        "y": 131.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 28,
+      "player_id": 11,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6428571428571429,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 266.5,
+        "y": 120.6
+      },
+      "corrected_pos": {
+        "x": 284.9,
+        "y": 133.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 28,
+      "player_id": 12,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6428571428571429,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 218.5,
+        "y": 118.1
+      },
+      "corrected_pos": {
+        "x": 222.1,
+        "y": 119.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 34,
+      "player_id": 5,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 450.1,
+        "y": 317.4
+      },
+      "corrected_pos": {
+        "x": 441.2,
+        "y": 297.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 34,
+      "player_id": 3,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 494.7,
+        "y": 337.2
+      },
+      "corrected_pos": {
+        "x": 479.0,
+        "y": 315.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 34,
+      "player_id": 6,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 522.7,
+        "y": 270.5
+      },
+      "corrected_pos": {
+        "x": 494.3,
+        "y": 257.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 34,
+      "player_id": 1,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 639.7,
+        "y": 294.6
+      },
+      "corrected_pos": {
+        "x": 589.7,
+        "y": 278.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 34,
+      "player_id": 2,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 193.5,
+        "y": 211.2
+      },
+      "corrected_pos": {
+        "x": 227.1,
+        "y": 209.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 34,
+      "player_id": 8,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 509.6,
+        "y": 213.5
+      },
+      "corrected_pos": {
+        "x": 483.3,
+        "y": 211.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 34,
+      "player_id": 7,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 324.7,
+        "y": 200.8
+      },
+      "corrected_pos": {
+        "x": 333.7,
+        "y": 201.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 34,
+      "player_id": 0,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 616.6,
+        "y": 189.6
+      },
+      "corrected_pos": {
+        "x": 571.6,
+        "y": 192.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 34,
+      "player_id": 11,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 276.5,
+        "y": 118.1
+      },
+      "corrected_pos": {
+        "x": 295.5,
+        "y": 133.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 34,
+      "player_id": 4,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 319.8,
+        "y": 159.6
+      },
+      "corrected_pos": {
+        "x": 329.7,
+        "y": 168.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 34,
+      "player_id": 12,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 228.1,
+        "y": 115.5
+      },
+      "corrected_pos": {
+        "x": 255.7,
+        "y": 130.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 35,
+      "player_id": 5,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 455.9,
+        "y": 316.9
+      },
+      "corrected_pos": {
+        "x": 446.1,
+        "y": 296.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 35,
+      "player_id": 3,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 501.1,
+        "y": 338.2
+      },
+      "corrected_pos": {
+        "x": 484.3,
+        "y": 316.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 35,
+      "player_id": 1,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 636.5,
+        "y": 295.8
+      },
+      "corrected_pos": {
+        "x": 587.3,
+        "y": 279.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 35,
+      "player_id": 6,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 521.3,
+        "y": 267.9
+      },
+      "corrected_pos": {
+        "x": 493.5,
+        "y": 254.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 35,
+      "player_id": 8,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 506.6,
+        "y": 213.0
+      },
+      "corrected_pos": {
+        "x": 481.0,
+        "y": 210.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 35,
+      "player_id": 2,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 195.2,
+        "y": 211.8
+      },
+      "corrected_pos": {
+        "x": 228.9,
+        "y": 210.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 35,
+      "player_id": 7,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 325.4,
+        "y": 200.4
+      },
+      "corrected_pos": {
+        "x": 334.7,
+        "y": 201.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 35,
+      "player_id": 0,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 615.7,
+        "y": 188.2
+      },
+      "corrected_pos": {
+        "x": 571.5,
+        "y": 190.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 35,
+      "player_id": 4,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 318.6,
+        "y": 161.6
+      },
+      "corrected_pos": {
+        "x": 328.5,
+        "y": 170.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 35,
+      "player_id": 12,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 229.9,
+        "y": 115.2
+      },
+      "corrected_pos": {
+        "x": 257.5,
+        "y": 130.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 35,
+      "player_id": 11,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 280.0,
+        "y": 117.7
+      },
+      "corrected_pos": {
+        "x": 299.1,
+        "y": 132.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 36,
+      "player_id": 5,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 461.7,
+        "y": 316.1
+      },
+      "corrected_pos": {
+        "x": 451.1,
+        "y": 295.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 36,
+      "player_id": 3,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 508.2,
+        "y": 337.5
+      },
+      "corrected_pos": {
+        "x": 490.1,
+        "y": 314.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 36,
+      "player_id": 1,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 632.1,
+        "y": 296.1
+      },
+      "corrected_pos": {
+        "x": 583.5,
+        "y": 280.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 36,
+      "player_id": 8,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 503.2,
+        "y": 214.9
+      },
+      "corrected_pos": {
+        "x": 478.1,
+        "y": 213.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 36,
+      "player_id": 6,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 520.0,
+        "y": 263.0
+      },
+      "corrected_pos": {
+        "x": 493.0,
+        "y": 249.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 36,
+      "player_id": 2,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 196.7,
+        "y": 210.6
+      },
+      "corrected_pos": {
+        "x": 230.2,
+        "y": 209.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 36,
+      "player_id": 7,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 325.7,
+        "y": 199.5
+      },
+      "corrected_pos": {
+        "x": 335.1,
+        "y": 200.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 36,
+      "player_id": 0,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 614.2,
+        "y": 188.1
+      },
+      "corrected_pos": {
+        "x": 570.5,
+        "y": 190.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 36,
+      "player_id": 4,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 317.5,
+        "y": 160.6
+      },
+      "corrected_pos": {
+        "x": 327.2,
+        "y": 169.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 36,
+      "player_id": 12,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 232.1,
+        "y": 114.0
+      },
+      "corrected_pos": {
+        "x": 259.4,
+        "y": 129.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 36,
+      "player_id": 11,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7142857142857143,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 282.2,
+        "y": 116.6
+      },
+      "corrected_pos": {
+        "x": 301.1,
+        "y": 131.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 40,
+      "player_id": 3,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6666666666666666,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 541.2,
+        "y": 330.2
+      },
+      "corrected_pos": {
+        "x": 519.4,
+        "y": 306.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 40,
+      "player_id": 5,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6666666666666666,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 490.0,
+        "y": 310.9
+      },
+      "corrected_pos": {
+        "x": 475.9,
+        "y": 291.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 40,
+      "player_id": 1,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6666666666666666,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 620.3,
+        "y": 292.1
+      },
+      "corrected_pos": {
+        "x": 576.2,
+        "y": 276.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 40,
+      "player_id": 8,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6666666666666666,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 492.6,
+        "y": 218.5
+      },
+      "corrected_pos": {
+        "x": 469.7,
+        "y": 216.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 40,
+      "player_id": 2,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6666666666666666,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 204.7,
+        "y": 210.3
+      },
+      "corrected_pos": {
+        "x": 233.6,
+        "y": 208.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 40,
+      "player_id": 7,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6666666666666666,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 330.0,
+        "y": 195.2
+      },
+      "corrected_pos": {
+        "x": 337.4,
+        "y": 195.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 40,
+      "player_id": 14,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6666666666666666,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 200.5,
+        "y": 167.2
+      },
+      "corrected_pos": {
+        "x": 229.4,
+        "y": 170.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 40,
+      "player_id": 0,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6666666666666666,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 608.9,
+        "y": 185.1
+      },
+      "corrected_pos": {
+        "x": 567.8,
+        "y": 187.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 40,
+      "player_id": 4,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6666666666666666,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 320.4,
+        "y": 158.1
+      },
+      "corrected_pos": {
+        "x": 329.1,
+        "y": 165.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 40,
+      "player_id": 11,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6666666666666666,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 292.7,
+        "y": 113.6
+      },
+      "corrected_pos": {
+        "x": 307.8,
+        "y": 127.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 40,
+      "player_id": 12,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6666666666666666,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 241.9,
+        "y": 111.1
+      },
+      "corrected_pos": {
+        "x": 265.1,
+        "y": 125.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 41,
+      "player_id": 5,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7333333333333333,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 496.9,
+        "y": 308.6
+      },
+      "corrected_pos": {
+        "x": 479.6,
+        "y": 286.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 41,
+      "player_id": 3,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7333333333333333,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 549.1,
+        "y": 325.8
+      },
+      "corrected_pos": {
+        "x": 523.0,
+        "y": 299.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 41,
+      "player_id": 1,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7333333333333333,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 618.4,
+        "y": 289.4
+      },
+      "corrected_pos": {
+        "x": 571.2,
+        "y": 271.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 41,
+      "player_id": 8,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7333333333333333,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 491.8,
+        "y": 217.9
+      },
+      "corrected_pos": {
+        "x": 468.1,
+        "y": 214.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 41,
+      "player_id": 2,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7333333333333333,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 207.0,
+        "y": 209.5
+      },
+      "corrected_pos": {
+        "x": 238.6,
+        "y": 207.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 41,
+      "player_id": 6,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7333333333333333,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 518.3,
+        "y": 267.8
+      },
+      "corrected_pos": {
+        "x": 491.1,
+        "y": 255.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 41,
+      "player_id": 7,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7333333333333333,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 331.1,
+        "y": 194.5
+      },
+      "corrected_pos": {
+        "x": 339.2,
+        "y": 194.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 41,
+      "player_id": 14,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7333333333333333,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 202.4,
+        "y": 165.5
+      },
+      "corrected_pos": {
+        "x": 234.3,
+        "y": 169.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 41,
+      "player_id": 0,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7333333333333333,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 608.0,
+        "y": 184.0
+      },
+      "corrected_pos": {
+        "x": 563.6,
+        "y": 186.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 41,
+      "player_id": 4,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7333333333333333,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 321.5,
+        "y": 157.0
+      },
+      "corrected_pos": {
+        "x": 331.2,
+        "y": 164.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 41,
+      "player_id": 11,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7333333333333333,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 294.4,
+        "y": 113.0
+      },
+      "corrected_pos": {
+        "x": 310.2,
+        "y": 128.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 41,
+      "player_id": 12,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.7333333333333333,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 244.7,
+        "y": 110.2
+      },
+      "corrected_pos": {
+        "x": 269.6,
+        "y": 125.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 42,
+      "player_id": 3,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6666666666666666,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 556.2,
+        "y": 322.9
+      },
+      "corrected_pos": {
+        "x": 531.7,
+        "y": 299.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 42,
+      "player_id": 5,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6666666666666666,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 503.6,
+        "y": 311.4
+      },
+      "corrected_pos": {
+        "x": 487.4,
+        "y": 292.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 42,
+      "player_id": 1,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6666666666666666,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 616.0,
+        "y": 288.5
+      },
+      "corrected_pos": {
+        "x": 573.6,
+        "y": 272.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 42,
+      "player_id": 8,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6666666666666666,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 491.2,
+        "y": 217.2
+      },
+      "corrected_pos": {
+        "x": 470.3,
+        "y": 214.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 42,
+      "player_id": 6,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6666666666666666,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 513.2,
+        "y": 268.7
+      },
+      "corrected_pos": {
+        "x": 492.4,
+        "y": 258.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 42,
+      "player_id": 2,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6666666666666666,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 208.7,
+        "y": 209.5
+      },
+      "corrected_pos": {
+        "x": 237.4,
+        "y": 207.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 42,
+      "player_id": 7,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6666666666666666,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 332.5,
+        "y": 193.3
+      },
+      "corrected_pos": {
+        "x": 339.9,
+        "y": 193.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 42,
+      "player_id": 14,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6666666666666666,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 204.3,
+        "y": 164.2
+      },
+      "corrected_pos": {
+        "x": 233.3,
+        "y": 167.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 42,
+      "player_id": 0,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6666666666666666,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 607.8,
+        "y": 183.0
+      },
+      "corrected_pos": {
+        "x": 567.7,
+        "y": 185.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 42,
+      "player_id": 4,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6666666666666666,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 322.2,
+        "y": 156.6
+      },
+      "corrected_pos": {
+        "x": 331.1,
+        "y": 163.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 42,
+      "player_id": 11,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6666666666666666,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 296.3,
+        "y": 112.3
+      },
+      "corrected_pos": {
+        "x": 310.6,
+        "y": 126.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 42,
+      "player_id": 12,
+      "rule_fired": "convergence_pull",
+      "confidence": 0.6666666666666666,
+      "game_state_active": "convergence",
+      "original_pos": {
+        "x": 247.1,
+        "y": 109.8
+      },
+      "corrected_pos": {
+        "x": 269.6,
+        "y": 124.0
+      },
+      "predicted": false
+    }
+  ]
+}

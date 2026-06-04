@@ -1,0 +1,76 @@
+{
+  "results": [
+    {
+      "seed_id": "offset_0s",
+      "fixed_rules_ade": 44.984449037221445,
+      "autoregressive_ade": 42.85744646066644,
+      "delta_ar_minus_fixed": -2.1270025765550074
+    },
+    {
+      "seed_id": "offset_10s",
+      "fixed_rules_ade": 7.457814676262929,
+      "autoregressive_ade": 28.65756137840374,
+      "delta_ar_minus_fixed": 21.199746702140814
+    },
+    {
+      "seed_id": "offset_12s",
+      "fixed_rules_ade": 6.339930191353508,
+      "autoregressive_ade": 37.030345814392376,
+      "delta_ar_minus_fixed": 30.690415623038866
+    },
+    {
+      "seed_id": "offset_14s",
+      "fixed_rules_ade": 6.968872777553704,
+      "autoregressive_ade": 35.57815726241114,
+      "delta_ar_minus_fixed": 28.609284484857433
+    },
+    {
+      "seed_id": "offset_15s",
+      "fixed_rules_ade": 41.57758040247291,
+      "autoregressive_ade": 46.027145575331325,
+      "delta_ar_minus_fixed": 4.449565172858414
+    },
+    {
+      "seed_id": "offset_16s",
+      "fixed_rules_ade": 9.975477197148866,
+      "autoregressive_ade": 37.974264614247545,
+      "delta_ar_minus_fixed": 27.99878741709868
+    },
+    {
+      "seed_id": "offset_18s",
+      "fixed_rules_ade": 7.554140473204379,
+      "autoregressive_ade": 35.11065214881853,
+      "delta_ar_minus_fixed": 27.556511675614153
+    },
+    {
+      "seed_id": "offset_2s",
+      "fixed_rules_ade": 5.645937724337897,
+      "autoregressive_ade": 32.278083091849766,
+      "delta_ar_minus_fixed": 26.632145367511868
+    },
+    {
+      "seed_id": "offset_4s",
+      "fixed_rules_ade": 6.74827082930992,
+      "autoregressive_ade": 30.105226442896303,
+      "delta_ar_minus_fixed": 23.356955613586383
+    },
+    {
+      "seed_id": "offset_5s",
+      "fixed_rules_ade": 50.644915659539095,
+      "autoregressive_ade": 46.1010540125066,
+      "delta_ar_minus_fixed": -4.543861647032493
+    },
+    {
+      "seed_id": "offset_6s",
+      "fixed_rules_ade": 7.21561294189377,
+      "autoregressive_ade": 36.89587599375678,
+      "delta_ar_minus_fixed": 29.68026305186301
+    },
+    {
+      "seed_id": "offset_8s",
+      "fixed_rules_ade": 8.871643634412237,
+      "autoregressive_ade": 28.042535148367705,
+      "delta_ar_minus_fixed": 19.170891513955468
+    }
+  ]
+}

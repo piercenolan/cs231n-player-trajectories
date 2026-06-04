@@ -1,0 +1,85 @@
+{
+  "seed_id": "offset_0s",
+  "gt_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_0s\\gt_aligned.json",
+  "results": [
+    {
+      "variant": "A0_plain",
+      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
+      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_A0_plain.json",
+      "ade_full": 32.87071129130679,
+      "fde_full": 49.21942339701063,
+      "ade_forecast": 40.15299182205631,
+      "fde_forecast": 49.21942339701063,
+      "num_matches": 366,
+      "teacher_forced_ade_px": 69.55036931643353,
+      "persistence_ade_px": 8.509158903499191,
+      "post_refine": null
+    },
+    {
+      "variant": "A1_rule_features",
+      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_rule_features\\checkpoint.pt",
+      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_rule_features\\predicted_A1_rule_features.json",
+      "ade_full": 34.95662191545129,
+      "fde_full": 40.28361015001187,
+      "ade_forecast": 44.984449037221445,
+      "fde_forecast": 40.28361015001187,
+      "num_matches": 300,
+      "teacher_forced_ade_px": 122.4023431022753,
+      "persistence_ade_px": 8.509158903499191,
+      "post_refine": null
+    },
+    {
+      "variant": "A3_graph",
+      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_graph\\checkpoint.pt",
+      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_graph\\predicted_A3_graph.json",
+      "ade_full": 33.40077522859293,
+      "fde_full": 45.54896581788691,
+      "ade_forecast": 40.78559717493895,
+      "fde_forecast": 45.54896581788691,
+      "num_matches": 367,
+      "teacher_forced_ade_px": 72.89469547463395,
+      "persistence_ade_px": 8.509158903499191,
+      "post_refine": null
+    },
+    {
+      "variant": "A2_post_game",
+      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
+      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_A2_post_game.json",
+      "ade_full": 37.641239320800196,
+      "fde_full": 50.01854678809084,
+      "ade_forecast": 45.2681354352906,
+      "fde_forecast": 50.01854678809084,
+      "num_matches": 394,
+      "teacher_forced_ade_px": 69.55036931643353,
+      "persistence_ade_px": 8.509158903499191,
+      "post_refine": "game"
+    },
+    {
+      "variant": "A2_post_physical",
+      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
+      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_A2_post_physical.json",
+      "ade_full": 37.5072219505666,
+      "fde_full": 50.93000278936139,
+      "ade_forecast": 44.99582370705415,
+      "fde_forecast": 50.93000278936139,
+      "num_matches": 394,
+      "teacher_forced_ade_px": 69.55036931643353,
+      "persistence_ade_px": 8.509158903499191,
+      "post_refine": "physical"
+    },
+    {
+      "variant": "SAM_augmented",
+      "ade_forecast": 7.479674384313496,
+      "fde_forecast": 7.964425865248269,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
+    },
+    {
+      "variant": "linear_baseline",
+      "ade_forecast": 6.351464825064998,
+      "fde_forecast": 11.88912734204426,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
+    }
+  ]
+}
