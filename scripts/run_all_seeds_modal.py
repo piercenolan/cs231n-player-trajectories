@@ -46,6 +46,11 @@ from utils.seed_schedule import (
 MODAL_VOLUME = "sports-data"
 
 
+def modal_cmd(*args: str) -> list[str]:
+    """Invoke Modal via `py -m modal` (works when `modal` exe is not on PATH)."""
+    return [sys.executable, "-m", "modal", *args]
+
+
 def run_cmd(cmd: list[str], dry_run: bool = False) -> int:
     line = " ".join(cmd)
     print(f"\n>> {line}")
@@ -55,7 +60,13 @@ def run_cmd(cmd: list[str], dry_run: bool = False) -> int:
 
 
 def modal_available() -> bool:
-    return shutil.which("modal") is not None
+    if shutil.which("modal") is not None:
+        return True
+    try:
+        import modal  # noqa: F401
+        return True
+    except ImportError:
+        return False
 
 
 def run_modal_seed(
@@ -66,10 +77,7 @@ def run_modal_seed(
     skip_upload: bool,
     dry_run: bool,
 ) -> int:
-    cmd = [
-        sys.executable,
-        "-m",
-        "modal",
+    cmd = modal_cmd(
         "run",
         "scripts/run_modal.py",
         "--dataset",
@@ -80,7 +88,7 @@ def run_modal_seed(
         f"--max-num-objects={args.max_num_objects}",
         f"--start-time-sec={start_sec}",
         f"--seed-id={seed_id}",
-    ]
+    )
     if skip_upload:
         cmd.append("--skip-upload")
     return run_cmd(cmd, dry_run=dry_run)
@@ -98,16 +106,7 @@ def download_seed_baselines(dataset: str, schedule: list[dict], dry_run: bool) -
         local.parent.mkdir(parents=True, exist_ok=True)
         remote = f"runs/{dataset}/seeds/{seed_id}/baseline_tracks.json"
         code = run_cmd(
-            [
-                sys.executable,
-                "-m",
-                "modal",
-                "volume",
-                "get",
-                MODAL_VOLUME,
-                remote,
-                str(local),
-            ],
+            modal_cmd("volume", "get", MODAL_VOLUME, remote, str(local)),
             dry_run=dry_run,
         )
         if code != 0 and not dry_run:
@@ -115,17 +114,14 @@ def download_seed_baselines(dataset: str, schedule: list[dict], dry_run: bool) -
             print(f"WARNING: download failed for {seed_id} (exit {code})")
 
     bulk_rc = run_cmd(
-        [
-            sys.executable,
-            "-m",
-            "modal",
+        modal_cmd(
             "volume",
             "get",
             MODAL_VOLUME,
             f"runs/{dataset}/seeds",
             str(seeds_root),
             "--force",
-        ],
+        ),
         dry_run=dry_run,
     )
     return rc or bulk_rc
@@ -170,7 +166,7 @@ def main():
         help="Seconds between window starts (use 2–5 for more LSTM data)",
     )
     parser.add_argument("--max-frames", type=int, default=45)
-    parser.add_argument("--resize-scale", type=float, default=0.67)
+    parser.add_argument("--resize-scale", type=float, default=0.5)
     parser.add_argument("--max-num-objects", type=int, default=12)
     parser.add_argument(
         "--num-frames",
@@ -271,7 +267,11 @@ def main():
 
     if not args.skip_modal:
         if not modal_available():
-            print("ERROR: `modal` CLI not found. Install: pip install modal")
+            print(
+                "ERROR: Modal not installed. Run:\n"
+                "  py -m pip install modal\n"
+                "  py -m modal setup"
+            )
             sys.exit(1)
 
         uploaded_frames = False
@@ -296,6 +296,7 @@ def main():
                 start_sec,
                 args,
                 skip_upload=skip_upload,
+                dry_run=False,
             )
             if code != 0:
                 print(f"ERROR: Modal failed for {seed_id} (exit {code})")

@@ -8,7 +8,8 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from models.trajectory_lstm import TrajectoryLSTM
+from models.trajectory_graph_lstm import TrajectoryGraphLSTM
+from models.trajectory_lstm import RuleConditionedLSTM, TrajectoryLSTM
 from utils.lstm_dataset import (
     denormalize_positions,
     load_tensor_file,
@@ -17,15 +18,35 @@ from utils.lstm_dataset import (
 )
 
 
-def load_checkpoint(checkpoint_path, device="cpu"):
-    ckpt = torch.load(checkpoint_path, map_location=device, weights_only=False)
-    cfg = ckpt["config"]
-    model = TrajectoryLSTM(
+def build_model_from_config(cfg):
+    model_name = cfg.get("model", "plain")
+    if model_name == "rule_features":
+        return RuleConditionedLSTM(
+            num_players=cfg["num_players"],
+            rule_feature_dim=cfg.get("rule_feature_dim", 15),
+            hidden_dim=cfg["hidden_dim"],
+            num_layers=cfg["num_layers"],
+            pred_len=cfg["pred_len"],
+        )
+    if model_name == "graph":
+        return TrajectoryGraphLSTM(
+            num_players=cfg["num_players"],
+            hidden_dim=cfg["hidden_dim"],
+            num_layers=cfg["num_layers"],
+            pred_len=cfg["pred_len"],
+        )
+    return TrajectoryLSTM(
         num_players=cfg["num_players"],
         hidden_dim=cfg["hidden_dim"],
         num_layers=cfg["num_layers"],
         pred_len=cfg["pred_len"],
     )
+
+
+def load_checkpoint(checkpoint_path, device="cpu"):
+    ckpt = torch.load(checkpoint_path, map_location=device, weights_only=False)
+    cfg = ckpt["config"]
+    model = build_model_from_config(cfg)
     model.load_state_dict(ckpt["model_state_dict"])
     model.to(device)
     model.eval()
@@ -50,6 +71,8 @@ def rollout_positions(model, seq, cfg, device="cpu", stitch="last"):
     pos_px = seq["positions"].copy()
     vis = seq["visibility"]
     pos_norm = normalize_positions(pos_px, scale)
+    rule_feat = seq.get("rule_features")
+    model_name = cfg.get("model", "plain")
     T, P, _ = pos_norm.shape
     win = obs_len + pred_len
 
@@ -60,7 +83,16 @@ def rollout_positions(model, seq, cfg, device="cpu", stitch="last"):
     for start in range(0, T - win + 1):
         x = pos_norm[start : start + obs_len]
         xt = torch.from_numpy(x).unsqueeze(0).to(device)
-        pred_norm = model(xt).squeeze(0).cpu().numpy()
+        if model_name == "rule_features":
+            if rule_feat is None:
+                raise ValueError("rule_features required for rule_features model")
+            rf = torch.from_numpy(rule_feat[start : start + obs_len]).unsqueeze(0).to(device)
+            pred_norm = model(xt, rf).squeeze(0).cpu().numpy()
+        elif model_name == "graph":
+            mx = torch.from_numpy(vis[start : start + obs_len]).unsqueeze(0).to(device)
+            pred_norm = model(xt, mx).squeeze(0).cpu().numpy()
+        else:
+            pred_norm = model(xt).squeeze(0).cpu().numpy()
         pred_px = denormalize_positions(pred_norm, scale)
         t0 = start + obs_len
         for k in range(pred_len):
@@ -150,3 +182,37 @@ def save_tracks(path, tracks):
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         json.dump(tracks, f, indent=2)
+
+
+RULE_PRESETS = {
+    "physical": "velocity_cap,hull_containment,spacing_push",
+    "game": "collective_momentum,stationary_persistence,cut_continuation,"
+    "mirror_prediction,cluster_cohesion,convergence_pull,divergence_spread,"
+    "isolated_player_hold,dead_ball_freeze",
+    "full": None,
+}
+
+
+def post_refine_tracks(tracks, rules_preset="game", gap_fill=False):
+    """Apply augmentation rules to predicted tracks JSON (A2)."""
+    from utils.augmentation import apply_augmentation, resolve_enabled_rules
+
+    meta = dict(tracks.get("meta") or {})
+    fw = int(meta.get("frame_width", 640))
+    fh = int(meta.get("frame_height", 360))
+    frames = tracks.get("frames", [])
+    if rules_preset == "full":
+        enabled = resolve_enabled_rules(level="full", gap_fill=gap_fill)
+    elif rules_preset in RULE_PRESETS:
+        enabled = resolve_enabled_rules(rules=RULE_PRESETS[rules_preset], gap_fill=gap_fill)
+    else:
+        enabled = resolve_enabled_rules(rules=rules_preset, gap_fill=gap_fill)
+    aug_frames, _log = apply_augmentation(
+        frames,
+        fw,
+        fh,
+        enabled_rules=enabled,
+        sanitize=False,
+        gap_fill=gap_fill,
+    )
+    return {"meta": {**meta, "post_refine": rules_preset}, "frames": aug_frames}

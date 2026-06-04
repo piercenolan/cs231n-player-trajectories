@@ -9,4 +9,5 @@ Old pipeline artifacts live here after the dataset reorganization:
 | `data/videos/video_1.mp4` | Unknown source — **do not use for paper ADE** |
 | `data/gt/sportsmot/video_1/` | Proxy smoothed GT from old baseline |
 
-**Primary dataset going forward:** `data/datasets/sportsmot_example/`
+**Primary dataset going forward:** `data/datasets/sportsmot_example/`  
+**Current run outputs:** `data/runs/sportsmot_example/` (12 seeds, rule-aware LSTM under `lstm/`). See repo [README.md](../../README.md).

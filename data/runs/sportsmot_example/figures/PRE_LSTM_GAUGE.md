@@ -11,6 +11,11 @@
 - `summary_figure.png` — baseline vs augmented (qualitative)
 - `ablation_ade_bar.png` — ADE across ablations (real GT)
 - `multi_seed_ade_bar.png` — ADE across temporal offsets
+- `lstm_rule_ablation_bar.png` — forecast ADE: A0–A3 LSTM variants
+- `lstm_per_rule_delta_ade.png` — per-rule post-refine ΔADE vs plain LSTM
+
+## Post-LSTM metrics
+See `../lstm/lstm_ablation_summary.csv` and `docs/MILESTONE_CHECKLIST.md` (12 seeds @ 2s step).
 
 ## Baseline vs augmented (console compare)
 ```

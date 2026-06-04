@@ -17,6 +17,7 @@ from utils.datasets import (
     trajectory_tensor_path,
 )
 from utils.seed_schedule import list_seed_entries
+from utils.rule_features import attach_rule_features_to_export
 from utils.trajectory_export import export_trajectories, validate_export
 
 
@@ -28,6 +29,7 @@ def export_one(
     min_vis,
     max_empty,
     seed_id=None,
+    with_rule_features=False,
 ):
     tracks_path = Path(tracks_path)
     output_path = Path(output_path)
@@ -35,6 +37,10 @@ def export_one(
         raise FileNotFoundError(tracks_path)
 
     export = export_trajectories(str(tracks_path), output_path, max_players=max_players)
+    if with_rule_features:
+        attach_rule_features_to_export(export, str(tracks_path), max_players=max_players)
+        with open(output_path, "w", encoding="utf-8") as f:
+            json.dump(export, f, indent=2)
     if seed_id:
         export["meta"]["seed_id"] = seed_id
         with open(output_path, "w", encoding="utf-8") as f:
@@ -77,6 +83,11 @@ def main():
         default=0.60,
         help="Per-slot empty fraction cap (0.30 strict; 0.60 for sparse 10th slots on seeds)",
     )
+    parser.add_argument(
+        "--with-rule-features",
+        action="store_true",
+        help="Attach per-frame rule_features (T,P,F) for rule-conditioned LSTM",
+    )
     args = parser.parse_args()
 
     do_root = args.root or not args.all_seeds
@@ -98,6 +109,7 @@ def main():
                 args.validate,
                 args.min_global_visibility,
                 args.max_slot_empty_frac,
+                with_rule_features=args.with_rule_features,
             )
             exported.append(("root", p))
         except Exception as e:
@@ -120,6 +132,7 @@ def main():
                     args.min_global_visibility,
                     args.max_slot_empty_frac,
                     seed_id=seed_id,
+                    with_rule_features=args.with_rule_features,
                 )
                 meta_out = out.parent / "tensor_export_meta.json"
                 with open(meta_out, "w", encoding="utf-8") as f:
@@ -151,6 +164,7 @@ def main():
             {
                 "dataset": args.dataset,
                 "ablation": LSTM_ABLATION,
+                "with_rule_features": args.with_rule_features,
                 "exported": {k: str(v) for k, v in exported},
                 "failed": {k: v for k, v in failed},
             },

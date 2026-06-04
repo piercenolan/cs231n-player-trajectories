@@ -1,0 +1,4273 @@
+{
+  "meta": {
+    "frame_width": 640,
+    "frame_height": 360,
+    "num_source_frames": 45,
+    "resize_scale": 0.5,
+    "start_time_sec": 12.0,
+    "extract_fps": 25.0,
+    "source_fps": 25.0,
+    "max_frames": 45,
+    "seed_id": "offset_12s",
+    "enabled_rules": [
+      "velocity_cap"
+    ],
+    "sanitize": true,
+    "gap_fill": false,
+    "sanitize_params": {
+      "max_width_frac": 0.35,
+      "max_aspect": 4.0,
+      "y_min_court_frac": 0.15,
+      "max_players": 12
+    },
+    "max_players": 10,
+    "num_frames": 45,
+    "source_tracks": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_12s\\sanitize_plus_velocity_cap\\augmented_tracks.json",
+    "rule_feature_dim": 15,
+    "variant": "A2_post_physical",
+    "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
+    "post_refine": "physical"
+  },
+  "frames": [
+    {
+      "frame_number": 1,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 528.4,
+            "y": 115.1
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 3,
+            "y": 2
+          },
+          "mask_center": {
+            "x": 518.3,
+            "y": 175.1
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 283.1,
+            "y": 202.4
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {},
+          "mask_center": {
+            "x": 586.6,
+            "y": 211.0
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {},
+          "mask_center": {
+            "x": 262.8,
+            "y": 262.7
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {},
+          "mask_center": {
+            "x": 428.6,
+            "y": 138.8
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 258.1,
+            "y": 106.9
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {},
+          "mask_center": {
+            "x": 320.2,
+            "y": 249.6
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -3,
+            "y": -2
+          },
+          "mask_center": {
+            "x": 488.8,
+            "y": 156.1
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 2,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 529.9,
+            "y": 114.7
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 4,
+            "y": 2
+          },
+          "mask_center": {
+            "x": 523.0,
+            "y": 176.8
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 287.3,
+            "y": 203.1
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {},
+          "mask_center": {
+            "x": 585.1,
+            "y": 210.9
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {},
+          "mask_center": {
+            "x": 258.5,
+            "y": 265.8
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {},
+          "mask_center": {
+            "x": 422.3,
+            "y": 140.0
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {
+            "x": 3,
+            "y": 2
+          },
+          "mask_center": {
+            "x": 263.7,
+            "y": 110.3
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {},
+          "mask_center": {
+            "x": 319.5,
+            "y": 249.2
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -4,
+            "y": -2
+          },
+          "mask_center": {
+            "x": 493.1,
+            "y": 158.5
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 3,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 530.4,
+            "y": 114.9
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 5,
+            "y": 3
+          },
+          "mask_center": {
+            "x": 526.6,
+            "y": 176.9
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 290.8,
+            "y": 204.9
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {},
+          "mask_center": {
+            "x": 583.3,
+            "y": 209.6
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {},
+          "mask_center": {
+            "x": 254.8,
+            "y": 267.1
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {},
+          "mask_center": {
+            "x": 415.1,
+            "y": 140.2
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {
+            "x": 2,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 264.9,
+            "y": 108.3
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {},
+          "mask_center": {
+            "x": 318.3,
+            "y": 249.1
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -5,
+            "y": -3
+          },
+          "mask_center": {
+            "x": 496.3,
+            "y": 159.5
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 4,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 530.5,
+            "y": 114.2
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 4,
+            "y": 2
+          },
+          "mask_center": {
+            "x": 528.9,
+            "y": 177.8
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 294.7,
+            "y": 207.5
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {},
+          "mask_center": {
+            "x": 581.0,
+            "y": 208.3
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {},
+          "mask_center": {
+            "x": 252.0,
+            "y": 267.3
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {},
+          "mask_center": {
+            "x": 408.5,
+            "y": 139.5
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {
+            "x": 2,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 266.9,
+            "y": 105.2
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {},
+          "mask_center": {
+            "x": 317.1,
+            "y": 249.0
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -4,
+            "y": -2
+          },
+          "mask_center": {
+            "x": 498.5,
+            "y": 160.2
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 5,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 531.2,
+            "y": 112.1
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 4,
+            "y": 2
+          },
+          "mask_center": {
+            "x": 531.3,
+            "y": 177.6
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 297.0,
+            "y": 207.9
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {},
+          "mask_center": {
+            "x": 578.6,
+            "y": 206.7
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {},
+          "mask_center": {
+            "x": 250.0,
+            "y": 266.0
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {},
+          "mask_center": {
+            "x": 403.2,
+            "y": 141.0
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {
+            "x": 1,
+            "y": -2
+          },
+          "mask_center": {
+            "x": 266.9,
+            "y": 103.0
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {},
+          "mask_center": {
+            "x": 315.9,
+            "y": 248.9
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -4,
+            "y": -2
+          },
+          "mask_center": {
+            "x": 500.4,
+            "y": 161.3
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 6,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 531.3,
+            "y": 111.6
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 4,
+            "y": 2
+          },
+          "mask_center": {
+            "x": 533.6,
+            "y": 175.9
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 297.7,
+            "y": 210.8
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {},
+          "mask_center": {
+            "x": 575.9,
+            "y": 205.6
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {},
+          "mask_center": {
+            "x": 248.8,
+            "y": 264.3
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {},
+          "mask_center": {
+            "x": 396.3,
+            "y": 140.2
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {
+            "x": 1,
+            "y": -1
+          },
+          "mask_center": {
+            "x": 268.5,
+            "y": 103.9
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {},
+          "mask_center": {
+            "x": 314.4,
+            "y": 248.4
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -4,
+            "y": -2
+          },
+          "mask_center": {
+            "x": 501.3,
+            "y": 162.3
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 7,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 531.1,
+            "y": 110.9
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 4,
+            "y": 1
+          },
+          "mask_center": {
+            "x": 534.8,
+            "y": 174.5
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {
+            "x": -1,
+            "y": -1
+          },
+          "mask_center": {
+            "x": 298.1,
+            "y": 216.4
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {},
+          "mask_center": {
+            "x": 573.2,
+            "y": 205.4
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {},
+          "mask_center": {
+            "x": 247.9,
+            "y": 261.6
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {},
+          "mask_center": {
+            "x": 387.9,
+            "y": 140.1
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {
+            "x": 1,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 269.2,
+            "y": 106.5
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {
+            "x": 1,
+            "y": 1
+          },
+          "mask_center": {
+            "x": 314.4,
+            "y": 247.4
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -4,
+            "y": -1
+          },
+          "mask_center": {
+            "x": 502.4,
+            "y": 161.4
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 8,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 530.7,
+            "y": 110.6
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 4,
+            "y": 1
+          },
+          "mask_center": {
+            "x": 537.0,
+            "y": 172.6
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {
+            "x": -2,
+            "y": -4
+          },
+          "mask_center": {
+            "x": 299.3,
+            "y": 216.7
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {},
+          "mask_center": {
+            "x": 570.5,
+            "y": 205.1
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {},
+          "mask_center": {
+            "x": 247.1,
+            "y": 259.5
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {},
+          "mask_center": {
+            "x": 380.2,
+            "y": 141.9
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {
+            "x": 1,
+            "y": 1
+          },
+          "mask_center": {
+            "x": 270.6,
+            "y": 108.6
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {
+            "x": 2,
+            "y": 4
+          },
+          "mask_center": {
+            "x": 315.8,
+            "y": 247.7
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -4,
+            "y": -1
+          },
+          "mask_center": {
+            "x": 503.6,
+            "y": 162.5
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 9,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 537.3,
+            "y": 112.8
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 1,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 535.3,
+            "y": 175.9
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 324.2,
+            "y": 212.5
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {},
+          "mask_center": {
+            "x": 570.6,
+            "y": 211.9
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {},
+          "mask_center": {
+            "x": 230.7,
+            "y": 267.7
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {},
+          "mask_center": {
+            "x": 368.1,
+            "y": 140.3
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 290.3,
+            "y": 121.0
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {},
+          "mask_center": {
+            "x": 298.9,
+            "y": 254.1
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -1,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 502.5,
+            "y": 163.8
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 10,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 535.9,
+            "y": 112.3
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 1,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 537.5,
+            "y": 175.4
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 325.2,
+            "y": 213.5
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {},
+          "mask_center": {
+            "x": 569.6,
+            "y": 211.5
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {},
+          "mask_center": {
+            "x": 232.0,
+            "y": 267.2
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {},
+          "mask_center": {
+            "x": 361.7,
+            "y": 139.9
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 289.0,
+            "y": 120.3
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {},
+          "mask_center": {
+            "x": 298.9,
+            "y": 254.7
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -1,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 504.3,
+            "y": 164.1
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 11,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 534.3,
+            "y": 111.8
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 1,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 539.5,
+            "y": 174.8
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 326.3,
+            "y": 214.5
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {},
+          "mask_center": {
+            "x": 568.2,
+            "y": 211.0
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {},
+          "mask_center": {
+            "x": 233.5,
+            "y": 266.7
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {},
+          "mask_center": {
+            "x": 354.8,
+            "y": 139.5
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 287.7,
+            "y": 119.5
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {},
+          "mask_center": {
+            "x": 298.8,
+            "y": 255.3
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -1,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 506.1,
+            "y": 164.5
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 12,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 532.7,
+            "y": 111.5
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 2,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 541.3,
+            "y": 174.3
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 327.4,
+            "y": 215.4
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {},
+          "mask_center": {
+            "x": 566.5,
+            "y": 210.4
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {},
+          "mask_center": {
+            "x": 234.9,
+            "y": 266.1
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {},
+          "mask_center": {
+            "x": 348.3,
+            "y": 139.1
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 286.6,
+            "y": 118.7
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {},
+          "mask_center": {
+            "x": 298.6,
+            "y": 255.8
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -2,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 507.6,
+            "y": 164.8
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 13,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 531.0,
+            "y": 111.1
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 2,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 542.7,
+            "y": 173.8
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 328.7,
+            "y": 216.2
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {},
+          "mask_center": {
+            "x": 564.3,
+            "y": 209.7
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {},
+          "mask_center": {
+            "x": 236.6,
+            "y": 265.5
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {},
+          "mask_center": {
+            "x": 341.5,
+            "y": 138.9
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 285.4,
+            "y": 118.0
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {},
+          "mask_center": {
+            "x": 298.2,
+            "y": 256.3
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -2,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 508.8,
+            "y": 165.2
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 14,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 529.1,
+            "y": 110.8
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 2,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 544.1,
+            "y": 173.2
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 330.2,
+            "y": 217.0
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {},
+          "mask_center": {
+            "x": 561.4,
+            "y": 208.9
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {},
+          "mask_center": {
+            "x": 238.6,
+            "y": 264.8
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {},
+          "mask_center": {
+            "x": 333.9,
+            "y": 138.7
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 284.0,
+            "y": 117.0
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {},
+          "mask_center": {
+            "x": 297.8,
+            "y": 256.6
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -2,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 510.0,
+            "y": 165.6
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 15,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 527.2,
+            "y": 110.6
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 2,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 545.2,
+            "y": 172.6
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 331.8,
+            "y": 217.7
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {},
+          "mask_center": {
+            "x": 558.2,
+            "y": 208.1
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {},
+          "mask_center": {
+            "x": 240.5,
+            "y": 264.1
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {},
+          "mask_center": {
+            "x": 326.6,
+            "y": 138.5
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 282.9,
+            "y": 116.1
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {},
+          "mask_center": {
+            "x": 297.2,
+            "y": 256.9
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -2,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 510.9,
+            "y": 166.1
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 16,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 525.6,
+            "y": 110.3
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 2,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 546.0,
+            "y": 172.1
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 333.0,
+            "y": 218.1
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {},
+          "mask_center": {
+            "x": 555.4,
+            "y": 207.5
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {},
+          "mask_center": {
+            "x": 241.8,
+            "y": 263.6
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {},
+          "mask_center": {
+            "x": 320.8,
+            "y": 138.4
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 282.5,
+            "y": 115.3
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {},
+          "mask_center": {
+            "x": 296.6,
+            "y": 256.9
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -2,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 511.4,
+            "y": 166.5
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 17,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 524.6,
+            "y": 110.0
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 2,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 546.4,
+            "y": 171.8
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 333.6,
+            "y": 218.2
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {},
+          "mask_center": {
+            "x": 553.6,
+            "y": 207.1
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {},
+          "mask_center": {
+            "x": 242.3,
+            "y": 263.3
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {},
+          "mask_center": {
+            "x": 316.8,
+            "y": 138.1
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 282.9,
+            "y": 114.9
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {},
+          "mask_center": {
+            "x": 296.0,
+            "y": 257.0
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -2,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 511.8,
+            "y": 166.8
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 18,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 523.4,
+            "y": 109.8
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 2,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 546.6,
+            "y": 171.4
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 334.3,
+            "y": 218.4
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {},
+          "mask_center": {
+            "x": 551.4,
+            "y": 206.6
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {},
+          "mask_center": {
+            "x": 243.0,
+            "y": 263.0
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {},
+          "mask_center": {
+            "x": 312.5,
+            "y": 138.1
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 283.2,
+            "y": 114.5
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {},
+          "mask_center": {
+            "x": 295.3,
+            "y": 256.9
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -2,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 511.9,
+            "y": 167.0
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 19,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 522.0,
+            "y": 109.7
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 2,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 546.4,
+            "y": 171.1
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 334.9,
+            "y": 218.5
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {},
+          "mask_center": {
+            "x": 548.9,
+            "y": 206.0
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {},
+          "mask_center": {
+            "x": 243.9,
+            "y": 262.5
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {
+            "x": 0,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 308.1,
+            "y": 138.5
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {
+            "x": 0,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 283.3,
+            "y": 113.8
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {},
+          "mask_center": {
+            "x": 294.4,
+            "y": 256.8
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -2,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 511.6,
+            "y": 167.2
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 20,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 520.5,
+            "y": 109.7
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 2,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 545.9,
+            "y": 170.9
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 335.6,
+            "y": 218.6
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {
+            "x": 0,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 546.2,
+            "y": 205.5
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {},
+          "mask_center": {
+            "x": 244.9,
+            "y": 261.9
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {
+            "x": 1,
+            "y": 1
+          },
+          "mask_center": {
+            "x": 304.1,
+            "y": 139.9
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {
+            "x": -1,
+            "y": -1
+          },
+          "mask_center": {
+            "x": 282.7,
+            "y": 112.3
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {},
+          "mask_center": {
+            "x": 293.5,
+            "y": 256.6
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -2,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 511.1,
+            "y": 167.4
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 21,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 519.0,
+            "y": 109.7
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 1,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 545.1,
+            "y": 170.7
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 336.2,
+            "y": 218.7
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {
+            "x": 0,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 543.4,
+            "y": 205.1
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {},
+          "mask_center": {
+            "x": 245.8,
+            "y": 261.3
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {
+            "x": 1,
+            "y": 3
+          },
+          "mask_center": {
+            "x": 300.0,
+            "y": 141.4
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {
+            "x": -1,
+            "y": -3
+          },
+          "mask_center": {
+            "x": 282.7,
+            "y": 110.9
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {},
+          "mask_center": {
+            "x": 292.6,
+            "y": 256.3
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -1,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 510.3,
+            "y": 167.5
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 22,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 517.8,
+            "y": 109.7
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 0,
+            "y": -1
+          },
+          "mask_center": {
+            "x": 543.5,
+            "y": 169.9
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 336.2,
+            "y": 218.5
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {
+            "x": 0,
+            "y": 1
+          },
+          "mask_center": {
+            "x": 541.5,
+            "y": 204.8
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {},
+          "mask_center": {
+            "x": 246.2,
+            "y": 260.8
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {
+            "x": 1,
+            "y": 3
+          },
+          "mask_center": {
+            "x": 297.1,
+            "y": 142.5
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {
+            "x": -1,
+            "y": -3
+          },
+          "mask_center": {
+            "x": 283.3,
+            "y": 110.3
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {},
+          "mask_center": {
+            "x": 291.7,
+            "y": 255.9
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -1,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 509.2,
+            "y": 167.4
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 23,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 516.8,
+            "y": 109.7
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 0,
+            "y": -1
+          },
+          "mask_center": {
+            "x": 543.0,
+            "y": 169.7
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 336.0,
+            "y": 218.4
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {
+            "x": 0,
+            "y": 1
+          },
+          "mask_center": {
+            "x": 540.1,
+            "y": 204.6
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {},
+          "mask_center": {
+            "x": 246.3,
+            "y": 260.4
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {
+            "x": 1,
+            "y": 4
+          },
+          "mask_center": {
+            "x": 294.8,
+            "y": 143.3
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {
+            "x": -1,
+            "y": -4
+          },
+          "mask_center": {
+            "x": 284.2,
+            "y": 109.9
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {},
+          "mask_center": {
+            "x": 291.0,
+            "y": 255.6
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": 0,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 508.3,
+            "y": 167.3
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 24,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 515.6,
+            "y": 109.7
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 0,
+            "y": -1
+          },
+          "mask_center": {
+            "x": 542.4,
+            "y": 169.5
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 336.1,
+            "y": 218.4
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {
+            "x": 0,
+            "y": 1
+          },
+          "mask_center": {
+            "x": 538.1,
+            "y": 204.2
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {},
+          "mask_center": {
+            "x": 246.7,
+            "y": 259.9
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {
+            "x": 1,
+            "y": 4
+          },
+          "mask_center": {
+            "x": 291.3,
+            "y": 144.0
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {
+            "x": -1,
+            "y": -4
+          },
+          "mask_center": {
+            "x": 285.2,
+            "y": 109.5
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {},
+          "mask_center": {
+            "x": 290.1,
+            "y": 255.3
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {},
+          "mask_center": {
+            "x": 507.3,
+            "y": 167.2
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 25,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 514.2,
+            "y": 109.7
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 0,
+            "y": -1
+          },
+          "mask_center": {
+            "x": 541.6,
+            "y": 169.3
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {
+            "x": -4,
+            "y": 2
+          },
+          "mask_center": {
+            "x": 332.2,
+            "y": 220.8
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {
+            "x": 0,
+            "y": 1
+          },
+          "mask_center": {
+            "x": 535.4,
+            "y": 203.7
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {},
+          "mask_center": {
+            "x": 247.6,
+            "y": 259.3
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {
+            "x": 0,
+            "y": 4
+          },
+          "mask_center": {
+            "x": 286.5,
+            "y": 144.3
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {
+            "x": 0,
+            "y": -4
+          },
+          "mask_center": {
+            "x": 285.9,
+            "y": 109.3
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {},
+          "mask_center": {
+            "x": 289.1,
+            "y": 255.0
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {},
+          "mask_center": {
+            "x": 505.9,
+            "y": 167.2
+          }
+        },
+        {
+          "id": 10,
+          "bbox": {
+            "x": 4,
+            "y": -2
+          },
+          "mask_center": {
+            "x": 363.2,
+            "y": 204.5
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 26,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 511.8,
+            "y": 110.1
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 1,
+            "y": -2
+          },
+          "mask_center": {
+            "x": 538.8,
+            "y": 169.4
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {
+            "x": -5,
+            "y": 3
+          },
+          "mask_center": {
+            "x": 333.4,
+            "y": 222.4
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {
+            "x": -1,
+            "y": 2
+          },
+          "mask_center": {
+            "x": 530.5,
+            "y": 203.4
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {},
+          "mask_center": {
+            "x": 250.6,
+            "y": 258.3
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {
+            "x": -1,
+            "y": 2
+          },
+          "mask_center": {
+            "x": 274.7,
+            "y": 143.1
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {
+            "x": 1,
+            "y": -2
+          },
+          "mask_center": {
+            "x": 289.3,
+            "y": 111.3
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {},
+          "mask_center": {
+            "x": 286.6,
+            "y": 255.0
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {},
+          "mask_center": {
+            "x": 503.5,
+            "y": 166.6
+          }
+        },
+        {
+          "id": 10,
+          "bbox": {
+            "x": 5,
+            "y": -3
+          },
+          "mask_center": {
+            "x": 363.9,
+            "y": 205.2
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 27,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 508.4,
+            "y": 110.6
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 1,
+            "y": -3
+          },
+          "mask_center": {
+            "x": 535.5,
+            "y": 169.7
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {
+            "x": -5,
+            "y": 3
+          },
+          "mask_center": {
+            "x": 334.4,
+            "y": 224.2
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {
+            "x": -1,
+            "y": 3
+          },
+          "mask_center": {
+            "x": 524.3,
+            "y": 202.8
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {
+            "x": -3,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 251.3,
+            "y": 257.0
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {},
+          "mask_center": {
+            "x": 262.8,
+            "y": 142.7
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 292.3,
+            "y": 112.8
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {
+            "x": 3,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 286.2,
+            "y": 254.7
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {},
+          "mask_center": {
+            "x": 500.0,
+            "y": 166.1
+          }
+        },
+        {
+          "id": 10,
+          "bbox": {
+            "x": 5,
+            "y": -3
+          },
+          "mask_center": {
+            "x": 364.2,
+            "y": 205.8
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 28,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 504.1,
+            "y": 111.0
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 2,
+            "y": -4
+          },
+          "mask_center": {
+            "x": 531.6,
+            "y": 170.0
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {
+            "x": -6,
+            "y": 4
+          },
+          "mask_center": {
+            "x": 334.7,
+            "y": 225.6
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {
+            "x": -2,
+            "y": 4
+          },
+          "mask_center": {
+            "x": 517.9,
+            "y": 202.2
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {
+            "x": -7,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 251.0,
+            "y": 254.8
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {},
+          "mask_center": {
+            "x": 249.9,
+            "y": 143.7
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 296.5,
+            "y": 113.2
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {
+            "x": 7,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 286.0,
+            "y": 254.5
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {},
+          "mask_center": {
+            "x": 495.7,
+            "y": 165.4
+          }
+        },
+        {
+          "id": 10,
+          "bbox": {
+            "x": 6,
+            "y": -4
+          },
+          "mask_center": {
+            "x": 364.1,
+            "y": 206.6
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 29,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 499.6,
+            "y": 111.2
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 2,
+            "y": -4
+          },
+          "mask_center": {
+            "x": 527.2,
+            "y": 170.5
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {
+            "x": -6,
+            "y": 4
+          },
+          "mask_center": {
+            "x": 334.2,
+            "y": 226.3
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {
+            "x": -2,
+            "y": 4
+          },
+          "mask_center": {
+            "x": 511.5,
+            "y": 201.8
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {
+            "x": -11,
+            "y": -1
+          },
+          "mask_center": {
+            "x": 250.7,
+            "y": 251.2
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {},
+          "mask_center": {
+            "x": 237.1,
+            "y": 144.4
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 301.0,
+            "y": 113.8
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {
+            "x": 11,
+            "y": 1
+          },
+          "mask_center": {
+            "x": 285.4,
+            "y": 255.7
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": 0,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 491.5,
+            "y": 164.9
+          }
+        },
+        {
+          "id": 10,
+          "bbox": {
+            "x": 6,
+            "y": -4
+          },
+          "mask_center": {
+            "x": 364.1,
+            "y": 208.1
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 30,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 494.8,
+            "y": 111.2
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 3,
+            "y": -5
+          },
+          "mask_center": {
+            "x": 522.4,
+            "y": 171.0
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {
+            "x": -5,
+            "y": 3
+          },
+          "mask_center": {
+            "x": 332.5,
+            "y": 226.0
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {
+            "x": -3,
+            "y": 5
+          },
+          "mask_center": {
+            "x": 505.8,
+            "y": 201.8
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {
+            "x": -12,
+            "y": -8
+          },
+          "mask_center": {
+            "x": 252.5,
+            "y": 242.5
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {},
+          "mask_center": {
+            "x": 225.6,
+            "y": 145.1
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 306.3,
+            "y": 115.1
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {
+            "x": 12,
+            "y": 8
+          },
+          "mask_center": {
+            "x": 281.6,
+            "y": 261.9
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": 0,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 487.0,
+            "y": 164.4
+          }
+        },
+        {
+          "id": 10,
+          "bbox": {
+            "x": 5,
+            "y": -3
+          },
+          "mask_center": {
+            "x": 363.5,
+            "y": 209.7
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 31,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 490.3,
+            "y": 111.1
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 3,
+            "y": -5
+          },
+          "mask_center": {
+            "x": 517.5,
+            "y": 171.7
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {
+            "x": -4,
+            "y": 2
+          },
+          "mask_center": {
+            "x": 330.0,
+            "y": 225.0
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {
+            "x": -3,
+            "y": 5
+          },
+          "mask_center": {
+            "x": 501.0,
+            "y": 202.5
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {
+            "x": 1,
+            "y": -15
+          },
+          "mask_center": {
+            "x": 267.0,
+            "y": 233.8
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {
+            "x": -11,
+            "y": 1
+          },
+          "mask_center": {
+            "x": 205.0,
+            "y": 146.3
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 311.8,
+            "y": 116.6
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {
+            "x": -1,
+            "y": 15
+          },
+          "mask_center": {
+            "x": 264.3,
+            "y": 268.7
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -1,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 482.8,
+            "y": 163.9
+          }
+        },
+        {
+          "id": 10,
+          "bbox": {
+            "x": 4,
+            "y": -2
+          },
+          "mask_center": {
+            "x": 362.3,
+            "y": 211.5
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 32,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 486.8,
+            "y": 111.2
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 3,
+            "y": -5
+          },
+          "mask_center": {
+            "x": 512.4,
+            "y": 172.3
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {
+            "x": -1,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 327.3,
+            "y": 223.5
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {
+            "x": -3,
+            "y": 5
+          },
+          "mask_center": {
+            "x": 497.3,
+            "y": 203.9
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {
+            "x": 7,
+            "y": -12
+          },
+          "mask_center": {
+            "x": 272.7,
+            "y": 235.2
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {
+            "x": -9,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 200.8,
+            "y": 146.3
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 317.2,
+            "y": 118.2
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {
+            "x": -7,
+            "y": 12
+          },
+          "mask_center": {
+            "x": 255.5,
+            "y": 265.7
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -1,
+            "y": -1
+          },
+          "mask_center": {
+            "x": 479.3,
+            "y": 163.6
+          }
+        },
+        {
+          "id": 10,
+          "bbox": {
+            "x": 1,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 360.7,
+            "y": 213.1
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 33,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 484.6,
+            "y": 111.4
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 2,
+            "y": -6
+          },
+          "mask_center": {
+            "x": 506.6,
+            "y": 172.9
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 322.8,
+            "y": 222.8
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {
+            "x": -2,
+            "y": 6
+          },
+          "mask_center": {
+            "x": 495.0,
+            "y": 205.9
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {
+            "x": 7,
+            "y": -11
+          },
+          "mask_center": {
+            "x": 272.6,
+            "y": 235.4
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {
+            "x": -6,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 200.7,
+            "y": 145.6
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 321.7,
+            "y": 119.2
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {
+            "x": -7,
+            "y": 11
+          },
+          "mask_center": {
+            "x": 252.8,
+            "y": 264.3
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -2,
+            "y": -1
+          },
+          "mask_center": {
+            "x": 476.2,
+            "y": 163.2
+          }
+        },
+        {
+          "id": 10,
+          "bbox": {},
+          "mask_center": {
+            "x": 361.1,
+            "y": 214.0
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 34,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 483.5,
+            "y": 111.3
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 2,
+            "y": -6
+          },
+          "mask_center": {
+            "x": 505.4,
+            "y": 172.6
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 322.2,
+            "y": 222.6
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {
+            "x": -2,
+            "y": 6
+          },
+          "mask_center": {
+            "x": 493.9,
+            "y": 205.7
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {
+            "x": 8,
+            "y": -9
+          },
+          "mask_center": {
+            "x": 273.6,
+            "y": 235.8
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 321.8,
+            "y": 119.4
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {
+            "x": -8,
+            "y": 9
+          },
+          "mask_center": {
+            "x": 251.1,
+            "y": 262.6
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -2,
+            "y": -1
+          },
+          "mask_center": {
+            "x": 474.6,
+            "y": 163.0
+          }
+        },
+        {
+          "id": 10,
+          "bbox": {},
+          "mask_center": {
+            "x": 360.8,
+            "y": 213.8
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 35,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 481.9,
+            "y": 111.4
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 2,
+            "y": -6
+          },
+          "mask_center": {
+            "x": 503.3,
+            "y": 172.3
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 321.7,
+            "y": 222.6
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {
+            "x": -2,
+            "y": 6
+          },
+          "mask_center": {
+            "x": 491.2,
+            "y": 205.1
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {
+            "x": 9,
+            "y": -8
+          },
+          "mask_center": {
+            "x": 274.7,
+            "y": 236.4
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {
+            "x": -1,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 201.1,
+            "y": 145.3
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 321.0,
+            "y": 118.9
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {
+            "x": -9,
+            "y": 8
+          },
+          "mask_center": {
+            "x": 249.3,
+            "y": 260.5
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -2,
+            "y": -1
+          },
+          "mask_center": {
+            "x": 472.2,
+            "y": 162.8
+          }
+        },
+        {
+          "id": 10,
+          "bbox": {},
+          "mask_center": {
+            "x": 359.9,
+            "y": 213.9
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 36,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 480.7,
+            "y": 111.3
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 2,
+            "y": -6
+          },
+          "mask_center": {
+            "x": 501.5,
+            "y": 171.8
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 321.6,
+            "y": 222.5
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {
+            "x": -2,
+            "y": 6
+          },
+          "mask_center": {
+            "x": 490.1,
+            "y": 204.9
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {
+            "x": 8,
+            "y": -6
+          },
+          "mask_center": {
+            "x": 275.8,
+            "y": 237.1
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {
+            "x": 0,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 200.7,
+            "y": 145.4
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 320.4,
+            "y": 118.6
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {
+            "x": -8,
+            "y": 6
+          },
+          "mask_center": {
+            "x": 247.8,
+            "y": 258.1
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -2,
+            "y": -1
+          },
+          "mask_center": {
+            "x": 469.9,
+            "y": 162.6
+          }
+        },
+        {
+          "id": 10,
+          "bbox": {},
+          "mask_center": {
+            "x": 360.0,
+            "y": 214.0
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 37,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 479.4,
+            "y": 111.4
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 2,
+            "y": -6
+          },
+          "mask_center": {
+            "x": 499.7,
+            "y": 171.4
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 321.2,
+            "y": 222.4
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {
+            "x": -2,
+            "y": 6
+          },
+          "mask_center": {
+            "x": 489.1,
+            "y": 204.7
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {
+            "x": 8,
+            "y": -5
+          },
+          "mask_center": {
+            "x": 276.4,
+            "y": 237.4
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {
+            "x": 0,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 199.5,
+            "y": 145.7
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 320.0,
+            "y": 118.6
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {
+            "x": -8,
+            "y": 5
+          },
+          "mask_center": {
+            "x": 246.9,
+            "y": 256.2
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -1,
+            "y": -1
+          },
+          "mask_center": {
+            "x": 467.9,
+            "y": 162.5
+          }
+        },
+        {
+          "id": 10,
+          "bbox": {},
+          "mask_center": {
+            "x": 360.1,
+            "y": 214.0
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 38,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 478.5,
+            "y": 111.4
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 2,
+            "y": -7
+          },
+          "mask_center": {
+            "x": 498.2,
+            "y": 171.1
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 320.5,
+            "y": 222.2
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {
+            "x": -2,
+            "y": 7
+          },
+          "mask_center": {
+            "x": 488.8,
+            "y": 204.8
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {
+            "x": 8,
+            "y": -5
+          },
+          "mask_center": {
+            "x": 276.4,
+            "y": 237.2
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {
+            "x": 0,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 199.3,
+            "y": 145.6
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 319.8,
+            "y": 118.6
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {
+            "x": -8,
+            "y": 5
+          },
+          "mask_center": {
+            "x": 246.4,
+            "y": 255.1
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -1,
+            "y": -1
+          },
+          "mask_center": {
+            "x": 466.5,
+            "y": 162.4
+          }
+        },
+        {
+          "id": 10,
+          "bbox": {},
+          "mask_center": {
+            "x": 360.2,
+            "y": 214.0
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 39,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 478.0,
+            "y": 111.5
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 2,
+            "y": -7
+          },
+          "mask_center": {
+            "x": 497.1,
+            "y": 170.9
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 319.6,
+            "y": 222.0
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {
+            "x": -2,
+            "y": 7
+          },
+          "mask_center": {
+            "x": 488.8,
+            "y": 204.9
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {
+            "x": 8,
+            "y": -4
+          },
+          "mask_center": {
+            "x": 276.2,
+            "y": 237.0
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {
+            "x": 0,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 200.3,
+            "y": 145.2
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 319.7,
+            "y": 118.6
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {
+            "x": -8,
+            "y": 4
+          },
+          "mask_center": {
+            "x": 246.0,
+            "y": 254.7
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -1,
+            "y": -1
+          },
+          "mask_center": {
+            "x": 465.8,
+            "y": 162.3
+          }
+        },
+        {
+          "id": 10,
+          "bbox": {},
+          "mask_center": {
+            "x": 360.3,
+            "y": 213.9
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 40,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 478.1,
+            "y": 111.6
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 1,
+            "y": -7
+          },
+          "mask_center": {
+            "x": 496.8,
+            "y": 170.9
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 318.6,
+            "y": 221.8
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {
+            "x": -1,
+            "y": 7
+          },
+          "mask_center": {
+            "x": 489.3,
+            "y": 205.1
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {
+            "x": 8,
+            "y": -5
+          },
+          "mask_center": {
+            "x": 275.6,
+            "y": 236.6
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {
+            "x": 1,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 202.5,
+            "y": 144.7
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 320.0,
+            "y": 118.7
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {
+            "x": -8,
+            "y": 5
+          },
+          "mask_center": {
+            "x": 245.9,
+            "y": 255.2
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -2,
+            "y": -1
+          },
+          "mask_center": {
+            "x": 466.0,
+            "y": 162.2
+          }
+        },
+        {
+          "id": 10,
+          "bbox": {},
+          "mask_center": {
+            "x": 360.3,
+            "y": 213.8
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 41,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 478.4,
+            "y": 111.6
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 1,
+            "y": -7
+          },
+          "mask_center": {
+            "x": 496.6,
+            "y": 171.0
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 317.9,
+            "y": 221.6
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {
+            "x": -1,
+            "y": 7
+          },
+          "mask_center": {
+            "x": 489.9,
+            "y": 205.3
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {
+            "x": 8,
+            "y": -5
+          },
+          "mask_center": {
+            "x": 274.9,
+            "y": 236.2
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {
+            "x": 1,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 204.5,
+            "y": 144.4
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 320.3,
+            "y": 118.7
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {
+            "x": -8,
+            "y": 5
+          },
+          "mask_center": {
+            "x": 246.0,
+            "y": 255.9
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -2,
+            "y": -1
+          },
+          "mask_center": {
+            "x": 466.5,
+            "y": 162.1
+          }
+        },
+        {
+          "id": 10,
+          "bbox": {},
+          "mask_center": {
+            "x": 360.4,
+            "y": 213.7
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 42,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 478.7,
+            "y": 111.6
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 1,
+            "y": -7
+          },
+          "mask_center": {
+            "x": 496.2,
+            "y": 171.0
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 317.2,
+            "y": 221.5
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {
+            "x": -1,
+            "y": 7
+          },
+          "mask_center": {
+            "x": 490.6,
+            "y": 205.6
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {
+            "x": 8,
+            "y": -6
+          },
+          "mask_center": {
+            "x": 274.3,
+            "y": 235.8
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {
+            "x": 1,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 206.0,
+            "y": 144.3
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 320.6,
+            "y": 118.8
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {
+            "x": -8,
+            "y": 6
+          },
+          "mask_center": {
+            "x": 246.0,
+            "y": 256.4
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -2,
+            "y": -1
+          },
+          "mask_center": {
+            "x": 466.6,
+            "y": 162.0
+          }
+        },
+        {
+          "id": 10,
+          "bbox": {},
+          "mask_center": {
+            "x": 360.4,
+            "y": 213.6
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 43,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 478.7,
+            "y": 111.2
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 3,
+            "y": -9
+          },
+          "mask_center": {
+            "x": 495.6,
+            "y": 169.7
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 316.9,
+            "y": 223.2
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {
+            "x": -3,
+            "y": 9
+          },
+          "mask_center": {
+            "x": 483.4,
+            "y": 202.6
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {
+            "x": 8,
+            "y": -5
+          },
+          "mask_center": {
+            "x": 275.7,
+            "y": 235.0
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {
+            "x": 1,
+            "y": -1
+          },
+          "mask_center": {
+            "x": 206.8,
+            "y": 139.3
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 327.4,
+            "y": 116.4
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {
+            "x": -8,
+            "y": 5
+          },
+          "mask_center": {
+            "x": 245.4,
+            "y": 252.6
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -2,
+            "y": -1
+          },
+          "mask_center": {
+            "x": 464.8,
+            "y": 160.1
+          }
+        },
+        {
+          "id": 10,
+          "bbox": {},
+          "mask_center": {
+            "x": 358.0,
+            "y": 211.7
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 44,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 469.6,
+            "y": 111.5
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 6,
+            "y": -5
+          },
+          "mask_center": {
+            "x": 502.9,
+            "y": 174.7
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 315.4,
+            "y": 224.4
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {
+            "x": -6,
+            "y": 5
+          },
+          "mask_center": {
+            "x": 477.8,
+            "y": 199.0
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {
+            "x": 6,
+            "y": -4
+          },
+          "mask_center": {
+            "x": 274.1,
+            "y": 232.3
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {
+            "x": -2,
+            "y": -1
+          },
+          "mask_center": {
+            "x": 194.7,
+            "y": 139.4
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 332.3,
+            "y": 119.5
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {
+            "x": -6,
+            "y": 4
+          },
+          "mask_center": {
+            "x": 246.1,
+            "y": 253.3
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {},
+          "mask_center": {
+            "x": 461.5,
+            "y": 161.1
+          }
+        },
+        {
+          "id": 10,
+          "bbox": {},
+          "mask_center": {
+            "x": 354.7,
+            "y": 213.7
+          }
+        }
+      ]
+    },
+    {
+      "frame_number": 45,
+      "players": [
+        {
+          "id": 0,
+          "bbox": {},
+          "mask_center": {
+            "x": 476.0,
+            "y": 111.9
+          }
+        },
+        {
+          "id": 1,
+          "bbox": {
+            "x": 3,
+            "y": -10
+          },
+          "mask_center": {
+            "x": 489.0,
+            "y": 167.7
+          }
+        },
+        {
+          "id": 2,
+          "bbox": {},
+          "mask_center": {
+            "x": 314.2,
+            "y": 226.5
+          }
+        },
+        {
+          "id": 3,
+          "bbox": {
+            "x": -3,
+            "y": 10
+          },
+          "mask_center": {
+            "x": 479.1,
+            "y": 201.3
+          }
+        },
+        {
+          "id": 4,
+          "bbox": {
+            "x": 4,
+            "y": -4
+          },
+          "mask_center": {
+            "x": 274.9,
+            "y": 228.9
+          }
+        },
+        {
+          "id": 5,
+          "bbox": {
+            "x": -3,
+            "y": 0
+          },
+          "mask_center": {
+            "x": 192.9,
+            "y": 144.6
+          }
+        },
+        {
+          "id": 6,
+          "bbox": {},
+          "mask_center": {
+            "x": 334.4,
+            "y": 118.3
+          }
+        },
+        {
+          "id": 7,
+          "bbox": {
+            "x": -4,
+            "y": 4
+          },
+          "mask_center": {
+            "x": 250.7,
+            "y": 254.2
+          }
+        },
+        {
+          "id": 8,
+          "bbox": {
+            "x": -4,
+            "y": -2
+          },
+          "mask_center": {
+            "x": 458.1,
+            "y": 165.8
+          }
+        },
+        {
+          "id": 10,
+          "bbox": {},
+          "mask_center": {
+            "x": 353.7,
+            "y": 213.3
+          }
+        }
+      ]
+    }
+  ]
+}

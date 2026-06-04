@@ -1,0 +1,49 @@
+{
+  "model": "graph",
+  "dataset": "sportsmot_example",
+  "tensor_mode": "multi",
+  "split": "temporal_all",
+  "obs_len": 8,
+  "pred_len": 4,
+  "stride": 1,
+  "hidden_dim": 128,
+  "num_layers": 2,
+  "num_players": 10,
+  "rule_feature_dim": 15,
+  "epochs": 80,
+  "lr": 0.001,
+  "batch_size": 16,
+  "scale": [
+    640.0,
+    360.0
+  ],
+  "split_info": {
+    "train_paths": [
+      "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_0s\\trajectory_tensors.json",
+      "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_2s\\trajectory_tensors.json",
+      "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_4s\\trajectory_tensors.json",
+      "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_6s\\trajectory_tensors.json",
+      "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_8s\\trajectory_tensors.json",
+      "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_10s\\trajectory_tensors.json",
+      "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_12s\\trajectory_tensors.json",
+      "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_14s\\trajectory_tensors.json",
+      "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_16s\\trajectory_tensors.json",
+      "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_18s\\trajectory_tensors.json"
+    ],
+    "val_paths": [
+      "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_0s\\trajectory_tensors.json",
+      "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_2s\\trajectory_tensors.json",
+      "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_4s\\trajectory_tensors.json",
+      "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_6s\\trajectory_tensors.json",
+      "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_8s\\trajectory_tensors.json",
+      "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_10s\\trajectory_tensors.json",
+      "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_12s\\trajectory_tensors.json",
+      "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_14s\\trajectory_tensors.json",
+      "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_16s\\trajectory_tensors.json",
+      "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_18s\\trajectory_tensors.json"
+    ],
+    "split": "temporal_all",
+    "num_train_windows": 272,
+    "num_val_windows": 68
+  }
+}

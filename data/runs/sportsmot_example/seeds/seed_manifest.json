@@ -3,7 +3,7 @@
   "num_frames": 500,
   "step_sec": 2.0,
   "max_frames": 45,
-  "resize_scale": 0.67,
+  "resize_scale": 0.5,
   "seeds": [
     {
       "seed_id": "offset_0s",

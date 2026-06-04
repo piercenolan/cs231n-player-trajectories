@@ -10,6 +10,7 @@ import torch
 from torch.utils.data import DataLoader, Dataset
 
 from utils.datasets import lstm_tensor_paths, trajectory_tensor_path
+from utils.rule_features import RULE_FEATURE_DIM
 from utils.seed_schedule import parse_seed_offset_sec
 
 
@@ -33,9 +34,13 @@ def load_tensor_file(path):
     if not seed_id and parse_seed_offset_sec(path.parent.name) is not None:
         seed_id = path.parent.name
     scale = norm_stats_from_meta(meta)
+    rule_features = None
+    if "rule_features" in data:
+        rule_features = np.array(data["rule_features"], dtype=np.float32)
     return {
         "positions": positions,
         "visibility": visibility,
+        "rule_features": rule_features,
         "frame_numbers": np.array(data["frame_numbers"], dtype=np.int32),
         "player_ids": data["player_ids"],
         "meta": meta,
@@ -70,16 +75,20 @@ class TrajectoryWindowDataset(Dataset):
         stride=1,
         normalize=True,
         scale=None,
+        require_rule_features=False,
     ):
         self.obs_len = obs_len
         self.pred_len = pred_len
         self.stride = stride
         self.normalize = normalize
+        self.require_rule_features = require_rule_features
         self.samples = []
         self.sequences = []
 
         for tp in tensor_paths:
             seq = load_tensor_file(tp)
+            if require_rule_features and seq["rule_features"] is None:
+                raise ValueError(f"Missing rule_features in {tp}. Re-export with --with-rule-features")
             pos = seq["positions"]
             vis = seq["visibility"]
             scale = norm_stats_from_meta(seq["meta"]) if normalize else np.ones(2, np.float32)
@@ -113,7 +122,7 @@ class TrajectoryWindowDataset(Dataset):
         mask_x = vis[t0:t_obs]
         mask_y = vis[t_obs:t_end]
 
-        return {
+        item = {
             "x": torch.from_numpy(x.copy()),
             "y": torch.from_numpy(y.copy()),
             "mask_x": torch.from_numpy(mask_x.copy()),
@@ -121,6 +130,11 @@ class TrajectoryWindowDataset(Dataset):
             "seed_id": seq["seed_id"],
             "start": start,
         }
+        if seq["rule_features"] is not None:
+            rf = seq["rule_features"]
+            item["rules_obs"] = torch.from_numpy(rf[t0:t_obs].copy())
+            item["rules_y"] = torch.from_numpy(rf[t_obs:t_end].copy())
+        return item
 
 
 def split_tensor_paths_by_seed(tensor_paths, val_seed=VAL_SEED):
@@ -158,6 +172,7 @@ def build_dataloaders(
     val_seed=VAL_SEED,
     split="held_out_seed",
     num_workers=0,
+    require_rule_features=False,
 ):
     all_paths = resolve_tensor_paths(dataset, tensor_mode)
     if not all_paths:
@@ -168,7 +183,9 @@ def build_dataloaders(
 
     if tensor_mode == "single":
         # Temporal split: first 80% windows train, last 20% val
-        ds = TrajectoryWindowDataset(all_paths, obs_len, pred_len, stride)
+        ds = TrajectoryWindowDataset(
+            all_paths, obs_len, pred_len, stride, require_rule_features=require_rule_features
+        )
         n = len(ds)
         split = max(1, int(n * 0.8))
         train_ds = torch.utils.data.Subset(ds, range(0, split))
@@ -184,7 +201,9 @@ def build_dataloaders(
     if split == "all_seeds":
         train_paths = list(all_paths)
         val_paths = list(all_paths)
-        train_ds = TrajectoryWindowDataset(train_paths, obs_len, pred_len, stride)
+        train_ds = TrajectoryWindowDataset(
+            train_paths, obs_len, pred_len, stride, require_rule_features=require_rule_features
+        )
         val_ds = train_ds
         meta_scale = train_ds.sequences[0]["scale"]
         return (
@@ -199,7 +218,9 @@ def build_dataloaders(
         )
 
     if split == "temporal_all":
-        ds = TrajectoryWindowDataset(all_paths, obs_len, pred_len, stride)
+        ds = TrajectoryWindowDataset(
+            all_paths, obs_len, pred_len, stride, require_rule_features=require_rule_features
+        )
         n = len(ds)
         cut = max(1, int(n * 0.8))
         train_ds = torch.utils.data.Subset(ds, range(0, cut))
@@ -226,8 +247,12 @@ def build_dataloaders(
     if not val_paths:
         val_paths = [all_paths[0]]
 
-    train_ds = TrajectoryWindowDataset(train_paths, obs_len, pred_len, stride)
-    val_ds = TrajectoryWindowDataset(val_paths, obs_len, pred_len, stride)
+    train_ds = TrajectoryWindowDataset(
+        train_paths, obs_len, pred_len, stride, require_rule_features=require_rule_features
+    )
+    val_ds = TrajectoryWindowDataset(
+        val_paths, obs_len, pred_len, stride, require_rule_features=require_rule_features
+    )
     meta_scale = train_ds.sequences[0]["scale"] if train_ds.sequences else np.ones(2, np.float32)
 
     return (

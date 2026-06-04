@@ -47,6 +47,47 @@ class TrajectoryLSTM(nn.Module):
         return pred.view(b, self.pred_len, self.num_players, 2)
 
 
+class RuleConditionedLSTM(nn.Module):
+    """LSTM on concatenated per-frame position + rule features."""
+
+    def __init__(
+        self,
+        num_players=10,
+        rule_feature_dim=15,
+        hidden_dim=128,
+        num_layers=2,
+        pred_len=4,
+        dropout=0.1,
+    ):
+        super().__init__()
+        self.num_players = num_players
+        self.rule_feature_dim = rule_feature_dim
+        self.pred_len = pred_len
+        self.input_dim = num_players * (2 + rule_feature_dim)
+        self.output_dim = pred_len * num_players * 2
+        self.lstm = nn.LSTM(
+            input_size=self.input_dim,
+            hidden_size=hidden_dim,
+            num_layers=num_layers,
+            batch_first=True,
+            dropout=dropout if num_layers > 1 else 0.0,
+        )
+        self.head = nn.Linear(hidden_dim, self.output_dim)
+
+    def forward(self, x, rules=None):
+        """
+        x: (B, obs_len, P, 2)
+        rules: (B, obs_len, P, F) required
+        """
+        if rules is None:
+            raise ValueError("RuleConditionedLSTM requires rules tensor")
+        b, t, p, _ = x.shape
+        flat = torch.cat([x, rules], dim=-1).reshape(b, t, p * (2 + self.rule_feature_dim))
+        out, _ = self.lstm(flat)
+        pred = self.head(out[:, -1])
+        return pred.view(b, self.pred_len, self.num_players, 2)
+
+
 def masked_mse(pred, target, mask):
     """
     pred, target: (batch, pred_len, P, 2)
