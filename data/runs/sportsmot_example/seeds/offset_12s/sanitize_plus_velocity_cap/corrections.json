@@ -1,0 +1,28 @@
+{
+  "corrections": [
+    {
+      "frame_number": 34,
+      "player_id": 5,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 34,
+      "player_id": 11,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "crowd_rim_bleed",
+      "predicted": false
+    },
+    {
+      "frame_number": 35,
+      "player_id": 11,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "crowd_rim_bleed",
+      "predicted": false
+    }
+  ]
+}

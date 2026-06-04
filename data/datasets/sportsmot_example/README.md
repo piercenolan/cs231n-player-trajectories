@@ -30,24 +30,46 @@ data/datasets/sportsmot_example/
 ## Frame ↔ GT alignment
 
 - SportsMOT `gt.txt` frame index **1** = `frames/000001.jpg`
-- For a first SAM run, use the **first 45–100 frames** (1:1 index match):
-  - `frame_number: 1` in tracks JSON ↔ `000001.jpg` ↔ GT line with frame `1`
-- Default Modal/local settings: `max_frames=45`, `resize_scale=0.67` (matches prior runs)
-
-If you subsample later (e.g. every 25th frame for 1 FPS from 25 FPS video), re-run
-`scripts/setup_sportsmot_gt.py` with the correct `--extract-fps` and `--start-time-sec`.
+- Multi-seed SAM3 uses 45-frame windows at **resize_scale 0.5** (640×360 in tracks meta)
+- Per-seed evaluation uses `data/runs/sportsmot_example/seeds/{seed_id}/gt_aligned.json`
 
 ## Pipeline outputs
 
-All new runs write under:
+All run artifacts:
 
 ```text
 data/runs/sportsmot_example/
-├── baseline_tracks.json
-├── augmented_tracks.json
-├── ablations/
+├── baseline_tracks.json          # optional run-root (offset_0s canonical)
+├── ablations/                    # detection ablations + ADE
+├── sanitize_grid/
 ├── seeds/
+│   ├── seed_manifest.json        # 12 seeds @ 2s step
+│   ├── offset_0s/ ... offset_18s/
+│   │   ├── baseline_tracks.json
+│   │   ├── gt_aligned.json
+│   │   └── trajectory_tensors.json   # + rule_features when exported
+│   └── multi_seed_summary.json
+├── lstm/
+│   ├── lstm_plain/               # A0 checkpoint
+│   ├── lstm_rule_features/       # A1
+│   ├── lstm_graph/               # A3
+│   ├── lstm_ablation_summary.csv
+│   └── lstm_ablation_multi_seed.json
 └── figures/
+    ├── PRE_LSTM_GAUGE.md
+    ├── lstm_rule_ablation_bar.png
+    └── lstm_per_rule_delta_ade.png
 ```
 
-Legacy outputs remain in `data/outputs/` and `data/archive/`.
+## Quick start (after data upload)
+
+```powershell
+py scripts/run_all_seeds_modal.py --dataset sportsmot_example --step-sec 2 --skip-existing
+py scripts/export_lstm_tensors.py --dataset sportsmot_example --all-seeds --with-rule-features
+py scripts/train_lstm.py --model rule_features --split temporal_all --epochs 80
+py scripts/eval_lstm_ablations.py --dataset sportsmot_example --all-seeds
+```
+
+Full documentation: [README.md](../../../README.md), [docs/MILESTONE_CHECKLIST.md](../../../docs/MILESTONE_CHECKLIST.md).
+
+Legacy outputs: `data/outputs/`, `data/archive/`.

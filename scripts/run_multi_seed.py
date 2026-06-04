@@ -16,6 +16,7 @@ sys.path.insert(0, str(ROOT))
 
 from scripts.run_ablations import run_one_ablation
 from utils.datasets import SEED_OFFSETS, ablations_dir, resolve_seed_gt_path, runs_dir
+from utils.seed_schedule import list_seed_entries
 
 
 def bootstrap_seed_baselines(source_baseline, seeds_root, num_frames=45):
@@ -93,10 +94,15 @@ def main():
         print(f"Bootstrapped {len(seed_list)} pseudo-seeds from {args.bootstrap_from}")
     else:
         seed_list = []
-        for seed_id in SEED_OFFSETS:
+        for seed_id, _ in list_seed_entries(args.dataset):
             p = seeds_root / seed_id / "baseline_tracks.json"
             if p.exists():
                 seed_list.append((seed_id, p))
+        if not seed_list:
+            for seed_id in SEED_OFFSETS:
+                p = seeds_root / seed_id / "baseline_tracks.json"
+                if p.exists():
+                    seed_list.append((seed_id, p))
         if not seed_list:
             raise FileNotFoundError(
                 f"No seed baselines under {seeds_root}. "

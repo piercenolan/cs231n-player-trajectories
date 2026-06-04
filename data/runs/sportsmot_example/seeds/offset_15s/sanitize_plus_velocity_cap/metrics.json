@@ -83,6 +83,8 @@
     "fde": 10.445365176648608,
     "num_matches": 409,
     "num_frames": 45,
+    "min_frame": null,
+    "max_frame": null,
     "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_15s\\sanitize_plus_velocity_cap\\augmented_tracks.json",
     "gt_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_15s\\gt_aligned.json"
   },
@@ -91,6 +93,8 @@
     "fde": 10.445365176648608,
     "num_matches": 413,
     "num_frames": 45,
+    "min_frame": null,
+    "max_frame": null,
     "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_15s\\baseline_tracks.json",
     "gt_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_15s\\gt_aligned.json"
   },

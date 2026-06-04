@@ -97,6 +97,50 @@ def plot_multi_seed(summary_path, output_path):
     print(f"Saved {output_path}")
 
 
+def plot_lstm_ade(eval_path, output_path):
+    """Bar chart: augmented SAM vs LSTM vs linear (forecast horizon if available)."""
+    if not Path(eval_path).is_file():
+        print(f"Skip LSTM plot (missing {eval_path})")
+        return
+
+    with open(eval_path, encoding="utf-8") as f:
+        ev = json.load(f)
+
+    use_forecast = "lstm_forecast_only" in ev
+    if use_forecast:
+        names = ["Aug SAM (forecast)", "LSTM (forecast)", "Linear (forecast)"]
+        ades = [
+            ev["augmented_forecast_only"]["ade"],
+            ev["lstm_forecast_only"]["ade"],
+            ev.get("linear_forecast_only", {}).get("ade", float("nan")),
+        ]
+        title = "ADE on forecast horizon (frames >= obs_len)"
+    else:
+        names = ["Augmented SAM", "LSTM", "Linear"]
+        ades = [
+            ev["augmented_baseline"]["ade"],
+            ev["lstm"]["ade"],
+            ev.get("linear_baseline", {}).get("ade", float("nan")),
+        ]
+        title = "ADE vs GT (full clip)"
+
+    colors = ["#2ca02c", "#9467bd", "#ff7f0e"]
+    fig, ax = plt.subplots(figsize=(7, 4))
+    x = np.arange(len(names))
+    ax.bar(x, ades, color=colors, edgecolor="white")
+    ax.set_xticks(x)
+    ax.set_xticklabels(names, rotation=15, ha="right")
+    ax.set_ylabel("ADE (px)")
+    ax.set_title(title)
+    for i, v in enumerate(ades):
+        if v == v:
+            ax.text(i, v, f"{v:.1f}", ha="center", va="bottom", fontsize=9)
+    fig.tight_layout()
+    fig.savefig(output_path, dpi=150)
+    plt.close(fig)
+    print(f"Wrote {output_path}")
+
+
 def write_gauge_report(fig_dir, validation_path, compare_log_path):
     with open(validation_path, encoding="utf-8") as f:
         val = json.load(f)
@@ -152,6 +196,10 @@ def main():
         fig_dir,
         runs_dir(args.dataset) / "trajectory_validation.json",
         fig_dir / "compare_table.txt",
+    )
+    plot_lstm_ade(
+        runs_dir(args.dataset) / "lstm" / "lstm_eval.json",
+        fig_dir / "lstm_ade_bar.png",
     )
 
 

@@ -24,9 +24,10 @@ flowchart LR
     MET[metrics + ablations]
     EXP[trajectory_tensors.json]
   end
-  subgraph next [Next]
-    SEED[multi-seed SAM3]
-    LSTM[LSTM forecaster]
+  subgraph lstm [Rule-aware LSTM]
+    A0[A0 plain]
+    A1[A1 rule features]
+    A3[A3 graph]
   end
   F --> SAM --> BT
   GT --> ADE
@@ -34,8 +35,9 @@ flowchart LR
   AUG --> ADE
   AUG --> MET
   AUG --> EXP
-  BT --> SEED
-  EXP --> LSTM
+  EXP --> A0
+  EXP --> A1
+  EXP --> A3
 ```
 
 ---
@@ -51,9 +53,12 @@ flowchart LR
 | 5 | **Per-rule ablations** + ADE/FDE | Done | `ablations/ablation_summary.csv` |
 | 6 | **Sanitize grid** (ADE-ranked) | Done | `sanitize_grid/best_sanitize.json` → `w0.4_y0.1_p10` |
 | 7 | **LSTM export** + validation gate | Done | `trajectory_tensors.json`, `trajectory_validation.json` (`passed: true`) |
-| 8 | **Multi-seed SAM3** (0s / 10s / 15s offsets) | **In progress** | `docs/MULTI_SEED_COMMANDS.md` + `align_seed_gt.py` |
-| 9 | **Paper figures** (SportsMOT run) | Pending | Regenerate under `data/runs/.../figures/` |
-| 10 | **LSTM v1** train / eval | Not started | Input: `(T, P, 2)` + visibility mask |
+| 8 | **Multi-seed SAM3** (12 offsets @ 2s) | Done | `seeds/seed_manifest.json`, `multi_seed_summary.json` |
+| 9 | **Paper figures** (SportsMOT run) | Done | `figures/PRE_LSTM_GAUGE.md` + gauge PNGs |
+| 10 | **LSTM v1** train / eval | Done | `lstm/lstm_plain/`, `eval_lstm.py` |
+| 11 | **Rule-aware LSTM** (A0–A3 ablations) | Done | `lstm/lstm_ablation_summary.csv`, `figures/lstm_rule_ablation_bar.png` |
+| 12 | **Rule feature export** (15-dim) | Done | `utils/rule_features.py`; tensors include `rule_features` |
+| 13 | **Step-sec 2 multi-seed (12 windows)** | Done | 12 seeds @ 2s step; tensors + rule features exported |
 
 ---
 
@@ -78,7 +83,8 @@ flowchart LR
 |---------|-----|-----|
 | Unknown `video_1` + proxy GT | Invalid ADE | **Cleared** — SportsMOT `gt.txt` + aligned `gt.json` |
 | Export validation | Failed on old run | **Cleared** — `passed: true`, visibility 0.94 |
-| Multi-seed stability | Bootstrap only | **Open** — run real Modal offsets before LSTM |
+| Multi-seed stability | Bootstrap only | **Cleared** — 12 offsets @ 2s step |
+| LSTM train (local) | **Cleared** | A0–A3 trained; `lstm_ablation_summary.csv` |
 
 ---
 
@@ -90,6 +96,39 @@ flowchart LR
 
 ---
 
+## Rule-aware LSTM (forecast horizon, 12 seeds @ 2s step)
+
+**Training split (latest):** `held_out_seed` — train 11 seeds, validate `offset_0s`.
+
+| Variant | Median forecast ADE (px) | Mean forecast ADE (px) | Notes |
+|---------|-------------------------|------------------------|--------|
+| **A1 rule features** | **7.51** | 18.88 | Beats A0 on **10/12** seeds (`lstm_per_seed_delta.csv`) |
+| A3 graph | — | 18.65 | Slight mean edge vs A0 |
+| A0 plain | — | 20.29 | Positions-only |
+| A1b (+ rule loss) | — | — | `lstm/lstm_rule_features_a1b/` |
+
+**Held-out `offset_0s`:** A0/A1 degrade (not in training); report **median over train seeds** for generalization.
+
+**Feature groups (A1 inference ablation):** `lstm_rule_feature_group_ablation.csv` — full 15-dim best on most train seeds; `game_state_only` competitive on some.
+
+**Autoregressive rule recompute:** `lstm_autoregressive_compare.csv` — mixed vs fixed SAM-derived rules; not uniformly better.
+
+Per-rule post-refine attribution: `lstm/lstm_rule_attribution.csv`, `figures/lstm_per_rule_delta_ade.png`.
+
+Diagnostics: `lstm/seed_diagnosis.json`, `lstm/lstm_ablation_robust.json`.
+
+---
+
 ## Commands (copy-paste)
+
+```bash
+py scripts/export_lstm_tensors.py --dataset sportsmot_example --all-seeds --with-rule-features
+py scripts/train_lstm.py --model plain --split held_out_seed --val-seed offset_0s
+py scripts/train_lstm.py --model rule_features --split held_out_seed --rule-loss-weight 0.001 --out-dir data/runs/sportsmot_example/lstm/lstm_rule_features_a1b
+py scripts/eval_lstm_ablations.py --all-seeds --diagnose-seeds
+py scripts/eval_rule_feature_ablation.py --all-seeds
+py scripts/eval_autoregressive_compare.py
+py scripts/diagnose_lstm_seeds.py
+```
 
 See **README.md** (full pipeline) and **docs/PROJECT_PLAN.md** (multi-seed + LSTM ordering).
