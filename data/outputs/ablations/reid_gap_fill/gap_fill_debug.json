@@ -1,0 +1,81 @@
+{
+  "gap_fill_skipped": 9,
+  "gap_fill_applied": 172,
+  "skip_reasons": {
+    "roster_full": 9
+  },
+  "samples": [
+    {
+      "frame_number": 3,
+      "player_id": -1,
+      "rule_fired": "gap_fill_skipped",
+      "confidence": 0.0,
+      "game_state_active": "roster_full",
+      "predicted": false
+    },
+    {
+      "frame_number": 4,
+      "player_id": -1,
+      "rule_fired": "gap_fill_skipped",
+      "confidence": 0.0,
+      "game_state_active": "roster_full",
+      "predicted": false
+    },
+    {
+      "frame_number": 5,
+      "player_id": -1,
+      "rule_fired": "gap_fill_skipped",
+      "confidence": 0.0,
+      "game_state_active": "roster_full",
+      "predicted": false
+    },
+    {
+      "frame_number": 6,
+      "player_id": -1,
+      "rule_fired": "gap_fill_skipped",
+      "confidence": 0.0,
+      "game_state_active": "roster_full",
+      "predicted": false
+    },
+    {
+      "frame_number": 7,
+      "player_id": -1,
+      "rule_fired": "gap_fill_skipped",
+      "confidence": 0.0,
+      "game_state_active": "roster_full",
+      "predicted": false
+    },
+    {
+      "frame_number": 11,
+      "player_id": -1,
+      "rule_fired": "gap_fill_skipped",
+      "confidence": 0.0,
+      "game_state_active": "roster_full",
+      "predicted": false
+    },
+    {
+      "frame_number": 29,
+      "player_id": -1,
+      "rule_fired": "gap_fill_skipped",
+      "confidence": 0.0,
+      "game_state_active": "roster_full",
+      "predicted": false
+    },
+    {
+      "frame_number": 31,
+      "player_id": -1,
+      "rule_fired": "gap_fill_skipped",
+      "confidence": 0.0,
+      "game_state_active": "roster_full",
+      "predicted": false
+    },
+    {
+      "frame_number": 37,
+      "player_id": -1,
+      "rule_fired": "gap_fill_skipped",
+      "confidence": 0.0,
+      "game_state_active": "roster_full",
+      "predicted": false
+    }
+  ]
+}

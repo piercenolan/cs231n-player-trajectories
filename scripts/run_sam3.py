@@ -168,7 +168,14 @@ def load_sam3_predictor(
 # -----------------------------
 # Frame extraction
 # -----------------------------
-def extract_frames(video_path, output_dir, fps=1, max_frames=150, resize_scale=1.0):
+def extract_frames(
+    video_path,
+    output_dir,
+    fps=1,
+    max_frames=150,
+    resize_scale=1.0,
+    start_time_sec=0.0,
+):
     Path(output_dir).mkdir(parents=True, exist_ok=True)
 
     cap = cv2.VideoCapture(video_path)
@@ -178,6 +185,10 @@ def extract_frames(video_path, output_dir, fps=1, max_frames=150, resize_scale=1
     video_fps = cap.get(cv2.CAP_PROP_FPS)
     if video_fps <= 0:
         video_fps = fps  # fallback safety
+
+    if start_time_sec > 0:
+        cap.set(cv2.CAP_PROP_POS_MSEC, start_time_sec * 1000.0)
+        print(f"[INFO] Skipped to start_time_sec={start_time_sec}")
 
     frame_interval = max(int(video_fps / fps), 1)
 
@@ -539,9 +550,33 @@ def main():
         default=1.0,
         help="Optional downscale factor when saving frames (default: 1.0)",
     )
+    parser.add_argument(
+        "--start-time-sec",
+        type=float,
+        default=0.0,
+        help="Start extraction at this timestamp in the video (multi-seed offsets)",
+    )
+    parser.add_argument(
+        "--seed-id",
+        default=None,
+        help="Seed label for outputs (e.g. offset_10s). Writes under data/outputs/seeds/{seed_id}/",
+    )
+    parser.add_argument(
+        "--frames-dir",
+        default=None,
+        help="Override frames output directory",
+    )
     args = parser.parse_args()
 
-    frames_dir = "data/frames"
+    if args.seed_id:
+        seed_root = Path("data/outputs/seeds") / args.seed_id
+        frames_dir = args.frames_dir or str(seed_root / "frames")
+        output_path = args.output if args.output != "tracks.json" else str(
+            seed_root / "baseline_tracks.json"
+        )
+    else:
+        frames_dir = args.frames_dir or "data/frames"
+        output_path = args.output
 
     # Clear frames directory before extraction so old frames from
     # previous runs do not mix with new ones. SAM3 loads all JPEGs
@@ -559,11 +594,12 @@ def main():
         fps=args.fps,
         max_frames=args.max_frames,
         resize_scale=args.resize_scale,
+        start_time_sec=args.start_time_sec,
     )
 
     run_tracking(
         frames_dir=frames_dir,
-        output_path=args.output,
+        output_path=output_path,
         checkpoint=args.checkpoint,
         resize_scale=args.resize_scale,
     )

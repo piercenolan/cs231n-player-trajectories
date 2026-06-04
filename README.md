@@ -28,10 +28,10 @@ End-to-end pipeline:
    - Generates report + plots (baseline or augmented labels supported).
 
 3. **Augmentation (`utils/augmentation.py`)**
-   - Post-processes tracks with geometry-free basketball rules.
-   - Supports ablations: `physical`, `game`, `full`.
-   - Re-identifies missing players with prediction (`"predicted": true` flag).
-   - Saves augmented tracks + correction log.
+   - Stage 0: `sanitize_detections` (drop merged boxes, cap roster).
+   - Stage 1: per-rule corrections (`--rules velocity_cap` for single-rule ablations).
+   - Stage 2: gated `reid_gap_fill` (only when roster is short; `--no-gap-fill` to disable).
+   - Saves augmented tracks + `corrections.json`.
 
 4. **Visualization (`utils/visualize.py`)**
    - Draws tracks on frames.
@@ -140,9 +140,56 @@ python utils/augmentation.py \
 ```
 
 Ablation modes:
-- `--level physical`
-- `--level game`
-- `--level full`
+- `--level physical` / `--level game` / `--level full`
+- `--rules velocity_cap` — single rule (comma-separated for small combos)
+- `--no-sanitize` / `--no-gap-fill` — stage ablations
+
+Per-rule ablation sweep:
+
+```bash
+python scripts/setup_sportsmot_gt.py --tracks data/outputs/baseline_tracks.json --proxy-smooth
+python scripts/run_ablations.py --baseline data/outputs/baseline_tracks.json
+python scripts/run_sanitize_grid.py --baseline data/outputs/baseline_tracks.json
+python scripts/aggregate_experiments.py --root data/outputs/ablations
+```
+
+Multi-seed validation (bootstrap from one baseline, or run SAM3 with `--seed-id`):
+
+```bash
+python scripts/run_multi_seed.py --bootstrap-from data/outputs/baseline_tracks.json
+```
+
+LSTM export + validation gate:
+
+```bash
+python utils/trajectory_export.py --tracks data/outputs/augmented_tracks.json --validate
+```
+
+Compare baseline vs augmented metrics (observed players only):
+
+```bash
+python utils/metrics.py --tracks data/outputs/baseline_tracks.json \
+  --compare data/outputs/augmented_tracks.json --exclude-predicted
+```
+
+SportsMOT ADE/FDE on `video_1` (place GT at `data/gt/sportsmot/<sequence>/gt/gt.txt`):
+
+```bash
+python utils/trajectory_metrics.py --tracks data/outputs/augmented_tracks.json --sequence video_1
+```
+
+Multi-seed tracking (local):
+
+```bash
+python scripts/run_sam3.py --video_path data/clips/60.0_clip.mp4 \
+  --seed-id offset_10s --start-time-sec 10 --max-frames 45
+```
+
+Export LSTM-ready tensors:
+
+```bash
+python utils/trajectory_export.py --tracks data/outputs/augmented_tracks.json
+```
 
 ### 4) Compute augmented metrics
 

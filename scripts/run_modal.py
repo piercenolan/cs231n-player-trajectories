@@ -70,6 +70,7 @@ def run_pipeline(
     resize_scale: float = 0.67,
     output_path: str = "/data/outputs/baseline_tracks.json",
     max_num_objects: int = 14,
+    start_time_sec: float = 0.0,
 ):
     import gc
     import glob
@@ -106,13 +107,16 @@ def run_pipeline(
         f"max_num_objects={max_num_objects}, offload_video_to_cpu=True"
     )
 
-    print(f"Extracting frames from {video_path} (max={max_frames})...")
+    print(
+        f"Extracting frames from {video_path} (max={max_frames}, start={start_time_sec}s)..."
+    )
     extract_frames(
         video_path,
         "/data/frames",
         fps=1,
         max_frames=max_frames,
         resize_scale=resize_scale,
+        start_time_sec=start_time_sec,
     )
 
     gc.collect()
@@ -148,6 +152,8 @@ def main(
     output_path: str = "/data/outputs/baseline_tracks.json",
     max_num_objects: int = 14,
     skip_upload: bool = False,
+    start_time_sec: float = 0.0,
+    seed_id: str = "",
 ):
     local_video = Path(video_path)
     if not local_video.is_file():
@@ -166,12 +172,17 @@ def main(
     else:
         print(f"Skipping upload; using existing volume file {remote_video}")
 
+    remote_output = output_path
+    if seed_id:
+        remote_output = f"/data/outputs/seeds/{seed_id}/baseline_tracks.json"
+
     run_pipeline.remote(
         video_path=remote_video_abs,
         max_frames=max_frames,
         resize_scale=resize_scale,
-        output_path=output_path,
+        output_path=remote_output,
         max_num_objects=max_num_objects,
+        start_time_sec=start_time_sec,
     )
 
     print(

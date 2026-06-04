@@ -733,25 +733,253 @@ def _clip_xy(x, y, frame_width, frame_height):
     return float(min(max(x, 0.0), frame_width - 1.0)), float(min(max(y, 0.0), frame_height - 1.0))
 
 
-def apply_augmentation(frames, frame_width, frame_height, level="full"):
-    """
-    Apply geometry-free basketball augmentation rules to frame tracks.
+# -----------------------------
+# Rule registry and ablation config
+# -----------------------------
+PHYSICAL_RULES = frozenset({"velocity_cap", "hull_containment", "spacing_push"})
+GAME_RULES = frozenset(
+    {
+        "collective_momentum",
+        "stationary_persistence",
+        "cut_continuation",
+        "mirror_prediction",
+        "cluster_cohesion",
+        "convergence_pull",
+        "divergence_spread",
+        "isolated_player_hold",
+        "dead_ball_freeze",
+    }
+)
+POST_RULES = frozenset({"reid_gap_fill"})
+ALL_RULES = PHYSICAL_RULES | GAME_RULES | POST_RULES
 
-    Levels:
-      - physical: velocity cap, hull containment, spacing push
-      - game: context-aware game rules only
-      - full: physical + game
+RULE_REGISTRY = {
+    name: {"type": "physical" if name in PHYSICAL_RULES else ("post" if name in POST_RULES else "game")}
+    for name in sorted(ALL_RULES)
+}
+
+# Maps detector game_state_active -> correction rule name
+STATE_TO_RULE = {
+    "fast_break": "collective_momentum",
+    "transition": "collective_momentum",
+    "stationary": "stationary_persistence",
+    "cut": "cut_continuation",
+    "mirror": "mirror_prediction",
+    "convergence": "convergence_pull",
+    "divergence": "divergence_spread",
+    "isolation": "isolated_player_hold",
+    "dead_ball": "dead_ball_freeze",
+    "half_court": "cluster_cohesion",
+    "cluster": "cluster_cohesion",
+}
+
+LEVEL_TO_RULES = {
+    "physical": set(PHYSICAL_RULES),
+    "game": set(GAME_RULES),
+    "full": set(PHYSICAL_RULES) | set(GAME_RULES),
+}
+
+
+def resolve_enabled_rules(level="full", rules=None, gap_fill=True):
     """
-    if level not in {"physical", "game", "full"}:
-        raise ValueError("level must be one of: physical, game, full")
+    Resolve which rules are active from --level, --rules, and --no-gap-fill.
+    """
+    if rules:
+        if rules.strip().lower() == "none":
+            return set()
+        enabled = {r.strip() for r in rules.split(",") if r.strip()}
+        unknown = enabled - ALL_RULES
+        if unknown:
+            raise ValueError(f"Unknown rules: {sorted(unknown)}. Valid: {sorted(ALL_RULES)}")
+    else:
+        enabled = set(LEVEL_TO_RULES.get(level, LEVEL_TO_RULES["full"]))
+
+    if gap_fill:
+        enabled.add("reid_gap_fill")
+    else:
+        enabled.discard("reid_gap_fill")
+
+    return enabled
+
+
+def _bbox_area(player):
+    bbox = player.get("bbox", {})
+    w = float(bbox.get("w", 0))
+    h = float(bbox.get("h", 0))
+    if w > 0 and h > 0:
+        return w * h
+    return float(player.get("mask_area", 0))
+
+
+def is_merged_bbox(player, frame_width, frame_height, max_width_frac=0.35, max_aspect=4.0):
+    """True if bbox looks like a merged multi-player SAM blob."""
+    bbox = player.get("bbox", {})
+    w = float(bbox.get("w", 0))
+    h = float(bbox.get("h", 1))
+    if w <= 0 or h <= 0:
+        return False
+    if w > max_width_frac * frame_width:
+        return True
+    if w / max(h, 1e-6) > max_aspect:
+        return True
+    return False
+
+
+def _shift_bbox(bbox, dx, dy):
+    """Shift bbox origin by center delta; keep w/h."""
+    out = dict(bbox)
+    out["x"] = int(round(float(out.get("x", 0)) + dx))
+    out["y"] = int(round(float(out.get("y", 0)) + dy))
+    return out
+
+
+def sanitize_detections(
+    frames,
+    frame_width,
+    frame_height,
+    max_width_frac=0.35,
+    max_aspect=4.0,
+    y_min_court_frac=0.15,
+    max_players=12,
+):
+    """
+    Stage 0: drop merged/crowd detections and cap roster size per frame.
+
+    Returns (sanitized_frames, sanitize_log).
+    """
+    sanitized = []
+    sanitize_log = []
+
+    for frame in sorted(frames, key=lambda fr: int(fr["frame_number"])):
+        fnum = int(frame["frame_number"])
+        kept = []
+        y_min = y_min_court_frac * frame_height
+
+        for p in frame.get("players", []):
+            pid = p["id"]
+            center = p.get("mask_center", {})
+            cy = float(center.get("y", 0))
+            if cy < y_min:
+                sanitize_log.append(
+                    {"frame_number": fnum, "player_id": pid, "reason": "crowd_rim_bleed"}
+                )
+                continue
+            if is_merged_bbox(p, frame_width, frame_height, max_width_frac, max_aspect):
+                sanitize_log.append(
+                    {"frame_number": fnum, "player_id": pid, "reason": "merged_bbox"}
+                )
+                continue
+            kept.append(
+                {
+                    "id": pid,
+                    "bbox": dict(p.get("bbox", {})),
+                    "mask_center": dict(center),
+                    **({"mask_area": p["mask_area"]} if "mask_area" in p else {}),
+                }
+            )
+
+        if len(kept) > max_players:
+            kept.sort(key=_bbox_area, reverse=True)
+            for p in kept[max_players:]:
+                sanitize_log.append(
+                    {"frame_number": fnum, "player_id": p["id"], "reason": "roster_cap"}
+                )
+            kept = kept[:max_players]
+
+        sanitized.append({"frame_number": fnum, "players": kept})
+
+    return sanitized, sanitize_log
+
+
+def _copy_player(p):
+    return {
+        "id": p["id"],
+        "bbox": dict(p.get("bbox", {})),
+        "mask_center": dict(p.get("mask_center", {})),
+        **({"predicted": p["predicted"]} if p.get("predicted") else {}),
+        **({"mask_area": p["mask_area"]} if "mask_area" in p else {}),
+    }
+
+
+def _frame_has_merged_players(players, frame_width, frame_height):
+    return any(is_merged_bbox(p, frame_width, frame_height) for p in players)
+
+
+def _gap_length(history, fnum, pid):
+    """Frames since last observed appearance (1 = missing one frame)."""
+    appearances = [fn for fn, _, _ in history.get(pid, []) if fn < fnum]
+    if not appearances:
+        return None
+    last_fn = max(appearances)
+    return fnum - last_fn
+
+
+def apply_augmentation(
+    frames,
+    frame_width,
+    frame_height,
+    level="full",
+    enabled_rules=None,
+    sanitize=True,
+    gap_fill=True,
+    expected_players=10,
+    max_gap_frames=3,
+    max_players=12,
+    use_corrected_history=False,
+    sanitize_max_width_frac=0.35,
+    sanitize_max_aspect=4.0,
+    sanitize_y_min_court_frac=0.15,
+    gap_fill_debug=False,
+):
+    """
+    Apply geometry-free basketball augmentation in stages:
+      0) sanitize_detections (optional)
+      1) apply enabled rules per frame/player
+      2) gated gap_fill / re-ID (optional)
+    """
+    if enabled_rules is None:
+        enabled_rules = resolve_enabled_rules(level=level, gap_fill=gap_fill)
+    else:
+        enabled_rules = set(enabled_rules)
 
     frames = sorted(frames, key=lambda fr: int(fr["frame_number"]))
+    sanitize_log = []
+    if sanitize:
+        frames, sanitize_log = sanitize_detections(
+            frames,
+            frame_width,
+            frame_height,
+            max_width_frac=sanitize_max_width_frac,
+            max_aspect=sanitize_max_aspect,
+            y_min_court_frac=sanitize_y_min_court_frac,
+            max_players=max_players,
+        )
+
+    run_physical = bool(enabled_rules & PHYSICAL_RULES)
+    run_game = bool(enabled_rules & GAME_RULES)
+    run_gap_fill = "reid_gap_fill" in enabled_rules
+
     augmented = []
     correction_log = []
+    for entry in sanitize_log:
+        correction_log.append(
+            {
+                "frame_number": entry["frame_number"],
+                "player_id": entry["player_id"],
+                "rule_fired": "sanitize",
+                "confidence": 1.0,
+                "game_state_active": entry["reason"],
+                "predicted": False,
+            }
+        )
 
-    history = defaultdict(list)
-    cut_state = {}  # pid -> {"frames_since_cut": int}
+    history_raw = defaultdict(list)
+    history_corrected = defaultdict(list)
+    cut_state = {}
     seen_ids = set()
+
+    def _history_for_detectors():
+        return history_corrected if use_corrected_history else history_raw
 
     for frame in frames:
         fnum = int(frame["frame_number"])
@@ -769,8 +997,8 @@ def apply_augmentation(frames, frame_width, frame_height, level="full"):
         by_id = {p["id"]: p for p in players}
         frame_players = list(by_id.values())
 
-        # Build state detectors from history up to current frame.
-        player_positions = dict(history)
+        # Build state detectors from raw (sanitized) history.
+        player_positions = dict(_history_for_detectors())
         for p in frame_players:
             player_positions.setdefault(p["id"], [])
             player_positions[p["id"]] = list(player_positions[p["id"]]) + [
@@ -806,7 +1034,7 @@ def apply_augmentation(frames, frame_width, frame_height, level="full"):
             y = float(p["mask_center"]["y"])
             original = (x, y)
 
-            prev = _position_at_or_before(history.get(pid, []), fnum - 1)
+            prev = _position_at_or_before(history_raw.get(pid, []), fnum - 1)
             dx, dy = estimate_velocity(player_positions.get(pid, []), fnum)
             if prev is None:
                 prev = (x - dx, y - dy)
@@ -815,31 +1043,38 @@ def apply_augmentation(frames, frame_width, frame_height, level="full"):
             fired_conf = 0.0
             game_state_active = None
 
-            # Physical rules
-            if level in {"physical", "full"}:
-                nx, ny, fired = rule_velocity_cap(x, y, prev[0], prev[1], dx, dy)
-                if fired:
-                    x, y = nx, ny
-                    fired_rule = "velocity_cap"
-                    fired_conf = 1.0
-                    game_state_active = "physical"
+            # Physical rules (each only if enabled)
+            if run_physical:
+                if "velocity_cap" in enabled_rules:
+                    nx, ny, fired = rule_velocity_cap(x, y, prev[0], prev[1], dx, dy)
+                    if fired:
+                        x, y = nx, ny
+                        fired_rule = "velocity_cap"
+                        fired_conf = 1.0
+                        game_state_active = "physical"
 
-                nx, ny, fired = rule_hull_containment(x, y, dx, dy, [q for q in frame_players if q["id"] != pid])
-                if fired:
-                    x, y = nx, ny
-                    fired_rule = "hull_containment"
-                    fired_conf = 0.9
-                    game_state_active = "physical"
+                if "hull_containment" in enabled_rules:
+                    nx, ny, fired = rule_hull_containment(
+                        x, y, dx, dy, [q for q in frame_players if q["id"] != pid]
+                    )
+                    if fired:
+                        x, y = nx, ny
+                        fired_rule = "hull_containment"
+                        fired_conf = 0.9
+                        game_state_active = "physical"
 
-                nx, ny, fired = rule_spacing_push(pid, x, y, [q for q in frame_players if q["id"] != pid])
-                if fired:
-                    x, y = nx, ny
-                    fired_rule = "spacing_push"
-                    fired_conf = 0.85
-                    game_state_active = "physical"
+                if "spacing_push" in enabled_rules:
+                    nx, ny, fired = rule_spacing_push(
+                        pid, x, y, [q for q in frame_players if q["id"] != pid]
+                    )
+                    if fired:
+                        x, y = nx, ny
+                        fired_rule = "spacing_push"
+                        fired_conf = 0.85
+                        game_state_active = "physical"
 
-            # Game rule selection: one per player/frame.
-            if level in {"game", "full"}:
+            # Game rule selection: one per player/frame (filtered to enabled rules).
+            if run_game:
                 candidates = []
                 if is_dead:
                     candidates.append(("dead_ball", dead_conf))
@@ -856,7 +1091,7 @@ def apply_augmentation(frames, frame_width, frame_height, level="full"):
                 if pid in stationary_ids:
                     candidates.append(("stationary", 0.8))
 
-                changed, change_amount = detect_direction_change(history, fnum, pid)
+                changed, change_amount = detect_direction_change(_history_for_detectors(), fnum, pid)
                 if changed:
                     candidates.append(("cut", min(1.0, change_amount / 180.0)))
                     cut_state[pid] = {"frames_since_cut": 0}
@@ -882,10 +1117,20 @@ def apply_augmentation(frames, frame_width, frame_height, level="full"):
                     if mirr:
                         candidates.append(("mirror", mirr_conf))
 
-                if candidates:
-                    game_state_active, best_conf = max(candidates, key=lambda t: t[1])
+                # Keep only candidates whose mapped rule is enabled
+                filtered = []
+                for state, conf in candidates:
+                    rule_name = STATE_TO_RULE.get(state, "cluster_cohesion")
+                    if rule_name in enabled_rules:
+                        filtered.append((state, conf))
+                if "cluster_cohesion" in enabled_rules and not filtered:
+                    filtered.append(("cluster", 0.5))
+
+                if filtered:
+                    game_state_active, best_conf = max(filtered, key=lambda t: t[1])
                     fired_conf = float(best_conf)
-                    if game_state_active in {"fast_break", "transition"}:
+                    rule_name = STATE_TO_RULE.get(game_state_active, "cluster_cohesion")
+                    if game_state_active in {"fast_break", "transition"} and rule_name == "collective_momentum":
                         nx, ny, fired = rule_collective_momentum(
                             x, y, dx, dy, collective_angle, collective_conf
                         )
@@ -946,8 +1191,7 @@ def apply_augmentation(frames, frame_width, frame_height, level="full"):
                         if fired:
                             x, y = nx, ny
                             fired_rule = "dead_ball_freeze"
-                    else:
-                        # Default game-only cohesion if no specific higher rule fired.
+                    elif game_state_active in {"half_court", "cluster"} and "cluster_cohesion" in enabled_rules:
                         lb = clusters.get(pid)
                         if lb in cluster_centroids:
                             nx, ny, fired = rule_cluster_cohesion(
@@ -960,9 +1204,14 @@ def apply_augmentation(frames, frame_width, frame_height, level="full"):
                                 fired_conf = 0.5
 
             x, y = _clip_xy(x, y, frame_width, frame_height)
+            dx_shift = x - original[0]
+            dy_shift = y - original[1]
+            bbox = dict(p["bbox"])
+            if abs(dx_shift) > 1e-6 or abs(dy_shift) > 1e-6:
+                bbox = _shift_bbox(bbox, dx_shift, dy_shift)
             corrected = {
                 "id": pid,
-                "bbox": dict(p["bbox"]),
+                "bbox": bbox,
                 "mask_center": {"x": round(x, 1), "y": round(y, 1)},
             }
             corrected_by_id[pid] = corrected
@@ -981,90 +1230,138 @@ def apply_augmentation(frames, frame_width, frame_height, level="full"):
                     }
                 )
 
-        # Re-identification for missing players seen previously.
+        # Stage 2: gated gap-fill (re-identification)
         present_ids = set(corrected_by_id.keys())
-        recent_threshold = 10
-        missing_ids = sorted(
-            pid for pid in (seen_ids - present_ids)
-            if any(fn >= fnum - recent_threshold
-                for fn, _, _ in history.get(pid, []))
+        observed_count = len(present_ids)
+        allow_gap_fill = (
+            run_gap_fill
+            and observed_count < expected_players
+            and not _frame_has_merged_players(list(corrected_by_id.values()), frame_width, frame_height)
         )
-        for pid in missing_ids:
-            h = history.get(pid, [])
-            if not h:
-                continue
-            last = _position_at_or_before(h, fnum - 1)
-            if last is None:
-                continue
-            dx, dy = estimate_velocity(h, fnum - 1)
 
-            # pick best active game context for missing player
-            contexts = [
-                ("dead_ball", dead_conf if is_dead else 0.0),
-                ("convergence", conv_conf if is_conv else 0.0),
-                ("divergence", div_conf if is_div else 0.0),
-                ("transition", transition_conf if is_transition else 0.0),
-                ("fast_break", fast_break_conf if is_fast_break else 0.0),
-                ("half_court", half_court_conf if is_half_court else 0.0),
-            ]
-            game_state_active, conf = max(contexts, key=lambda t: t[1])
-            x, y = last[0], last[1]
-            fired_rule = "collective_momentum"
-            if level in {"game", "full"}:
-                if game_state_active == "dead_ball":
-                    x, y, _ = rule_dead_ball_freeze(x, y, dx, dy, conf)
-                    fired_rule = "dead_ball_freeze"
-                elif game_state_active == "convergence" and conv_point is not None:
-                    x, y, _ = rule_convergence_pull(x, y, dx, dy, conv_point[0], conv_point[1], conf)
-                    fired_rule = "convergence_pull"
-                elif game_state_active == "divergence":
-                    c = player_centroid(list(corrected_by_id.values())) or (x, y)
-                    x, y, _ = rule_divergence_spread(x, y, dx, dy, c[0], c[1], conf)
-                    fired_rule = "divergence_spread"
-                elif game_state_active in {"fast_break", "transition"}:
-                    x, y, _ = rule_collective_momentum(x, y, dx, dy, collective_angle, collective_conf)
-                    fired_rule = "collective_momentum"
-                else:
-                    x, y = predict_next_position(x, y, dx, dy)
-                    fired_rule = "cluster_cohesion"
-            else:
-                x, y = predict_next_position(x, y, dx, dy)
-                fired_rule = "velocity_cap"
-
-            x, y = _clip_xy(x, y, frame_width, frame_height)
-            last_entry = next(
-                (p for frame in reversed(augmented) 
-                for p in frame.get("players", []) 
-                if p["id"] == pid), None
-            )
-            last_bbox = last_entry["bbox"] if last_entry else {"x": int(round(x)), "y": int(round(y)), "w": 30, "h": 60}
-
-            corrected_by_id[pid] = {
-                "id": pid,
-                "bbox": {"x": int(round(x)), "y": int(round(y)), 
-                        "w": last_bbox["w"], "h": last_bbox["h"]},
-                "mask_center": {"x": round(x, 1), "y": round(y, 1)},
-                "predicted": True,
-            }
+        if run_gap_fill and gap_fill_debug and not allow_gap_fill:
+            reason = "roster_full" if observed_count >= expected_players else "merged_boxes"
             correction_log.append(
                 {
                     "frame_number": fnum,
-                    "player_id": pid,
-                    "rule_fired": fired_rule,
-                    "confidence": float(max(0.0, min(1.0, conf))),
-                    "game_state_active": game_state_active,
-                    "original_pos": {"x": round(last[0], 1), "y": round(last[1], 1)},
-                    "corrected_pos": {"x": round(x, 1), "y": round(y, 1)},
-                    "predicted": True,
+                    "player_id": -1,
+                    "rule_fired": "gap_fill_skipped",
+                    "confidence": 0.0,
+                    "game_state_active": reason,
+                    "predicted": False,
                 }
             )
+
+        if allow_gap_fill:
+            missing_ids = sorted(seen_ids - present_ids)
+            for pid in missing_ids:
+                gap = _gap_length(history_raw, fnum, pid)
+                if gap is None or gap < 1 or gap > max_gap_frames:
+                    if gap_fill_debug and gap is not None:
+                        correction_log.append(
+                            {
+                                "frame_number": fnum,
+                                "player_id": pid,
+                                "rule_fired": "gap_fill_skipped",
+                                "confidence": 0.0,
+                                "game_state_active": f"gap_{gap}_out_of_range",
+                                "predicted": False,
+                            }
+                        )
+                    continue
+                if len(corrected_by_id) >= max_players:
+                    break
+
+                h = history_raw.get(pid, [])
+                last = _position_at_or_before(h, fnum - 1)
+                if last is None:
+                    continue
+                dx, dy = estimate_velocity(h, fnum - 1)
+
+                contexts = [
+                    ("dead_ball", dead_conf if is_dead else 0.0),
+                    ("convergence", conv_conf if is_conv else 0.0),
+                    ("divergence", div_conf if is_div else 0.0),
+                    ("transition", transition_conf if is_transition else 0.0),
+                    ("fast_break", fast_break_conf if is_fast_break else 0.0),
+                    ("half_court", half_court_conf if is_half_court else 0.0),
+                ]
+                game_state_active, conf = max(contexts, key=lambda t: t[1])
+                x, y = last[0], last[1]
+                fired_rule = "reid_gap_fill"
+
+                if run_game:
+                    rule_name = STATE_TO_RULE.get(game_state_active, "cluster_cohesion")
+                    if rule_name == "dead_ball_freeze" and "dead_ball_freeze" in enabled_rules:
+                        x, y, _ = rule_dead_ball_freeze(x, y, dx, dy, conf)
+                        fired_rule = "dead_ball_freeze"
+                    elif rule_name == "convergence_pull" and conv_point is not None and "convergence_pull" in enabled_rules:
+                        x, y, _ = rule_convergence_pull(
+                            x, y, dx, dy, conv_point[0], conv_point[1], conf
+                        )
+                        fired_rule = "convergence_pull"
+                    elif rule_name == "divergence_spread" and "divergence_spread" in enabled_rules:
+                        c = player_centroid(list(corrected_by_id.values())) or (x, y)
+                        x, y, _ = rule_divergence_spread(x, y, dx, dy, c[0], c[1], conf)
+                        fired_rule = "divergence_spread"
+                    elif rule_name == "collective_momentum" and "collective_momentum" in enabled_rules:
+                        x, y, _ = rule_collective_momentum(
+                            x, y, dx, dy, collective_angle, collective_conf
+                        )
+                        fired_rule = "collective_momentum"
+                    else:
+                        x, y = predict_next_position(x, y, dx, dy)
+                else:
+                    x, y = predict_next_position(x, y, dx, dy)
+
+                x, y = _clip_xy(x, y, frame_width, frame_height)
+                last_entry = next(
+                    (
+                        p
+                        for fr in reversed(augmented)
+                        for p in fr.get("players", [])
+                        if p["id"] == pid
+                    ),
+                    None,
+                )
+                if last_entry:
+                    last_bbox = dict(last_entry["bbox"])
+                    dx_s = x - float(last_entry["mask_center"]["x"])
+                    dy_s = y - float(last_entry["mask_center"]["y"])
+                    last_bbox = _shift_bbox(last_bbox, dx_s, dy_s)
+                else:
+                    last_bbox = {"x": int(round(x)), "y": int(round(y)), "w": 30, "h": 60}
+
+                corrected_by_id[pid] = {
+                    "id": pid,
+                    "bbox": last_bbox,
+                    "mask_center": {"x": round(x, 1), "y": round(y, 1)},
+                    "predicted": True,
+                }
+                correction_log.append(
+                    {
+                        "frame_number": fnum,
+                        "player_id": pid,
+                        "rule_fired": fired_rule,
+                        "confidence": float(max(0.0, min(1.0, conf))),
+                        "game_state_active": game_state_active,
+                        "original_pos": {"x": round(last[0], 1), "y": round(last[1], 1)},
+                        "corrected_pos": {"x": round(x, 1), "y": round(y, 1)},
+                        "predicted": True,
+                    }
+                )
 
         out_players = [corrected_by_id[pid] for pid in sorted(corrected_by_id)]
         augmented.append({"frame_number": fnum, "players": out_players})
 
-        # Update history with augmented frame for recursive temporal consistency.
         for p in out_players:
-            history[p["id"]].append((fnum, float(p["mask_center"]["x"]), float(p["mask_center"]["y"])))
+            cx = float(p["mask_center"]["x"])
+            cy = float(p["mask_center"]["y"])
+            history_raw[p["id"]].append((fnum, cx, cy))
+            if not p.get("predicted"):
+                history_corrected[p["id"]].append((fnum, cx, cy))
+            elif use_corrected_history:
+                history_corrected[p["id"]].append((fnum, cx, cy))
             seen_ids.add(p["id"])
 
     return augmented, correction_log
@@ -1094,7 +1391,23 @@ def save_augmented_tracks(frames, correction_log, output_path, meta=None):
     return corrections_path
 
 
-def run_augmentation(input_path, output_path, frame_width, frame_height, level="full"):
+def run_augmentation(
+    input_path,
+    output_path,
+    frame_width,
+    frame_height,
+    level="full",
+    rules=None,
+    sanitize=True,
+    gap_fill=True,
+    expected_players=10,
+    max_gap_frames=3,
+    max_players=12,
+    sanitize_max_width_frac=0.35,
+    sanitize_max_aspect=4.0,
+    sanitize_y_min_court_frac=0.15,
+    gap_fill_debug=False,
+):
     """
     Run full augmentation pipeline: load, augment, save, and print summary.
     """
@@ -1105,14 +1418,57 @@ def run_augmentation(input_path, output_path, frame_width, frame_height, level="
         input_data.get("frames", []),
         key=lambda fr: int(fr.get("frame_number", 0)),
     )
-    meta = input_data.get("meta")
+    meta = dict(input_data.get("meta") or {})
+    enabled = resolve_enabled_rules(level=level, rules=rules, gap_fill=gap_fill)
+    meta["enabled_rules"] = sorted(enabled)
+    meta["sanitize"] = sanitize
+    meta["gap_fill"] = gap_fill
+    meta["sanitize_params"] = {
+        "max_width_frac": sanitize_max_width_frac,
+        "max_aspect": sanitize_max_aspect,
+        "y_min_court_frac": sanitize_y_min_court_frac,
+        "max_players": max_players,
+    }
 
     augmented_frames, correction_log = apply_augmentation(
-        frames, frame_width=frame_width, frame_height=frame_height, level=level
+        frames,
+        frame_width=frame_width,
+        frame_height=frame_height,
+        level=level,
+        enabled_rules=enabled,
+        sanitize=sanitize,
+        gap_fill=gap_fill,
+        expected_players=expected_players,
+        max_gap_frames=max_gap_frames,
+        max_players=max_players,
+        sanitize_max_width_frac=sanitize_max_width_frac,
+        sanitize_max_aspect=sanitize_max_aspect,
+        sanitize_y_min_court_frac=sanitize_y_min_court_frac,
+        gap_fill_debug=gap_fill_debug,
     )
     corrections_path = save_augmented_tracks(
         augmented_frames, correction_log, output_path, meta=meta
     )
+
+    if gap_fill_debug:
+        skips = [c for c in correction_log if c.get("rule_fired") == "gap_fill_skipped"]
+        fills = [c for c in correction_log if c.get("predicted")]
+        reasons = {}
+        for s in skips:
+            r = s.get("game_state_active", "unknown")
+            reasons[r] = reasons.get(r, 0) + 1
+        debug_path = Path(output_path).parent / "gap_fill_debug.json"
+        with open(debug_path, "w", encoding="utf-8") as f:
+            json.dump(
+                {
+                    "gap_fill_skipped": len(skips),
+                    "gap_fill_applied": len(fills),
+                    "skip_reasons": reasons,
+                    "samples": skips[:50],
+                },
+                f,
+                indent=2,
+            )
 
     counts = defaultdict(int)
     predicted_count = 0
@@ -1121,23 +1477,15 @@ def run_augmentation(input_path, output_path, frame_width, frame_height, level="
         if entry.get("predicted"):
             predicted_count += 1
 
-    physical_rules = ["velocity_cap", "hull_containment", "spacing_push"]
-    game_rules = [
-        "collective_momentum",
-        "stationary_persistence",
-        "cut_continuation",
-        "mirror_prediction",
-        "cluster_cohesion",
-        "convergence_pull",
-        "divergence_spread",
-        "isolated_player_hold",
-        "dead_ball_freeze",
-    ]
+    physical_rules = sorted(PHYSICAL_RULES)
+    game_rules = sorted(GAME_RULES)
     players_processed = sum(len(fr.get("players", [])) for fr in augmented_frames)
 
     print("AUGMENTATION SUMMARY")
     print("=====================")
-    print(f"Level: {level} | Frames: {len(augmented_frames)} | Players processed: {players_processed}")
+    print(f"Level: {level} | Rules: {sorted(enabled)}")
+    print(f"Sanitize: {sanitize} | Gap-fill: {gap_fill}")
+    print(f"Frames: {len(augmented_frames)} | Players processed: {players_processed}")
     print()
     print("Physical Rules Fired:")
     for name in physical_rules:
@@ -1147,8 +1495,9 @@ def run_augmentation(input_path, output_path, frame_width, frame_height, level="
     for name in game_rules:
         print(f"  {name:<24} {counts[name]}")
     print()
-    print("Re-identification:")
-    print(f"  Players re-added via prediction: {predicted_count}")
+    print("Post-processing:")
+    print(f"  sanitize drops logged: {counts.get('sanitize', 0)}")
+    print(f"  reid_gap_fill / predicted: {predicted_count}")
     print()
     print(f"Total corrections: {len(correction_log)}")
     print(f"Saved augmented tracks to: {Path(output_path)}")
@@ -1171,8 +1520,26 @@ def main():
         "--level",
         choices=["physical", "game", "full"],
         default="full",
-        help="Ablation level: physical, game, or full",
+        help="Ablation level: physical, game, or full (ignored if --rules set)",
     )
+    parser.add_argument(
+        "--rules",
+        default=None,
+        help="Comma-separated rule names for single-rule ablation (e.g. velocity_cap)",
+    )
+    parser.add_argument(
+        "--no-sanitize",
+        action="store_true",
+        help="Skip sanitize_detections pre-filter",
+    )
+    parser.add_argument(
+        "--no-gap-fill",
+        action="store_true",
+        help="Disable gated re-identification (reid_gap_fill)",
+    )
+    parser.add_argument("--expected-players", type=int, default=10)
+    parser.add_argument("--max-gap-frames", type=int, default=3)
+    parser.add_argument("--max-players", type=int, default=12)
     args = parser.parse_args()
 
     frame_width = args.frame_width
@@ -1194,6 +1561,12 @@ def main():
         frame_width=int(frame_width),
         frame_height=int(frame_height),
         level=args.level,
+        rules=args.rules,
+        sanitize=not args.no_sanitize,
+        gap_fill=not args.no_gap_fill,
+        expected_players=args.expected_players,
+        max_gap_frames=args.max_gap_frames,
+        max_players=args.max_players,
     )
 
 
