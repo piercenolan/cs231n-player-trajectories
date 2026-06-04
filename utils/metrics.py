@@ -40,17 +40,84 @@ def _sorted_frames(frames):
     return sorted(frames, key=lambda f: int(f["frame_number"]))
 
 
-def _players_per_frame(frames):
+def _is_predicted(player):
+    return bool(player.get("predicted", False))
+
+
+def _players_per_frame(frames, include_predicted=True):
     """Return parallel lists of frame numbers and player counts."""
     sorted_frames = _sorted_frames(frames)
     if not sorted_frames:
         return [], []
     numbers = [f["frame_number"] for f in sorted_frames]
-    counts = [len(f.get("players", [])) for f in sorted_frames]
+    counts = []
+    for f in sorted_frames:
+        players = f.get("players", [])
+        if include_predicted:
+            counts.append(len(players))
+        else:
+            counts.append(sum(1 for p in players if not _is_predicted(p)))
     return numbers, counts
 
 
-def count_id_switches(frames, gap_threshold=5):
+def observed_players_per_frame(frames):
+    """Count non-predicted players per frame."""
+    return _players_per_frame(frames, include_predicted=False)
+
+
+def predicted_players_per_frame(frames):
+    """Count predicted (gap-filled) players per frame."""
+    sorted_frames = _sorted_frames(frames)
+    if not sorted_frames:
+        return [], []
+    numbers = [f["frame_number"] for f in sorted_frames]
+    counts = [
+        sum(1 for p in f.get("players", []) if _is_predicted(p)) for f in sorted_frames
+    ]
+    return numbers, counts
+
+
+def compute_trajectory_smoothness(frames, include_predicted=False):
+    """
+    Mean per-frame center displacement and max jump (proxy for jerk).
+
+    Lower is smoother. Uses mask_center when present.
+    """
+    sorted_frames = _sorted_frames(frames)
+    if len(sorted_frames) < 2:
+        return {"mean_displacement": 0.0, "max_jump": 0.0, "total_jumps": 0}
+
+    id_to_series = defaultdict(list)
+    for frame in sorted_frames:
+        fnum = int(frame["frame_number"])
+        for player in frame.get("players", []):
+            if not include_predicted and _is_predicted(player):
+                continue
+            center = player.get("mask_center", {})
+            if "x" not in center or "y" not in center:
+                continue
+            id_to_series[player["id"]].append(
+                (fnum, float(center["x"]), float(center["y"]))
+            )
+
+    jumps = []
+    for _pid, series in id_to_series.items():
+        series = sorted(series, key=lambda t: t[0])
+        for (_, x0, y0), (_, x1, y1) in zip(series, series[1:]):
+            jumps.append(float(np.hypot(x1 - x0, y1 - y0)))
+
+    if not jumps:
+        return {"mean_displacement": 0.0, "max_jump": 0.0, "total_jumps": 0}
+
+    arr = np.array(jumps, dtype=float)
+    return {
+        "mean_displacement": float(np.mean(arr)),
+        "max_jump": float(np.max(arr)),
+        "total_jumps": int(len(arr)),
+    }
+
+
+def count_id_switches(frames, gap_threshold=5, include_predicted=True):
     """
     Count identity re-acquisitions after extended dropout.
 
@@ -70,6 +137,8 @@ def count_id_switches(frames, gap_threshold=5):
     for frame in _sorted_frames(frames):
         frame_num = frame["frame_number"]
         for player in frame.get("players", []):
+            if not include_predicted and _is_predicted(player):
+                continue
             id_to_frames[player["id"]].append(frame_num)
 
     reappearances = defaultdict(list)
@@ -142,7 +211,7 @@ def count_sudden_drops(frames, drop_size=3):
     return drop_frames, len(drop_frames)
 
 
-def compute_track_continuity(frames):
+def compute_track_continuity(frames, include_predicted=True):
     """
     Measure how long each player ID stays continuously visible.
 
@@ -158,6 +227,8 @@ def compute_track_continuity(frames):
     for frame in _sorted_frames(frames):
         frame_num = frame["frame_number"]
         for player in frame.get("players", []):
+            if not include_predicted and _is_predicted(player):
+                continue
             id_to_frames[player["id"]].append(frame_num)
 
     if not id_to_frames:
@@ -183,7 +254,7 @@ def compute_track_continuity(frames):
     return longest_streaks, mean_streak, min_streak
 
 
-def compute_id_consistency(frames):
+def compute_id_consistency(frames, include_predicted=True):
     """
     Summarize how stable the number of active tracks is over time.
 
@@ -194,7 +265,7 @@ def compute_id_consistency(frames):
     Returns:
         (mean_count, std_count, min_count, max_count).
     """
-    _, counts = _players_per_frame(frames)
+    _, counts = _players_per_frame(frames, include_predicted=include_predicted)
     if not counts:
         return 0.0, 0.0, 0, 0
 
@@ -207,7 +278,106 @@ def compute_id_consistency(frames):
     )
 
 
-def summary_report(tracks_path, expected_players=10, frames=None, label="SAM3.1 BASELINE"):
+def collect_metrics_dict(frames, expected_players=10, include_predicted=False):
+    """Return a flat metrics dict suitable for JSON export."""
+    mean_players, std_players, min_players, max_players = compute_id_consistency(
+        frames, include_predicted=include_predicted
+    )
+    total_id_switches, _ = count_id_switches(frames, include_predicted=include_predicted)
+    _, mean_streak, min_streak = compute_track_continuity(
+        frames, include_predicted=include_predicted
+    )
+    _, obs_counts = observed_players_per_frame(frames)
+    _, pred_counts = predicted_players_per_frame(frames)
+    smooth = compute_trajectory_smoothness(frames, include_predicted=include_predicted)
+    loss_count = count_tracking_loss(frames)[1]
+    sudden_drop_count = count_sudden_drops(frames)[1]
+
+    total_frames = len(_sorted_frames(frames))
+    full_cov = sum(1 for c in obs_counts if c >= expected_players) if obs_counts else 0
+
+    return {
+        "total_frames": total_frames,
+        "include_predicted_in_counts": include_predicted,
+        "mean_players_per_frame": mean_players,
+        "std_players_per_frame": std_players,
+        "min_players_per_frame": min_players,
+        "max_players_per_frame": max_players,
+        "mean_observed_per_frame": float(np.mean(obs_counts)) if obs_counts else 0.0,
+        "mean_predicted_per_frame": float(np.mean(pred_counts)) if pred_counts else 0.0,
+        "frames_with_full_coverage": full_cov,
+        "total_id_switches": total_id_switches,
+        "mean_track_streak": mean_streak,
+        "min_track_streak": min_streak,
+        "mean_displacement": smooth["mean_displacement"],
+        "max_jump": smooth["max_jump"],
+        "rolling_loss_frames": loss_count,
+        "sudden_drop_frames": sudden_drop_count,
+    }
+
+
+def compare_reports(
+    baseline_path,
+    augmented_path,
+    expected_players=10,
+    include_predicted_in_aug=False,
+):
+    """
+    Print baseline vs augmented deltas for research ablations.
+    """
+    baseline_frames = load_tracks(baseline_path)
+    augmented_frames = load_tracks(augmented_path)
+
+    base = collect_metrics_dict(
+        baseline_frames, expected_players=expected_players, include_predicted=True
+    )
+    aug = collect_metrics_dict(
+        augmented_frames,
+        expected_players=expected_players,
+        include_predicted=include_predicted_in_aug,
+    )
+
+    print()
+    print("=" * 50)
+    print("BASELINE vs AUGMENTED COMPARISON")
+    print("=" * 50)
+    print(f"Baseline:  {baseline_path}")
+    print(f"Augmented: {augmented_path}")
+    print(f"(Augmented counts exclude predicted: {not include_predicted_in_aug})")
+    print()
+
+    keys = [
+        ("mean_observed_per_frame", "Mean observed players/frame", False),
+        ("mean_predicted_per_frame", "Mean predicted players/frame", False),
+        ("total_id_switches", "ID switches", True),
+        ("mean_track_streak", "Mean track streak", False),
+        ("mean_displacement", "Mean displacement (smoothness)", True),
+        ("max_jump", "Max jump", True),
+        ("rolling_loss_frames", "Rolling loss frames", True),
+    ]
+
+    for key, label, lower_is_better in keys:
+        b = base.get(key, 0)
+        a = aug.get(key, 0)
+        delta = a - b
+        direction = "better" if (delta < 0) == lower_is_better else "worse"
+        if delta == 0:
+            direction = "same"
+        print(f"  {label:<32} base={b:8.2f}  aug={a:8.2f}  delta={delta:+8.2f}  ({direction})")
+
+    print("=" * 50)
+    print()
+
+    return {"baseline": base, "augmented": aug, "delta": {k: aug[k] - base[k] for k in base}}
+
+
+def summary_report(
+    tracks_path,
+    expected_players=10,
+    frames=None,
+    label="SAM3.1 BASELINE",
+    include_predicted=True,
+):
     """
     Run all baseline metrics and print a formatted research report.
 
@@ -223,13 +393,18 @@ def summary_report(tracks_path, expected_players=10, frames=None, label="SAM3.1 
         frames = load_tracks(tracks_path)
 
     mean_players, std_players, min_players, max_players = compute_id_consistency(
-        frames
+        frames, include_predicted=include_predicted
     )
-    total_id_switches, _ = count_id_switches(frames)
-    _, mean_streak, min_streak = compute_track_continuity(frames)
+    total_id_switches, _ = count_id_switches(frames, include_predicted=include_predicted)
+    _, mean_streak, min_streak = compute_track_continuity(
+        frames, include_predicted=include_predicted
+    )
+    smooth = compute_trajectory_smoothness(frames, include_predicted=include_predicted)
+    _, obs_counts = observed_players_per_frame(frames)
+    _, pred_counts = predicted_players_per_frame(frames)
 
     total_frames = len(frames)
-    _, counts = _players_per_frame(frames)
+    _, counts = _players_per_frame(frames, include_predicted=include_predicted)
     frames_with_full_coverage = sum(1 for c in counts if c >= expected_players)
     frames_with_loss = sum(1 for c in counts if c < expected_players)
 
@@ -243,6 +418,7 @@ def summary_report(tracks_path, expected_players=10, frames=None, label="SAM3.1 
     print(f"{label} METRICS REPORT")
     print("=" * 42)
     print(f"Total frames analyzed: {total_frames}")
+    print(f"Include predicted in counts: {include_predicted}")
     print()
     print("--- Tracking Coverage ---")
     print(
@@ -259,6 +435,13 @@ def summary_report(tracks_path, expected_players=10, frames=None, label="SAM3.1 
         f"Frames with tracking loss (<{expected_players} players): "
         f"{frames_with_loss} ({loss_pct:.1f}%)"
     )
+    if pred_counts:
+        print(f"Mean observed per frame: {np.mean(obs_counts):.1f}")
+        print(f"Mean predicted per frame: {np.mean(pred_counts):.1f}")
+    print()
+    print("--- Trajectory Smoothness ---")
+    print(f"Mean displacement: {smooth['mean_displacement']:.2f} px")
+    print(f"Max jump: {smooth['max_jump']:.2f} px")
     print()
     print("--- ID Stability ---")
     print(f"Total ID switches detected: {total_id_switches}")
@@ -281,20 +464,10 @@ def summary_report(tracks_path, expected_players=10, frames=None, label="SAM3.1 
     print(f"Sudden drop events (3+ players): {sudden_drop_count} frames")
     print("(These exclude camera pans and fast breaks)")
 
-    metrics = {
-        "total_frames": total_frames,
-        "mean_players_per_frame": mean_players,
-        "std_players_per_frame": std_players,
-        "min_players_per_frame": min_players,
-        "max_players_per_frame": max_players,
-        "frames_with_full_coverage": frames_with_full_coverage,
-        "frames_with_loss": frames_with_loss,
-        "total_id_switches": total_id_switches,
-        "mean_track_streak": mean_streak,
-        "min_track_streak": min_streak,
-        "rolling_loss_frames": loss_count,
-        "sudden_drop_frames": sudden_drop_count,
-    }
+    metrics = collect_metrics_dict(
+        frames, expected_players=expected_players, include_predicted=include_predicted
+    )
+    metrics["frames_with_loss"] = frames_with_loss
     return metrics
 
 
@@ -303,6 +476,7 @@ def plot_metrics(
     output_path="data/outputs/baseline_metrics.png",
     expected_players=10,
     label="SAM3.1 BASELINE",
+    include_predicted=True,
 ):
     """
     Save a two-panel baseline figure for the research paper.
@@ -313,8 +487,10 @@ def plot_metrics(
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    frame_numbers, counts = _players_per_frame(frames)
-    longest_streaks, _, _ = compute_track_continuity(frames)
+    frame_numbers, counts = _players_per_frame(frames, include_predicted=include_predicted)
+    longest_streaks, _, _ = compute_track_continuity(
+        frames, include_predicted=include_predicted
+    )
 
     fig, axes = plt.subplots(1, 2, figsize=(12, 4.5))
 
@@ -409,21 +585,56 @@ def main():
         default="SAM3.1 BASELINE",
         help="Label for the metrics report and plot",
     )
+    parser.add_argument(
+        "--compare",
+        default=None,
+        help="Path to augmented tracks; print baseline vs augmented comparison",
+    )
+    parser.add_argument(
+        "--exclude-predicted",
+        action="store_true",
+        help="Exclude predicted (gap-filled) players from augmented metrics",
+    )
+    parser.add_argument(
+        "--save-json",
+        default=None,
+        help="Save metrics dict to JSON path",
+    )
     args = parser.parse_args()
 
+    include_predicted = not args.exclude_predicted
+
+    if args.compare:
+        compare_reports(
+            args.tracks,
+            args.compare,
+            expected_players=args.expected_players,
+            include_predicted_in_aug=include_predicted,
+        )
+        return
+
     frames = load_tracks(args.tracks)
-    summary_report(
+    metrics = summary_report(
         args.tracks,
         expected_players=args.expected_players,
         frames=frames,
         label=args.label,
+        include_predicted=include_predicted,
     )
     plot_metrics(
         frames,
         output_path=args.output_figure,
         expected_players=args.expected_players,
         label=args.label,
+        include_predicted=include_predicted,
     )
+
+    if args.save_json:
+        out = Path(args.save_json)
+        out.parent.mkdir(parents=True, exist_ok=True)
+        with open(out, "w", encoding="utf-8") as f:
+            json.dump(metrics, f, indent=2)
+        print(f"Saved metrics JSON to {out}")
 
 
 if __name__ == "__main__":

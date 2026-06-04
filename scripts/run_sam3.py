@@ -165,10 +165,39 @@ def load_sam3_predictor(
     return predictor
 
 
+def release_sam3_predictor(predictor):
+    """Drop SAM3 weights and session state so a reused Modal container can run again."""
+    import gc
+
+    if predictor is None:
+        return
+    try:
+        if hasattr(predictor, "_all_inference_states"):
+            predictor._all_inference_states.clear()
+        if hasattr(predictor, "model") and predictor.model is not None:
+            predictor.model.cpu()
+            del predictor.model
+        del predictor
+    except Exception as exc:
+        print(f"[WARN] Predictor cleanup: {exc}")
+    gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+        torch.cuda.synchronize()
+    free_cuda_memory("After model release")
+
+
 # -----------------------------
 # Frame extraction
 # -----------------------------
-def extract_frames(video_path, output_dir, fps=1, max_frames=150, resize_scale=1.0):
+def extract_frames(
+    video_path,
+    output_dir,
+    fps=1,
+    max_frames=150,
+    resize_scale=1.0,
+    start_time_sec=0.0,
+):
     Path(output_dir).mkdir(parents=True, exist_ok=True)
 
     cap = cv2.VideoCapture(video_path)
@@ -178,6 +207,10 @@ def extract_frames(video_path, output_dir, fps=1, max_frames=150, resize_scale=1
     video_fps = cap.get(cv2.CAP_PROP_FPS)
     if video_fps <= 0:
         video_fps = fps  # fallback safety
+
+    if start_time_sec > 0:
+        cap.set(cv2.CAP_PROP_POS_MSEC, start_time_sec * 1000.0)
+        print(f"[INFO] Skipped to start_time_sec={start_time_sec}")
 
     frame_interval = max(int(video_fps / fps), 1)
 
@@ -216,6 +249,73 @@ def extract_frames(video_path, output_dir, fps=1, max_frames=150, resize_scale=1
         i += 1
 
     cap.release()
+    return frame_paths
+
+
+def prepare_frames_from_dir(
+    source_dir,
+    output_dir,
+    max_frames=45,
+    resize_scale=1.0,
+    start_time_sec=0.0,
+    source_fps=25.0,
+    extract_fps=25.0,
+):
+    """
+    Copy subsampled JPEGs from an existing frame folder (e.g. SportsMOT img1).
+
+    Output files are 00000.jpg, 00001.jpg, ... for SAM3. Use extract_fps=25 when
+    taking consecutive SportsMOT frames so GT frame N aligns with track frame N.
+    """
+    source_dir = Path(source_dir)
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    for old_frame in output_dir.glob("*.jpg"):
+        old_frame.unlink()
+
+    all_frames = sorted(source_dir.glob("*.jpg"), key=lambda p: int(p.stem))
+    if not all_frames:
+        raise FileNotFoundError(f"No JPEG frames in {source_dir}")
+
+    start_mot_frame = int(round(start_time_sec * source_fps)) + 1
+    interval = max(int(round(source_fps / extract_fps)), 1)
+
+    saved = 0
+    frame_paths = []
+    for frame_path in all_frames:
+        mot_frame = int(frame_path.stem)
+        if mot_frame < start_mot_frame:
+            continue
+        rel = mot_frame - start_mot_frame
+        if rel % interval != 0:
+            continue
+
+        frame = cv2.imread(str(frame_path))
+        if frame is None:
+            continue
+
+        if resize_scale != 1.0:
+            frame = cv2.resize(
+                frame,
+                (0, 0),
+                fx=resize_scale,
+                fy=resize_scale,
+                interpolation=cv2.INTER_AREA,
+            )
+
+        path = output_dir / f"{saved:05d}.jpg"
+        cv2.imwrite(str(path), frame)
+        frame_paths.append(str(path))
+        saved += 1
+        if saved >= max_frames:
+            print(f"[INFO] Reached max_frames={max_frames}, stopping frame prep.")
+            break
+
+    print(
+        f"[INFO] Prepared {saved} frames from {source_dir} "
+        f"(start_mot={start_mot_frame}, interval={interval}, scale={resize_scale})"
+    )
     return frame_paths
 
 
@@ -441,17 +541,18 @@ def run_tracking(
 
     free_cuda_memory("Before tracking")
 
-    predictor = load_sam3_predictor(
-        checkpoint,
-        use_fp16_weights=use_fp16_weights,
-        use_fa3=use_fa3,
-        max_num_objects=max_num_objects,
-        async_loading_frames=async_loading_frames,
-    )
-
     session_id = None
+    predictor = None
 
     try:
+        predictor = load_sam3_predictor(
+            checkpoint,
+            use_fp16_weights=use_fp16_weights,
+            use_fa3=use_fa3,
+            max_num_objects=max_num_objects,
+            async_loading_frames=async_loading_frames,
+        )
+
         session_id = start_video_session(
             predictor,
             frames_dir,
@@ -503,7 +604,7 @@ def run_tracking(
         print("Saved:", output_path)
 
     finally:
-        if session_id:
+        if session_id and predictor is not None:
             try:
                 predictor.handle_request({
                     "type": "close_session",
@@ -511,6 +612,7 @@ def run_tracking(
                 })
             except Exception:
                 pass
+        release_sam3_predictor(predictor)
 
 
 # -----------------------------
@@ -518,14 +620,39 @@ def run_tracking(
 # -----------------------------
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--video_path", required=True)
+    parser.add_argument(
+        "--dataset",
+        default="sportsmot_example",
+        help="Dataset key from utils.datasets (default: sportsmot_example)",
+    )
+    parser.add_argument(
+        "--video_path",
+        default=None,
+        help="Input video (required unless --skip-extract)",
+    )
+    parser.add_argument(
+        "--skip-extract",
+        action="store_true",
+        help="Use existing dataset frames instead of extracting from video",
+    )
+    parser.add_argument(
+        "--frames-source",
+        default=None,
+        help="Override source frame directory when --skip-extract",
+    )
+    parser.add_argument(
+        "--source-fps",
+        type=float,
+        default=None,
+        help="Native video FPS for frame prep (default: dataset source_fps)",
+    )
     parser.add_argument("--output", default="tracks.json")
     parser.add_argument("--checkpoint", default=None)
     parser.add_argument(
         "--fps",
         type=float,
-        default=1,
-        help="Frames per second to extract from video (default: 1)",
+        default=None,
+        help="Extract/sample FPS (default: 25 for SportsMOT frames, 1 for video)",
     )
     parser.add_argument(
         "--max-frames",
@@ -539,31 +666,93 @@ def main():
         default=1.0,
         help="Optional downscale factor when saving frames (default: 1.0)",
     )
+    parser.add_argument(
+        "--start-time-sec",
+        type=float,
+        default=0.0,
+        help="Start extraction at this timestamp in the video (multi-seed offsets)",
+    )
+    parser.add_argument(
+        "--seed-id",
+        default=None,
+        help="Seed label for outputs (e.g. offset_10s). Writes under data/runs/{dataset}/seeds/{seed_id}/",
+    )
+    parser.add_argument(
+        "--frames-dir",
+        default=None,
+        help="Override prepared frames output directory",
+    )
     args = parser.parse_args()
 
-    frames_dir = "data/frames"
+    from utils.datasets import baseline_tracks_path, get_dataset, runs_dir
 
-    # Clear frames directory before extraction so old frames from
-    # previous runs do not mix with new ones. SAM3 loads all JPEGs
-    # in the directory — stale frames from a prior run with different
-    # max_frames would be included silently.
-    frames_path = Path(frames_dir)
-    if frames_path.exists():
-        for old_frame in frames_path.glob("*.jpg"):
-            old_frame.unlink()
-        print(f"[INFO] Cleared {frames_dir} before extraction.")
+    ds = get_dataset(args.dataset)
+    source_fps = args.source_fps if args.source_fps is not None else float(ds["source_fps"])
+    if args.fps is not None:
+        extract_fps = args.fps
+    elif args.skip_extract:
+        extract_fps = float(ds["extract_fps"])
+    else:
+        extract_fps = 1.0
 
-    extract_frames(
-        args.video_path,
-        frames_dir,
-        fps=args.fps,
-        max_frames=args.max_frames,
-        resize_scale=args.resize_scale,
-    )
+    if args.seed_id:
+        seed_root = runs_dir(args.dataset, args.seed_id)
+        frames_dir = args.frames_dir or str(seed_root / "frames")
+        output_path = args.output if args.output != "tracks.json" else str(
+            baseline_tracks_path(args.dataset, args.seed_id)
+        )
+    else:
+        run_root = runs_dir(args.dataset)
+        frames_dir = args.frames_dir or str(run_root / "frames")
+        output_path = args.output if args.output != "tracks.json" else str(
+            baseline_tracks_path(args.dataset)
+        )
+
+    if args.skip_extract:
+        source = Path(args.frames_source or ds["frames_dir"])
+        if not source.is_dir() or not any(source.glob("*.jpg")):
+            raise FileNotFoundError(
+                f"No frames in {source}. Upload SportsMOT img1/*.jpg to "
+                f"{ds['frames_dir']} (see data/datasets/sportsmot_example/README.md)."
+            )
+        prepare_frames_from_dir(
+            source,
+            frames_dir,
+            max_frames=args.max_frames,
+            resize_scale=args.resize_scale,
+            start_time_sec=args.start_time_sec,
+            source_fps=source_fps,
+            extract_fps=extract_fps,
+        )
+    else:
+        if not args.video_path:
+            video = ds.get("video")
+            if video and Path(video).is_file():
+                args.video_path = str(video)
+            else:
+                raise SystemExit(
+                    "Provide --video_path or use --skip-extract with SportsMOT frames in "
+                    f"{ds['frames_dir']}"
+                )
+
+        frames_path = Path(frames_dir)
+        if frames_path.exists():
+            for old_frame in frames_path.glob("*.jpg"):
+                old_frame.unlink()
+            print(f"[INFO] Cleared {frames_dir} before extraction.")
+
+        extract_frames(
+            args.video_path,
+            frames_dir,
+            fps=extract_fps,
+            max_frames=args.max_frames,
+            resize_scale=args.resize_scale,
+            start_time_sec=args.start_time_sec,
+        )
 
     run_tracking(
         frames_dir=frames_dir,
-        output_path=args.output,
+        output_path=output_path,
         checkpoint=args.checkpoint,
         resize_scale=args.resize_scale,
     )

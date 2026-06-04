@@ -1,0 +1,16 @@
+{
+  "recommended_ablation": "sanitize_plus_velocity_cap",
+  "num_seeds": 3,
+  "ade_mean": 27.366237768010492,
+  "ade_values": [
+    19.861232732887988,
+    32.5980828884148,
+    29.639397682728692
+  ],
+  "seeds": [
+    "offset_0s",
+    "offset_10s",
+    "offset_20s"
+  ],
+  "ade_std": 5.442565569624745
+}

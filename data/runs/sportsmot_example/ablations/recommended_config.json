@@ -1,0 +1,7 @@
+{
+  "recommended_ablation_ade_proxy": "dead_ball_freeze",
+  "recommended_ablation_lstm_v1": "sanitize_plus_velocity_cap",
+  "selection_metric_ade": "lowest_ade",
+  "selection_metric_lstm": "best_smoothness_without_gap_fill",
+  "lstm_v1_gap_fill": false
+}

@@ -1,0 +1,5476 @@
+{
+  "corrections": [
+    {
+      "frame_number": 4,
+      "player_id": 5,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 10,
+      "player_id": 1,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 10,
+      "player_id": 0,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 12,
+      "player_id": 5,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 14,
+      "player_id": 9,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 14,
+      "player_id": 4,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 15,
+      "player_id": 0,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 15,
+      "player_id": 4,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 15,
+      "player_id": 3,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 15,
+      "player_id": 7,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 19,
+      "player_id": 0,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 19,
+      "player_id": 1,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 20,
+      "player_id": 3,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 20,
+      "player_id": 4,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 21,
+      "player_id": 3,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 34,
+      "player_id": 1,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 34,
+      "player_id": 0,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 35,
+      "player_id": 0,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 35,
+      "player_id": 1,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 36,
+      "player_id": 1,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 40,
+      "player_id": 9,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 40,
+      "player_id": 8,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 40,
+      "player_id": 2,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 41,
+      "player_id": 7,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 41,
+      "player_id": 5,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 44,
+      "player_id": 0,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 1,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 251.1,
+        "y": 124.4
+      },
+      "corrected_pos": {
+        "x": 245.6,
+        "y": 121.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 1,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 62.3,
+        "y": 114.8
+      },
+      "corrected_pos": {
+        "x": 73.0,
+        "y": 107.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 1,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 203.2,
+        "y": 118.4
+      },
+      "corrected_pos": {
+        "x": 207.3,
+        "y": 116.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 1,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 216.8,
+        "y": 83.1
+      },
+      "corrected_pos": {
+        "x": 218.2,
+        "y": 88.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 1,
+      "player_id": 4,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 138.7,
+        "y": 62.9
+      },
+      "corrected_pos": {
+        "x": 134.2,
+        "y": 65.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 1,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 146.9,
+        "y": 51.5
+      },
+      "corrected_pos": {
+        "x": 140.7,
+        "y": 56.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 2,
+      "player_id": 9,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 52.4,
+        "y": 127.7
+      },
+      "corrected_pos": {
+        "x": 62.1,
+        "y": 127.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 2,
+      "player_id": 10,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 141.8,
+        "y": 143.4
+      },
+      "corrected_pos": {
+        "x": 133.6,
+        "y": 140.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 2,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 290.3,
+        "y": 124.6
+      },
+      "corrected_pos": {
+        "x": 313.2,
+        "y": 120.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 2,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 108.5,
+        "y": 113.2
+      },
+      "corrected_pos": {
+        "x": 135.4,
+        "y": 121.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 2,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 237.4,
+        "y": 119.4
+      },
+      "corrected_pos": {
+        "x": 259.2,
+        "y": 116.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 2,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 236.9,
+        "y": 90.8
+      },
+      "corrected_pos": {
+        "x": 249.7,
+        "y": 93.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 2,
+      "player_id": 4,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 179.8,
+        "y": 66.3
+      },
+      "corrected_pos": {
+        "x": 225.5,
+        "y": 71.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 2,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 186.3,
+        "y": 57.6
+      },
+      "corrected_pos": {
+        "x": 230.7,
+        "y": 65.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 3,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 274.5,
+        "y": 112.7
+      },
+      "corrected_pos": {
+        "x": 297.8,
+        "y": 107.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 3,
+      "player_id": 9,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 94.4,
+        "y": 132.0
+      },
+      "corrected_pos": {
+        "x": 128.5,
+        "y": 134.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 3,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 313.9,
+        "y": 135.9
+      },
+      "corrected_pos": {
+        "x": 329.8,
+        "y": 133.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 3,
+      "player_id": 10,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 169.6,
+        "y": 145.1
+      },
+      "corrected_pos": {
+        "x": 191.6,
+        "y": 145.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 3,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 142.7,
+        "y": 112.2
+      },
+      "corrected_pos": {
+        "x": 169.2,
+        "y": 117.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 3,
+      "player_id": 1,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 221.5,
+        "y": 87.6
+      },
+      "corrected_pos": {
+        "x": 228.6,
+        "y": 88.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 3,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 239.2,
+        "y": 89.8
+      },
+      "corrected_pos": {
+        "x": 251.1,
+        "y": 91.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 3,
+      "player_id": 4,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 214.1,
+        "y": 67.4
+      },
+      "corrected_pos": {
+        "x": 254.6,
+        "y": 73.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 3,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 318.4,
+        "y": 103.0
+      },
+      "corrected_pos": {
+        "x": 306.1,
+        "y": 101.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 3,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 215.7,
+        "y": 58.7
+      },
+      "corrected_pos": {
+        "x": 253.9,
+        "y": 66.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 4,
+      "player_id": 9,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 115.5,
+        "y": 141.2
+      },
+      "corrected_pos": {
+        "x": 147.6,
+        "y": 144.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 4,
+      "player_id": 10,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 189.3,
+        "y": 154.2
+      },
+      "corrected_pos": {
+        "x": 207.6,
+        "y": 154.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 4,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 240.2,
+        "y": 106.3
+      },
+      "corrected_pos": {
+        "x": 253.9,
+        "y": 111.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 4,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 305.7,
+        "y": 132.7
+      },
+      "corrected_pos": {
+        "x": 316.5,
+        "y": 130.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 4,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 285.4,
+        "y": 123.5
+      },
+      "corrected_pos": {
+        "x": 305.0,
+        "y": 122.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 4,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 160.1,
+        "y": 127.1
+      },
+      "corrected_pos": {
+        "x": 185.2,
+        "y": 132.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 4,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 366.2,
+        "y": 117.3
+      },
+      "corrected_pos": {
+        "x": 396.9,
+        "y": 128.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 4,
+      "player_id": 4,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 236.1,
+        "y": 83.9
+      },
+      "corrected_pos": {
+        "x": 271.9,
+        "y": 93.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 4,
+      "player_id": 1,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 212.0,
+        "y": 95.4
+      },
+      "corrected_pos": {
+        "x": 190.2,
+        "y": 107.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 4,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 242.5,
+        "y": 75.4
+      },
+      "corrected_pos": {
+        "x": 277.0,
+        "y": 86.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 5,
+      "player_id": 10,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 187.9,
+        "y": 166.2
+      },
+      "corrected_pos": {
+        "x": 203.2,
+        "y": 165.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 5,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 279.1,
+        "y": 158.7
+      },
+      "corrected_pos": {
+        "x": 291.0,
+        "y": 168.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 5,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 302.8,
+        "y": 160.3
+      },
+      "corrected_pos": {
+        "x": 301.9,
+        "y": 168.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 5,
+      "player_id": 9,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 167.7,
+        "y": 140.8
+      },
+      "corrected_pos": {
+        "x": 200.8,
+        "y": 141.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 5,
+      "player_id": 1,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 203.8,
+        "y": 112.5
+      },
+      "corrected_pos": {
+        "x": 191.6,
+        "y": 124.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 5,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 183.6,
+        "y": 118.2
+      },
+      "corrected_pos": {
+        "x": 198.2,
+        "y": 119.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 5,
+      "player_id": 4,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 218.2,
+        "y": 98.7
+      },
+      "corrected_pos": {
+        "x": 211.1,
+        "y": 111.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 5,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 395.3,
+        "y": 129.3
+      },
+      "corrected_pos": {
+        "x": 414.3,
+        "y": 144.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 5,
+      "player_id": 5,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 303.5,
+        "y": 119.5
+      },
+      "corrected_pos": {
+        "x": 305.2,
+        "y": 125.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 5,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 279.6,
+        "y": 179.1
+      },
+      "corrected_pos": {
+        "x": 294.1,
+        "y": 196.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 6,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 310.5,
+        "y": 161.9
+      },
+      "corrected_pos": {
+        "x": 305.8,
+        "y": 165.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 6,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 146.2,
+        "y": 111.5
+      },
+      "corrected_pos": {
+        "x": 146.2,
+        "y": 111.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 6,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 257.6,
+        "y": 163.1
+      },
+      "corrected_pos": {
+        "x": 257.9,
+        "y": 173.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 6,
+      "player_id": 10,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 153.4,
+        "y": 168.1
+      },
+      "corrected_pos": {
+        "x": 148.0,
+        "y": 163.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 6,
+      "player_id": 1,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 165.6,
+        "y": 106.5
+      },
+      "corrected_pos": {
+        "x": 151.1,
+        "y": 113.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 6,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 390.1,
+        "y": 122.5
+      },
+      "corrected_pos": {
+        "x": 397.0,
+        "y": 131.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 6,
+      "player_id": 9,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 206.0,
+        "y": 119.1
+      },
+      "corrected_pos": {
+        "x": 220.9,
+        "y": 114.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 6,
+      "player_id": 5,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 292.0,
+        "y": 112.7
+      },
+      "corrected_pos": {
+        "x": 285.6,
+        "y": 107.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 6,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 214.1,
+        "y": 99.0
+      },
+      "corrected_pos": {
+        "x": 196.8,
+        "y": 104.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 6,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 177.2,
+        "y": 99.0
+      },
+      "corrected_pos": {
+        "x": 176.2,
+        "y": 110.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 7,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 287.9,
+        "y": 143.7
+      },
+      "corrected_pos": {
+        "x": 269.2,
+        "y": 142.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 7,
+      "player_id": 10,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 105.6,
+        "y": 169.7
+      },
+      "corrected_pos": {
+        "x": 71.8,
+        "y": 164.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 7,
+      "player_id": 1,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 63.4,
+        "y": 106.6
+      },
+      "corrected_pos": {
+        "x": 31.5,
+        "y": 109.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 7,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 21.3,
+        "y": 119.7
+      },
+      "corrected_pos": {
+        "x": 0.0,
+        "y": 117.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 7,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 180.0,
+        "y": 164.3
+      },
+      "corrected_pos": {
+        "x": 157.2,
+        "y": 166.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 7,
+      "player_id": 9,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 187.7,
+        "y": 108.2
+      },
+      "corrected_pos": {
+        "x": 207.4,
+        "y": 101.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 7,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 315.4,
+        "y": 107.7
+      },
+      "corrected_pos": {
+        "x": 277.1,
+        "y": 104.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 7,
+      "player_id": 4,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 100.9,
+        "y": 101.7
+      },
+      "corrected_pos": {
+        "x": 69.0,
+        "y": 115.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 7,
+      "player_id": 5,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 233.0,
+        "y": 94.3
+      },
+      "corrected_pos": {
+        "x": 204.1,
+        "y": 86.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 7,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 192.0,
+        "y": 101.5
+      },
+      "corrected_pos": {
+        "x": 183.6,
+        "y": 102.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 8,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 157.3,
+        "y": 160.7
+      },
+      "corrected_pos": {
+        "x": 112.4,
+        "y": 156.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 8,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 261.8,
+        "y": 123.7
+      },
+      "corrected_pos": {
+        "x": 244.0,
+        "y": 107.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 8,
+      "player_id": 10,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 114.6,
+        "y": 177.6
+      },
+      "corrected_pos": {
+        "x": 90.3,
+        "y": 175.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 8,
+      "player_id": 9,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 191.1,
+        "y": 101.8
+      },
+      "corrected_pos": {
+        "x": 195.6,
+        "y": 91.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 8,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 61.9,
+        "y": 106.6
+      },
+      "corrected_pos": {
+        "x": 49.3,
+        "y": 123.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 8,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 191.7,
+        "y": 85.4
+      },
+      "corrected_pos": {
+        "x": 171.3,
+        "y": 59.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 8,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 261.2,
+        "y": 93.3
+      },
+      "corrected_pos": {
+        "x": 213.4,
+        "y": 81.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 9,
+      "player_id": 10,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 155.5,
+        "y": 173.5
+      },
+      "corrected_pos": {
+        "x": 164.0,
+        "y": 164.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 9,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 181.3,
+        "y": 140.3
+      },
+      "corrected_pos": {
+        "x": 162.2,
+        "y": 126.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 9,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 187.0,
+        "y": 96.0
+      },
+      "corrected_pos": {
+        "x": 184.6,
+        "y": 97.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 9,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 238.0,
+        "y": 107.1
+      },
+      "corrected_pos": {
+        "x": 209.9,
+        "y": 93.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 9,
+      "player_id": 1,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 210.4,
+        "y": 94.7
+      },
+      "corrected_pos": {
+        "x": 187.1,
+        "y": 93.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 9,
+      "player_id": 9,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 59.5,
+        "y": 112.3
+      },
+      "corrected_pos": {
+        "x": 16.8,
+        "y": 110.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 9,
+      "player_id": 4,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 156.4,
+        "y": 89.0
+      },
+      "corrected_pos": {
+        "x": 139.2,
+        "y": 96.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 9,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 62.8,
+        "y": 100.8
+      },
+      "corrected_pos": {
+        "x": 35.7,
+        "y": 100.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 10,
+      "player_id": 10,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 227.4,
+        "y": 156.3
+      },
+      "corrected_pos": {
+        "x": 269.9,
+        "y": 146.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 10,
+      "player_id": 5,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 54.1,
+        "y": 123.7
+      },
+      "corrected_pos": {
+        "x": 18.5,
+        "y": 114.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 10,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 247.3,
+        "y": 99.2
+      },
+      "corrected_pos": {
+        "x": 261.3,
+        "y": 102.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 10,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 218.8,
+        "y": 105.0
+      },
+      "corrected_pos": {
+        "x": 208.1,
+        "y": 97.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 10,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 97.4,
+        "y": 113.1
+      },
+      "corrected_pos": {
+        "x": 89.4,
+        "y": 112.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 10,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 236.4,
+        "y": 117.6
+      },
+      "corrected_pos": {
+        "x": 256.7,
+        "y": 104.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 10,
+      "player_id": 4,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 106.1,
+        "y": 80.7
+      },
+      "corrected_pos": {
+        "x": 82.0,
+        "y": 81.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 10,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 53.6,
+        "y": 139.9
+      },
+      "corrected_pos": {
+        "x": 10.4,
+        "y": 136.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 11,
+      "player_id": 10,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 258.5,
+        "y": 156.7
+      },
+      "corrected_pos": {
+        "x": 299.2,
+        "y": 143.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 11,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 216.5,
+        "y": 101.8
+      },
+      "corrected_pos": {
+        "x": 213.5,
+        "y": 103.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 11,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 137.6,
+        "y": 117.4
+      },
+      "corrected_pos": {
+        "x": 153.0,
+        "y": 113.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 11,
+      "player_id": 1,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 77.3,
+        "y": 114.8
+      },
+      "corrected_pos": {
+        "x": 55.4,
+        "y": 113.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 11,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 230.1,
+        "y": 109.3
+      },
+      "corrected_pos": {
+        "x": 247.3,
+        "y": 123.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 11,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 123.9,
+        "y": 110.2
+      },
+      "corrected_pos": {
+        "x": 110.7,
+        "y": 106.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 11,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 193.2,
+        "y": 99.3
+      },
+      "corrected_pos": {
+        "x": 151.4,
+        "y": 90.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 11,
+      "player_id": 5,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 291.3,
+        "y": 106.8
+      },
+      "corrected_pos": {
+        "x": 315.1,
+        "y": 103.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 11,
+      "player_id": 4,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 71.2,
+        "y": 92.4
+      },
+      "corrected_pos": {
+        "x": 67.5,
+        "y": 91.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 11,
+      "player_id": 9,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 73.3,
+        "y": 102.8
+      },
+      "corrected_pos": {
+        "x": 34.7,
+        "y": 105.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 12,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 152.4,
+        "y": 102.8
+      },
+      "corrected_pos": {
+        "x": 185.0,
+        "y": 102.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 12,
+      "player_id": 10,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 296.3,
+        "y": 144.8
+      },
+      "corrected_pos": {
+        "x": 324.3,
+        "y": 132.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 12,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 264.9,
+        "y": 95.2
+      },
+      "corrected_pos": {
+        "x": 285.3,
+        "y": 97.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 12,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 203.2,
+        "y": 92.1
+      },
+      "corrected_pos": {
+        "x": 185.9,
+        "y": 88.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 12,
+      "player_id": 4,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 91.2,
+        "y": 92.7
+      },
+      "corrected_pos": {
+        "x": 92.2,
+        "y": 92.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 12,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 238.5,
+        "y": 82.8
+      },
+      "corrected_pos": {
+        "x": 250.4,
+        "y": 85.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 12,
+      "player_id": 9,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 193.2,
+        "y": 107.9
+      },
+      "corrected_pos": {
+        "x": 183.5,
+        "y": 111.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 12,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 239.5,
+        "y": 113.1
+      },
+      "corrected_pos": {
+        "x": 305.6,
+        "y": 107.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 13,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 342.0,
+        "y": 104.5
+      },
+      "corrected_pos": {
+        "x": 387.7,
+        "y": 92.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 13,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 306.6,
+        "y": 104.9
+      },
+      "corrected_pos": {
+        "x": 392.3,
+        "y": 98.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 13,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 177.6,
+        "y": 96.3
+      },
+      "corrected_pos": {
+        "x": 201.2,
+        "y": 91.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 13,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 220.7,
+        "y": 79.4
+      },
+      "corrected_pos": {
+        "x": 225.2,
+        "y": 79.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 13,
+      "player_id": 10,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 316.3,
+        "y": 151.2
+      },
+      "corrected_pos": {
+        "x": 333.5,
+        "y": 144.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 13,
+      "player_id": 4,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 139.9,
+        "y": 93.8
+      },
+      "corrected_pos": {
+        "x": 163.0,
+        "y": 96.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 13,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 361.8,
+        "y": 93.8
+      },
+      "corrected_pos": {
+        "x": 384.3,
+        "y": 95.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 13,
+      "player_id": 9,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 375.0,
+        "y": 106.6
+      },
+      "corrected_pos": {
+        "x": 428.0,
+        "y": 107.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 13,
+      "player_id": 1,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 174.7,
+        "y": 96.9
+      },
+      "corrected_pos": {
+        "x": 194.5,
+        "y": 94.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 14,
+      "player_id": 10,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 293.9,
+        "y": 168.4
+      },
+      "corrected_pos": {
+        "x": 281.6,
+        "y": 162.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 14,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 310.3,
+        "y": 114.8
+      },
+      "corrected_pos": {
+        "x": 349.4,
+        "y": 115.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 14,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 241.6,
+        "y": 74.2
+      },
+      "corrected_pos": {
+        "x": 265.3,
+        "y": 76.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 14,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 192.9,
+        "y": 97.0
+      },
+      "corrected_pos": {
+        "x": 212.9,
+        "y": 94.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 14,
+      "player_id": 5,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 44.1,
+        "y": 111.7
+      },
+      "corrected_pos": {
+        "x": 82.6,
+        "y": 111.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 14,
+      "player_id": 1,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 190.4,
+        "y": 94.6
+      },
+      "corrected_pos": {
+        "x": 200.1,
+        "y": 97.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 14,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 208.7,
+        "y": 88.1
+      },
+      "corrected_pos": {
+        "x": 220.6,
+        "y": 88.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 15,
+      "player_id": 10,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 78.8,
+        "y": 137.5
+      },
+      "corrected_pos": {
+        "x": 23.2,
+        "y": 132.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 15,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 353.0,
+        "y": 113.1
+      },
+      "corrected_pos": {
+        "x": 374.9,
+        "y": 106.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 15,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 253.3,
+        "y": 92.2
+      },
+      "corrected_pos": {
+        "x": 277.4,
+        "y": 91.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 15,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 177.0,
+        "y": 72.3
+      },
+      "corrected_pos": {
+        "x": 165.0,
+        "y": 70.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 15,
+      "player_id": 9,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 344.3,
+        "y": 118.0
+      },
+      "corrected_pos": {
+        "x": 428.0,
+        "y": 117.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 15,
+      "player_id": 1,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 252.3,
+        "y": 94.6
+      },
+      "corrected_pos": {
+        "x": 295.9,
+        "y": 94.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 16,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 102.9,
+        "y": 139.8
+      },
+      "corrected_pos": {
+        "x": 77.9,
+        "y": 148.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 16,
+      "player_id": 5,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 150.2,
+        "y": 118.5
+      },
+      "corrected_pos": {
+        "x": 218.5,
+        "y": 115.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 16,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 345.2,
+        "y": 110.1
+      },
+      "corrected_pos": {
+        "x": 359.6,
+        "y": 110.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 16,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 317.2,
+        "y": 94.3
+      },
+      "corrected_pos": {
+        "x": 348.1,
+        "y": 95.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 16,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 192.4,
+        "y": 75.7
+      },
+      "corrected_pos": {
+        "x": 182.5,
+        "y": 78.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 16,
+      "player_id": 4,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 180.9,
+        "y": 90.7
+      },
+      "corrected_pos": {
+        "x": 202.7,
+        "y": 95.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 16,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 199.5,
+        "y": 81.3
+      },
+      "corrected_pos": {
+        "x": 182.2,
+        "y": 84.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 16,
+      "player_id": 10,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 102.8,
+        "y": 146.1
+      },
+      "corrected_pos": {
+        "x": 51.6,
+        "y": 139.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 16,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 152.7,
+        "y": 124.8
+      },
+      "corrected_pos": {
+        "x": 169.0,
+        "y": 118.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 17,
+      "player_id": 10,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 144.3,
+        "y": 146.0
+      },
+      "corrected_pos": {
+        "x": 114.6,
+        "y": 134.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 17,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 295.8,
+        "y": 110.1
+      },
+      "corrected_pos": {
+        "x": 268.3,
+        "y": 112.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 17,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 198.2,
+        "y": 98.4
+      },
+      "corrected_pos": {
+        "x": 164.9,
+        "y": 104.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 17,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 171.9,
+        "y": 117.3
+      },
+      "corrected_pos": {
+        "x": 166.3,
+        "y": 116.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 17,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 208.2,
+        "y": 79.1
+      },
+      "corrected_pos": {
+        "x": 201.1,
+        "y": 81.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 17,
+      "player_id": 1,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 244.4,
+        "y": 110.3
+      },
+      "corrected_pos": {
+        "x": 269.7,
+        "y": 112.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 17,
+      "player_id": 9,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 171.5,
+        "y": 108.0
+      },
+      "corrected_pos": {
+        "x": 204.0,
+        "y": 107.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 18,
+      "player_id": 10,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 178.4,
+        "y": 150.3
+      },
+      "corrected_pos": {
+        "x": 224.6,
+        "y": 147.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 18,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 250.4,
+        "y": 115.9
+      },
+      "corrected_pos": {
+        "x": 225.4,
+        "y": 116.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 18,
+      "player_id": 1,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 204.0,
+        "y": 103.9
+      },
+      "corrected_pos": {
+        "x": 208.2,
+        "y": 104.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 18,
+      "player_id": 4,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 294.3,
+        "y": 106.0
+      },
+      "corrected_pos": {
+        "x": 328.4,
+        "y": 108.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 18,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 320.5,
+        "y": 93.7
+      },
+      "corrected_pos": {
+        "x": 332.8,
+        "y": 97.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 18,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 225.0,
+        "y": 80.7
+      },
+      "corrected_pos": {
+        "x": 236.5,
+        "y": 89.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 18,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 301.1,
+        "y": 102.4
+      },
+      "corrected_pos": {
+        "x": 308.6,
+        "y": 103.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 19,
+      "player_id": 10,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 196.9,
+        "y": 153.6
+      },
+      "corrected_pos": {
+        "x": 238.5,
+        "y": 150.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 19,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 360.0,
+        "y": 133.5
+      },
+      "corrected_pos": {
+        "x": 339.1,
+        "y": 144.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 19,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 209.0,
+        "y": 122.3
+      },
+      "corrected_pos": {
+        "x": 169.2,
+        "y": 124.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 19,
+      "player_id": 4,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 194.5,
+        "y": 117.8
+      },
+      "corrected_pos": {
+        "x": 182.4,
+        "y": 122.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 19,
+      "player_id": 9,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 300.7,
+        "y": 116.6
+      },
+      "corrected_pos": {
+        "x": 287.7,
+        "y": 117.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 19,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 243.5,
+        "y": 84.4
+      },
+      "corrected_pos": {
+        "x": 253.3,
+        "y": 92.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 19,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 300.3,
+        "y": 90.8
+      },
+      "corrected_pos": {
+        "x": 335.8,
+        "y": 97.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 20,
+      "player_id": 9,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 178.5,
+        "y": 131.0
+      },
+      "corrected_pos": {
+        "x": 136.9,
+        "y": 133.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 20,
+      "player_id": 10,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 247.8,
+        "y": 151.6
+      },
+      "corrected_pos": {
+        "x": 275.7,
+        "y": 150.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 20,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 217.7,
+        "y": 112.1
+      },
+      "corrected_pos": {
+        "x": 153.7,
+        "y": 120.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 20,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 406.3,
+        "y": 104.7
+      },
+      "corrected_pos": {
+        "x": 425.1,
+        "y": 108.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 20,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 190.1,
+        "y": 114.7
+      },
+      "corrected_pos": {
+        "x": 176.0,
+        "y": 118.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 20,
+      "player_id": 12,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 180.4,
+        "y": 129.3
+      },
+      "corrected_pos": {
+        "x": 186.2,
+        "y": 128.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 20,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 274.5,
+        "y": 87.8
+      },
+      "corrected_pos": {
+        "x": 281.1,
+        "y": 96.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 20,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 178.3,
+        "y": 131.5
+      },
+      "corrected_pos": {
+        "x": 160.6,
+        "y": 134.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 21,
+      "player_id": 10,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 345.4,
+        "y": 157.9
+      },
+      "corrected_pos": {
+        "x": 376.3,
+        "y": 159.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 21,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 186.3,
+        "y": 142.3
+      },
+      "corrected_pos": {
+        "x": 183.6,
+        "y": 142.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 21,
+      "player_id": 1,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 287.0,
+        "y": 121.0
+      },
+      "corrected_pos": {
+        "x": 284.5,
+        "y": 128.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 21,
+      "player_id": 12,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 182.9,
+        "y": 113.2
+      },
+      "corrected_pos": {
+        "x": 188.7,
+        "y": 100.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 21,
+      "player_id": 5,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 364.8,
+        "y": 152.7
+      },
+      "corrected_pos": {
+        "x": 364.9,
+        "y": 155.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 21,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 263.3,
+        "y": 101.1
+      },
+      "corrected_pos": {
+        "x": 222.8,
+        "y": 102.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 21,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 267.5,
+        "y": 84.7
+      },
+      "corrected_pos": {
+        "x": 267.3,
+        "y": 88.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 21,
+      "player_id": 9,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 344.5,
+        "y": 155.0
+      },
+      "corrected_pos": {
+        "x": 369.7,
+        "y": 165.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 21,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 352.6,
+        "y": 165.3
+      },
+      "corrected_pos": {
+        "x": 376.7,
+        "y": 167.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 22,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 214.2,
+        "y": 155.3
+      },
+      "corrected_pos": {
+        "x": 220.7,
+        "y": 156.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 22,
+      "player_id": 12,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 173.2,
+        "y": 117.5
+      },
+      "corrected_pos": {
+        "x": 170.7,
+        "y": 114.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 22,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 194.3,
+        "y": 121.2
+      },
+      "corrected_pos": {
+        "x": 143.6,
+        "y": 126.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 22,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 165.5,
+        "y": 97.0
+      },
+      "corrected_pos": {
+        "x": 200.2,
+        "y": 100.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 22,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 257.4,
+        "y": 79.5
+      },
+      "corrected_pos": {
+        "x": 258.5,
+        "y": 75.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 26,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 292.5,
+        "y": 113.1
+      },
+      "corrected_pos": {
+        "x": 303.4,
+        "y": 113.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 26,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 328.3,
+        "y": 127.1
+      },
+      "corrected_pos": {
+        "x": 334.1,
+        "y": 129.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 26,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 130.2,
+        "y": 122.6
+      },
+      "corrected_pos": {
+        "x": 147.0,
+        "y": 120.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 26,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 175.4,
+        "y": 85.6
+      },
+      "corrected_pos": {
+        "x": 166.7,
+        "y": 84.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 26,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 328.2,
+        "y": 107.2
+      },
+      "corrected_pos": {
+        "x": 263.8,
+        "y": 112.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 26,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 187.5,
+        "y": 74.2
+      },
+      "corrected_pos": {
+        "x": 172.1,
+        "y": 72.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 26,
+      "player_id": 1,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 331.8,
+        "y": 116.6
+      },
+      "corrected_pos": {
+        "x": 322.4,
+        "y": 115.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 27,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 348.3,
+        "y": 122.1
+      },
+      "corrected_pos": {
+        "x": 398.9,
+        "y": 129.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 27,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 300.4,
+        "y": 118.1
+      },
+      "corrected_pos": {
+        "x": 305.3,
+        "y": 118.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 27,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 142.8,
+        "y": 118.1
+      },
+      "corrected_pos": {
+        "x": 155.0,
+        "y": 115.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 27,
+      "player_id": 12,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 247.0,
+        "y": 106.8
+      },
+      "corrected_pos": {
+        "x": 256.8,
+        "y": 104.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 27,
+      "player_id": 1,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 289.7,
+        "y": 110.4
+      },
+      "corrected_pos": {
+        "x": 291.1,
+        "y": 111.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 27,
+      "player_id": 5,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 202.9,
+        "y": 132.4
+      },
+      "corrected_pos": {
+        "x": 218.0,
+        "y": 128.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 27,
+      "player_id": 4,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 192.4,
+        "y": 85.1
+      },
+      "corrected_pos": {
+        "x": 169.0,
+        "y": 93.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 27,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 200.3,
+        "y": 77.3
+      },
+      "corrected_pos": {
+        "x": 196.6,
+        "y": 80.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 28,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 351.1,
+        "y": 113.6
+      },
+      "corrected_pos": {
+        "x": 344.6,
+        "y": 106.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 28,
+      "player_id": 5,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 204.3,
+        "y": 132.0
+      },
+      "corrected_pos": {
+        "x": 199.4,
+        "y": 128.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 28,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 301.6,
+        "y": 105.6
+      },
+      "corrected_pos": {
+        "x": 294.6,
+        "y": 111.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 28,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 318.0,
+        "y": 116.5
+      },
+      "corrected_pos": {
+        "x": 325.4,
+        "y": 116.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 28,
+      "player_id": 4,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 257.7,
+        "y": 106.7
+      },
+      "corrected_pos": {
+        "x": 251.9,
+        "y": 114.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 28,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 152.5,
+        "y": 120.0
+      },
+      "corrected_pos": {
+        "x": 156.9,
+        "y": 114.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 28,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 199.8,
+        "y": 86.7
+      },
+      "corrected_pos": {
+        "x": 188.3,
+        "y": 89.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 28,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 209.9,
+        "y": 76.3
+      },
+      "corrected_pos": {
+        "x": 210.6,
+        "y": 82.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 29,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 166.3,
+        "y": 148.0
+      },
+      "corrected_pos": {
+        "x": 127.0,
+        "y": 145.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 29,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 339.5,
+        "y": 112.1
+      },
+      "corrected_pos": {
+        "x": 343.5,
+        "y": 111.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 29,
+      "player_id": 5,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 207.8,
+        "y": 135.5
+      },
+      "corrected_pos": {
+        "x": 195.7,
+        "y": 131.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 29,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 308.9,
+        "y": 106.0
+      },
+      "corrected_pos": {
+        "x": 325.3,
+        "y": 104.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 29,
+      "player_id": 4,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 285.1,
+        "y": 107.8
+      },
+      "corrected_pos": {
+        "x": 320.9,
+        "y": 111.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 29,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 159.4,
+        "y": 120.7
+      },
+      "corrected_pos": {
+        "x": 169.5,
+        "y": 118.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 29,
+      "player_id": 10,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 205.0,
+        "y": 88.5
+      },
+      "corrected_pos": {
+        "x": 233.7,
+        "y": 92.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 29,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 205.8,
+        "y": 90.0
+      },
+      "corrected_pos": {
+        "x": 208.6,
+        "y": 93.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 29,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 216.5,
+        "y": 81.6
+      },
+      "corrected_pos": {
+        "x": 223.7,
+        "y": 89.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 29,
+      "player_id": 1,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 312.4,
+        "y": 115.6
+      },
+      "corrected_pos": {
+        "x": 308.7,
+        "y": 113.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 30,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 190.4,
+        "y": 154.8
+      },
+      "corrected_pos": {
+        "x": 137.8,
+        "y": 154.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 30,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 265.0,
+        "y": 106.6
+      },
+      "corrected_pos": {
+        "x": 260.6,
+        "y": 103.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 30,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 189.6,
+        "y": 119.7
+      },
+      "corrected_pos": {
+        "x": 202.0,
+        "y": 120.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 30,
+      "player_id": 5,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 219.0,
+        "y": 134.7
+      },
+      "corrected_pos": {
+        "x": 216.6,
+        "y": 133.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 30,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 291.0,
+        "y": 107.1
+      },
+      "corrected_pos": {
+        "x": 281.4,
+        "y": 102.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 30,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 229.8,
+        "y": 82.3
+      },
+      "corrected_pos": {
+        "x": 245.1,
+        "y": 86.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 30,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 214.6,
+        "y": 95.7
+      },
+      "corrected_pos": {
+        "x": 222.7,
+        "y": 102.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 30,
+      "player_id": 10,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 214.0,
+        "y": 94.5
+      },
+      "corrected_pos": {
+        "x": 229.1,
+        "y": 100.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 31,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 355.6,
+        "y": 154.0
+      },
+      "corrected_pos": {
+        "x": 358.5,
+        "y": 166.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 31,
+      "player_id": 12,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 238.0,
+        "y": 108.0
+      },
+      "corrected_pos": {
+        "x": 239.3,
+        "y": 112.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 31,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 250.7,
+        "y": 133.8
+      },
+      "corrected_pos": {
+        "x": 276.0,
+        "y": 135.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 31,
+      "player_id": 1,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 241.5,
+        "y": 111.4
+      },
+      "corrected_pos": {
+        "x": 228.6,
+        "y": 110.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 31,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 262.5,
+        "y": 108.6
+      },
+      "corrected_pos": {
+        "x": 251.8,
+        "y": 109.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 31,
+      "player_id": 9,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 245.5,
+        "y": 102.0
+      },
+      "corrected_pos": {
+        "x": 265.4,
+        "y": 115.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 31,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 256.8,
+        "y": 82.5
+      },
+      "corrected_pos": {
+        "x": 268.2,
+        "y": 88.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 31,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 254.6,
+        "y": 134.0
+      },
+      "corrected_pos": {
+        "x": 235.2,
+        "y": 134.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 31,
+      "player_id": 4,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 245.9,
+        "y": 99.9
+      },
+      "corrected_pos": {
+        "x": 277.6,
+        "y": 106.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 31,
+      "player_id": 5,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 272.8,
+        "y": 149.0
+      },
+      "corrected_pos": {
+        "x": 288.2,
+        "y": 147.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 32,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 388.0,
+        "y": 140.5
+      },
+      "corrected_pos": {
+        "x": 428.0,
+        "y": 139.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 32,
+      "player_id": 5,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 285.4,
+        "y": 138.3
+      },
+      "corrected_pos": {
+        "x": 302.2,
+        "y": 134.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 32,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 222.5,
+        "y": 123.4
+      },
+      "corrected_pos": {
+        "x": 242.1,
+        "y": 122.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 32,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 278.0,
+        "y": 109.4
+      },
+      "corrected_pos": {
+        "x": 259.8,
+        "y": 111.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 32,
+      "player_id": 4,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 204.0,
+        "y": 120.1
+      },
+      "corrected_pos": {
+        "x": 206.2,
+        "y": 120.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 32,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 249.4,
+        "y": 111.4
+      },
+      "corrected_pos": {
+        "x": 224.4,
+        "y": 111.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 32,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 258.8,
+        "y": 91.8
+      },
+      "corrected_pos": {
+        "x": 266.4,
+        "y": 96.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 32,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 251.8,
+        "y": 86.5
+      },
+      "corrected_pos": {
+        "x": 264.5,
+        "y": 92.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 33,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 387.1,
+        "y": 137.2
+      },
+      "corrected_pos": {
+        "x": 428.0,
+        "y": 130.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 33,
+      "player_id": 5,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 305.2,
+        "y": 133.8
+      },
+      "corrected_pos": {
+        "x": 335.6,
+        "y": 132.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 33,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 200.4,
+        "y": 126.6
+      },
+      "corrected_pos": {
+        "x": 206.7,
+        "y": 123.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 33,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 247.7,
+        "y": 92.4
+      },
+      "corrected_pos": {
+        "x": 249.8,
+        "y": 95.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 33,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 324.8,
+        "y": 106.8
+      },
+      "corrected_pos": {
+        "x": 344.8,
+        "y": 111.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 33,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 279.7,
+        "y": 109.4
+      },
+      "corrected_pos": {
+        "x": 270.1,
+        "y": 110.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 33,
+      "player_id": 1,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 216.5,
+        "y": 107.9
+      },
+      "corrected_pos": {
+        "x": 210.1,
+        "y": 106.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 33,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 255.1,
+        "y": 83.3
+      },
+      "corrected_pos": {
+        "x": 253.6,
+        "y": 86.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 33,
+      "player_id": 12,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 205.7,
+        "y": 106.1
+      },
+      "corrected_pos": {
+        "x": 210.3,
+        "y": 104.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 34,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 381.0,
+        "y": 136.9
+      },
+      "corrected_pos": {
+        "x": 374.0,
+        "y": 127.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 34,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 189.1,
+        "y": 129.6
+      },
+      "corrected_pos": {
+        "x": 175.1,
+        "y": 122.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 34,
+      "player_id": 10,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 296.5,
+        "y": 134.5
+      },
+      "corrected_pos": {
+        "x": 298.9,
+        "y": 135.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 34,
+      "player_id": 12,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 295.8,
+        "y": 133.6
+      },
+      "corrected_pos": {
+        "x": 317.6,
+        "y": 140.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 34,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 245.3,
+        "y": 92.0
+      },
+      "corrected_pos": {
+        "x": 243.7,
+        "y": 92.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 34,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 308.9,
+        "y": 109.5
+      },
+      "corrected_pos": {
+        "x": 330.0,
+        "y": 106.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 34,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 252.7,
+        "y": 80.8
+      },
+      "corrected_pos": {
+        "x": 245.0,
+        "y": 82.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 34,
+      "player_id": 5,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 298.7,
+        "y": 137.5
+      },
+      "corrected_pos": {
+        "x": 305.0,
+        "y": 133.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 34,
+      "player_id": 4,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 252.1,
+        "y": 100.1
+      },
+      "corrected_pos": {
+        "x": 229.9,
+        "y": 100.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 35,
+      "player_id": 5,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 282.1,
+        "y": 134.5
+      },
+      "corrected_pos": {
+        "x": 268.5,
+        "y": 130.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 35,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 374.4,
+        "y": 136.6
+      },
+      "corrected_pos": {
+        "x": 355.1,
+        "y": 133.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 35,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 189.9,
+        "y": 133.0
+      },
+      "corrected_pos": {
+        "x": 186.2,
+        "y": 131.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 35,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 324.1,
+        "y": 115.7
+      },
+      "corrected_pos": {
+        "x": 355.7,
+        "y": 118.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 35,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 238.5,
+        "y": 98.8
+      },
+      "corrected_pos": {
+        "x": 232.1,
+        "y": 103.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 35,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 253.5,
+        "y": 86.3
+      },
+      "corrected_pos": {
+        "x": 247.6,
+        "y": 89.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 36,
+      "player_id": 5,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 282.0,
+        "y": 131.6
+      },
+      "corrected_pos": {
+        "x": 256.4,
+        "y": 125.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 36,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 204.2,
+        "y": 125.9
+      },
+      "corrected_pos": {
+        "x": 207.7,
+        "y": 122.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 36,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 379.1,
+        "y": 136.2
+      },
+      "corrected_pos": {
+        "x": 361.3,
+        "y": 135.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 36,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 331.3,
+        "y": 117.1
+      },
+      "corrected_pos": {
+        "x": 352.4,
+        "y": 120.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 36,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 250.2,
+        "y": 92.5
+      },
+      "corrected_pos": {
+        "x": 261.6,
+        "y": 93.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 36,
+      "player_id": 12,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 202.5,
+        "y": 100.5
+      },
+      "corrected_pos": {
+        "x": 216.5,
+        "y": 104.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 36,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 201.6,
+        "y": 80.7
+      },
+      "corrected_pos": {
+        "x": 193.5,
+        "y": 81.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 36,
+      "player_id": 4,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 211.0,
+        "y": 89.7
+      },
+      "corrected_pos": {
+        "x": 195.5,
+        "y": 92.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 37,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 420.3,
+        "y": 139.7
+      },
+      "corrected_pos": {
+        "x": 424.9,
+        "y": 140.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 37,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 209.6,
+        "y": 125.6
+      },
+      "corrected_pos": {
+        "x": 221.6,
+        "y": 124.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 37,
+      "player_id": 5,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 301.4,
+        "y": 124.2
+      },
+      "corrected_pos": {
+        "x": 284.9,
+        "y": 120.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 37,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 342.9,
+        "y": 115.4
+      },
+      "corrected_pos": {
+        "x": 354.1,
+        "y": 120.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 37,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 256.0,
+        "y": 97.3
+      },
+      "corrected_pos": {
+        "x": 263.3,
+        "y": 100.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 37,
+      "player_id": 4,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 219.0,
+        "y": 109.1
+      },
+      "corrected_pos": {
+        "x": 224.8,
+        "y": 111.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 37,
+      "player_id": 1,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 194.9,
+        "y": 117.0
+      },
+      "corrected_pos": {
+        "x": 186.5,
+        "y": 116.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 37,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 195.6,
+        "y": 111.8
+      },
+      "corrected_pos": {
+        "x": 192.7,
+        "y": 116.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 37,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 197.1,
+        "y": 111.2
+      },
+      "corrected_pos": {
+        "x": 190.0,
+        "y": 117.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 37,
+      "player_id": 12,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 216.9,
+        "y": 126.9
+      },
+      "corrected_pos": {
+        "x": 233.5,
+        "y": 135.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 38,
+      "player_id": 1,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 266.5,
+        "y": 105.5
+      },
+      "corrected_pos": {
+        "x": 278.0,
+        "y": 103.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 38,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 339.3,
+        "y": 163.3
+      },
+      "corrected_pos": {
+        "x": 334.5,
+        "y": 164.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 38,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 210.3,
+        "y": 131.2
+      },
+      "corrected_pos": {
+        "x": 222.2,
+        "y": 126.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 38,
+      "player_id": 5,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 317.3,
+        "y": 114.7
+      },
+      "corrected_pos": {
+        "x": 334.2,
+        "y": 113.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 38,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 352.9,
+        "y": 110.1
+      },
+      "corrected_pos": {
+        "x": 348.9,
+        "y": 111.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 38,
+      "player_id": 12,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 183.9,
+        "y": 118.7
+      },
+      "corrected_pos": {
+        "x": 172.5,
+        "y": 116.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 38,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 281.7,
+        "y": 105.2
+      },
+      "corrected_pos": {
+        "x": 270.9,
+        "y": 107.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 38,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 246.1,
+        "y": 91.3
+      },
+      "corrected_pos": {
+        "x": 248.2,
+        "y": 91.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 40,
+      "player_id": 1,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 215.7,
+        "y": 104.6
+      },
+      "corrected_pos": {
+        "x": 225.4,
+        "y": 106.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 40,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 167.5,
+        "y": 148.0
+      },
+      "corrected_pos": {
+        "x": 147.2,
+        "y": 146.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 40,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 92.2,
+        "y": 113.0
+      },
+      "corrected_pos": {
+        "x": 70.9,
+        "y": 117.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 41,
+      "player_id": 4,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 245.4,
+        "y": 150.2
+      },
+      "corrected_pos": {
+        "x": 247.3,
+        "y": 147.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 41,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 124.9,
+        "y": 114.7
+      },
+      "corrected_pos": {
+        "x": 105.1,
+        "y": 114.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 41,
+      "player_id": 1,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 220.1,
+        "y": 92.6
+      },
+      "corrected_pos": {
+        "x": 238.4,
+        "y": 88.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 41,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 184.3,
+        "y": 84.2
+      },
+      "corrected_pos": {
+        "x": 178.9,
+        "y": 84.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 41,
+      "player_id": 9,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 230.7,
+        "y": 86.5
+      },
+      "corrected_pos": {
+        "x": 289.3,
+        "y": 96.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 41,
+      "player_id": 12,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 231.4,
+        "y": 85.6
+      },
+      "corrected_pos": {
+        "x": 225.0,
+        "y": 89.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 42,
+      "player_id": 10,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 210.0,
+        "y": 143.0
+      },
+      "corrected_pos": {
+        "x": 210.6,
+        "y": 142.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 42,
+      "player_id": 4,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 211.2,
+        "y": 147.2
+      },
+      "corrected_pos": {
+        "x": 210.8,
+        "y": 148.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 42,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 58.9,
+        "y": 121.0
+      },
+      "corrected_pos": {
+        "x": 18.8,
+        "y": 120.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 42,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 173.5,
+        "y": 109.7
+      },
+      "corrected_pos": {
+        "x": 154.7,
+        "y": 111.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 42,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 226.9,
+        "y": 96.1
+      },
+      "corrected_pos": {
+        "x": 219.8,
+        "y": 100.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 42,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 188.0,
+        "y": 83.1
+      },
+      "corrected_pos": {
+        "x": 191.3,
+        "y": 86.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 42,
+      "player_id": 1,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 211.6,
+        "y": 95.6
+      },
+      "corrected_pos": {
+        "x": 200.7,
+        "y": 97.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 42,
+      "player_id": 12,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 210.6,
+        "y": 139.7
+      },
+      "corrected_pos": {
+        "x": 195.2,
+        "y": 140.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 42,
+      "player_id": 5,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 253.5,
+        "y": 110.2
+      },
+      "corrected_pos": {
+        "x": 260.3,
+        "y": 107.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 43,
+      "player_id": 12,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 164.2,
+        "y": 139.3
+      },
+      "corrected_pos": {
+        "x": 161.1,
+        "y": 142.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 43,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 57.1,
+        "y": 119.3
+      },
+      "corrected_pos": {
+        "x": 23.3,
+        "y": 120.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 43,
+      "player_id": 1,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 225.3,
+        "y": 97.2
+      },
+      "corrected_pos": {
+        "x": 221.5,
+        "y": 95.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 43,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 188.6,
+        "y": 79.8
+      },
+      "corrected_pos": {
+        "x": 185.4,
+        "y": 88.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 43,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 229.8,
+        "y": 109.8
+      },
+      "corrected_pos": {
+        "x": 238.0,
+        "y": 102.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 43,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 179.8,
+        "y": 83.7
+      },
+      "corrected_pos": {
+        "x": 181.5,
+        "y": 83.4
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 43,
+      "player_id": 5,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 250.9,
+        "y": 103.2
+      },
+      "corrected_pos": {
+        "x": 247.7,
+        "y": 99.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 44,
+      "player_id": 12,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 103.9,
+        "y": 144.0
+      },
+      "corrected_pos": {
+        "x": 71.3,
+        "y": 153.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 44,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 267.0,
+        "y": 119.5
+      },
+      "corrected_pos": {
+        "x": 302.6,
+        "y": 117.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 44,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 180.1,
+        "y": 82.4
+      },
+      "corrected_pos": {
+        "x": 180.8,
+        "y": 86.9
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 44,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 42.8,
+        "y": 118.5
+      },
+      "corrected_pos": {
+        "x": 44.0,
+        "y": 114.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 44,
+      "player_id": 5,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 244.6,
+        "y": 106.1
+      },
+      "corrected_pos": {
+        "x": 232.4,
+        "y": 104.2
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 44,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 160.7,
+        "y": 90.7
+      },
+      "corrected_pos": {
+        "x": 144.2,
+        "y": 97.7
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 44,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 224.5,
+        "y": 94.4
+      },
+      "corrected_pos": {
+        "x": 238.9,
+        "y": 98.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 45,
+      "player_id": 6,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 187.5,
+        "y": 89.5
+      },
+      "corrected_pos": {
+        "x": 194.2,
+        "y": 91.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 45,
+      "player_id": 2,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 282.1,
+        "y": 130.6
+      },
+      "corrected_pos": {
+        "x": 303.6,
+        "y": 130.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 45,
+      "player_id": 12,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 53.0,
+        "y": 151.0
+      },
+      "corrected_pos": {
+        "x": 13.8,
+        "y": 150.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 45,
+      "player_id": 5,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 230.3,
+        "y": 111.9
+      },
+      "corrected_pos": {
+        "x": 220.2,
+        "y": 111.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 45,
+      "player_id": 7,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 40.6,
+        "y": 119.9
+      },
+      "corrected_pos": {
+        "x": 47.7,
+        "y": 123.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 45,
+      "player_id": 0,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 189.9,
+        "y": 90.0
+      },
+      "corrected_pos": {
+        "x": 186.4,
+        "y": 91.0
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 45,
+      "player_id": 3,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 218.5,
+        "y": 103.1
+      },
+      "corrected_pos": {
+        "x": 228.4,
+        "y": 98.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 45,
+      "player_id": 8,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 147.8,
+        "y": 95.0
+      },
+      "corrected_pos": {
+        "x": 150.6,
+        "y": 99.3
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 45,
+      "player_id": 1,
+      "rule_fired": "cluster_cohesion",
+      "confidence": 0.5,
+      "game_state_active": "cluster",
+      "original_pos": {
+        "x": 282.1,
+        "y": 111.1
+      },
+      "corrected_pos": {
+        "x": 273.2,
+        "y": 113.9
+      },
+      "predicted": false
+    }
+  ]
+}

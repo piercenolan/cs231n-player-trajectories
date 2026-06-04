@@ -1,0 +1,518 @@
+{
+  "offset_0s/sanitize_plus_velocity_cap": {
+    "ade": {
+      "mean": 19.861232732887988,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_frames_with_full_coverage": {
+      "mean": -2.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_include_predicted_in_counts": {
+      "mean": -1.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_max_jump": {
+      "mean": -162.78628408665335,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_max_players_per_frame": {
+      "mean": -1.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_mean_displacement": {
+      "mean": -18.716613067932627,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_mean_observed_per_frame": {
+      "mean": -0.6666666666666661,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_mean_players_per_frame": {
+      "mean": -0.6666666666666661,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_mean_predicted_per_frame": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_mean_track_streak": {
+      "mean": -0.2727272727272716,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_min_players_per_frame": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_min_track_streak": {
+      "mean": -1.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_rolling_loss_frames": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_std_players_per_frame": {
+      "mean": 0.14470276832552864,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_sudden_drop_frames": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_total_frames": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_total_id_switches": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "fde": {
+      "mean": 21.41032523017834,
+      "std": 0.0,
+      "n": 1
+    },
+    "frames_with_full_coverage": {
+      "mean": 6.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "include_predicted_in_counts": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "max_jump": {
+      "mean": 75.01499850029992,
+      "std": 0.0,
+      "n": 1
+    },
+    "max_players_per_frame": {
+      "mean": 10.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "mean_displacement": {
+      "mean": 33.88784369891992,
+      "std": 0.0,
+      "n": 1
+    },
+    "mean_observed_per_frame": {
+      "mean": 8.466666666666667,
+      "std": 0.0,
+      "n": 1
+    },
+    "mean_players_per_frame": {
+      "mean": 8.466666666666667,
+      "std": 0.0,
+      "n": 1
+    },
+    "mean_predicted_per_frame": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "mean_track_streak": {
+      "mean": 8.272727272727273,
+      "std": 0.0,
+      "n": 1
+    },
+    "min_players_per_frame": {
+      "mean": 6.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "min_track_streak": {
+      "mean": 3.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "rolling_loss_frames": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "std_players_per_frame": {
+      "mean": 1.4544949486180951,
+      "std": 0.0,
+      "n": 1
+    },
+    "sudden_drop_frames": {
+      "mean": 1.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "total_frames": {
+      "mean": 15.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "total_id_switches": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    }
+  },
+  "offset_10s/sanitize_plus_velocity_cap": {
+    "ade": {
+      "mean": 32.5980828884148,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_frames_with_full_coverage": {
+      "mean": -2.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_include_predicted_in_counts": {
+      "mean": -1.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_max_jump": {
+      "mean": -182.15557939076012,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_max_players_per_frame": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_mean_displacement": {
+      "mean": -21.08310175599489,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_mean_observed_per_frame": {
+      "mean": -0.33333333333333304,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_mean_players_per_frame": {
+      "mean": -0.33333333333333304,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_mean_predicted_per_frame": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_mean_track_streak": {
+      "mean": -0.5,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_min_players_per_frame": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_min_track_streak": {
+      "mean": -1.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_rolling_loss_frames": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_std_players_per_frame": {
+      "mean": -0.22844814430495486,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_sudden_drop_frames": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_total_frames": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_total_id_switches": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "fde": {
+      "mean": 25.7875375499152,
+      "std": 0.0,
+      "n": 1
+    },
+    "frames_with_full_coverage": {
+      "mean": 1.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "include_predicted_in_counts": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "max_jump": {
+      "mean": 75.02159689049547,
+      "std": 0.0,
+      "n": 1
+    },
+    "max_players_per_frame": {
+      "mean": 10.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "mean_displacement": {
+      "mean": 32.167589341268965,
+      "std": 0.0,
+      "n": 1
+    },
+    "mean_observed_per_frame": {
+      "mean": 6.2,
+      "std": 0.0,
+      "n": 1
+    },
+    "mean_players_per_frame": {
+      "mean": 6.2,
+      "std": 0.0,
+      "n": 1
+    },
+    "mean_predicted_per_frame": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "mean_track_streak": {
+      "mean": 4.333333333333333,
+      "std": 0.0,
+      "n": 1
+    },
+    "min_players_per_frame": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "min_track_streak": {
+      "mean": 2.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "rolling_loss_frames": {
+      "mean": 3.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "std_players_per_frame": {
+      "mean": 3.2903900478008175,
+      "std": 0.0,
+      "n": 1
+    },
+    "sudden_drop_frames": {
+      "mean": 2.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "total_frames": {
+      "mean": 15.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "total_id_switches": {
+      "mean": 2.0,
+      "std": 0.0,
+      "n": 1
+    }
+  },
+  "offset_20s/sanitize_plus_velocity_cap": {
+    "ade": {
+      "mean": 29.639397682728692,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_frames_with_full_coverage": {
+      "mean": -1.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_include_predicted_in_counts": {
+      "mean": -1.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_max_jump": {
+      "mean": -114.63079896797868,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_max_players_per_frame": {
+      "mean": -1.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_mean_displacement": {
+      "mean": -9.368257249275981,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_mean_observed_per_frame": {
+      "mean": -0.7333333333333334,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_mean_players_per_frame": {
+      "mean": -0.7333333333333334,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_mean_predicted_per_frame": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_mean_track_streak": {
+      "mean": -0.666666666666667,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_min_players_per_frame": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_min_track_streak": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_rolling_loss_frames": {
+      "mean": 1.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_std_players_per_frame": {
+      "mean": 0.17009461780195512,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_sudden_drop_frames": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_total_frames": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "delta_total_id_switches": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "fde": {
+      "mean": 23.3150698246285,
+      "std": 0.0,
+      "n": 1
+    },
+    "frames_with_full_coverage": {
+      "mean": 2.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "include_predicted_in_counts": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "max_jump": {
+      "mean": 75.02966080157898,
+      "std": 0.0,
+      "n": 1
+    },
+    "max_players_per_frame": {
+      "mean": 10.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "mean_displacement": {
+      "mean": 27.41295065929579,
+      "std": 0.0,
+      "n": 1
+    },
+    "mean_observed_per_frame": {
+      "mean": 7.266666666666667,
+      "std": 0.0,
+      "n": 1
+    },
+    "mean_players_per_frame": {
+      "mean": 7.266666666666667,
+      "std": 0.0,
+      "n": 1
+    },
+    "mean_predicted_per_frame": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "mean_track_streak": {
+      "mean": 5.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "min_players_per_frame": {
+      "mean": 0.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "min_track_streak": {
+      "mean": 1.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "rolling_loss_frames": {
+      "mean": 2.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "std_players_per_frame": {
+      "mean": 2.619584360585133,
+      "std": 0.0,
+      "n": 1
+    },
+    "sudden_drop_frames": {
+      "mean": 2.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "total_frames": {
+      "mean": 15.0,
+      "std": 0.0,
+      "n": 1
+    },
+    "total_id_switches": {
+      "mean": 2.0,
+      "std": 0.0,
+      "n": 1
+    }
+  }
+}
