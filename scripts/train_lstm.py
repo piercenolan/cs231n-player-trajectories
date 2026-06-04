@@ -3,6 +3,8 @@
 
 import argparse
 import json
+import random
+import subprocess
 import sys
 from pathlib import Path
 
@@ -15,7 +17,9 @@ sys.path.insert(0, str(ROOT))
 from models.trajectory_graph_lstm import TrajectoryGraphLSTM
 from models.trajectory_lstm import RuleConditionedLSTM, TrajectoryLSTM, masked_mse
 from utils.datasets import lstm_out_dir
+from utils.linear_baseline import linear_prediction_norm_torch
 from utils.lstm_dataset import build_dataloaders
+from utils.lstm_val_metrics import forecast_ade_px_rollout
 from utils.rule_features import RULE_FEATURE_DIM
 
 
@@ -83,32 +87,107 @@ def rule_penalty_loss(pred, mask_y, scale, max_speed_px=50.0, min_spacing_px=35.
     return total if n_terms else pred.new_tensor(0.0)
 
 
-def forward_batch(model, model_name, batch, device, scale=None, rule_loss_weight=0.0):
+def scheduled_sampling_prob(epoch, ramp_end=40, max_p=0.3):
+    if epoch <= 0:
+        return 0.0
+    if epoch >= ramp_end:
+        return max_p
+    return max_p * (epoch / ramp_end)
+
+
+def predict_positions(model, model_name, batch, device, residual=False, pred_len=4):
+    """Model output; if residual, add constant-velocity linear baseline."""
     x = batch["x"].to(device)
-    y = batch["y"].to(device)
-    mask_y = batch["mask_y"].to(device)
     if model_name == "rule_features":
         rules = batch["rules_obs"].to(device)
-        pred = model(x, rules)
+        delta = model(x, rules)
     elif model_name == "graph":
         mask_x = batch["mask_x"].to(device)
-        pred = model(x, mask_x)
+        delta = model(x, mask_x)
     else:
-        pred = model(x)
+        delta = model(x)
+    if residual:
+        y_lin = linear_prediction_norm_torch(x, pred_len)
+        return y_lin + delta
+    return delta
+
+
+def masked_l1_px(pred, target, mask_y, scale):
+    """Differentiable L1 in pixel space (closer to ADE than MSE alone)."""
+    scale_t = scale.view(1, 1, 1, 2).to(pred.device)
+    diff = (pred - target).abs() * scale_t
+    mask_f = mask_y.float().unsqueeze(-1).expand_as(diff)
+    return (diff * mask_f).sum() / mask_f.sum().clamp(min=1.0)
+
+
+def apply_scheduled_sampling(model, model_name, batch, device, p, residual=False, pred_len=4):
+    if p <= 0 or random.random() > p:
+        return batch
+    x = batch["x"].to(device).clone()
+    with torch.no_grad():
+        pred = predict_positions(model, model_name, {**batch, "x": x}, device, residual, pred_len)
+    k = min(2, x.shape[1] - 1, pred.shape[1])
+    for i in range(k):
+        x[:, -(k - i)] = pred[:, i]
+    batch = dict(batch)
+    batch["x"] = x
+    return batch
+
+
+def forward_batch(
+    model,
+    model_name,
+    batch,
+    device,
+    scale=None,
+    rule_loss_weight=0.0,
+    residual=False,
+    pred_len=4,
+    px_l1_weight=0.0,
+):
+    y = batch["y"].to(device)
+    mask_y = batch["mask_y"].to(device)
+    pred = predict_positions(model, model_name, batch, device, residual=residual, pred_len=pred_len)
     loss = masked_mse(pred, y, mask_y)
+    if px_l1_weight > 0 and scale is not None:
+        loss = loss + px_l1_weight * masked_l1_px(pred, y, mask_y, scale)
     if rule_loss_weight > 0 and scale is not None:
         loss = loss + rule_loss_weight * rule_penalty_loss(pred, mask_y, scale)
     return loss
 
 
-def train_epoch(model, model_name, loader, optimizer, device, scale, rule_loss_weight):
+def train_epoch(
+    model,
+    model_name,
+    loader,
+    optimizer,
+    device,
+    scale,
+    rule_loss_weight,
+    scheduled_p=0.0,
+    residual=False,
+    pred_len=4,
+    px_l1_weight=0.0,
+):
     model.train()
     total = 0.0
     n = 0
     for batch in loader:
         optimizer.zero_grad()
+        if scheduled_p > 0:
+            batch = apply_scheduled_sampling(
+                model, model_name, batch, device, scheduled_p, residual, pred_len
+            )
         loss = forward_batch(
-            model, model_name, batch, device, scale=scale, rule_loss_weight=rule_loss_weight
+            model,
+            model_name,
+            batch,
+            device,
+            scale=scale,
+            rule_loss_weight=rule_loss_weight,
+            residual=residual,
+            pred_len=pred_len,
+            px_l1_weight=px_l1_weight,
         )
         loss.backward()
         optimizer.step()
@@ -118,13 +197,31 @@ def train_epoch(model, model_name, loader, optimizer, device, scale, rule_loss_w
 
 
 @torch.no_grad()
-def eval_epoch(model, model_name, loader, device, scale, rule_loss_weight):
+def eval_epoch(
+    model,
+    model_name,
+    loader,
+    device,
+    scale,
+    rule_loss_weight,
+    residual=False,
+    pred_len=4,
+    px_l1_weight=0.0,
+):
     model.eval()
     total = 0.0
     n = 0
     for batch in loader:
         loss = forward_batch(
-            model, model_name, batch, device, scale=scale, rule_loss_weight=rule_loss_weight
+            model,
+            model_name,
+            batch,
+            device,
+            scale=scale,
+            rule_loss_weight=rule_loss_weight,
+            residual=residual,
+            pred_len=pred_len,
+            px_l1_weight=px_l1_weight,
         )
         total += loss.item()
         n += 1
@@ -162,11 +259,43 @@ def main():
         help="A1b: weight for velocity/spacing penalty on predictions (rule_features only)",
     )
     parser.add_argument("--val-seed", default=None, help="Held-out seed for held_out_seed split")
+    parser.add_argument(
+        "--scheduled-sampling",
+        action="store_true",
+        help="Mix model predictions into observation window during training",
+    )
+    parser.add_argument(
+        "--post-eval",
+        action="store_true",
+        help="After training, run multi-seed eval and record A1_temporal_all",
+    )
+    parser.add_argument(
+        "--residual",
+        action="store_true",
+        help="Predict correction on top of constant-velocity linear baseline",
+    )
+    parser.add_argument(
+        "--optimize-forecast-ade",
+        action="store_true",
+        help="Save best checkpoint by val rollout forecast ADE (px); add pixel L1 to loss",
+    )
+    parser.add_argument(
+        "--px-l1-weight",
+        type=float,
+        default=0.25,
+        help="Weight for pixel L1 term when --optimize-forecast-ade (default 0.25)",
+    )
     args = parser.parse_args()
 
     require_rules = args.model == "rule_features"
-    default_sub = f"lstm_{args.model}"
-    out_dir = Path(args.out_dir or (lstm_out_dir(args.dataset) / default_sub))
+    if args.out_dir:
+        out_dir = Path(args.out_dir)
+    elif args.model == "rule_features" and args.residual:
+        out_dir = lstm_out_dir(args.dataset) / "lstm_rule_features_residual"
+    elif args.model == "rule_features" and args.split == "temporal_all":
+        out_dir = lstm_out_dir(args.dataset) / "lstm_rule_features_temporal"
+    else:
+        out_dir = lstm_out_dir(args.dataset) / f"lstm_{args.model}"
     out_dir.mkdir(parents=True, exist_ok=True)
 
     dl_kw = dict(
@@ -200,19 +329,77 @@ def main():
     ).to(device)
 
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
-    history = {"train_loss": [], "val_loss": []}
+    px_l1_w = args.px_l1_weight if args.optimize_forecast_ade else 0.0
+    history = {"train_loss": [], "val_loss": [], "val_forecast_ade_px": []}
+    val_paths = split_info.get("val_paths", [])
+    run_cfg = {
+        "model": args.model,
+        "obs_len": args.obs_len,
+        "pred_len": args.pred_len,
+        "residual": args.residual,
+        "scale": scale.tolist(),
+        "num_players": None,
+    }
+
+    best_ade = float("inf")
+    best_state = None
+    best_epoch = 0
 
     print(
-        f"Training {args.model} on {device} | "
+        f"Training {args.model} on {device} | residual={args.residual} | "
+        f"optimize_forecast_ade={args.optimize_forecast_ade} | "
         f"train={len(train_loader)} val={len(val_loader)}"
     )
     for epoch in range(1, args.epochs + 1):
-        tr = train_epoch(model, args.model, train_loader, optimizer, device, scale_t, rule_w)
-        va = eval_epoch(model, args.model, val_loader, device, scale_t, rule_w)
+        sched_p = scheduled_sampling_prob(epoch) if args.scheduled_sampling else 0.0
+        tr = train_epoch(
+            model,
+            args.model,
+            train_loader,
+            optimizer,
+            device,
+            scale_t,
+            rule_w,
+            scheduled_p=sched_p,
+            residual=args.residual,
+            pred_len=args.pred_len,
+            px_l1_weight=px_l1_w,
+        )
+        va = eval_epoch(
+            model,
+            args.model,
+            val_loader,
+            device,
+            scale_t,
+            rule_w,
+            residual=args.residual,
+            pred_len=args.pred_len,
+            px_l1_weight=px_l1_w,
+        )
         history["train_loss"].append(tr)
         history["val_loss"].append(va)
+
+        val_ade = float("nan")
+        if args.optimize_forecast_ade and val_paths:
+            run_cfg["num_players"] = num_players
+            val_ade = forecast_ade_px_rollout(model, run_cfg, val_paths, device)
+            history["val_forecast_ade_px"].append(val_ade)
+            if val_ade == val_ade and val_ade < best_ade:
+                best_ade = val_ade
+                best_state = {k: v.cpu().clone() for k, v in model.state_dict().items()}
+                best_epoch = epoch
+
         if epoch == 1 or epoch % 10 == 0 or epoch == args.epochs:
-            print(f"Epoch {epoch:3d}  train={tr:.6f}  val={va:.6f}")
+            msg = f"Epoch {epoch:3d}  train={tr:.6f}  val={va:.6f}"
+            if val_ade == val_ade:
+                msg += f"  val_forecast_ade={val_ade:.3f}px"
+                if best_ade == best_ade:
+                    msg += f"  best={best_ade:.3f}px@{best_epoch}"
+            print(msg)
+
+    if best_state is not None:
+        model.load_state_dict(best_state)
+        print(f"Loaded best checkpoint from epoch {best_epoch} (val forecast ADE {best_ade:.3f} px)")
 
     config = {
         "model": args.model,
@@ -232,6 +419,12 @@ def main():
         "scale": scale.tolist(),
         "split_info": split_info,
         "rule_loss_weight": rule_w,
+        "scheduled_sampling": args.scheduled_sampling,
+        "residual": args.residual,
+        "optimize_forecast_ade": args.optimize_forecast_ade,
+        "px_l1_weight": px_l1_w,
+        "best_val_forecast_ade_px": best_ade if best_ade == best_ade else None,
+        "best_epoch": best_epoch if best_epoch else None,
     }
 
     ckpt_path = out_dir / "checkpoint.pt"
@@ -243,6 +436,58 @@ def main():
 
     print(f"Checkpoint: {ckpt_path}")
     print(f"Best val loss: {min(history['val_loss']):.6f}")
+    if best_ade == best_ade:
+        print(f"Best val forecast ADE: {best_ade:.3f} px (epoch {best_epoch})")
+
+    run_post_eval = args.post_eval or (
+        args.model == "rule_features"
+        and (args.split == "temporal_all" or args.residual)
+    )
+    if run_post_eval:
+        eval_script = ROOT / "scripts" / "eval_lstm_ablations.py"
+        extra = ["--a1-residual-checkpoint", str(ckpt_path)] if args.residual else []
+        a1_flag = [] if args.residual else ["--a1-checkpoint", str(ckpt_path)]
+        cmd = [
+            sys.executable,
+            str(eval_script),
+            "--dataset",
+            args.dataset,
+            "--all-seeds",
+            "--skip-attribution",
+            *a1_flag,
+            *extra,
+        ]
+        print("Running post-train multi-seed eval:", " ".join(cmd))
+        subprocess.run(cmd, check=True, cwd=str(ROOT))
+        summary_path = lstm_out_dir(args.dataset) / "lstm_ablation_summary.json"
+        variant_key = "A1_residual" if args.residual else "A1_temporal_all"
+        entry = {
+            "variant": variant_key,
+            "checkpoint": str(ckpt_path),
+            "split": args.split,
+            "scheduled_sampling": args.scheduled_sampling,
+            "residual": args.residual,
+            "optimize_forecast_ade": args.optimize_forecast_ade,
+            "best_val_forecast_ade_px": best_ade if best_ade == best_ade else None,
+            "train_config": str(out_dir / "train_config.json"),
+        }
+        if summary_path.is_file():
+            with open(summary_path, encoding="utf-8") as f:
+                existing = json.load(f)
+        else:
+            existing = {}
+        if "runs" not in existing:
+            if "results" in existing:
+                existing = {
+                    "runs": {"held_out_single_seed": existing},
+                }
+            else:
+                existing = {"runs": {}}
+        existing["runs"][variant_key] = entry
+        with open(summary_path, "w", encoding="utf-8") as f:
+            json.dump(existing, f, indent=2)
+        print(f"Appended {variant_key} to {summary_path}")
+
 
 
 if __name__ == "__main__":

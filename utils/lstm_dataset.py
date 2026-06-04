@@ -10,6 +10,7 @@ import torch
 from torch.utils.data import DataLoader, Dataset
 
 from utils.datasets import lstm_tensor_paths, trajectory_tensor_path
+from utils.linear_baseline import linear_prediction_norm
 from utils.rule_features import RULE_FEATURE_DIM
 from utils.seed_schedule import parse_seed_offset_sec
 
@@ -119,12 +120,14 @@ class TrajectoryWindowDataset(Dataset):
 
         x = pos[t0:t_obs]
         y = pos[t_obs:t_end]
+        y_linear = linear_prediction_norm(x, self.pred_len)
         mask_x = vis[t0:t_obs]
         mask_y = vis[t_obs:t_end]
 
         item = {
             "x": torch.from_numpy(x.copy()),
             "y": torch.from_numpy(y.copy()),
+            "y_linear": torch.from_numpy(np.asarray(y_linear, dtype=np.float32).copy()),
             "mask_x": torch.from_numpy(mask_x.copy()),
             "mask_y": torch.from_numpy(mask_y.copy()),
             "seed_id": seq["seed_id"],
@@ -221,10 +224,21 @@ def build_dataloaders(
         ds = TrajectoryWindowDataset(
             all_paths, obs_len, pred_len, stride, require_rule_features=require_rule_features
         )
-        n = len(ds)
-        cut = max(1, int(n * 0.8))
-        train_ds = torch.utils.data.Subset(ds, range(0, cut))
-        val_ds = torch.utils.data.Subset(ds, range(cut, n))
+        per_seq = {}
+        for i, (seq_i, start) in enumerate(ds.samples):
+            per_seq.setdefault(seq_i, []).append((i, start))
+        train_idx, val_idx = [], []
+        per_seed_counts = {}
+        for seq_i, windows in per_seq.items():
+            windows.sort(key=lambda x: x[1])
+            n = len(windows)
+            cut = max(1, int(n * 0.8))
+            sid = ds.sequences[seq_i]["seed_id"]
+            per_seed_counts[sid] = {"train_windows": cut, "val_windows": n - cut}
+            for j, (idx, _) in enumerate(windows):
+                (train_idx if j < cut else val_idx).append(idx)
+        train_ds = torch.utils.data.Subset(ds, train_idx)
+        val_ds = torch.utils.data.Subset(ds, val_idx)
         meta_scale = ds.sequences[0]["scale"]
         return (
             DataLoader(train_ds, batch_size=batch_size, shuffle=True, num_workers=num_workers),
@@ -234,8 +248,10 @@ def build_dataloaders(
                 "train_paths": [str(p) for p in all_paths],
                 "val_paths": [str(p) for p in all_paths],
                 "split": "temporal_all",
-                "num_train_windows": cut,
-                "num_val_windows": n - cut,
+                "per_seed_temporal": True,
+                "num_train_windows": len(train_idx),
+                "num_val_windows": len(val_idx),
+                "per_seed_window_counts": per_seed_counts,
             },
         )
 

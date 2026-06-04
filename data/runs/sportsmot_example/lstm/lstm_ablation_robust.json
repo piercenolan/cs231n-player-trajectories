@@ -8,8 +8,10 @@
       "A0_forecast_ade": 40.15299182205631,
       "A1_forecast_ade": 44.984449037221445,
       "A3_forecast_ade": 40.78559717493895,
+      "linear_forecast_ade": 7.094899719933177,
       "delta_A1_minus_A0": 4.831457215165138,
       "winner": "A0",
+      "winner_vs_linear": "linear",
       "A0_teacher_forced": 69.55036931643353,
       "A1_teacher_forced": 122.4023431022753
     },
@@ -18,8 +20,10 @@
       "A0_forecast_ade": 7.858015224044043,
       "A1_forecast_ade": 7.457814676262929,
       "A3_forecast_ade": 7.9470277165416485,
+      "linear_forecast_ade": 6.163764922036038,
       "delta_A1_minus_A0": -0.4002005477811137,
       "winner": "A1",
+      "winner_vs_linear": "linear",
       "A0_teacher_forced": 8.562130701310867,
       "A1_teacher_forced": 5.251594475865674
     },
@@ -28,8 +32,10 @@
       "A0_forecast_ade": 10.686401478605006,
       "A1_forecast_ade": 6.339930191353508,
       "A3_forecast_ade": 8.471201063285271,
+      "linear_forecast_ade": 4.688552850715641,
       "delta_A1_minus_A0": -4.346471287251498,
       "winner": "A1",
+      "winner_vs_linear": "linear",
       "A0_teacher_forced": 9.278322158808976,
       "A1_teacher_forced": 4.980237690424791
     },
@@ -38,8 +44,10 @@
       "A0_forecast_ade": 10.43274140853807,
       "A1_forecast_ade": 6.968872777553704,
       "A3_forecast_ade": 8.724274327978561,
+      "linear_forecast_ade": 5.943614040600911,
       "delta_A1_minus_A0": -3.463868630984365,
       "winner": "A1",
+      "winner_vs_linear": "linear",
       "A0_teacher_forced": 10.087358410687221,
       "A1_teacher_forced": 4.495385970151091
     },
@@ -48,8 +56,10 @@
       "A0_forecast_ade": 37.296695994126054,
       "A1_forecast_ade": 41.57758040247291,
       "A3_forecast_ade": 37.11899809600471,
+      "linear_forecast_ade": 5.185002135343581,
       "delta_A1_minus_A0": 4.280884408346857,
       "winner": "A0",
+      "winner_vs_linear": "linear",
       "A0_teacher_forced": 80.00345414500634,
       "A1_teacher_forced": 99.33631906691512
     },
@@ -58,8 +68,10 @@
       "A0_forecast_ade": 11.193131964498157,
       "A1_forecast_ade": 9.975477197148866,
       "A3_forecast_ade": 10.914051604177901,
+      "linear_forecast_ade": 7.384540562251234,
       "delta_A1_minus_A0": -1.2176547673492912,
       "winner": "A1",
+      "winner_vs_linear": "linear",
       "A0_teacher_forced": 7.615356687029057,
       "A1_teacher_forced": 4.79281523464905
     },
@@ -68,8 +80,10 @@
       "A0_forecast_ade": 10.665072684118241,
       "A1_forecast_ade": 7.554140473204379,
       "A3_forecast_ade": 8.614503774293528,
+      "linear_forecast_ade": 5.954555263206858,
       "delta_A1_minus_A0": -3.1109322109138624,
       "winner": "A1",
+      "winner_vs_linear": "linear",
       "A0_teacher_forced": 7.920390745111114,
       "A1_teacher_forced": 4.671576898586573
     },
@@ -78,8 +92,10 @@
       "A0_forecast_ade": 7.702032633871597,
       "A1_forecast_ade": 5.645937724337897,
       "A3_forecast_ade": 5.791132360056117,
+      "linear_forecast_ade": 3.219550224957729,
       "delta_A1_minus_A0": -2.0560949095336998,
       "winner": "A1",
+      "winner_vs_linear": "linear",
       "A0_teacher_forced": 7.438438888485817,
       "A1_teacher_forced": 4.345330575902891
     },
@@ -88,8 +104,10 @@
       "A0_forecast_ade": 9.5654701118484,
       "A1_forecast_ade": 6.74827082930992,
       "A3_forecast_ade": 6.563434373668453,
+      "linear_forecast_ade": 4.550815699945138,
       "delta_A1_minus_A0": -2.81719928253848,
       "winner": "A1",
+      "winner_vs_linear": "linear",
       "A0_teacher_forced": 9.032197744311656,
       "A1_teacher_forced": 4.96203931425972
     },
@@ -98,8 +116,10 @@
       "A0_forecast_ade": 53.683680359714494,
       "A1_forecast_ade": 50.644915659539095,
       "A3_forecast_ade": 43.97251854501456,
+      "linear_forecast_ade": 4.5721068126651145,
       "delta_A1_minus_A0": -3.038764700175399,
       "winner": "A1",
+      "winner_vs_linear": "linear",
       "A0_teacher_forced": 89.25016387490665,
       "A1_teacher_forced": 118.13771960454828
     },
@@ -108,8 +128,10 @@
       "A0_forecast_ade": 11.56251098251585,
       "A1_forecast_ade": 7.21561294189377,
       "A3_forecast_ade": 9.23755107604695,
+      "linear_forecast_ade": 5.6679269123552,
       "delta_A1_minus_A0": -4.346898040622079,
       "winner": "A1",
+      "winner_vs_linear": "linear",
       "A0_teacher_forced": 10.632880717258463,
       "A1_teacher_forced": 4.965819933468147
     },
@@ -118,8 +140,10 @@
       "A0_forecast_ade": 9.550234316262216,
       "A1_forecast_ade": 8.871643634412237,
       "A3_forecast_ade": 7.758211761960107,
+      "linear_forecast_ade": 6.783438935906647,
       "delta_A1_minus_A0": -0.678590681849979,
       "winner": "A1",
+      "winner_vs_linear": "linear",
       "A0_teacher_forced": 7.59821462543053,
       "A1_teacher_forced": 6.255611611965537
     }
@@ -137,11 +161,30 @@
       "ade_forecast_std": 16.730377436825727,
       "n_seeds": 12
     },
+    "A1_residual": {
+      "ade_forecast_mean": 5.618815740211379,
+      "ade_forecast_median": 5.805358369183563,
+      "ade_forecast_std": 1.167562011825238,
+      "n_seeds": 12
+    },
     "A3_graph": {
       "ade_forecast_mean": 16.324875156163895,
       "ade_forecast_median": 8.669389051136044,
       "ade_forecast_std": 14.15198012950312,
       "n_seeds": 12
+    },
+    "linear_baseline": {
+      "ade_forecast_mean": 5.6007306733264395,
+      "ade_forecast_median": 5.805770476478056,
+      "ade_forecast_std": 1.1623578357824385,
+      "n_seeds": 12
+    },
+    "SAM_augmented": {
+      "ade_forecast_mean": 5.303986373345519,
+      "ade_forecast_median": 5.275230697932628,
+      "ade_forecast_std": 1.389605321562029,
+      "n_seeds": 12
     }
-  }
+  },
+  "A1_beats_linear_seeds": 0
 }

@@ -97,49 +97,79 @@ def plot_multi_seed(summary_path, output_path):
     print(f"Saved {output_path}")
 
 
-def plot_lstm_ade(eval_path, output_path):
-    """Bar chart: augmented SAM vs LSTM vs linear (forecast horizon if available)."""
-    if not Path(eval_path).is_file():
-        print(f"Skip LSTM plot (missing {eval_path})")
+def plot_lstm_ade(csv_path, output_path, a1_checkpoint=None):
+    """Four-bar headline chart: SAM detection ceiling, linear, A0, A1 (median over seeds)."""
+    import csv
+
+    csv_path = Path(csv_path)
+    if not csv_path.is_file():
+        print(f"Skip LSTM plot (missing {csv_path})")
         return
 
-    with open(eval_path, encoding="utf-8") as f:
-        ev = json.load(f)
+    rows = []
+    with open(csv_path, encoding="utf-8") as f:
+        rows = list(csv.DictReader(f))
 
-    use_forecast = "lstm_forecast_only" in ev
-    if use_forecast:
-        names = ["Aug SAM (forecast)", "LSTM (forecast)", "Linear (forecast)"]
-        ades = [
-            ev["augmented_forecast_only"]["ade"],
-            ev["lstm_forecast_only"]["ade"],
-            ev.get("linear_forecast_only", {}).get("ade", float("nan")),
-        ]
-        title = "ADE on forecast horizon (frames >= obs_len)"
-    else:
-        names = ["Augmented SAM", "LSTM", "Linear"]
-        ades = [
-            ev["augmented_baseline"]["ade"],
-            ev["lstm"]["ade"],
-            ev.get("linear_baseline", {}).get("ade", float("nan")),
-        ]
-        title = "ADE vs GT (full clip)"
+    def med(col):
+        vals = []
+        for r in rows:
+            try:
+                v = float(r[col])
+            except (TypeError, ValueError):
+                continue
+            if v == v:
+                vals.append(v)
+        return float(np.median(vals)) if vals else float("nan")
 
-    colors = ["#2ca02c", "#9467bd", "#ff7f0e"]
-    fig, ax = plt.subplots(figsize=(7, 4))
+    names = ["SAM3.1 (detection)", "Linear", "A0 Plain", "A1 Rule-Cond."]
+    ades = [
+        med("SAM_forecast_ade") if "SAM_forecast_ade" in (rows[0] if rows else {}) else float("nan"),
+        med("linear_forecast_ade"),
+        med("A0_forecast_ade"),
+        med("A1_forecast_ade"),
+    ]
+    if ades[0] != ades[0]:
+        lstm_root = csv_path.parent
+        ms = lstm_root / "lstm_ablation_multi_seed.json"
+        if ms.is_file():
+            import json
+            with open(ms, encoding="utf-8") as f:
+                data = json.load(f)
+            sam_vals = [
+                float(r["ade_forecast"])
+                for r in data.get("per_seed", [])
+                if r.get("variant") == "SAM_augmented" and r.get("ade_forecast") == r.get("ade_forecast")
+            ]
+            if sam_vals:
+                ades[0] = float(np.median(sam_vals))
+
+    colors = ["#2ca02c", "#ff7f0e", "#1f77b4", "#9467bd"]
+    fig, ax = plt.subplots(figsize=(8, 4))
     x = np.arange(len(names))
     ax.bar(x, ades, color=colors, edgecolor="white")
     ax.set_xticks(x)
     ax.set_xticklabels(names, rotation=15, ha="right")
-    ax.set_ylabel("ADE (px)")
-    ax.set_title(title)
+    ax.set_ylabel("Forecast ADE (pixels)")
+    ax.set_ylim(bottom=0)
+    ax.set_title("Forecast ADE — median across all seeds")
     for i, v in enumerate(ades):
         if v == v:
             ax.text(i, v, f"{v:.1f}", ha="center", va="bottom", fontsize=9)
+    ax.annotate(
+        "Detection ceiling\n(uses future frames)",
+        xy=(0, ades[0]) if ades[0] == ades[0] else (0, 0),
+        xytext=(0.5, 0.85),
+        textcoords="axes fraction",
+        fontsize=8,
+        ha="center",
+        arrowprops=dict(arrowstyle="->", color="#2ca02c", lw=1),
+    )
     fig.tight_layout()
-    fig.savefig(output_path, dpi=150)
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(output_path, dpi=150, bbox_inches="tight")
     plt.close(fig)
     print(f"Wrote {output_path}")
-
 
 def write_gauge_report(fig_dir, validation_path, compare_log_path):
     with open(validation_path, encoding="utf-8") as f:
@@ -198,7 +228,7 @@ def main():
         fig_dir / "compare_table.txt",
     )
     plot_lstm_ade(
-        runs_dir(args.dataset) / "lstm" / "lstm_eval.json",
+        runs_dir(args.dataset) / "lstm" / "lstm_per_seed_delta.csv",
         fig_dir / "lstm_ade_bar.png",
     )
 

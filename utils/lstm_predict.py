@@ -10,6 +10,7 @@ import torch
 
 from models.trajectory_graph_lstm import TrajectoryGraphLSTM
 from models.trajectory_lstm import RuleConditionedLSTM, TrajectoryLSTM
+from utils.linear_baseline import linear_prediction_norm
 from utils.lstm_dataset import (
     denormalize_positions,
     load_tensor_file,
@@ -113,12 +114,17 @@ def rollout_positions(model, seq, cfg, device="cpu", stitch="last", autoregressi
                 seq, pos_px, scale, start, obs_len, autoregressive
             )
             rft = torch.from_numpy(rf).unsqueeze(0).to(device)
-            pred_norm = model(xt, rft).squeeze(0).cpu().numpy()
+            delta_norm = model(xt, rft).squeeze(0).cpu().numpy()
         elif model_name == "graph":
             mx = torch.from_numpy(vis[start : start + obs_len]).unsqueeze(0).to(device)
-            pred_norm = model(xt, mx).squeeze(0).cpu().numpy()
+            delta_norm = model(xt, mx).squeeze(0).cpu().numpy()
         else:
-            pred_norm = model(xt).squeeze(0).cpu().numpy()
+            delta_norm = model(xt).squeeze(0).cpu().numpy()
+        if cfg.get("residual"):
+            lin_norm = linear_prediction_norm(x, pred_len)
+            pred_norm = lin_norm + delta_norm
+        else:
+            pred_norm = delta_norm
         pred_px = denormalize_positions(pred_norm, scale)
         t0 = start + obs_len
         for k in range(pred_len):

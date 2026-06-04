@@ -199,6 +199,14 @@ Train all forecaster variants on **all seeds** with temporal split:
 ```powershell
 py scripts/train_lstm.py --model plain --split held_out_seed --val-seed offset_0s --epochs 80
 py scripts/train_lstm.py --model rule_features --split held_out_seed --val-seed offset_0s --epochs 80
+
+**Residual LSTM (linear prior + learned correction, optimizes val forecast ADE):**
+
+```powershell
+py scripts/train_lstm.py --model rule_features --split held_out_seed --val-seed offset_0s ^
+  --residual --optimize-forecast-ade --scheduled-sampling --epochs 80
+py scripts/eval_lstm_ablations.py --dataset sportsmot_example --all-seeds --skip-attribution
+```
 py scripts/train_lstm.py --model graph --split held_out_seed --val-seed offset_0s --epochs 80
 py scripts/train_lstm.py --model rule_features --split held_out_seed --rule-loss-weight 0.001 --out-dir data/runs/sportsmot_example/lstm/lstm_rule_features_a1b
 ```
@@ -260,7 +268,7 @@ Under `data/runs/sportsmot_example/`:
 | `seeds/seed_manifest.json` | 12 seeds @ 2s step (0s–18s) |
 | `seeds/*/trajectory_tensors.json` | Positions + `rule_features` (15-dim) |
 | `seeds/multi_seed_summary.json` | Detection ADE across seeds |
-| `lstm/lstm_plain/`, `lstm_rule_features/`, `lstm_graph/` | Checkpoints per variant |
+| `lstm/lstm_plain/`, `lstm_rule_features/`, `lstm_graph/`, `lstm_rule_features_residual/` | Checkpoints per variant |
 | `lstm/lstm_ablation_summary.csv` | A0–A3 vs linear/SAM (forecast horizon) |
 | `lstm/lstm_ablation_multi_seed.json` | Per-seed + aggregate metrics |
 | `lstm/lstm_rule_attribution.csv` | Per-rule ΔADE (A2 attribution) |

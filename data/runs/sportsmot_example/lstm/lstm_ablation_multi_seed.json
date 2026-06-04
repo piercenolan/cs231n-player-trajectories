@@ -1,6 +1,22 @@
 {
   "per_seed": [
     {
+      "variant": "linear_baseline",
+      "seed_id": "offset_0s",
+      "ade_forecast": 7.094899719933177,
+      "fde_forecast": 11.88912734204426,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
+    },
+    {
+      "variant": "SAM_augmented",
+      "seed_id": "offset_0s",
+      "ade_forecast": 8.421115888459711,
+      "fde_forecast": 7.964425865248269,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
+    },
+    {
       "variant": "A0_plain",
       "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
       "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_offset_0s_A0_plain.json",
@@ -29,6 +45,20 @@
       "seed_id": "offset_0s"
     },
     {
+      "variant": "A1_residual",
+      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\checkpoint.pt",
+      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\predicted_offset_0s_A1_residual.json",
+      "ade_full": 6.479465518872252,
+      "fde_full": 12.777062750877729,
+      "ade_forecast": 7.248357134357561,
+      "fde_forecast": 12.777062750877729,
+      "num_matches": 428,
+      "teacher_forced_ade_px": 367.7234710532861,
+      "persistence_ade_px": 8.509158903499191,
+      "post_refine": null,
+      "seed_id": "offset_0s"
+    },
+    {
       "variant": "A3_graph",
       "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_graph\\checkpoint.pt",
       "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_graph\\predicted_offset_0s_A3_graph.json",
@@ -43,32 +73,20 @@
       "seed_id": "offset_0s"
     },
     {
-      "variant": "A2_post_game",
-      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
-      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_offset_0s_A2_post_game.json",
-      "ade_full": 37.641239320800196,
-      "fde_full": 50.01854678809084,
-      "ade_forecast": 45.2681354352906,
-      "fde_forecast": 50.01854678809084,
-      "num_matches": 394,
-      "teacher_forced_ade_px": 69.55036931643353,
-      "persistence_ade_px": 8.509158903499191,
-      "post_refine": "game",
-      "seed_id": "offset_0s"
+      "variant": "linear_baseline",
+      "seed_id": "offset_10s",
+      "ade_forecast": 6.163764922036038,
+      "fde_forecast": 8.578597867723307,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
     },
     {
-      "variant": "A2_post_physical",
-      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
-      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_offset_0s_A2_post_physical.json",
-      "ade_full": 37.5072219505666,
-      "fde_full": 50.93000278936139,
-      "ade_forecast": 44.99582370705415,
-      "fde_forecast": 50.93000278936139,
-      "num_matches": 394,
-      "teacher_forced_ade_px": 69.55036931643353,
-      "persistence_ade_px": 8.509158903499191,
-      "post_refine": "physical",
-      "seed_id": "offset_0s"
+      "variant": "SAM_augmented",
+      "seed_id": "offset_10s",
+      "ade_forecast": 5.533995851226282,
+      "fde_forecast": 7.335308964252917,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
     },
     {
       "variant": "A0_plain",
@@ -99,6 +117,20 @@
       "seed_id": "offset_10s"
     },
     {
+      "variant": "A1_residual",
+      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\checkpoint.pt",
+      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\predicted_offset_10s_A1_residual.json",
+      "ade_full": 5.844459240324575,
+      "fde_full": 7.782709581207861,
+      "ade_forecast": 6.151760852310757,
+      "fde_forecast": 7.782709581207861,
+      "num_matches": 441,
+      "teacher_forced_ade_px": 408.02205661354856,
+      "persistence_ade_px": 10.067162030992769,
+      "post_refine": null,
+      "seed_id": "offset_10s"
+    },
+    {
       "variant": "A3_graph",
       "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_graph\\checkpoint.pt",
       "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_graph\\predicted_offset_10s_A3_graph.json",
@@ -113,32 +145,20 @@
       "seed_id": "offset_10s"
     },
     {
-      "variant": "A2_post_game",
-      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
-      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_offset_10s_A2_post_game.json",
-      "ade_full": 7.249556111379697,
-      "fde_full": 12.028243966809706,
-      "ade_forecast": 7.861303165504579,
-      "fde_forecast": 12.028243966809706,
-      "num_matches": 447,
-      "teacher_forced_ade_px": 8.562130701310867,
-      "persistence_ade_px": 10.067162030992769,
-      "post_refine": "game",
-      "seed_id": "offset_10s"
+      "variant": "linear_baseline",
+      "seed_id": "offset_12s",
+      "ade_forecast": 4.688552850715641,
+      "fde_forecast": 5.948091228062065,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
     },
     {
-      "variant": "A2_post_physical",
-      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
-      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_offset_10s_A2_post_physical.json",
-      "ade_full": 8.59015398680152,
-      "fde_full": 13.085189495761474,
-      "ade_forecast": 9.23971467065618,
-      "fde_forecast": 13.085189495761474,
-      "num_matches": 447,
-      "teacher_forced_ade_px": 8.562130701310867,
-      "persistence_ade_px": 10.067162030992769,
-      "post_refine": "physical",
-      "seed_id": "offset_10s"
+      "variant": "SAM_augmented",
+      "seed_id": "offset_12s",
+      "ade_forecast": 4.109606598978233,
+      "fde_forecast": 4.008019736710839,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
     },
     {
       "variant": "A0_plain",
@@ -169,6 +189,20 @@
       "seed_id": "offset_12s"
     },
     {
+      "variant": "A1_residual",
+      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\checkpoint.pt",
+      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\predicted_offset_12s_A1_residual.json",
+      "ade_full": 4.491892619763521,
+      "fde_full": 6.139346071609721,
+      "ade_forecast": 4.677560083907727,
+      "fde_forecast": 6.139346071609721,
+      "num_matches": 421,
+      "teacher_forced_ade_px": 423.9708660578324,
+      "persistence_ade_px": 10.853599813484081,
+      "post_refine": null,
+      "seed_id": "offset_12s"
+    },
+    {
       "variant": "A3_graph",
       "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_graph\\checkpoint.pt",
       "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_graph\\predicted_offset_12s_A3_graph.json",
@@ -183,32 +217,20 @@
       "seed_id": "offset_12s"
     },
     {
-      "variant": "A2_post_game",
-      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
-      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_offset_12s_A2_post_game.json",
-      "ade_full": 10.396380196703994,
-      "fde_full": 12.826508473965001,
-      "ade_forecast": 11.767234740418996,
-      "fde_forecast": 12.826508473965001,
-      "num_matches": 424,
-      "teacher_forced_ade_px": 9.278322158808976,
-      "persistence_ade_px": 10.853599813484081,
-      "post_refine": "game",
-      "seed_id": "offset_12s"
+      "variant": "linear_baseline",
+      "seed_id": "offset_14s",
+      "ade_forecast": 5.943614040600911,
+      "fde_forecast": 6.569090243057399,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
     },
     {
-      "variant": "A2_post_physical",
-      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
-      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_offset_12s_A2_post_physical.json",
-      "ade_full": 10.094479764943541,
-      "fde_full": 13.684554364972175,
-      "ade_forecast": 11.292710872443227,
-      "fde_forecast": 13.684554364972175,
-      "num_matches": 425,
-      "teacher_forced_ade_px": 9.278322158808976,
-      "persistence_ade_px": 10.853599813484081,
-      "post_refine": "physical",
-      "seed_id": "offset_12s"
+      "variant": "SAM_augmented",
+      "seed_id": "offset_14s",
+      "ade_forecast": 5.531057915934641,
+      "fde_forecast": 5.884716188785827,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
     },
     {
       "variant": "A0_plain",
@@ -239,6 +261,20 @@
       "seed_id": "offset_14s"
     },
     {
+      "variant": "A1_residual",
+      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\checkpoint.pt",
+      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\predicted_offset_14s_A1_residual.json",
+      "ade_full": 5.504656925117577,
+      "fde_full": 6.085131505276203,
+      "ade_forecast": 5.948327002948575,
+      "fde_forecast": 6.085131505276203,
+      "num_matches": 402,
+      "teacher_forced_ade_px": 383.49203260528657,
+      "persistence_ade_px": 6.508212521210709,
+      "post_refine": null,
+      "seed_id": "offset_14s"
+    },
+    {
       "variant": "A3_graph",
       "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_graph\\checkpoint.pt",
       "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_graph\\predicted_offset_14s_A3_graph.json",
@@ -253,32 +289,20 @@
       "seed_id": "offset_14s"
     },
     {
-      "variant": "A2_post_game",
-      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
-      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_offset_14s_A2_post_game.json",
-      "ade_full": 9.604692838251125,
-      "fde_full": 12.35771084989577,
-      "ade_forecast": 10.931642697452528,
-      "fde_forecast": 12.35771084989577,
-      "num_matches": 404,
-      "teacher_forced_ade_px": 10.087358410687221,
-      "persistence_ade_px": 6.508212521210709,
-      "post_refine": "game",
-      "seed_id": "offset_14s"
+      "variant": "linear_baseline",
+      "seed_id": "offset_15s",
+      "ade_forecast": 5.185002135343581,
+      "fde_forecast": 9.335978283440536,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
     },
     {
-      "variant": "A2_post_physical",
-      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
-      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_offset_14s_A2_post_physical.json",
-      "ade_full": 9.770563617949383,
-      "fde_full": 12.433850405557878,
-      "ade_forecast": 11.06961891158372,
-      "fde_forecast": 12.433850405557878,
-      "num_matches": 404,
-      "teacher_forced_ade_px": 10.087358410687221,
-      "persistence_ade_px": 6.508212521210709,
-      "post_refine": "physical",
-      "seed_id": "offset_14s"
+      "variant": "SAM_augmented",
+      "seed_id": "offset_15s",
+      "ade_forecast": 5.1899452129208195,
+      "fde_forecast": 10.445365176648608,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
     },
     {
       "variant": "A0_plain",
@@ -309,6 +333,20 @@
       "seed_id": "offset_15s"
     },
     {
+      "variant": "A1_residual",
+      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\checkpoint.pt",
+      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\predicted_offset_15s_A1_residual.json",
+      "ade_full": 4.9692209615753065,
+      "fde_full": 9.192449451449992,
+      "ade_forecast": 5.151075380396664,
+      "fde_forecast": 9.192449451449992,
+      "num_matches": 393,
+      "teacher_forced_ade_px": 389.83722478044467,
+      "persistence_ade_px": 8.368268469024802,
+      "post_refine": null,
+      "seed_id": "offset_15s"
+    },
+    {
       "variant": "A3_graph",
       "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_graph\\checkpoint.pt",
       "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_graph\\predicted_offset_15s_A3_graph.json",
@@ -323,32 +361,20 @@
       "seed_id": "offset_15s"
     },
     {
-      "variant": "A2_post_game",
-      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
-      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_offset_15s_A2_post_game.json",
-      "ade_full": 31.259250329068728,
-      "fde_full": 41.473347517179015,
-      "ade_forecast": 38.30088917269316,
-      "fde_forecast": 41.473347517179015,
-      "num_matches": 326,
-      "teacher_forced_ade_px": 80.00345414500634,
-      "persistence_ade_px": 8.368268469024802,
-      "post_refine": "game",
-      "seed_id": "offset_15s"
+      "variant": "linear_baseline",
+      "seed_id": "offset_16s",
+      "ade_forecast": 7.384540562251234,
+      "fde_forecast": 9.832084008131218,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
     },
     {
-      "variant": "A2_post_physical",
-      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
-      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_offset_15s_A2_post_physical.json",
-      "ade_full": 28.632813752751456,
-      "fde_full": 39.674372586939626,
-      "ade_forecast": 34.67437043352637,
-      "fde_forecast": 39.674372586939626,
-      "num_matches": 331,
-      "teacher_forced_ade_px": 80.00345414500634,
-      "persistence_ade_px": 8.368268469024802,
-      "post_refine": "physical",
-      "seed_id": "offset_15s"
+      "variant": "SAM_augmented",
+      "seed_id": "offset_16s",
+      "ade_forecast": 6.830362198513213,
+      "fde_forecast": 6.689231271930993,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
     },
     {
       "variant": "A0_plain",
@@ -379,6 +405,20 @@
       "seed_id": "offset_16s"
     },
     {
+      "variant": "A1_residual",
+      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\checkpoint.pt",
+      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\predicted_offset_16s_A1_residual.json",
+      "ade_full": 6.905607708088319,
+      "fde_full": 9.940050058383134,
+      "ade_forecast": 7.380075761492426,
+      "fde_forecast": 9.940050058383134,
+      "num_matches": 360,
+      "teacher_forced_ade_px": 351.3074488247142,
+      "persistence_ade_px": 4.840605364159188,
+      "post_refine": null,
+      "seed_id": "offset_16s"
+    },
+    {
       "variant": "A3_graph",
       "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_graph\\checkpoint.pt",
       "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_graph\\predicted_offset_16s_A3_graph.json",
@@ -393,32 +433,20 @@
       "seed_id": "offset_16s"
     },
     {
-      "variant": "A2_post_game",
-      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
-      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_offset_16s_A2_post_game.json",
-      "ade_full": 10.21400602184962,
-      "fde_full": 14.725702440769258,
-      "ade_forecast": 11.38640124678914,
-      "fde_forecast": 14.725702440769258,
-      "num_matches": 360,
-      "teacher_forced_ade_px": 7.615356687029057,
-      "persistence_ade_px": 4.840605364159188,
-      "post_refine": "game",
-      "seed_id": "offset_16s"
+      "variant": "linear_baseline",
+      "seed_id": "offset_18s",
+      "ade_forecast": 5.954555263206858,
+      "fde_forecast": 4.5147399425792125,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
     },
     {
-      "variant": "A2_post_physical",
-      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
-      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_offset_16s_A2_post_physical.json",
-      "ade_full": 9.673891784052868,
-      "fde_full": 14.811392706114638,
-      "ade_forecast": 10.734176298551228,
-      "fde_forecast": 14.811392706114638,
-      "num_matches": 360,
-      "teacher_forced_ade_px": 7.615356687029057,
-      "persistence_ade_px": 4.840605364159188,
-      "post_refine": "physical",
-      "seed_id": "offset_16s"
+      "variant": "SAM_augmented",
+      "seed_id": "offset_18s",
+      "ade_forecast": 5.322252914127266,
+      "fde_forecast": 4.838073873655349,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
     },
     {
       "variant": "A0_plain",
@@ -449,6 +477,20 @@
       "seed_id": "offset_18s"
     },
     {
+      "variant": "A1_residual",
+      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\checkpoint.pt",
+      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\predicted_offset_18s_A1_residual.json",
+      "ade_full": 6.01068070472998,
+      "fde_full": 4.748912980317124,
+      "ade_forecast": 6.122910140607054,
+      "fde_forecast": 4.748912980317124,
+      "num_matches": 437,
+      "teacher_forced_ade_px": 389.7808810209253,
+      "persistence_ade_px": 6.6465796115451585,
+      "post_refine": null,
+      "seed_id": "offset_18s"
+    },
+    {
       "variant": "A3_graph",
       "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_graph\\checkpoint.pt",
       "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_graph\\predicted_offset_18s_A3_graph.json",
@@ -463,32 +505,20 @@
       "seed_id": "offset_18s"
     },
     {
-      "variant": "A2_post_game",
-      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
-      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_offset_18s_A2_post_game.json",
-      "ade_full": 9.871261555310493,
-      "fde_full": 12.891613518225922,
-      "ade_forecast": 10.785254554390034,
-      "fde_forecast": 12.891613518225922,
-      "num_matches": 442,
-      "teacher_forced_ade_px": 7.920390745111114,
-      "persistence_ade_px": 6.6465796115451585,
-      "post_refine": "game",
-      "seed_id": "offset_18s"
+      "variant": "linear_baseline",
+      "seed_id": "offset_2s",
+      "ade_forecast": 3.219550224957729,
+      "fde_forecast": 5.620072044750459,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
     },
     {
-      "variant": "A2_post_physical",
-      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
-      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_offset_18s_A2_post_physical.json",
-      "ade_full": 10.853414130379186,
-      "fde_full": 12.728160342182491,
-      "ade_forecast": 11.753911879960953,
-      "fde_forecast": 12.728160342182491,
-      "num_matches": 442,
-      "teacher_forced_ade_px": 7.920390745111114,
-      "persistence_ade_px": 6.6465796115451585,
-      "post_refine": "physical",
-      "seed_id": "offset_18s"
+      "variant": "SAM_augmented",
+      "seed_id": "offset_2s",
+      "ade_forecast": 2.926622282923471,
+      "fde_forecast": 3.5022072963446136,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
     },
     {
       "variant": "A0_plain",
@@ -519,6 +549,20 @@
       "seed_id": "offset_2s"
     },
     {
+      "variant": "A1_residual",
+      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\checkpoint.pt",
+      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\predicted_offset_2s_A1_residual.json",
+      "ade_full": 3.2239193485582116,
+      "fde_full": 5.722354671737841,
+      "ade_forecast": 3.246405612644809,
+      "fde_forecast": 5.722354671737841,
+      "num_matches": 447,
+      "teacher_forced_ade_px": 370.0441158294678,
+      "persistence_ade_px": 4.042745408207616,
+      "post_refine": null,
+      "seed_id": "offset_2s"
+    },
+    {
       "variant": "A3_graph",
       "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_graph\\checkpoint.pt",
       "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_graph\\predicted_offset_2s_A3_graph.json",
@@ -533,32 +577,20 @@
       "seed_id": "offset_2s"
     },
     {
-      "variant": "A2_post_game",
-      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
-      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_offset_2s_A2_post_game.json",
-      "ade_full": 6.8667721115782125,
-      "fde_full": 11.381754172564106,
-      "ade_forecast": 7.635101711239108,
-      "fde_forecast": 11.381754172564106,
-      "num_matches": 447,
-      "teacher_forced_ade_px": 7.438438888485817,
-      "persistence_ade_px": 4.042745408207616,
-      "post_refine": "game",
-      "seed_id": "offset_2s"
+      "variant": "linear_baseline",
+      "seed_id": "offset_4s",
+      "ade_forecast": 4.550815699945138,
+      "fde_forecast": 8.313332850971074,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
     },
     {
-      "variant": "A2_post_physical",
-      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
-      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_offset_2s_A2_post_physical.json",
-      "ade_full": 7.1801017951839405,
-      "fde_full": 11.773612954082576,
-      "ade_forecast": 7.710056932040542,
-      "fde_forecast": 11.773612954082576,
-      "num_matches": 447,
-      "teacher_forced_ade_px": 7.438438888485817,
-      "persistence_ade_px": 4.042745408207616,
-      "post_refine": "physical",
-      "seed_id": "offset_2s"
+      "variant": "SAM_augmented",
+      "seed_id": "offset_4s",
+      "ade_forecast": 4.090290257762613,
+      "fde_forecast": 3.846749954062369,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
     },
     {
       "variant": "A0_plain",
@@ -589,6 +621,20 @@
       "seed_id": "offset_4s"
     },
     {
+      "variant": "A1_residual",
+      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\checkpoint.pt",
+      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\predicted_offset_4s_A1_residual.json",
+      "ade_full": 4.3847833914065735,
+      "fde_full": 8.662023712706937,
+      "ade_forecast": 4.499583244211773,
+      "fde_forecast": 8.662023712706937,
+      "num_matches": 450,
+      "teacher_forced_ade_px": 340.7368247424855,
+      "persistence_ade_px": 4.644972447305918,
+      "post_refine": null,
+      "seed_id": "offset_4s"
+    },
+    {
       "variant": "A3_graph",
       "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_graph\\checkpoint.pt",
       "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_graph\\predicted_offset_4s_A3_graph.json",
@@ -603,32 +649,20 @@
       "seed_id": "offset_4s"
     },
     {
-      "variant": "A2_post_game",
-      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
-      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_offset_4s_A2_post_game.json",
-      "ade_full": 8.478600638554173,
-      "fde_full": 11.06195771676025,
-      "ade_forecast": 9.486212973000152,
-      "fde_forecast": 11.06195771676025,
-      "num_matches": 450,
-      "teacher_forced_ade_px": 9.032197744311656,
-      "persistence_ade_px": 4.644972447305918,
-      "post_refine": "game",
-      "seed_id": "offset_4s"
+      "variant": "linear_baseline",
+      "seed_id": "offset_5s",
+      "ade_forecast": 4.5721068126651145,
+      "fde_forecast": 5.616668291356491,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
     },
     {
-      "variant": "A2_post_physical",
-      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
-      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_offset_4s_A2_post_physical.json",
-      "ade_full": 8.585116819335024,
-      "fde_full": 11.293815518132533,
-      "ade_forecast": 9.61030424240394,
-      "fde_forecast": 11.293815518132533,
-      "num_matches": 450,
-      "teacher_forced_ade_px": 9.032197744311656,
-      "persistence_ade_px": 4.644972447305918,
-      "post_refine": "physical",
-      "seed_id": "offset_4s"
+      "variant": "SAM_augmented",
+      "seed_id": "offset_5s",
+      "ade_forecast": 4.127563322973336,
+      "fde_forecast": 4.998654224810901,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
     },
     {
       "variant": "A0_plain",
@@ -659,6 +693,20 @@
       "seed_id": "offset_5s"
     },
     {
+      "variant": "A1_residual",
+      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\checkpoint.pt",
+      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\predicted_offset_5s_A1_residual.json",
+      "ade_full": 4.543985198996407,
+      "fde_full": 5.696527467492729,
+      "ade_forecast": 4.678311718924819,
+      "fde_forecast": 5.696527467492729,
+      "num_matches": 450,
+      "teacher_forced_ade_px": 321.29633240419275,
+      "persistence_ade_px": 4.335173410440192,
+      "post_refine": null,
+      "seed_id": "offset_5s"
+    },
+    {
       "variant": "A3_graph",
       "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_graph\\checkpoint.pt",
       "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_graph\\predicted_offset_5s_A3_graph.json",
@@ -673,32 +721,20 @@
       "seed_id": "offset_5s"
     },
     {
-      "variant": "A2_post_game",
-      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
-      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_offset_5s_A2_post_game.json",
-      "ade_full": 42.725285980255954,
-      "fde_full": 48.9653275546143,
-      "ade_forecast": 54.03096480834475,
-      "fde_forecast": 48.9653275546143,
-      "num_matches": 354,
-      "teacher_forced_ade_px": 89.25016387490665,
-      "persistence_ade_px": 4.335173410440192,
-      "post_refine": "game",
-      "seed_id": "offset_5s"
+      "variant": "linear_baseline",
+      "seed_id": "offset_6s",
+      "ade_forecast": 5.6679269123552,
+      "fde_forecast": 6.591788814755384,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
     },
     {
-      "variant": "A2_post_physical",
-      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
-      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_offset_5s_A2_post_physical.json",
-      "ade_full": 41.72171898290603,
-      "fde_full": 48.648656548104476,
-      "ade_forecast": 52.522392218627,
-      "fde_forecast": 48.648656548104476,
-      "num_matches": 359,
-      "teacher_forced_ade_px": 89.25016387490665,
-      "persistence_ade_px": 4.335173410440192,
-      "post_refine": "physical",
-      "seed_id": "offset_5s"
+      "variant": "SAM_augmented",
+      "seed_id": "offset_6s",
+      "ade_forecast": 5.22820848173799,
+      "fde_forecast": 4.146415166341536,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
     },
     {
       "variant": "A0_plain",
@@ -729,6 +765,20 @@
       "seed_id": "offset_6s"
     },
     {
+      "variant": "A1_residual",
+      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\checkpoint.pt",
+      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\predicted_offset_6s_A1_residual.json",
+      "ade_full": 5.3867301838992105,
+      "fde_full": 7.208176540308342,
+      "ade_forecast": 5.662389735418551,
+      "fde_forecast": 7.208176540308342,
+      "num_matches": 449,
+      "teacher_forced_ade_px": 323.7538059459013,
+      "persistence_ade_px": 5.2346472360632,
+      "post_refine": null,
+      "seed_id": "offset_6s"
+    },
+    {
       "variant": "A3_graph",
       "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_graph\\checkpoint.pt",
       "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_graph\\predicted_offset_6s_A3_graph.json",
@@ -743,32 +793,20 @@
       "seed_id": "offset_6s"
     },
     {
-      "variant": "A2_post_game",
-      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
-      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_offset_6s_A2_post_game.json",
-      "ade_full": 10.400514714830994,
-      "fde_full": 18.970669567433657,
-      "ade_forecast": 11.756834805640977,
-      "fde_forecast": 18.970669567433657,
-      "num_matches": 450,
-      "teacher_forced_ade_px": 10.632880717258463,
-      "persistence_ade_px": 5.2346472360632,
-      "post_refine": "game",
-      "seed_id": "offset_6s"
+      "variant": "linear_baseline",
+      "seed_id": "offset_8s",
+      "ade_forecast": 6.783438935906647,
+      "fde_forecast": 8.995114436787647,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
     },
     {
-      "variant": "A2_post_physical",
-      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
-      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_offset_6s_A2_post_physical.json",
-      "ade_full": 10.731274407843792,
-      "fde_full": 17.76471502653,
-      "ade_forecast": 11.612342564596847,
-      "fde_forecast": 17.76471502653,
-      "num_matches": 450,
-      "teacher_forced_ade_px": 10.632880717258463,
-      "persistence_ade_px": 5.2346472360632,
-      "post_refine": "physical",
-      "seed_id": "offset_6s"
+      "variant": "SAM_augmented",
+      "seed_id": "offset_8s",
+      "ade_forecast": 6.336815554588658,
+      "fde_forecast": 5.094679306028629,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
     },
     {
       "variant": "A0_plain",
@@ -799,6 +837,20 @@
       "seed_id": "offset_8s"
     },
     {
+      "variant": "A1_residual",
+      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\checkpoint.pt",
+      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\predicted_offset_8s_A1_residual.json",
+      "ade_full": 6.442483523211729,
+      "fde_full": 8.919047179769292,
+      "ade_forecast": 6.659032215315841,
+      "fde_forecast": 8.919047179769292,
+      "num_matches": 447,
+      "teacher_forced_ade_px": 393.746230221359,
+      "persistence_ade_px": 6.393635592660343,
+      "post_refine": null,
+      "seed_id": "offset_8s"
+    },
+    {
       "variant": "A3_graph",
       "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_graph\\checkpoint.pt",
       "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_graph\\predicted_offset_8s_A3_graph.json",
@@ -811,37 +863,21 @@
       "persistence_ade_px": 6.393635592660343,
       "post_refine": null,
       "seed_id": "offset_8s"
-    },
-    {
-      "variant": "A2_post_game",
-      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
-      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_offset_8s_A2_post_game.json",
-      "ade_full": 8.914658642936953,
-      "fde_full": 7.732585233986337,
-      "ade_forecast": 9.617845446180908,
-      "fde_forecast": 7.732585233986337,
-      "num_matches": 447,
-      "teacher_forced_ade_px": 7.59821462543053,
-      "persistence_ade_px": 6.393635592660343,
-      "post_refine": "game",
-      "seed_id": "offset_8s"
-    },
-    {
-      "variant": "A2_post_physical",
-      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\checkpoint.pt",
-      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\lstm_plain\\predicted_offset_8s_A2_post_physical.json",
-      "ade_full": 9.633721487973434,
-      "fde_full": 6.793049071346683,
-      "ade_forecast": 10.346964551117217,
-      "fde_forecast": 6.793049071346683,
-      "num_matches": 447,
-      "teacher_forced_ade_px": 7.59821462543053,
-      "persistence_ade_px": 6.393635592660343,
-      "post_refine": "physical",
-      "seed_id": "offset_8s"
     }
   ],
   "aggregate": {
+    "linear_baseline": {
+      "ade_forecast_mean": 5.6007306733264395,
+      "ade_forecast_median": 5.805770476478056,
+      "ade_forecast_std": 1.1623578357824385,
+      "n_seeds": 12
+    },
+    "SAM_augmented": {
+      "ade_forecast_mean": 5.303986373345519,
+      "ade_forecast_median": 5.275230697932628,
+      "ade_forecast_std": 1.389605321562029,
+      "n_seeds": 12
+    },
     "A0_plain": {
       "ade_forecast_mean": 18.362414915016537,
       "ade_forecast_median": 10.675737081361625,
@@ -854,22 +890,16 @@
       "ade_forecast_std": 16.730377436825727,
       "n_seeds": 12
     },
+    "A1_residual": {
+      "ade_forecast_mean": 5.618815740211379,
+      "ade_forecast_median": 5.805358369183563,
+      "ade_forecast_std": 1.167562011825238,
+      "n_seeds": 12
+    },
     "A3_graph": {
       "ade_forecast_mean": 16.324875156163895,
       "ade_forecast_median": 8.669389051136044,
       "ade_forecast_std": 14.15198012950312,
-      "n_seeds": 12
-    },
-    "A2_post_game": {
-      "ade_forecast_mean": 19.068985063078745,
-      "ade_forecast_median": 11.159021972120833,
-      "ade_forecast_std": 15.85544793805601,
-      "n_seeds": 12
-    },
-    "A2_post_physical": {
-      "ade_forecast_mean": 18.796865606880115,
-      "ade_forecast_median": 11.181164892013474,
-      "ade_forecast_std": 15.078108070023893,
       "n_seeds": 12
     }
   }

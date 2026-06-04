@@ -86,6 +86,31 @@ def eval_tracks_ade(tracks_path, gt_path, min_frame=None, max_distance=80.0):
     return compute_ade_fde(tracks_path, gt_path, **kw)
 
 
+
+
+def linear_forecast_ade_for_seed(tensor_path, gt_path, lstm_root, seed_id, obs_len=8, pred_len=4):
+    seq = load_tensor_file(tensor_path)
+    cfg = {"obs_len": obs_len, "pred_len": pred_len}
+    lin_pos, _ = linear_extrapolation_positions(seq, cfg)
+    lin_tracks = positions_to_tracks(seq, lin_pos)
+    lin_p = lstm_root / f"_lin_eval_{seed_id}.json"
+    save_tracks(lin_p, lin_tracks)
+    min_f = forecast_min_frame_from_tracks(lin_p, obs_len)
+    if min_f is not None:
+        return eval_tracks_ade(lin_p, gt_path, min_frame=min_f)
+    return eval_tracks_ade(lin_p, gt_path)
+
+
+def sam_forecast_ade_for_seed(dataset, seed_id, gt_path, obs_len=8):
+    aug_path = seed_augmented_tracks_path(dataset, seed_id)
+    if not aug_path.is_file():
+        return {"ade": float("nan"), "fde": float("nan")}
+    min_f = forecast_min_frame_from_tracks(aug_path, obs_len)
+    if min_f is not None:
+        return eval_tracks_ade(aug_path, gt_path, min_frame=min_f)
+    return eval_tracks_ade(aug_path, gt_path)
+
+
 def run_variant(
     variant_id,
     ckpt_path,
@@ -184,8 +209,9 @@ def per_rule_attribution(plain_ckpt, tensor_path, gt_path, device, dataset):
     return rows, str(out_csv)
 
 
-def write_robust_report(seed_rows, lstm_root, dataset):
+def write_robust_report(seed_rows, lstm_root, dataset, linear_by_seed=None):
     """Per-seed A1 vs A0 delta, median ADE, win rate."""
+    linear_by_seed = linear_by_seed or {}
     by_seed = {}
     for row in seed_rows:
         sid = row["seed_id"]
@@ -193,12 +219,15 @@ def write_robust_report(seed_rows, lstm_root, dataset):
 
     delta_rows = []
     wins = losses = 0
+    a1_beats_linear = 0
     for sid in sorted(by_seed.keys()):
         a0 = by_seed[sid].get("A0_plain", {})
         a1 = by_seed[sid].get("A1_rule_features", {})
         a3 = by_seed[sid].get("A3_graph", {})
+        lin_row = by_seed[sid].get("linear_baseline", {})
         fc0 = a0.get("ade_forecast", float("nan"))
         fc1 = a1.get("ade_forecast", float("nan"))
+        fc_lin = lin_row.get("ade_forecast", linear_by_seed.get(sid, float("nan")))
         delta = fc1 - fc0 if fc0 == fc0 and fc1 == fc1 else float("nan")
         if delta == delta:
             if delta < -0.01:
@@ -211,14 +240,26 @@ def write_robust_report(seed_rows, lstm_root, dataset):
                 winner = "tie"
         else:
             winner = "na"
+        if fc1 == fc1 and fc_lin == fc_lin:
+            if fc1 < fc_lin - 0.01:
+                winner_vs_linear = "A1"
+                a1_beats_linear += 1
+            elif fc1 > fc_lin + 0.01:
+                winner_vs_linear = "linear"
+            else:
+                winner_vs_linear = "tie"
+        else:
+            winner_vs_linear = "na"
         delta_rows.append(
             {
                 "seed_id": sid,
                 "A0_forecast_ade": fc0,
                 "A1_forecast_ade": fc1,
                 "A3_forecast_ade": a3.get("ade_forecast"),
+                "linear_forecast_ade": fc_lin,
                 "delta_A1_minus_A0": delta,
                 "winner": winner,
+                "winner_vs_linear": winner_vs_linear,
                 "A0_teacher_forced": a0.get("teacher_forced_ade_px"),
                 "A1_teacher_forced": a1.get("teacher_forced_ade_px"),
             }
@@ -238,7 +279,14 @@ def write_robust_report(seed_rows, lstm_root, dataset):
         "per_seed_delta": delta_rows,
         "robust_aggregate": {},
     }
-    for variant in ("A0_plain", "A1_rule_features", "A3_graph"):
+    for variant in (
+        "A0_plain",
+        "A1_rule_features",
+        "A1_residual",
+        "A3_graph",
+        "linear_baseline",
+        "SAM_augmented",
+    ):
         ades = collect(variant)
         if ades:
             summary["robust_aggregate"][variant] = {
@@ -247,6 +295,8 @@ def write_robust_report(seed_rows, lstm_root, dataset):
                 "ade_forecast_std": float(np.std(ades)),
                 "n_seeds": len(ades),
             }
+
+    summary["A1_beats_linear_seeds"] = a1_beats_linear
 
     report_path = lstm_root / "lstm_ablation_robust.json"
     with open(report_path, "w", encoding="utf-8") as f:
@@ -298,6 +348,16 @@ def main():
         help="Recompute rule features from rolled-out positions (A1)",
     )
     parser.add_argument(
+        "--a1-checkpoint",
+        default=None,
+        help="Override A1 checkpoint path",
+    )
+    parser.add_argument(
+        "--a1-residual-checkpoint",
+        default=None,
+        help="Override A1 residual checkpoint path",
+    )
+    parser.add_argument(
         "--diagnose-seeds",
         action="store_true",
         help="Run seed diagnosis and write lstm/seed_diagnosis.json",
@@ -317,13 +377,21 @@ def main():
         align_if_missing=True,
     )
 
+    a1_ckpt = Path(args.a1_checkpoint) if args.a1_checkpoint else (lstm_root / "lstm_rule_features" / "checkpoint.pt")
+    a1_res_ckpt = (
+        Path(args.a1_residual_checkpoint)
+        if args.a1_residual_checkpoint
+        else (lstm_root / "lstm_rule_features_residual" / "checkpoint.pt")
+    )
     variants = [
         ("A0_plain", lstm_root / "lstm_plain" / "checkpoint.pt", None),
-        ("A1_rule_features", lstm_root / "lstm_rule_features" / "checkpoint.pt", None),
+        ("A1_rule_features", a1_ckpt, None),
         ("A3_graph", lstm_root / "lstm_graph" / "checkpoint.pt", None),
         ("A2_post_game", lstm_root / "lstm_plain" / "checkpoint.pt", "game"),
         ("A2_post_physical", lstm_root / "lstm_plain" / "checkpoint.pt", "physical"),
     ]
+    if a1_res_ckpt.is_file():
+        variants.insert(2, ("A1_residual", a1_res_ckpt, None))
 
     aug_path = seed_augmented_tracks_path(args.dataset, args.seed_id)
     if aug_path.is_file():
@@ -425,6 +493,7 @@ def main():
             if d.is_dir() and (d / "trajectory_tensors.json").is_file()
         )
         seed_rows = []
+        linear_by_seed = {}
         for sid in seed_ids:
             tp = runs_dir(args.dataset) / "seeds" / sid / "trajectory_tensors.json"
             if not tp.is_file():
@@ -435,7 +504,32 @@ def main():
                 runs_dir(args.dataset, sid) / "baseline_tracks.json",
                 align_if_missing=True,
             )
+            lin_m = linear_forecast_ade_for_seed(tp, gt, lstm_root, sid)
+            linear_by_seed[sid] = lin_m["ade"]
+            seed_rows.append(
+                {
+                    "variant": "linear_baseline",
+                    "seed_id": sid,
+                    "ade_forecast": lin_m["ade"],
+                    "fde_forecast": lin_m.get("fde"),
+                    "teacher_forced_ade_px": float("nan"),
+                    "persistence_ade_px": float("nan"),
+                }
+            )
+            sam_m = sam_forecast_ade_for_seed(args.dataset, sid, gt)
+            seed_rows.append(
+                {
+                    "variant": "SAM_augmented",
+                    "seed_id": sid,
+                    "ade_forecast": sam_m["ade"],
+                    "fde_forecast": sam_m.get("fde"),
+                    "teacher_forced_ade_px": float("nan"),
+                    "persistence_ade_px": float("nan"),
+                }
+            )
             for vid, ckpt, pr in variants:
+                if pr is not None:
+                    continue
                 if not ckpt.is_file():
                     continue
                 r = run_variant(
@@ -463,7 +557,7 @@ def main():
             }
         with open(agg_path, "w", encoding="utf-8") as f:
             json.dump({"per_seed": seed_rows, "aggregate": aggregate}, f, indent=2)
-        write_robust_report(seed_rows, lstm_root, args.dataset)
+        write_robust_report(seed_rows, lstm_root, args.dataset, linear_by_seed=linear_by_seed)
         print(f"Wrote {agg_path}")
 
 
