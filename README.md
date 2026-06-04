@@ -1,227 +1,273 @@
 # CS231N Player Trajectories (SAM3.1)
 
-Research project for evaluating **SAM3.1** tracking on basketball broadcast video, then improving it with a basketball-domain, geometry-free augmentation layer.
+Research project: **SAM3.1** player tracking on basketball video, a **geometry-free augmentation** layer, evaluation against **SportsMOT** ground truth, and **rule-aware LSTM** trajectory forecasting (plain, rule-conditioned, graph, and post-refine ablations).
 
-## Project Goal
+**Write-up:** [docs/MILESTONE_CHECKLIST.md](docs/MILESTONE_CHECKLIST.md) · **Living plan:** [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.md) · **Multi-seed:** [docs/MULTI_SEED_COMMANDS.md](docs/MULTI_SEED_COMMANDS.md)
 
-Phase 1 objective:
-- run SAM3.1 on basketball clips,
-- extract per-frame player tracks,
-- measure baseline failures (ID switches, tracking loss),
-- apply augmentation rules,
-- compare baseline vs augmented outputs quantitatively and qualitatively.
+---
 
-## Current Architecture
+## Architecture
 
-End-to-end pipeline:
+```mermaid
+flowchart TB
+  subgraph data [Data layer]
+    DS[data/datasets/sportsmot_example\nframes + gt.txt]
+  end
+  subgraph runs [Run outputs data/runs/sportsmot_example]
+    SEEDS[seeds/offset_*s/]
+    TT[trajectory_tensors.json + rule_features]
+    LSTM[lstm/lstm_plain | rule_features | graph]
+  end
+  subgraph track [Tracking]
+    MOD[run_modal.py / run_all_seeds_modal.py]
+    BT[baseline_tracks.json]
+  end
+  subgraph aug [Augmentation]
+    AUG[utils/augmentation.py]
+    RF[utils/rule_features.py]
+  end
+  subgraph forecast [Forecasting]
+    A0[A0 plain LSTM]
+    A1[A1 rule-conditioned LSTM]
+    A3[A3 graph LSTM]
+    A2[A2 post-refine on predictions]
+  end
+  DS --> MOD --> BT
+  BT --> AUG --> SEEDS
+  AUG --> RF --> TT
+  TT --> A0
+  TT --> A1
+  TT --> A3
+  A0 --> A2
+```
 
-1. **Tracking (`scripts/run_sam3.py`)**
-   - Extracts JPEG frames from input video (`extract_frames`, default 5 FPS sampling).
-   - Loads SAM3.1 multiplex predictor.
-   - Starts session and prompts frame 0 with text `"basketball players"`.
-   - Propagates tracking across video.
-   - Saves raw tracks JSON to `data/outputs/tracks.json`.
+| Stage | Component | Output |
+|-------|-----------|--------|
+| 1. Track | SAM3.1 + mask filters | `seeds/{seed_id}/baseline_tracks.json` |
+| 2. Align GT | MOT `gt.txt` → track space | `seeds/{seed_id}/gt_aligned.json` |
+| 3. Augment | sanitize → rules → optional gap-fill | `ablations/*/augmented_tracks.json` |
+| 4. Evaluate | metrics, ADE/FDE, ablations, grid | CSV + `recommended_config.json` |
+| 5. Export | `(T,P,2)` positions + optional `rule_features` | `seeds/*/trajectory_tensors.json` |
+| 6. Multi-seed | SAM3 at 2s offsets (12 windows) | `seeds/seed_manifest.json` |
+| 7. LSTM | A0–A3 train / predict / ablation eval | `lstm/lstm_*/checkpoint.pt`, `lstm_ablation_summary.csv` |
 
-2. **Baseline / Evaluation (`utils/metrics.py`)**
-   - Loads tracks JSON.
-   - Computes ID stability and coverage metrics.
-   - Generates report + plots (baseline or augmented labels supported).
+Paths are resolved via `utils/datasets.py` (`--dataset sportsmot_example`).
 
-3. **Augmentation (`utils/augmentation.py`)**
-   - Post-processes tracks with geometry-free basketball rules.
-   - Supports ablations: `physical`, `game`, `full`.
-   - Re-identifies missing players with prediction (`"predicted": true` flag).
-   - Saves augmented tracks + correction log.
+---
 
-4. **Visualization (`utils/visualize.py`)**
-   - Draws tracks on frames.
-   - Creates baseline vs augmented side-by-side comparisons.
-   - Creates summary figure for paper/slides.
+## Milestone status (short)
 
-## Repository Layout
+| Phase | Status |
+|-------|--------|
+| SportsMOT data + SAM3 baseline | Done |
+| Real GT + ablations + sanitize grid | Done |
+| Multi-seed SAM3 (12 seeds @ 2s step) | Done |
+| LSTM export + rule features (15-dim) | Done |
+| Rule-aware LSTM A0–A3 + ablation tables | Done |
+
+Details and report numbers: [docs/MILESTONE_CHECKLIST.md](docs/MILESTONE_CHECKLIST.md).
+
+---
+
+## Repository layout
 
 ```text
 cs231n-player-trajectories/
+├── docs/
+│   ├── MILESTONE_CHECKLIST.md   # one-page report status + LSTM ablation table
+│   ├── PROJECT_PLAN.md          # phases, architecture, LSTM variants
+│   └── MULTI_SEED_COMMANDS.md   # Modal multi-seed orchestration
 ├── scripts/
-│   └── run_sam3.py
+│   ├── run_modal.py / run_sam3.py
+│   ├── run_all_seeds_modal.py   # all seeds: Modal + GT + export
+│   ├── export_lstm_tensors.py   # --with-rule-features
+│   ├── train_lstm.py            # --model plain|rule_features|graph
+│   ├── predict_lstm.py          # --post-refine physical|game|full
+│   ├── eval_lstm.py / eval_lstm_ablations.py
+│   └── audit_lstm.py
+├── models/
+│   ├── trajectory_lstm.py       # TrajectoryLSTM, RuleConditionedLSTM
+│   └── trajectory_graph_lstm.py # TrajectoryGraphLSTM (A3)
 ├── utils/
-│   ├── augmentation.py
-│   ├── metrics.py
-│   ├── video_utils.py
-│   └── visualize.py
+│   ├── augmentation.py, rule_features.py
+│   ├── lstm_dataset.py, lstm_predict.py
+│   ├── trajectory_export.py, trajectory_metrics.py
+│   └── datasets.py
 ├── data/
-│   ├── clips/                 # input .mp4 clips (not committed)
-│   ├── frames_dir/            # extracted JPEG frames (generated)
-│   └── outputs/               # tracks, metrics, visualizations (generated)
+│   ├── datasets/sportsmot_example/
+│   └── runs/sportsmot_example/   # seeds/, lstm/, figures/, ablations/
 └── CONTEXT.md
 ```
+
+---
 
 ## Requirements
 
 - Python 3.11+
-- CUDA-capable GPU (for SAM3.1 tracking)
-- Hugging Face access to gated repo: `facebook/sam3.1`
-
-Python packages used in current code:
-- `sam3`
-- `torch`
-- `opencv-python` (or `opencv-python-headless` in headless env)
-- `numpy`
-- `matplotlib`
-
-Install example:
+- CUDA GPU for local SAM3, or Modal account for cloud runs
+- Hugging Face access: `facebook/sam3.1`
+- PyTorch for LSTM training/eval (local CPU is fine for small models)
 
 ```bash
 pip install sam3 torch opencv-python numpy matplotlib
 ```
 
-If `ImportError: No module named cv2`:
+---
 
-```bash
-pip install opencv-python
+## Data setup
+
+Copy from the SportsMOT example zip:
+
+| Zip | Repo path |
+|-----|-----------|
+| `img1/*.jpg` | `data/datasets/sportsmot_example/frames/` |
+| `gt/gt.txt` | `data/datasets/sportsmot_example/gt/gt.txt` |
+| `seqinfo.ini` | `data/datasets/sportsmot_example/seqinfo.ini` (optional) |
+
+See [data/datasets/sportsmot_example/README.md](data/datasets/sportsmot_example/README.md).
+
+---
+
+## Pipeline commands (SportsMOT example)
+
+### 1) Multi-seed SAM3 (recommended)
+
+```powershell
+py scripts/run_all_seeds_modal.py --dataset sportsmot_example --step-sec 2 --skip-existing
 ```
 
-## Data Expectations
+Then export tensors with rule features for all seeds:
 
-- Input videos in `data/clips/` (example names in `CONTEXT.md`).
-- Extracted frames are saved by `run_sam3.py` to `data/frames_dir/` as:
-  - `0.jpg`, `1.jpg`, `2.jpg`, ...
-- `tracks.json` frame numbering is 1-indexed:
-  - `frame_number=1` corresponds to `0.jpg`
-
-## Alternate tracks.json format
-
-If your tracks file uses `"frame"` instead of `"frame_number"` or lacks `mask_center`,
-normalize it before running the pipeline:
-
-```bash
-python utils/convert_tracks.py --input tracks.json --output data/outputs/tracks.json
+```powershell
+py scripts/export_lstm_tensors.py --dataset sportsmot_example --all-seeds --with-rule-features
 ```
 
-This sets `frame_number`, derives `mask_center` from each bbox center, and preserves `predicted` flags.
+Manual steps: [docs/MULTI_SEED_COMMANDS.md](docs/MULTI_SEED_COMMANDS.md). Use `py -m modal` if `modal` is not on PATH.
 
-## Quick Start (End-to-End)
+### 2) Align ground truth (if not done by orchestrator)
 
-### 1) Run SAM3.1 tracking
-
-```bash
-python scripts/run_sam3.py \
-  --video_path data/clips/60.0_clip.mp4 \
-  --output data/outputs/tracks.json
+```powershell
+py scripts/align_seed_gt.py --dataset sportsmot_example
+py scripts/setup_sportsmot_gt.py --dataset sportsmot_example
 ```
 
-Optional local checkpoint:
+### 3) Augmentation + detection ablations
 
-```bash
-python scripts/run_sam3.py \
-  --video_path data/clips/60.0_clip.mp4 \
-  --output data/outputs/tracks.json \
-  --checkpoint /path/to/sam3.1_multiplex.pt
+```powershell
+py scripts/run_ablations.py --dataset sportsmot_example
+py scripts/run_sanitize_grid.py --dataset sportsmot_example
 ```
 
-### 2) Compute baseline metrics
+LSTM input policy: `sanitize_plus_velocity_cap` (same SAM3 positions for A0 and A1; A1 adds rule **features** in the network).
 
-```bash
-python utils/metrics.py \
-  --tracks data/outputs/tracks.json \
-  --output-figure data/outputs/baseline_metrics.png \
-  --label "SAM3.1 BASELINE"
+### 4) Rule-aware LSTM (A0–A3)
+
+Train all forecaster variants on **all seeds** with temporal split:
+
+```powershell
+py scripts/train_lstm.py --model plain --split held_out_seed --val-seed offset_0s --epochs 80
+py scripts/train_lstm.py --model rule_features --split held_out_seed --val-seed offset_0s --epochs 80
+py scripts/train_lstm.py --model graph --split held_out_seed --val-seed offset_0s --epochs 80
+py scripts/train_lstm.py --model rule_features --split held_out_seed --rule-loss-weight 0.001 --out-dir data/runs/sportsmot_example/lstm/lstm_rule_features_a1b
 ```
 
-### 3) Run augmentation
+Evaluate forecast-horizon ADE/FDE vs linear and SAM baselines:
 
-```bash
-python utils/augmentation.py \
-  --tracks data/outputs/tracks.json \
-  --output data/outputs/augmented_tracks.json \
-  --frame-width 1280 \
-  --frame-height 720 \
-  --level full
+```powershell
+py scripts/eval_lstm_ablations.py --dataset sportsmot_example --all-seeds --diagnose-seeds
+py scripts/eval_rule_feature_ablation.py --all-seeds
+py scripts/eval_autoregressive_compare.py
+py scripts/diagnose_lstm_seeds.py
 ```
 
-Ablation modes:
-- `--level physical`
-- `--level game`
-- `--level full`
+Optional A2 post-refine (rules applied to plain LSTM predictions, no extra training):
 
-### 4) Compute augmented metrics
-
-```bash
-python utils/metrics.py \
-  --tracks data/outputs/augmented_tracks.json \
-  --output-figure data/outputs/augmented_metrics.png \
-  --label "SAM3.1 + AUGMENTATION"
+```powershell
+py scripts/predict_lstm.py --checkpoint data/runs/sportsmot_example/lstm/lstm_plain/checkpoint.pt --post-refine game
 ```
 
-### 5) Visualize qualitative results
+Diagnostics:
 
-Annotate one tracks file:
-
-```bash
-python utils/visualize.py \
-  --frames data/frames/frames_dir \
-  --tracks data/outputs/tracks.json \
-  --output data/outputs/annotated_baseline \
-  --every-n 5
+```powershell
+py scripts/audit_lstm.py
+py scripts/eval_lstm.py --dataset sportsmot_example --linear-baseline
 ```
 
-Baseline vs augmented side-by-side:
+| Variant | CLI | Role |
+|---------|-----|------|
+| **A0** | `--model plain` | Positions-only LSTM |
+| **A1** | `--model rule_features` | LSTM + per-frame rule/social features |
+| **A2** | `--post-refine` on predict | Same augmentation rules on **forecast** tracks |
+| **A3** | `--model graph` | Lightweight graph/message-passing + temporal LSTM |
 
-```bash
-python utils/visualize.py \
-  --frames data/frames/frames_dir \
-  --baseline data/outputs/tracks.json \
-  --augmented data/outputs/augmented_tracks.json \
-  --output data/outputs/comparison \
-  --compare \
-  --every-n 5
+**Training split:** Use `--split temporal_all` (not `held_out_seed` with few seeds). Do not mix run-root `trajectory_tensors.json` (0.67 resize) with `seeds/offset_*` tensors (0.5 resize).
+
+### 5) Pre-LSTM gauge figures
+
+```powershell
+py scripts/plot_pre_lstm_gauge.py --dataset sportsmot_example
 ```
 
-Paper summary figure:
+### 6) Visualization
 
-```bash
-python utils/visualize.py \
-  --frames data/frames/frames_dir \
-  --baseline data/outputs/tracks.json \
-  --augmented data/outputs/augmented_tracks.json \
-  --output data/outputs/summary_figure.png \
-  --summary \
-  --n-frames 4
+```powershell
+py utils/visualize.py --frames data/runs/sportsmot_example/frames ^
+  --baseline data/runs/sportsmot_example/baseline_tracks.json ^
+  --augmented data/runs/sportsmot_example/ablations/sanitize_plus_velocity_cap/augmented_tracks.json ^
+  --output data/runs/sportsmot_example/figures/summary_figure.png --summary --n-frames 4
 ```
 
-## Output Files
+---
 
-Typical generated artifacts:
+## Key outputs
 
-- `data/outputs/tracks.json` – raw SAM3.1 tracks
-- `data/outputs/augmented_tracks.json` – augmented tracks
-- `data/outputs/corrections.json` – augmentation correction log
-- `data/outputs/baseline_metrics.png` – baseline metric figure
-- `data/outputs/augmented_metrics.png` – augmented metric figure
-- `data/outputs/comparison/*.jpg` – side-by-side qualitative frames
-- `data/outputs/summary_figure.png` – paper-ready summary panel
+Under `data/runs/sportsmot_example/`:
 
-## Notes on Methodology
+| Path | Description |
+|------|-------------|
+| `seeds/seed_manifest.json` | 12 seeds @ 2s step (0s–18s) |
+| `seeds/*/trajectory_tensors.json` | Positions + `rule_features` (15-dim) |
+| `seeds/multi_seed_summary.json` | Detection ADE across seeds |
+| `lstm/lstm_plain/`, `lstm_rule_features/`, `lstm_graph/` | Checkpoints per variant |
+| `lstm/lstm_ablation_summary.csv` | A0–A3 vs linear/SAM (forecast horizon) |
+| `lstm/lstm_ablation_multi_seed.json` | Per-seed + aggregate metrics |
+| `lstm/lstm_rule_attribution.csv` | Per-rule ΔADE (A2 attribution) |
+| `lstm/lstm_per_seed_delta.csv` | Per-seed A1 − A0 forecast ADE |
+| `lstm/lstm_ablation_robust.json` | Median ADE + win rate |
+| `lstm/seed_diagnosis.json` | Per-seed visibility / export gate |
+| `lstm/lstm_rule_feature_group_ablation.csv` | A1 feature-group masking |
+| `lstm/lstm_autoregressive_compare.csv` | Fixed vs AR rule features |
+| `lstm/lstm_rule_features_a1b/` | A1 + soft rule penalty checkpoint |
+| `figures/lstm_rule_ablation_bar.png` | Variant comparison bar chart |
+| `figures/lstm_per_rule_delta_ade.png` | Post-refine rule attribution |
 
-- Augmentation intentionally avoids hardcoded court geometry, basket positions, and camera calibration.
-- Rules rely on relative player relationships and velocity patterns so they transfer across broadcast camera pans/zooms/cuts.
-- `predicted: true` marks players re-added by augmentation re-identification logic.
+---
 
-## Common Issues
+## Report snapshot (12 seeds, forecast ADE)
 
-1. **`No module named cv2`**
-   - Install OpenCV in the same Python environment used to run scripts.
+| Variant | Mean ADE (px) | `offset_0s` ADE (px) |
+|---------|---------------|----------------------|
+| A3 graph | 18.64 ± 16.71 | 9.09 |
+| A1 rule features | 18.88 ± 16.92 | **8.86** |
+| A0 plain | 20.29 ± 15.20 | 9.19 |
+| Linear baseline | — | 6.35 |
+| SAM augmented (detection) | — | 7.48 |
 
-2. **No annotated frames saved**
-   - Check `--frames` directory path.
-   - Confirm JPEG frames exist and are numerically named (`0.jpg`, `1.jpg`, ... or zero-padded numeric stems).
+Post-hoc game rules on forecasts (A2) **hurt** ADE (~22 px mean), consistent with detection ablations.
 
-3. **HF checkpoint access errors**
-   - Ensure access to `facebook/sam3.1` and that your HF auth token is active in the runtime environment.
+---
 
-## Citation / Internal Use
+## Methodology notes
 
-This repository is currently structured for CS231N milestone and paper workflows:
-- reproducible baseline,
-- augmentation ablations,
-- metrics and qualitative comparisons for reporting.
+- Augmentation uses **relative** player geometry and motion only (no court model).
+- **Plain LSTM (A0)** still uses `sanitize_plus_velocity_cap` **positions**; “plain” means no rule features **in the network**.
+- **A1** adds geometry-free signals (speed, hull margin, spacing, game-state flags) from `utils/rule_features.py`.
+- Evaluate LSTM with **forecast-horizon** ADE (frames after `obs_len`), not full-clip detection ADE.
+- Default SAM window: **45 frames**; multi-seed runs use **resize_scale 0.5** (640×360).
+
+## Common issues
+
+- **`No module named utils`** — run scripts from repo root (`py scripts/...`).
+- **`No module named torch`** — `pip install torch` for LSTM; SAM3 can stay on Modal.
+- **Modal connection failed** — retry `run_all_seeds_modal.py`; existing seeds are kept with `--skip-existing`.
+- **`modal` not on PATH** — use `py -m modal run ...`.
