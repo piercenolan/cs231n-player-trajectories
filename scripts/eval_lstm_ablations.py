@@ -220,13 +220,16 @@ def write_robust_report(seed_rows, lstm_root, dataset, linear_by_seed=None):
     delta_rows = []
     wins = losses = 0
     a1_beats_linear = 0
+    res_beats_linear = 0
     for sid in sorted(by_seed.keys()):
         a0 = by_seed[sid].get("A0_plain", {})
         a1 = by_seed[sid].get("A1_rule_features", {})
+        a1_res = by_seed[sid].get("A1_residual", {})
         a3 = by_seed[sid].get("A3_graph", {})
         lin_row = by_seed[sid].get("linear_baseline", {})
         fc0 = a0.get("ade_forecast", float("nan"))
         fc1 = a1.get("ade_forecast", float("nan"))
+        fc_res = a1_res.get("ade_forecast", float("nan"))
         fc_lin = lin_row.get("ade_forecast", linear_by_seed.get(sid, float("nan")))
         delta = fc1 - fc0 if fc0 == fc0 and fc1 == fc1 else float("nan")
         if delta == delta:
@@ -250,16 +253,28 @@ def write_robust_report(seed_rows, lstm_root, dataset, linear_by_seed=None):
                 winner_vs_linear = "tie"
         else:
             winner_vs_linear = "na"
+        if fc_res == fc_res and fc_lin == fc_lin:
+            if fc_res < fc_lin - 0.01:
+                winner_res_vs_linear = "A1_residual"
+                res_beats_linear += 1
+            elif fc_res > fc_lin + 0.01:
+                winner_res_vs_linear = "linear"
+            else:
+                winner_res_vs_linear = "tie"
+        else:
+            winner_res_vs_linear = "na"
         delta_rows.append(
             {
                 "seed_id": sid,
                 "A0_forecast_ade": fc0,
                 "A1_forecast_ade": fc1,
+                "A1_residual_forecast_ade": fc_res,
                 "A3_forecast_ade": a3.get("ade_forecast"),
                 "linear_forecast_ade": fc_lin,
                 "delta_A1_minus_A0": delta,
                 "winner": winner,
                 "winner_vs_linear": winner_vs_linear,
+                "winner_residual_vs_linear": winner_res_vs_linear,
                 "A0_teacher_forced": a0.get("teacher_forced_ade_px"),
                 "A1_teacher_forced": a1.get("teacher_forced_ade_px"),
             }
@@ -297,6 +312,7 @@ def write_robust_report(seed_rows, lstm_root, dataset, linear_by_seed=None):
             }
 
     summary["A1_beats_linear_seeds"] = a1_beats_linear
+    summary["A1_residual_beats_linear_seeds"] = res_beats_linear
 
     report_path = lstm_root / "lstm_ablation_robust.json"
     with open(report_path, "w", encoding="utf-8") as f:

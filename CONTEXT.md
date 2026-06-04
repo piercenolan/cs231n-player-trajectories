@@ -51,17 +51,19 @@ See `docs/MILESTONE_CHECKLIST.md` for report tables and `docs/PROJECT_PLAN.md` f
 
 **Detection (augmented vs GT):** baseline ADE ~7.16 px; `sanitize_plus_velocity_cap` ~7.34 px; game-rule `full` stack hurts ADE.
 
-**Forecasting (12 seeds, `held_out_seed` — val `offset_0s`):**
+**Forecasting (12 seeds @ 2s, `held_out_seed` training — val `offset_0s`):**
 
-| Variant | Median forecast ADE | Mean forecast ADE |
-|---------|---------------------|-------------------|
-| A1 rule features | **7.51 px** | 17.0 px |
-| A3 graph | 8.67 px | 16.3 px |
-| A0 plain | 10.68 px | 17.0 px |
+| Variant | Median forecast ADE (all) | Median forecast ADE (clean seeds) |
+|---------|---------------------------|-----------------------------------|
+| **A1 residual** (headline) | **5.81 px** | 5.95 px |
+| Linear baseline | 5.81 px | 5.94 px |
+| A1 rule features | 7.51 px | 7.22 px |
+| A3 graph | 8.67 px | 8.47 px |
+| A0 plain | 10.68 px | 10.43 px |
 
-A1 beats A0 on **10/12** seeds. Do not cite `offset_0s` forecast ADE (held out). Linear / SAM aug on train seeds ≈ 6–7 px (detection ceiling).
+A1 beats A0 on **10/12** seeds; **residual LSTM ties linear** on median and beats linear on **5/12** seeds. Three failure seeds (`offset_0s`, `offset_5s`, `offset_15s`) reflect SAM tracking collapse. See `docs/PAPER_RESULTS.md`.
 
-**Write-up framing:** SAM3 provides perception; sanitize cleans inputs; rule **features** in A1 improve short-horizon forecasts vs plain LSTM; post-hoc game rules on predictions (A2) mirror detection findings and hurt ADE.
+**Write-up framing:** SAM3 provides perception; sanitize cleans inputs; **residual rule-LSTM** learns corrections over constant-velocity linear; post-hoc game rules on predictions (A2) hurt ADE. Cross-sequence transfer: `docs/MODAL_SPRINT_RUNBOOK.md`.
 
 ## Conventions
 
