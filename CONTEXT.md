@@ -51,14 +51,15 @@ See `docs/MILESTONE_CHECKLIST.md` for report tables and `docs/PROJECT_PLAN.md` f
 
 **Detection (augmented vs GT):** baseline ADE ~7.16 px; `sanitize_plus_velocity_cap` ~7.34 px; game-rule `full` stack hurts ADE.
 
-**Forecasting (12 seeds, `temporal_all` train):**
+**Forecasting (12 seeds, `held_out_seed` — val `offset_0s`):**
 
-| Variant | Mean forecast ADE | Best on `offset_0s` |
-|---------|-------------------|---------------------|
-| A3 graph | 18.64 px | 9.09 px |
-| A1 rule features | 18.88 px | **8.86 px** (beats A0) |
-| A0 plain | 20.29 px | 9.19 px |
-| Linear / SAM aug | — | 6.35 / 7.48 px |
+| Variant | Median forecast ADE | Mean forecast ADE |
+|---------|---------------------|-------------------|
+| A1 rule features | **7.51 px** | 17.0 px |
+| A3 graph | 8.67 px | 16.3 px |
+| A0 plain | 10.68 px | 17.0 px |
+
+A1 beats A0 on **10/12** seeds. Do not cite `offset_0s` forecast ADE (held out). Linear / SAM aug on train seeds ≈ 6–7 px (detection ceiling).
 
 **Write-up framing:** SAM3 provides perception; sanitize cleans inputs; rule **features** in A1 improve short-horizon forecasts vs plain LSTM; post-hoc game rules on predictions (A2) mirror detection findings and hurt ADE.
 

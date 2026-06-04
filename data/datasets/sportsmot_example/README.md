@@ -54,7 +54,8 @@ data/runs/sportsmot_example/
 │   ├── lstm_rule_features/       # A1
 │   ├── lstm_graph/               # A3
 │   ├── lstm_ablation_summary.csv
-│   └── lstm_ablation_multi_seed.json
+│   ├── lstm_ablation_robust.json
+│   └── lstm_per_seed_delta.csv
 └── figures/
     ├── PRE_LSTM_GAUGE.md
     ├── lstm_rule_ablation_bar.png
@@ -66,8 +67,8 @@ data/runs/sportsmot_example/
 ```powershell
 py scripts/run_all_seeds_modal.py --dataset sportsmot_example --step-sec 2 --skip-existing
 py scripts/export_lstm_tensors.py --dataset sportsmot_example --all-seeds --with-rule-features
-py scripts/train_lstm.py --model rule_features --split temporal_all --epochs 80
-py scripts/eval_lstm_ablations.py --dataset sportsmot_example --all-seeds
+py scripts/train_lstm.py --model rule_features --split held_out_seed --val-seed offset_0s --epochs 80
+py scripts/eval_lstm_ablations.py --dataset sportsmot_example --all-seeds --diagnose-seeds
 ```
 
 Full documentation: [README.md](../../../README.md), [docs/MILESTONE_CHECKLIST.md](../../../docs/MILESTONE_CHECKLIST.md).

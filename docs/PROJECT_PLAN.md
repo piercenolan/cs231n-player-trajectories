@@ -68,12 +68,12 @@ Related docs: [MILESTONE_CHECKLIST.md](MILESTONE_CHECKLIST.md), [README.md](../R
 
 | Task | Status |
 |------|--------|
-| Dataset loader + `temporal_all` split | Done |
+| Dataset loader + splits (`held_out_seed`, `temporal_all`) | Done |
 | `train_lstm.py --model plain\|rule_features\|graph` | Done |
 | `eval_lstm_ablations.py` (forecast ADE, attribution) | Done |
 | Report tables + figures | Done — `lstm_ablation_summary.csv`, bar charts |
 
-**Recommended training:** `--split temporal_all` on all exported seeds; 80 epochs; do not use `held_out_seed` with sparse seeds.
+**Recommended training for report:** `--split held_out_seed --val-seed offset_0s` (11 train seeds). Alternative: `--split temporal_all` for more windows but train/val overlap across seeds.
 
 **Evaluation protocol:**
 

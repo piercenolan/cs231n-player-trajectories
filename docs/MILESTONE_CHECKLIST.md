@@ -7,37 +7,30 @@ One-page status for the report. Primary dataset: **SportsMOT example**, 45-frame
 ```mermaid
 flowchart LR
   subgraph data [Data]
-    F[frames 000001-000500]
-    GT[gt.txt / gt.json]
+    F[frames + gt.txt]
   end
   subgraph track [Tracking]
     SAM[SAM3.1 Modal]
-    BT[baseline_tracks.json]
+    BT[baseline_tracks]
   end
   subgraph aug [Augmentation]
-    SAN[sanitize]
-    RULES[physical / game rules]
-    AUG[augmented_tracks.json]
+    AUG[sanitize_plus_velocity_cap]
+    RF[rule_features]
+    TT[trajectory_tensors]
   end
-  subgraph eval [Evaluation]
-    ADE[ADE / FDE]
-    MET[metrics + ablations]
-    EXP[trajectory_tensors.json]
-  end
-  subgraph lstm [Rule-aware LSTM]
+  subgraph lstm [Forecasting]
     A0[A0 plain]
     A1[A1 rule features]
     A3[A3 graph]
+    A2[A2 post-refine]
   end
   F --> SAM --> BT
-  GT --> ADE
-  BT --> SAN --> RULES --> AUG
-  AUG --> ADE
-  AUG --> MET
-  AUG --> EXP
-  EXP --> A0
-  EXP --> A1
-  EXP --> A3
+  BT --> AUG --> TT
+  AUG --> RF --> TT
+  TT --> A0
+  TT --> A1
+  TT --> A3
+  A0 --> A2
 ```
 
 ---
@@ -102,9 +95,9 @@ flowchart LR
 
 | Variant | Median forecast ADE (px) | Mean forecast ADE (px) | Notes |
 |---------|-------------------------|------------------------|--------|
-| **A1 rule features** | **7.51** | 18.88 | Beats A0 on **10/12** seeds (`lstm_per_seed_delta.csv`) |
-| A3 graph | — | 18.65 | Slight mean edge vs A0 |
-| A0 plain | — | 20.29 | Positions-only |
+| **A1 rule features** | **7.51** | 17.0 | Beats A0 on **10/12** seeds (`lstm_per_seed_delta.csv`) |
+| A3 graph | 8.67 | 16.3 | Best mean on held-out training |
+| A0 plain | 10.68 | 17.0 | Positions-only |
 | A1b (+ rule loss) | — | — | `lstm/lstm_rule_features_a1b/` |
 
 **Held-out `offset_0s`:** A0/A1 degrade (not in training); report **median over train seeds** for generalization.

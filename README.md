@@ -10,35 +10,63 @@ Research project: **SAM3.1** player tracking on basketball video, a **geometry-f
 
 ```mermaid
 flowchart TB
-  subgraph data [Data layer]
-    DS[data/datasets/sportsmot_example\nframes + gt.txt]
+  subgraph dataLayer [Static data]
+    frames["datasets/sportsmot_example/frames"]
+    gt_txt["gt/gt.txt"]
   end
-  subgraph runs [Run outputs data/runs/sportsmot_example]
-    SEEDS[seeds/offset_*s/]
-    TT[trajectory_tensors.json + rule_features]
-    LSTM[lstm/lstm_plain | rule_features | graph]
+
+  subgraph tracking [SAM3 tracking]
+    modal["run_modal.py / run_all_seeds_modal.py"]
+    baseline["seeds/*/baseline_tracks.json"]
+    frames --> modal --> baseline
   end
-  subgraph track [Tracking]
-    MOD[run_modal.py / run_all_seeds_modal.py]
-    BT[baseline_tracks.json]
+
+  subgraph gtPath [GT alignment]
+    align_gt["align_seed_gt.py"]
+    gt_aligned["seeds/*/gt_aligned.json"]
+    gt_txt --> align_gt
+    baseline --> align_gt --> gt_aligned
   end
-  subgraph aug [Augmentation]
-    AUG[utils/augmentation.py]
-    RF[utils/rule_features.py]
+
+  subgraph augPath [Augmentation]
+    aug_lib["utils/augmentation.py"]
+    aug_out["augmented_tracks sanitize_plus_velocity_cap"]
+    baseline --> aug_lib --> aug_out
   end
-  subgraph forecast [Forecasting]
-    A0[A0 plain LSTM]
-    A1[A1 rule-conditioned LSTM]
-    A3[A3 graph LSTM]
-    A2[A2 post-refine on predictions]
+
+  subgraph tensorExport [Tensor export]
+    rule_feat["utils/rule_features.py"]
+    tensors["trajectory_tensors.json positions + rule_features"]
+    export_py["export_lstm_tensors.py --with-rule-features"]
+    aug_out --> export_py --> tensors
+    aug_out --> rule_feat --> tensors
   end
-  DS --> MOD --> BT
-  BT --> AUG --> SEEDS
-  AUG --> RF --> TT
-  TT --> A0
-  TT --> A1
-  TT --> A3
-  A0 --> A2
+
+  subgraph detEval [Detection evaluation]
+    det_metrics["run_ablations.py / trajectory_metrics ADE"]
+    aug_out --> det_metrics
+    gt_aligned --> det_metrics
+  end
+
+  subgraph forecast [Forecast models]
+    A0["A0 plain LSTM"]
+    A1["A1 rule-conditioned LSTM"]
+    A3["A3 graph LSTM"]
+    A2["A2 post-refine on A0 output"]
+    tensors --> A0
+    tensors --> A1
+    tensors --> A3
+    A0 --> A2
+  end
+
+  subgraph fcstEval [Forecast evaluation]
+    fcst_metrics["eval_lstm_ablations.py forecast ADE/FDE"]
+    A0 --> fcst_metrics
+    A1 --> fcst_metrics
+    A3 --> fcst_metrics
+    A2 --> fcst_metrics
+    gt_aligned --> fcst_metrics
+  end
 ```
 
 | Stage | Component | Output |
@@ -79,12 +107,16 @@ cs231n-player-trajectories/
 │   └── MULTI_SEED_COMMANDS.md   # Modal multi-seed orchestration
 ├── scripts/
 │   ├── run_modal.py / run_sam3.py
-│   ├── run_all_seeds_modal.py   # all seeds: Modal + GT + export
+│   ├── run_all_seeds_modal.py   # Modal + align GT + multi-seed metrics
+│   ├── align_seed_gt.py / setup_sportsmot_gt.py
+│   ├── run_ablations.py / run_sanitize_grid.py
 │   ├── export_lstm_tensors.py   # --with-rule-features
 │   ├── train_lstm.py            # --model plain|rule_features|graph
-│   ├── predict_lstm.py          # --post-refine physical|game|full
+│   ├── predict_lstm.py          # --post-refine for A2
 │   ├── eval_lstm.py / eval_lstm_ablations.py
-│   └── audit_lstm.py
+│   ├── eval_rule_feature_ablation.py / eval_autoregressive_compare.py
+│   ├── diagnose_lstm_seeds.py / audit_lstm.py
+│   └── plot_pre_lstm_gauge.py
 ├── models/
 │   ├── trajectory_lstm.py       # TrajectoryLSTM, RuleConditionedLSTM
 │   └── trajectory_graph_lstm.py # TrajectoryGraphLSTM (A3)
@@ -200,7 +232,7 @@ py scripts/eval_lstm.py --dataset sportsmot_example --linear-baseline
 | **A2** | `--post-refine` on predict | Same augmentation rules on **forecast** tracks |
 | **A3** | `--model graph` | Lightweight graph/message-passing + temporal LSTM |
 
-**Training split:** Use `--split temporal_all` (not `held_out_seed` with few seeds). Do not mix run-root `trajectory_tensors.json` (0.67 resize) with `seeds/offset_*` tensors (0.5 resize).
+**Training split:** Default for the report is `--split held_out_seed --val-seed offset_0s` (train 11 seeds, validate on `offset_0s`). For maximum training windows on all clips, use `--split temporal_all`. Do not mix run-root `trajectory_tensors.json` (0.67 resize) with `seeds/offset_*` tensors (0.5 resize).
 
 ### 5) Pre-LSTM gauge figures
 
@@ -243,17 +275,19 @@ Under `data/runs/sportsmot_example/`:
 
 ---
 
-## Report snapshot (12 seeds, forecast ADE)
+## Report snapshot (12 seeds, held-out training, forecast ADE)
 
-| Variant | Mean ADE (px) | `offset_0s` ADE (px) |
-|---------|---------------|----------------------|
-| A3 graph | 18.64 ± 16.71 | 9.09 |
-| A1 rule features | 18.88 ± 16.92 | **8.86** |
-| A0 plain | 20.29 ± 15.20 | 9.19 |
-| Linear baseline | — | 6.35 |
-| SAM augmented (detection) | — | 7.48 |
+Models trained with `held_out_seed` (`offset_0s` validation only). **Use median ADE** on train seeds — a few late-clip seeds have high rollout error and inflate the mean.
 
-Post-hoc game rules on forecasts (A2) **hurt** ADE (~22 px mean), consistent with detection ablations.
+| Variant | Median forecast ADE (px) | Mean forecast ADE (px) | A1 wins vs A0 |
+|---------|--------------------------|--------------------------|---------------|
+| **A1 rule features** | **7.51** | 17.0 | **10 / 12 seeds** |
+| A3 graph | 8.67 | 16.3 | — |
+| A0 plain | 10.68 | 17.0 | — |
+
+Example train seed (`offset_2s`): A1 **4.86 px**, A0 6.66 px, linear ~6.4 px. Held-out `offset_0s` is not in training — expect poor rollout there (~40–45 px).
+
+Post-hoc game rules on forecasts (A2) **hurt** ADE, consistent with detection ablations. See `lstm/lstm_ablation_robust.json` and `lstm/lstm_per_seed_delta.csv`.
 
 ---
 

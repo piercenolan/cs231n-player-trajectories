@@ -35,10 +35,10 @@ py scripts/export_lstm_tensors.py --dataset sportsmot_example --all-seeds --with
 Then retrain and refresh ablation tables:
 
 ```powershell
-py scripts/train_lstm.py --model plain --split temporal_all --epochs 80
-py scripts/train_lstm.py --model rule_features --split temporal_all --epochs 80
-py scripts/train_lstm.py --model graph --split temporal_all --epochs 80
-py scripts/eval_lstm_ablations.py --dataset sportsmot_example --all-seeds
+py scripts/train_lstm.py --model plain --split held_out_seed --val-seed offset_0s --epochs 80
+py scripts/train_lstm.py --model rule_features --split held_out_seed --val-seed offset_0s --epochs 80
+py scripts/train_lstm.py --model graph --split held_out_seed --val-seed offset_0s --epochs 80
+py scripts/eval_lstm_ablations.py --dataset sportsmot_example --all-seeds --diagnose-seeds
 ```
 
 Use `py -m modal` if the `modal` CLI is not on PATH.
