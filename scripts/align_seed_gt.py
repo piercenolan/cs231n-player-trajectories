@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from utils.datasets import SEED_OFFSETS, align_seed_gt, baseline_tracks_path, runs_dir
+from utils.seed_schedule import list_seed_entries
 
 
 def main():
@@ -26,9 +27,14 @@ def main():
 
     seeds_root = runs_dir(args.dataset) / "seeds"
     if args.seed_id:
-        seeds = [(args.seed_id, args.start_time_sec)]
+        start = args.start_time_sec
+        seeds = [(args.seed_id, start if start is not None else 0.0)]
     else:
-        seeds = list(SEED_OFFSETS.items())
+        entries = list_seed_entries(args.dataset)
+        if entries:
+            seeds = entries
+        else:
+            seeds = list(SEED_OFFSETS.items())
 
     for seed_id, default_start in seeds:
         tracks = Path(args.tracks) if args.tracks and args.seed_id else baseline_tracks_path(

@@ -87,12 +87,22 @@ def seed_gt_aligned_path(dataset="sportsmot_example", seed_id="offset_0s"):
     return runs_dir(dataset, seed_id) / "gt_aligned.json"
 
 
-def start_time_sec_for_seed(seed_id, tracks_meta=None):
-    """Resolve start_time_sec from tracks meta or SEED_OFFSETS."""
+def start_time_sec_for_seed(seed_id, tracks_meta=None, dataset="sportsmot_example"):
+    """Resolve start_time_sec from tracks meta, manifest, SEED_OFFSETS, or seed_id name."""
     if tracks_meta and tracks_meta.get("start_time_sec") is not None:
         return float(tracks_meta["start_time_sec"])
     if seed_id in SEED_OFFSETS:
         return float(SEED_OFFSETS[seed_id])
+    from utils.seed_schedule import load_seed_manifest, parse_seed_offset_sec
+
+    manifest = load_seed_manifest(dataset)
+    if manifest:
+        for s in manifest.get("seeds", []):
+            if s.get("seed_id") == seed_id:
+                return float(s["start_time_sec"])
+    parsed = parse_seed_offset_sec(seed_id)
+    if parsed is not None:
+        return parsed
     return 0.0
 
 
@@ -120,7 +130,7 @@ def align_seed_gt(
     start = (
         start_time_sec
         if start_time_sec is not None
-        else start_time_sec_for_seed(seed_id, meta)
+        else start_time_sec_for_seed(seed_id, meta, dataset=dataset)
     )
     fps = extract_fps if extract_fps is not None else float(ds["extract_fps"])
     out = Path(output_path or seed_gt_aligned_path(dataset, seed_id))
@@ -214,3 +224,58 @@ def resolve_augmented_tracks_path(dataset="sportsmot_example"):
         f"  py utils/augmentation.py --dataset {dataset} --rules velocity_cap --no-gap-fill\n"
         "or complete run_ablations.py first."
     )
+
+
+LSTM_ABLATION = "sanitize_plus_velocity_cap"
+
+
+def seed_augmented_tracks_path(dataset="sportsmot_example", seed_id="offset_0s"):
+    """Per-seed augmented tracks from multi-seed ablation run."""
+    return (
+        runs_dir(dataset, seed_id)
+        / LSTM_ABLATION
+        / "augmented_tracks.json"
+    )
+
+
+def trajectory_tensor_path(dataset="sportsmot_example", seed_id=None):
+    """LSTM tensor JSON: run root (offset_0s canonical) or per-seed under seeds/."""
+    if seed_id:
+        return runs_dir(dataset, seed_id) / "trajectory_tensors.json"
+    return runs_dir(dataset) / "trajectory_tensors.json"
+
+
+def lstm_tensor_paths(dataset="sportsmot_example", mode="multi"):
+    """
+    Resolve trajectory_tensors.json paths for LSTM training.
+
+    mode: 'single' -> run-root tensor (offset_0s canonical export)
+          'multi'  -> all SEED_OFFSETS with existing per-seed tensors
+    """
+    if mode == "single":
+        p = trajectory_tensor_path(dataset, seed_id=None)
+        if not p.exists():
+            p = trajectory_tensor_path(dataset, seed_id="offset_0s")
+        return [p] if p.exists() else []
+
+    from utils.seed_schedule import list_seed_entries
+
+    paths = []
+    for seed_id, _ in list_seed_entries(dataset):
+        p = trajectory_tensor_path(dataset, seed_id=seed_id)
+        if p.exists():
+            paths.append(p)
+    if not paths:
+        for seed_id in SEED_OFFSETS:
+            p = trajectory_tensor_path(dataset, seed_id=seed_id)
+            if p.exists():
+                paths.append(p)
+    if not paths:
+        root = trajectory_tensor_path(dataset, seed_id=None)
+        if root.exists():
+            paths.append(root)
+    return paths
+
+
+def lstm_out_dir(dataset="sportsmot_example"):
+    return runs_dir(dataset) / "lstm"

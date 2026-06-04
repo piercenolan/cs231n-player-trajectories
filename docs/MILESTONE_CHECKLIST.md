@@ -51,9 +51,9 @@ flowchart LR
 | 5 | **Per-rule ablations** + ADE/FDE | Done | `ablations/ablation_summary.csv` |
 | 6 | **Sanitize grid** (ADE-ranked) | Done | `sanitize_grid/best_sanitize.json` → `w0.4_y0.1_p10` |
 | 7 | **LSTM export** + validation gate | Done | `trajectory_tensors.json`, `trajectory_validation.json` (`passed: true`) |
-| 8 | **Multi-seed SAM3** (0s / 10s / 15s offsets) | **In progress** | `docs/MULTI_SEED_COMMANDS.md` + `align_seed_gt.py` |
-| 9 | **Paper figures** (SportsMOT run) | Pending | Regenerate under `data/runs/.../figures/` |
-| 10 | **LSTM v1** train / eval | Not started | Input: `(T, P, 2)` + visibility mask |
+| 8 | **Multi-seed SAM3** (0s / 10s / 15s offsets) | Done | `seeds/multi_seed_summary.json`, per-seed `gt_aligned.json` |
+| 9 | **Paper figures** (SportsMOT run) | Done | `figures/PRE_LSTM_GAUGE.md` + gauge PNGs |
+| 10 | **LSTM v1** train / eval | Done | `lstm/checkpoint.pt`, `lstm_eval.json`; val loss ≈ 0.024; see forecast ADE in eval |
 
 ---
 
@@ -78,7 +78,8 @@ flowchart LR
 |---------|-----|-----|
 | Unknown `video_1` + proxy GT | Invalid ADE | **Cleared** — SportsMOT `gt.txt` + aligned `gt.json` |
 | Export validation | Failed on old run | **Cleared** — `passed: true`, visibility 0.94 |
-| Multi-seed stability | Bootstrap only | **Open** — run real Modal offsets before LSTM |
+| Multi-seed stability | Bootstrap only | **Cleared** — 3 real offsets, ADE 5.94 ± 1.09 px |
+| LSTM train (local) | **Cleared** | Trained multi-seed; eval in `lstm/lstm_eval.json` |
 
 ---
 

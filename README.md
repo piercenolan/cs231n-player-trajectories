@@ -1,6 +1,6 @@
 # CS231N Player Trajectories (SAM3.1)
 
-Research project: **SAM3.1** player tracking on basketball video, a **geometry-free augmentation** layer, evaluation against **SportsMOT** ground truth, and (next) an **LSTM** trajectory forecaster.
+Research project: **SAM3.1** player tracking on basketball video, a **geometry-free augmentation** layer, evaluation against **SportsMOT** ground truth, and an **LSTM** trajectory forecaster.
 
 **Write-up:** [docs/MILESTONE_CHECKLIST.md](docs/MILESTONE_CHECKLIST.md) · **Living plan:** [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.md)
 
@@ -52,7 +52,7 @@ flowchart TB
 | 4. Evaluate | metrics, ADE/FDE, ablations, grid | CSV + `recommended_config.json` |
 | 5. Export | Fixed `(T,P,2)` tensors + validation | `trajectory_tensors.json` |
 | 6. Multi-seed | SAM3 at time offsets (pre-LSTM) | `seeds/*/baseline_tracks.json` |
-| 7. LSTM | Sequence model (planned) | TBD |
+| 7. LSTM | Train / predict / ADE eval | `lstm/checkpoint.pt`, `predicted_tracks.json` |
 
 Paths are resolved via `utils/datasets.py` (`--dataset sportsmot_example`).
 
@@ -65,8 +65,8 @@ Paths are resolved via `utils/datasets.py` (`--dataset sportsmot_example`).
 | SportsMOT data + SAM3 baseline (45f) | Done |
 | Real GT + ablations + sanitize grid | Done |
 | LSTM export validation gate | Passed (visibility 0.94) |
-| Multi-seed SAM3 | **Next** — see below |
-| LSTM training | Not started |
+| Multi-seed SAM3 | Done |
+| LSTM training | Done — see `lstm/lstm_eval.json` and `figures/lstm_ade_bar.png` |
 
 Details: [docs/MILESTONE_CHECKLIST.md](docs/MILESTONE_CHECKLIST.md).
 
@@ -86,13 +86,21 @@ cs231n-player-trajectories/
 │   ├── run_ablations.py
 │   ├── run_sanitize_grid.py
 │   ├── run_multi_seed.py
-│   └── aggregate_experiments.py
+│   ├── run_all_seeds_modal.py
+│   ├── export_lstm_tensors.py
+│   ├── train_lstm.py
+│   ├── predict_lstm.py
+│   └── eval_lstm.py
+├── models/
+│   └── trajectory_lstm.py
 ├── utils/
 │   ├── datasets.py              # canonical paths
 │   ├── augmentation.py
 │   ├── metrics.py
 │   ├── trajectory_metrics.py
 │   ├── trajectory_export.py
+│   ├── lstm_dataset.py
+│   ├── lstm_predict.py
 │   └── visualize.py
 ├── data/
 │   ├── datasets/sportsmot_example/   # upload frames + gt.txt
@@ -162,7 +170,14 @@ py utils/augmentation.py --dataset sportsmot_example --rules velocity_cap --no-g
 
 ### 4) Multi-seed SAM3 (before LSTM)
 
-Copy-paste command sheet: **[docs/MULTI_SEED_COMMANDS.md](docs/MULTI_SEED_COMMANDS.md)** (download seed 1, run seeds 2–3, align GT, aggregate ADE).
+**All seeds (automated):** runs Modal every 5s through the clip, downloads volume, post-processes:
+
+```powershell
+py scripts/run_all_seeds_modal.py --dataset sportsmot_example
+py scripts/run_all_seeds_modal.py --step-sec 2
+```
+
+Manual / partial steps: **[docs/MULTI_SEED_COMMANDS.md](docs/MULTI_SEED_COMMANDS.md)**
 
 ```powershell
 py scripts/align_seed_gt.py --dataset sportsmot_example
@@ -188,9 +203,28 @@ py utils/visualize.py --frames data/runs/sportsmot_example/frames ^
   --output data/runs/sportsmot_example/figures/summary_figure.png --summary --n-frames 4
 ```
 
-### 6) LSTM (next phase)
+### 6) LSTM trajectory prediction
 
-Train on `data/runs/sportsmot_example/trajectory_tensors.json` after multi-seed is complete. See [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.md#phase-4--lstm-trajectory-model-next).
+Requires **PyTorch** locally (`pip install torch`). Uses `sanitize_plus_velocity_cap` tensors; default training is **multi-seed** (train on `offset_10s` + `offset_15s`, validate on held-out `offset_0s`).
+
+```powershell
+py scripts/export_lstm_tensors.py --dataset sportsmot_example --all-seeds --root
+py scripts/train_lstm.py --dataset sportsmot_example --tensor-mode multi --split temporal_all --epochs 80
+py scripts/audit_lstm.py
+py scripts/predict_lstm.py --dataset sportsmot_example
+py scripts/eval_lstm.py --dataset sportsmot_example --linear-baseline
+```
+
+Outputs under `data/runs/sportsmot_example/lstm/`:
+
+- `checkpoint.pt`, `train_config.json`, `loss_history.json`
+- `predicted_tracks.json`, `lstm_eval.json` (ADE/FDE vs per-seed `gt_aligned.json`)
+
+Use `--tensor-mode single` for a quick smoke test on per-seed tensors only (run-root `trajectory_tensors.json` is a **different SAM resize** than `seeds/offset_*` — do not mix).
+
+**Training split:** Prefer `--split temporal_all` (all 3 seeds, ~102 windows). Default `held_out_seed` trains on 10s+15s only and often **fails on 0s** (~105 px teacher-forced error). `py scripts/audit_lstm.py` prints per-seed diagnostics.
+
+**More data:** Each new Modal `--seed-id` offset adds ~34 training windows. With 10+ offsets from the 500-frame clip, LSTM should approach the persistence baseline (~8 px on SAM tracks).
 
 ---
 
@@ -203,7 +237,9 @@ Under `data/runs/sportsmot_example/`:
 - `ablations/recommended_config.json` — ADE vs LSTM v1 policy
 - `sanitize_grid/best_sanitize.json` — best sanitize hyperparameters
 - `trajectory_tensors.json` / `trajectory_validation.json` — LSTM-ready arrays + gate
-- `seeds/multi_seed_summary.json` — after multi-seed step
+- `seeds/{offset_*}/trajectory_tensors.json` — per-seed tensors for multi-seed training
+- `seeds/multi_seed_summary.json` — multi-seed ADE aggregate
+- `lstm/` — checkpoint, predictions, `lstm_eval.json`
 
 ---
 

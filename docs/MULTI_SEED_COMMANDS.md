@@ -1,5 +1,25 @@
 # Multi-seed Modal commands (SportsMOT example)
 
+## One-command pipeline (recommended)
+
+Generates seeds every 5s across 500 frames, runs Modal sequentially, downloads from volume, aligns GT, runs augmentation + LSTM export:
+
+```powershell
+py scripts/run_all_seeds_modal.py --dataset sportsmot_example
+```
+
+Denser windows (~10 seeds) for more LSTM training data:
+
+```powershell
+py scripts/run_all_seeds_modal.py --step-sec 2
+```
+
+Plan without Modal: `py scripts/run_all_seeds_modal.py --dry-run`
+
+---
+
+## Manual steps (legacy)
+
 Run **one Modal job at a time**. Wait until each finishes before starting the next (reduces CUDA OOM from warm GPU reuse).
 
 Use the **same** `--max-frames 45 --resize-scale 0.67` on every seed unless you document otherwise.

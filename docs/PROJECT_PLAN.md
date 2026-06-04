@@ -60,16 +60,17 @@ Related docs: [MILESTONE_CHECKLIST.md](MILESTONE_CHECKLIST.md), [README.md](../R
 
 ---
 
-### Phase 4 — LSTM trajectory model (next)
+### Phase 4 — LSTM trajectory model
 
 **Goal:** Sequence model on `(T, P, 2)` positions + visibility mask; report ADE/FDE vs GT.
 
 | Task | Status |
 |------|--------|
-| Dataset loader from `trajectory_tensors.json` | Not started |
-| Train/val split (same 45f window or multi-seed windows) | Not started |
-| Baseline LSTM / GRU forecaster | Not started |
-| Compare SAM3+aug vs LSTM-corrected trajectories | Not started |
+| Per-seed `trajectory_tensors.json` export | Done — `scripts/export_lstm_tensors.py` |
+| Dataset loader (`utils/lstm_dataset.py`) | Done — held-out `offset_0s` val |
+| LSTM forecaster (`models/trajectory_lstm.py`) | Done |
+| Training loop (`scripts/train_lstm.py`) | Done — run locally with PyTorch |
+| Predict + ADE/FDE (`predict_lstm.py`, `eval_lstm.py`) | Done |
 
 **Recommended input config (policy):** `sanitize_plus_velocity_cap`, `gap_fill: false`  
 **ADE-leading config (report):** `dead_ball_freeze` or sanitize grid `w0.4_y0.1_p10` — document choice in write-up.

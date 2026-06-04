@@ -1,0 +1,80 @@
+{
+  "dataset": "sportsmot_example",
+  "seed_id": "offset_0s",
+  "gt_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_0s\\gt_aligned.json",
+  "obs_len": 8,
+  "pred_len": 4,
+  "lstm": {
+    "ade": 15.572692951459073,
+    "fde": 25.659597705125822,
+    "num_matches": 431,
+    "num_frames": 45,
+    "min_frame": null,
+    "max_frame": null,
+    "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\predicted_tracks.json",
+    "gt_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_0s\\gt_aligned.json"
+  },
+  "augmented_baseline": {
+    "ade": 7.479674384313496,
+    "fde": 7.964425865248269,
+    "num_matches": 438,
+    "num_frames": 45,
+    "min_frame": null,
+    "max_frame": null,
+    "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_0s\\sanitize_plus_velocity_cap\\augmented_tracks.json",
+    "gt_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_0s\\gt_aligned.json"
+  },
+  "delta_ade": 8.093018567145577,
+  "delta_fde": 17.695171839877553,
+  "teacher_forced_on_sam": {
+    "teacher_forced_ade_px": 13.410008161073337,
+    "persistence_ade_px": 8.509158903499191,
+    "num_pairs": 1331
+  },
+  "forecast_horizon": {
+    "min_frame": 9,
+    "note": "ADE/FDE on frames where LSTM replaces SAM (index >= obs_len)"
+  },
+  "lstm_forecast_only": {
+    "ade": 18.128563658242182,
+    "fde": 25.659597705125822,
+    "num_matches": 360,
+    "num_frames": 37,
+    "min_frame": 9,
+    "max_frame": null,
+    "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\predicted_tracks.json",
+    "gt_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_0s\\gt_aligned.json"
+  },
+  "augmented_forecast_only": {
+    "ade": 8.421115888459711,
+    "fde": 7.964425865248269,
+    "num_matches": 367,
+    "num_frames": 37,
+    "min_frame": 9,
+    "max_frame": null,
+    "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_0s\\sanitize_plus_velocity_cap\\augmented_tracks.json",
+    "gt_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_0s\\gt_aligned.json"
+  },
+  "delta_ade_forecast_only": 9.70744776978247,
+  "linear_baseline": {
+    "ade": 6.351464825064998,
+    "fde": 11.88912734204426,
+    "num_matches": 428,
+    "num_frames": 45,
+    "min_frame": null,
+    "max_frame": null,
+    "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\linear_baseline_tracks.json",
+    "gt_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_0s\\gt_aligned.json"
+  },
+  "delta_ade_vs_linear": 9.221228126394076,
+  "linear_forecast_only": {
+    "ade": 7.094899719933177,
+    "fde": 11.88912734204426,
+    "num_matches": 357,
+    "num_frames": 37,
+    "min_frame": 9,
+    "max_frame": null,
+    "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\lstm\\linear_baseline_tracks.json",
+    "gt_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_0s\\gt_aligned.json"
+  }
+}

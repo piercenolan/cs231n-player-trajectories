@@ -1,0 +1,11 @@
+{
+  "dataset": "sportsmot_example",
+  "ablation": "sanitize_plus_velocity_cap",
+  "exported": {
+    "root": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\trajectory_tensors.json",
+    "offset_0s": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_0s\\trajectory_tensors.json",
+    "offset_10s": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_10s\\trajectory_tensors.json",
+    "offset_15s": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_example\\seeds\\offset_15s\\trajectory_tensors.json"
+  },
+  "failed": {}
+}

@@ -134,9 +134,18 @@ def match_frame(pred_pts, gt_pts, max_distance=80.0):
     return matches
 
 
-def compute_ade_fde(tracks_path, gt_path, max_distance=80.0, gt_format="auto"):
+def compute_ade_fde(
+    tracks_path,
+    gt_path,
+    max_distance=80.0,
+    gt_format="auto",
+    min_frame=None,
+    max_frame=None,
+):
     """
     Compute ADE (mean L2 over matched frame-player pairs) and FDE (last frame).
+
+    Optional min_frame / max_frame restrict which frame numbers are scored.
 
     Returns dict with ade, fde, num_matches, num_frames.
     """
@@ -144,6 +153,10 @@ def compute_ade_fde(tracks_path, gt_path, max_distance=80.0, gt_format="auto"):
     gt_by_frame = load_ground_truth(gt_path, format=gt_format)
 
     common_frames = sorted(set(pred_by_frame) & set(gt_by_frame))
+    if min_frame is not None:
+        common_frames = [f for f in common_frames if f >= min_frame]
+    if max_frame is not None:
+        common_frames = [f for f in common_frames if f <= max_frame]
     errors = []
     last_frame_errors = []
 
@@ -164,9 +177,21 @@ def compute_ade_fde(tracks_path, gt_path, max_distance=80.0, gt_format="auto"):
         "fde": fde,
         "num_matches": len(errors),
         "num_frames": len(common_frames),
+        "min_frame": min_frame,
+        "max_frame": max_frame,
         "tracks_path": str(tracks_path),
         "gt_path": str(gt_path),
     }
+
+
+def forecast_min_frame_from_tracks(tracks_path, obs_len):
+    """First frame number at which LSTM rollout replaces SAM (index obs_len)."""
+    with open(tracks_path, encoding="utf-8") as f:
+        data = json.load(f)
+    frames = sorted(data.get("frames", []), key=lambda fr: int(fr["frame_number"]))
+    if len(frames) <= obs_len:
+        return None
+    return int(frames[obs_len]["frame_number"])
 
 
 def find_sportsmot_gt(sequence_name="sportsmot_example", gt_root=None):
