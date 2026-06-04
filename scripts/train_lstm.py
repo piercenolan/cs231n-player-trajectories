@@ -45,7 +45,45 @@ def build_model(model_name, num_players, pred_len, hidden_dim, num_layers, rule_
     raise ValueError(f"Unknown model: {model_name}")
 
 
-def forward_batch(model, model_name, batch, device):
+def rule_penalty_loss(pred, mask_y, scale, max_speed_px=50.0, min_spacing_px=35.0):
+    """
+    Soft physical constraints on predicted positions (A1b).
+    Vectorized velocity cap + batched pairwise spacing per timestep.
+    """
+    scale_t = scale.view(1, 1, 1, 2).to(pred.device)
+    pred_px = pred * scale_t
+    total = pred.new_tensor(0.0)
+    n_terms = 0
+
+    if pred.shape[1] >= 2:
+        vel = pred_px[:, 1:] - pred_px[:, :-1]
+        speed = torch.sqrt((vel**2).sum(dim=-1) + 1e-8)
+        m = mask_y[:, 1:] & mask_y[:, :-1]
+        if m.any():
+            pen = torch.relu(speed - max_speed_px)
+            total = total + (pen * m.float()).sum() / m.float().sum().clamp(min=1.0)
+            n_terms += 1
+
+    B, L, P, _ = pred_px.shape
+    for t in range(L):
+        m_t = mask_y[:, t]
+        if m_t.sum() < 2:
+            continue
+        pts = pred_px[:, t]
+        diff = pts.unsqueeze(2) - pts.unsqueeze(1)
+        dist = torch.sqrt((diff**2).sum(-1) + 1e-8)
+        pair_mask = m_t.unsqueeze(2) & m_t.unsqueeze(1)
+        eye = torch.eye(P, device=pred.device, dtype=torch.bool).unsqueeze(0)
+        pair_mask = pair_mask & ~eye
+        if pair_mask.any():
+            pen = torch.relu(min_spacing_px - dist)
+            total = total + (pen * pair_mask.float()).sum() / pair_mask.float().sum().clamp(min=1.0)
+            n_terms += 1
+
+    return total if n_terms else pred.new_tensor(0.0)
+
+
+def forward_batch(model, model_name, batch, device, scale=None, rule_loss_weight=0.0):
     x = batch["x"].to(device)
     y = batch["y"].to(device)
     mask_y = batch["mask_y"].to(device)
@@ -58,16 +96,20 @@ def forward_batch(model, model_name, batch, device):
     else:
         pred = model(x)
     loss = masked_mse(pred, y, mask_y)
+    if rule_loss_weight > 0 and scale is not None:
+        loss = loss + rule_loss_weight * rule_penalty_loss(pred, mask_y, scale)
     return loss
 
 
-def train_epoch(model, model_name, loader, optimizer, device):
+def train_epoch(model, model_name, loader, optimizer, device, scale, rule_loss_weight):
     model.train()
     total = 0.0
     n = 0
     for batch in loader:
         optimizer.zero_grad()
-        loss = forward_batch(model, model_name, batch, device)
+        loss = forward_batch(
+            model, model_name, batch, device, scale=scale, rule_loss_weight=rule_loss_weight
+        )
         loss.backward()
         optimizer.step()
         total += loss.item()
@@ -76,12 +118,14 @@ def train_epoch(model, model_name, loader, optimizer, device):
 
 
 @torch.no_grad()
-def eval_epoch(model, model_name, loader, device):
+def eval_epoch(model, model_name, loader, device, scale, rule_loss_weight):
     model.eval()
     total = 0.0
     n = 0
     for batch in loader:
-        loss = forward_batch(model, model_name, batch, device)
+        loss = forward_batch(
+            model, model_name, batch, device, scale=scale, rule_loss_weight=rule_loss_weight
+        )
         total += loss.item()
         n += 1
     return total / max(n, 1)
@@ -111,6 +155,13 @@ def main():
     parser.add_argument("--batch-size", type=int, default=16)
     parser.add_argument("--out-dir", default=None)
     parser.add_argument("--device", default=None)
+    parser.add_argument(
+        "--rule-loss-weight",
+        type=float,
+        default=0.0,
+        help="A1b: weight for velocity/spacing penalty on predictions (rule_features only)",
+    )
+    parser.add_argument("--val-seed", default=None, help="Held-out seed for held_out_seed split")
     args = parser.parse_args()
 
     require_rules = args.model == "rule_features"
@@ -118,7 +169,7 @@ def main():
     out_dir = Path(args.out_dir or (lstm_out_dir(args.dataset) / default_sub))
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    train_loader, val_loader, scale, split_info = build_dataloaders(
+    dl_kw = dict(
         dataset=args.dataset,
         tensor_mode=args.tensor_mode,
         obs_len=args.obs_len,
@@ -128,6 +179,12 @@ def main():
         split=args.split,
         require_rule_features=require_rules,
     )
+    if args.val_seed:
+        dl_kw["val_seed"] = args.val_seed
+    train_loader, val_loader, scale, split_info = build_dataloaders(**dl_kw)
+
+    scale_t = torch.tensor(scale, dtype=torch.float32)
+    rule_w = args.rule_loss_weight if args.model == "rule_features" else 0.0
 
     sample = next(iter(train_loader))
     num_players = sample["x"].shape[2]
@@ -150,8 +207,8 @@ def main():
         f"train={len(train_loader)} val={len(val_loader)}"
     )
     for epoch in range(1, args.epochs + 1):
-        tr = train_epoch(model, args.model, train_loader, optimizer, device)
-        va = eval_epoch(model, args.model, val_loader, device)
+        tr = train_epoch(model, args.model, train_loader, optimizer, device, scale_t, rule_w)
+        va = eval_epoch(model, args.model, val_loader, device, scale_t, rule_w)
         history["train_loss"].append(tr)
         history["val_loss"].append(va)
         if epoch == 1 or epoch % 10 == 0 or epoch == args.epochs:
@@ -174,6 +231,7 @@ def main():
         "batch_size": args.batch_size,
         "scale": scale.tolist(),
         "split_info": split_info,
+        "rule_loss_weight": rule_w,
     }
 
     ckpt_path = out_dir / "checkpoint.pt"

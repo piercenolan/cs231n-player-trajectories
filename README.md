@@ -165,15 +165,19 @@ LSTM input policy: `sanitize_plus_velocity_cap` (same SAM3 positions for A0 and 
 Train all forecaster variants on **all seeds** with temporal split:
 
 ```powershell
-py scripts/train_lstm.py --model plain --split temporal_all --epochs 80
-py scripts/train_lstm.py --model rule_features --split temporal_all --epochs 80
-py scripts/train_lstm.py --model graph --split temporal_all --epochs 80
+py scripts/train_lstm.py --model plain --split held_out_seed --val-seed offset_0s --epochs 80
+py scripts/train_lstm.py --model rule_features --split held_out_seed --val-seed offset_0s --epochs 80
+py scripts/train_lstm.py --model graph --split held_out_seed --val-seed offset_0s --epochs 80
+py scripts/train_lstm.py --model rule_features --split held_out_seed --rule-loss-weight 0.001 --out-dir data/runs/sportsmot_example/lstm/lstm_rule_features_a1b
 ```
 
 Evaluate forecast-horizon ADE/FDE vs linear and SAM baselines:
 
 ```powershell
-py scripts/eval_lstm_ablations.py --dataset sportsmot_example --all-seeds
+py scripts/eval_lstm_ablations.py --dataset sportsmot_example --all-seeds --diagnose-seeds
+py scripts/eval_rule_feature_ablation.py --all-seeds
+py scripts/eval_autoregressive_compare.py
+py scripts/diagnose_lstm_seeds.py
 ```
 
 Optional A2 post-refine (rules applied to plain LSTM predictions, no extra training):
@@ -228,6 +232,12 @@ Under `data/runs/sportsmot_example/`:
 | `lstm/lstm_ablation_summary.csv` | A0–A3 vs linear/SAM (forecast horizon) |
 | `lstm/lstm_ablation_multi_seed.json` | Per-seed + aggregate metrics |
 | `lstm/lstm_rule_attribution.csv` | Per-rule ΔADE (A2 attribution) |
+| `lstm/lstm_per_seed_delta.csv` | Per-seed A1 − A0 forecast ADE |
+| `lstm/lstm_ablation_robust.json` | Median ADE + win rate |
+| `lstm/seed_diagnosis.json` | Per-seed visibility / export gate |
+| `lstm/lstm_rule_feature_group_ablation.csv` | A1 feature-group masking |
+| `lstm/lstm_autoregressive_compare.csv` | Fixed vs AR rule features |
+| `lstm/lstm_rule_features_a1b/` | A1 + soft rule penalty checkpoint |
 | `figures/lstm_rule_ablation_bar.png` | Variant comparison bar chart |
 | `figures/lstm_per_rule_delta_ade.png` | Post-refine rule attribution |
 

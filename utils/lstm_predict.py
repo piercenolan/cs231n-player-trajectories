@@ -53,27 +53,51 @@ def load_checkpoint(checkpoint_path, device="cpu"):
     return model, cfg
 
 
+def _rule_features_for_window(seq, pos_px, scale, start, obs_len, autoregressive):
+    """Rule feature slice for one obs window."""
+    if not autoregressive:
+        rf = seq.get("rule_features")
+        if rf is None:
+            raise ValueError("rule_features required for rule_features model")
+        return rf[start : start + obs_len]
+
+    from utils.rule_features import compute_rule_features_from_positions
+
+    meta = seq.get("meta") or {}
+    fw = int(meta.get("frame_width", 640))
+    fh = int(meta.get("frame_height", 360))
+    full_rf = compute_rule_features_from_positions(
+        pos_px,
+        seq["visibility"],
+        seq["frame_numbers"],
+        seq["player_ids"],
+        frame_width=fw,
+        frame_height=fh,
+    )
+    return full_rf[start : start + obs_len]
+
+
 @torch.no_grad()
-def rollout_positions(model, seq, cfg, device="cpu", stitch="last"):
+def rollout_positions(model, seq, cfg, device="cpu", stitch="last", autoregressive=False):
     """
     Sliding-window LSTM rollout on one sequence dict from load_tensor_file.
+
+    autoregressive: feed predicted positions back into history and recompute rule
+    features each window (rule_features model only).
 
     Returns (T, P, 2) pixel positions and (T, P) bool forecast_updated mask.
     """
     obs_len = cfg["obs_len"]
     pred_len = cfg["pred_len"]
-    # Always use this sequence's scale (seeds may differ from checkpoint / root export).
     scale = seq.get("scale")
     if scale is None:
         scale = norm_stats_from_meta(seq["meta"])
     scale = np.asarray(scale, dtype=np.float32)
 
-    pos_px = seq["positions"].copy()
+    pos_px = seq["positions"].copy().astype(np.float32)
     vis = seq["visibility"]
-    pos_norm = normalize_positions(pos_px, scale)
-    rule_feat = seq.get("rule_features")
     model_name = cfg.get("model", "plain")
-    T, P, _ = pos_norm.shape
+    T, P, _ = pos_px.shape
     win = obs_len + pred_len
 
     accum = np.zeros((T, P, 2), dtype=np.float32)
@@ -81,13 +105,15 @@ def rollout_positions(model, seq, cfg, device="cpu", stitch="last"):
     updated = np.zeros((T, P), dtype=bool)
 
     for start in range(0, T - win + 1):
+        pos_norm = normalize_positions(pos_px, scale)
         x = pos_norm[start : start + obs_len]
         xt = torch.from_numpy(x).unsqueeze(0).to(device)
         if model_name == "rule_features":
-            if rule_feat is None:
-                raise ValueError("rule_features required for rule_features model")
-            rf = torch.from_numpy(rule_feat[start : start + obs_len]).unsqueeze(0).to(device)
-            pred_norm = model(xt, rf).squeeze(0).cpu().numpy()
+            rf = _rule_features_for_window(
+                seq, pos_px, scale, start, obs_len, autoregressive
+            )
+            rft = torch.from_numpy(rf).unsqueeze(0).to(device)
+            pred_norm = model(xt, rft).squeeze(0).cpu().numpy()
         elif model_name == "graph":
             mx = torch.from_numpy(vis[start : start + obs_len]).unsqueeze(0).to(device)
             pred_norm = model(xt, mx).squeeze(0).cpu().numpy()
@@ -100,6 +126,8 @@ def rollout_positions(model, seq, cfg, device="cpu", stitch="last"):
             for p in range(pred_px.shape[1]):
                 if not vis[t, p]:
                     continue
+                if autoregressive:
+                    pos_px[t, p] = pred_px[k, p]
                 if stitch == "last":
                     accum[t, p] = pred_px[k, p]
                     counts[t, p] = 1.0

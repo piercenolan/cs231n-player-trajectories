@@ -1,0 +1,788 @@
+{
+  "configs": {
+    "full_all_features": [
+      "kinematic",
+      "social_geometry",
+      "game_state"
+    ],
+    "kinematic_only": [
+      "kinematic"
+    ],
+    "social_geometry_only": [
+      "social_geometry"
+    ],
+    "game_state_only": [
+      "game_state"
+    ],
+    "kinematic_plus_social": [
+      "kinematic",
+      "social_geometry"
+    ],
+    "kinematic_plus_game": [
+      "kinematic",
+      "game_state"
+    ],
+    "no_game_state": [
+      "kinematic",
+      "social_geometry"
+    ]
+  },
+  "results": [
+    {
+      "seed_id": "offset_0s",
+      "ablation": "full_all_features",
+      "groups_kept": "kinematic,social_geometry,game_state",
+      "n_features_active": 15,
+      "ade_forecast": 44.984449037221445,
+      "fde_forecast": 40.28361015001187,
+      "teacher_forced_ade_px": 122.4023431022753
+    },
+    {
+      "seed_id": "offset_0s",
+      "ablation": "kinematic_only",
+      "groups_kept": "kinematic",
+      "n_features_active": 5,
+      "ade_forecast": 53.49509344040757,
+      "fde_forecast": 47.80433319671715,
+      "teacher_forced_ade_px": 96.70441713913503
+    },
+    {
+      "seed_id": "offset_0s",
+      "ablation": "social_geometry_only",
+      "groups_kept": "social_geometry",
+      "n_features_active": 3,
+      "ade_forecast": 51.628729282195884,
+      "fde_forecast": 47.377629389621525,
+      "teacher_forced_ade_px": 108.18184975983056
+    },
+    {
+      "seed_id": "offset_0s",
+      "ablation": "game_state_only",
+      "groups_kept": "game_state",
+      "n_features_active": 7,
+      "ade_forecast": 35.346833828779616,
+      "fde_forecast": 29.311022313770508,
+      "teacher_forced_ade_px": 83.92815003907386
+    },
+    {
+      "seed_id": "offset_0s",
+      "ablation": "kinematic_plus_social",
+      "groups_kept": "kinematic,social_geometry",
+      "n_features_active": 8,
+      "ade_forecast": 50.73073291574399,
+      "fde_forecast": 62.413388452942456,
+      "teacher_forced_ade_px": 109.54749295516268
+    },
+    {
+      "seed_id": "offset_0s",
+      "ablation": "kinematic_plus_game",
+      "groups_kept": "kinematic,game_state",
+      "n_features_active": 12,
+      "ade_forecast": 42.3427868683086,
+      "fde_forecast": 40.83740100483135,
+      "teacher_forced_ade_px": 98.50199043473116
+    },
+    {
+      "seed_id": "offset_0s",
+      "ablation": "no_game_state",
+      "groups_kept": "kinematic,social_geometry",
+      "n_features_active": 8,
+      "ade_forecast": 50.73073291574399,
+      "fde_forecast": 62.413388452942456,
+      "teacher_forced_ade_px": 109.54749295516268
+    },
+    {
+      "seed_id": "offset_10s",
+      "ablation": "full_all_features",
+      "groups_kept": "kinematic,social_geometry,game_state",
+      "n_features_active": 15,
+      "ade_forecast": 7.457814676262929,
+      "fde_forecast": 7.614738479150477,
+      "teacher_forced_ade_px": 5.251594475865674
+    },
+    {
+      "seed_id": "offset_10s",
+      "ablation": "kinematic_only",
+      "groups_kept": "kinematic",
+      "n_features_active": 5,
+      "ade_forecast": 42.94825572242172,
+      "fde_forecast": 36.00234654374782,
+      "teacher_forced_ade_px": 72.38066144035548
+    },
+    {
+      "seed_id": "offset_10s",
+      "ablation": "social_geometry_only",
+      "groups_kept": "social_geometry",
+      "n_features_active": 3,
+      "ade_forecast": 42.835438663045494,
+      "fde_forecast": 43.277345044552035,
+      "teacher_forced_ade_px": 67.49337143740597
+    },
+    {
+      "seed_id": "offset_10s",
+      "ablation": "game_state_only",
+      "groups_kept": "game_state",
+      "n_features_active": 7,
+      "ade_forecast": 45.30496194745016,
+      "fde_forecast": 43.40198661791658,
+      "teacher_forced_ade_px": 67.5693087699859
+    },
+    {
+      "seed_id": "offset_10s",
+      "ablation": "kinematic_plus_social",
+      "groups_kept": "kinematic,social_geometry",
+      "n_features_active": 8,
+      "ade_forecast": 34.3594134078831,
+      "fde_forecast": 37.4868752443486,
+      "teacher_forced_ade_px": 35.48506564226897
+    },
+    {
+      "seed_id": "offset_10s",
+      "ablation": "kinematic_plus_game",
+      "groups_kept": "kinematic,game_state",
+      "n_features_active": 12,
+      "ade_forecast": 35.388185366875625,
+      "fde_forecast": 21.042550427129623,
+      "teacher_forced_ade_px": 52.4201163026098
+    },
+    {
+      "seed_id": "offset_10s",
+      "ablation": "no_game_state",
+      "groups_kept": "kinematic,social_geometry",
+      "n_features_active": 8,
+      "ade_forecast": 34.3594134078831,
+      "fde_forecast": 37.4868752443486,
+      "teacher_forced_ade_px": 35.48506564226897
+    },
+    {
+      "seed_id": "offset_12s",
+      "ablation": "full_all_features",
+      "groups_kept": "kinematic,social_geometry,game_state",
+      "n_features_active": 15,
+      "ade_forecast": 6.339930191353508,
+      "fde_forecast": 9.944826789348484,
+      "teacher_forced_ade_px": 4.980237690424791
+    },
+    {
+      "seed_id": "offset_12s",
+      "ablation": "kinematic_only",
+      "groups_kept": "kinematic",
+      "n_features_active": 5,
+      "ade_forecast": 49.92643680794746,
+      "fde_forecast": 46.154307177596216,
+      "teacher_forced_ade_px": 82.86620061606949
+    },
+    {
+      "seed_id": "offset_12s",
+      "ablation": "social_geometry_only",
+      "groups_kept": "social_geometry",
+      "n_features_active": 3,
+      "ade_forecast": 50.37597631084576,
+      "fde_forecast": 52.3165229128948,
+      "teacher_forced_ade_px": 79.15020741666962
+    },
+    {
+      "seed_id": "offset_12s",
+      "ablation": "game_state_only",
+      "groups_kept": "game_state",
+      "n_features_active": 7,
+      "ade_forecast": 35.6453151888279,
+      "fde_forecast": 31.143291458140496,
+      "teacher_forced_ade_px": 51.15217746631207
+    },
+    {
+      "seed_id": "offset_12s",
+      "ablation": "kinematic_plus_social",
+      "groups_kept": "kinematic,social_geometry",
+      "n_features_active": 8,
+      "ade_forecast": 34.75997969996056,
+      "fde_forecast": 39.9116730433229,
+      "teacher_forced_ade_px": 52.531574617548976
+    },
+    {
+      "seed_id": "offset_12s",
+      "ablation": "kinematic_plus_game",
+      "groups_kept": "kinematic,game_state",
+      "n_features_active": 12,
+      "ade_forecast": 27.620193086238814,
+      "fde_forecast": 39.471810399789135,
+      "teacher_forced_ade_px": 29.33932793716712
+    },
+    {
+      "seed_id": "offset_12s",
+      "ablation": "no_game_state",
+      "groups_kept": "kinematic,social_geometry",
+      "n_features_active": 8,
+      "ade_forecast": 34.75997969996056,
+      "fde_forecast": 39.9116730433229,
+      "teacher_forced_ade_px": 52.531574617548976
+    },
+    {
+      "seed_id": "offset_14s",
+      "ablation": "full_all_features",
+      "groups_kept": "kinematic,social_geometry,game_state",
+      "n_features_active": 15,
+      "ade_forecast": 6.968872777553704,
+      "fde_forecast": 8.012383873344719,
+      "teacher_forced_ade_px": 4.495385970151091
+    },
+    {
+      "seed_id": "offset_14s",
+      "ablation": "kinematic_only",
+      "groups_kept": "kinematic",
+      "n_features_active": 5,
+      "ade_forecast": 44.058169806467745,
+      "fde_forecast": 55.676544030397736,
+      "teacher_forced_ade_px": 60.807127182638396
+    },
+    {
+      "seed_id": "offset_14s",
+      "ablation": "social_geometry_only",
+      "groups_kept": "social_geometry",
+      "n_features_active": 3,
+      "ade_forecast": 41.83358483536249,
+      "fde_forecast": 46.56163794235518,
+      "teacher_forced_ade_px": 69.99399258394158
+    },
+    {
+      "seed_id": "offset_14s",
+      "ablation": "game_state_only",
+      "groups_kept": "game_state",
+      "n_features_active": 7,
+      "ade_forecast": 37.03961025061337,
+      "fde_forecast": 36.8823318173283,
+      "teacher_forced_ade_px": 85.84400648036889
+    },
+    {
+      "seed_id": "offset_14s",
+      "ablation": "kinematic_plus_social",
+      "groups_kept": "kinematic,social_geometry",
+      "n_features_active": 8,
+      "ade_forecast": 36.24316594800477,
+      "fde_forecast": 39.04471626095158,
+      "teacher_forced_ade_px": 34.32923842926996
+    },
+    {
+      "seed_id": "offset_14s",
+      "ablation": "kinematic_plus_game",
+      "groups_kept": "kinematic,game_state",
+      "n_features_active": 12,
+      "ade_forecast": 34.400967851685266,
+      "fde_forecast": 35.159523240203455,
+      "teacher_forced_ade_px": 37.779802456893755
+    },
+    {
+      "seed_id": "offset_14s",
+      "ablation": "no_game_state",
+      "groups_kept": "kinematic,social_geometry",
+      "n_features_active": 8,
+      "ade_forecast": 36.24316594800477,
+      "fde_forecast": 39.04471626095158,
+      "teacher_forced_ade_px": 34.32923842926996
+    },
+    {
+      "seed_id": "offset_15s",
+      "ablation": "full_all_features",
+      "groups_kept": "kinematic,social_geometry,game_state",
+      "n_features_active": 15,
+      "ade_forecast": 41.57758040247291,
+      "fde_forecast": 32.511772846426226,
+      "teacher_forced_ade_px": 99.33631906691512
+    },
+    {
+      "seed_id": "offset_15s",
+      "ablation": "kinematic_only",
+      "groups_kept": "kinematic",
+      "n_features_active": 5,
+      "ade_forecast": 48.43451709730539,
+      "fde_forecast": 49.769169664532626,
+      "teacher_forced_ade_px": 126.53529427075702
+    },
+    {
+      "seed_id": "offset_15s",
+      "ablation": "social_geometry_only",
+      "groups_kept": "social_geometry",
+      "n_features_active": 3,
+      "ade_forecast": 44.505631973535074,
+      "fde_forecast": 48.06092610257,
+      "teacher_forced_ade_px": 116.35445479926706
+    },
+    {
+      "seed_id": "offset_15s",
+      "ablation": "game_state_only",
+      "groups_kept": "game_state",
+      "n_features_active": 7,
+      "ade_forecast": 40.13309543594153,
+      "fde_forecast": 42.958515828238035,
+      "teacher_forced_ade_px": 127.67938593050881
+    },
+    {
+      "seed_id": "offset_15s",
+      "ablation": "kinematic_plus_social",
+      "groups_kept": "kinematic,social_geometry",
+      "n_features_active": 8,
+      "ade_forecast": 42.40846738997592,
+      "fde_forecast": 42.07368012974525,
+      "teacher_forced_ade_px": 120.48656258662976
+    },
+    {
+      "seed_id": "offset_15s",
+      "ablation": "kinematic_plus_game",
+      "groups_kept": "kinematic,game_state",
+      "n_features_active": 12,
+      "ade_forecast": 38.594432268566564,
+      "fde_forecast": 39.3693721684965,
+      "teacher_forced_ade_px": 116.57939635109177
+    },
+    {
+      "seed_id": "offset_15s",
+      "ablation": "no_game_state",
+      "groups_kept": "kinematic,social_geometry",
+      "n_features_active": 8,
+      "ade_forecast": 42.40846738997592,
+      "fde_forecast": 42.07368012974525,
+      "teacher_forced_ade_px": 120.48656258662976
+    },
+    {
+      "seed_id": "offset_16s",
+      "ablation": "full_all_features",
+      "groups_kept": "kinematic,social_geometry,game_state",
+      "n_features_active": 15,
+      "ade_forecast": 9.975477197148866,
+      "fde_forecast": 11.58554858132686,
+      "teacher_forced_ade_px": 4.79281523464905
+    },
+    {
+      "seed_id": "offset_16s",
+      "ablation": "kinematic_only",
+      "groups_kept": "kinematic",
+      "n_features_active": 5,
+      "ade_forecast": 41.10697201700839,
+      "fde_forecast": 47.39011256701789,
+      "teacher_forced_ade_px": 44.32095004114158
+    },
+    {
+      "seed_id": "offset_16s",
+      "ablation": "social_geometry_only",
+      "groups_kept": "social_geometry",
+      "n_features_active": 3,
+      "ade_forecast": 44.01619569207296,
+      "fde_forecast": 42.92365894499088,
+      "teacher_forced_ade_px": 99.96829295579126
+    },
+    {
+      "seed_id": "offset_16s",
+      "ablation": "game_state_only",
+      "groups_kept": "game_state",
+      "n_features_active": 7,
+      "ade_forecast": 38.185875840358364,
+      "fde_forecast": 34.803042691310885,
+      "teacher_forced_ade_px": 62.51082438300638
+    },
+    {
+      "seed_id": "offset_16s",
+      "ablation": "kinematic_plus_social",
+      "groups_kept": "kinematic,social_geometry",
+      "n_features_active": 8,
+      "ade_forecast": 34.56276792483515,
+      "fde_forecast": 42.32028375398535,
+      "teacher_forced_ade_px": 33.06201189607382
+    },
+    {
+      "seed_id": "offset_16s",
+      "ablation": "kinematic_plus_game",
+      "groups_kept": "kinematic,game_state",
+      "n_features_active": 12,
+      "ade_forecast": 22.767847360426668,
+      "fde_forecast": 24.477777814625128,
+      "teacher_forced_ade_px": 16.724765778442517
+    },
+    {
+      "seed_id": "offset_16s",
+      "ablation": "no_game_state",
+      "groups_kept": "kinematic,social_geometry",
+      "n_features_active": 8,
+      "ade_forecast": 34.56276792483515,
+      "fde_forecast": 42.32028375398535,
+      "teacher_forced_ade_px": 33.06201189607382
+    },
+    {
+      "seed_id": "offset_18s",
+      "ablation": "full_all_features",
+      "groups_kept": "kinematic,social_geometry,game_state",
+      "n_features_active": 15,
+      "ade_forecast": 7.554140473204379,
+      "fde_forecast": 8.682555505417179,
+      "teacher_forced_ade_px": 4.671576898586573
+    },
+    {
+      "seed_id": "offset_18s",
+      "ablation": "kinematic_only",
+      "groups_kept": "kinematic",
+      "n_features_active": 5,
+      "ade_forecast": 46.23674848998546,
+      "fde_forecast": 52.66975418179915,
+      "teacher_forced_ade_px": 104.83027446690988
+    },
+    {
+      "seed_id": "offset_18s",
+      "ablation": "social_geometry_only",
+      "groups_kept": "social_geometry",
+      "n_features_active": 3,
+      "ade_forecast": 39.4954263217284,
+      "fde_forecast": 49.606970441013445,
+      "teacher_forced_ade_px": 70.90222356860079
+    },
+    {
+      "seed_id": "offset_18s",
+      "ablation": "game_state_only",
+      "groups_kept": "game_state",
+      "n_features_active": 7,
+      "ade_forecast": 44.13080651783773,
+      "fde_forecast": 40.9795754247935,
+      "teacher_forced_ade_px": 128.22894434592095
+    },
+    {
+      "seed_id": "offset_18s",
+      "ablation": "kinematic_plus_social",
+      "groups_kept": "kinematic,social_geometry",
+      "n_features_active": 8,
+      "ade_forecast": 35.792189820720665,
+      "fde_forecast": 43.471337840673606,
+      "teacher_forced_ade_px": 37.90883378282356
+    },
+    {
+      "seed_id": "offset_18s",
+      "ablation": "kinematic_plus_game",
+      "groups_kept": "kinematic,game_state",
+      "n_features_active": 12,
+      "ade_forecast": 43.18601538587931,
+      "fde_forecast": 46.98949044257987,
+      "teacher_forced_ade_px": 97.86984934611834
+    },
+    {
+      "seed_id": "offset_18s",
+      "ablation": "no_game_state",
+      "groups_kept": "kinematic,social_geometry",
+      "n_features_active": 8,
+      "ade_forecast": 35.792189820720665,
+      "fde_forecast": 43.471337840673606,
+      "teacher_forced_ade_px": 37.90883378282356
+    },
+    {
+      "seed_id": "offset_2s",
+      "ablation": "full_all_features",
+      "groups_kept": "kinematic,social_geometry,game_state",
+      "n_features_active": 15,
+      "ade_forecast": 5.645937724337897,
+      "fde_forecast": 8.77340810520078,
+      "teacher_forced_ade_px": 4.345330575902891
+    },
+    {
+      "seed_id": "offset_2s",
+      "ablation": "kinematic_only",
+      "groups_kept": "kinematic",
+      "n_features_active": 5,
+      "ade_forecast": 37.65555089661525,
+      "fde_forecast": 40.321924548660185,
+      "teacher_forced_ade_px": 59.42536495873595
+    },
+    {
+      "seed_id": "offset_2s",
+      "ablation": "social_geometry_only",
+      "groups_kept": "social_geometry",
+      "n_features_active": 3,
+      "ade_forecast": 41.692037729760386,
+      "fde_forecast": 43.524154128171595,
+      "teacher_forced_ade_px": 52.86124554390416
+    },
+    {
+      "seed_id": "offset_2s",
+      "ablation": "game_state_only",
+      "groups_kept": "game_state",
+      "n_features_active": 7,
+      "ade_forecast": 47.71604331187262,
+      "fde_forecast": 52.93830767122281,
+      "teacher_forced_ade_px": 112.73670851448003
+    },
+    {
+      "seed_id": "offset_2s",
+      "ablation": "kinematic_plus_social",
+      "groups_kept": "kinematic,social_geometry",
+      "n_features_active": 8,
+      "ade_forecast": 22.41278610134189,
+      "fde_forecast": 19.332944769658855,
+      "teacher_forced_ade_px": 23.60961264069466
+    },
+    {
+      "seed_id": "offset_2s",
+      "ablation": "kinematic_plus_game",
+      "groups_kept": "kinematic,game_state",
+      "n_features_active": 12,
+      "ade_forecast": 41.926434875388566,
+      "fde_forecast": 42.9731923100155,
+      "teacher_forced_ade_px": 53.213159701754066
+    },
+    {
+      "seed_id": "offset_2s",
+      "ablation": "no_game_state",
+      "groups_kept": "kinematic,social_geometry",
+      "n_features_active": 8,
+      "ade_forecast": 22.41278610134189,
+      "fde_forecast": 19.332944769658855,
+      "teacher_forced_ade_px": 23.60961264069466
+    },
+    {
+      "seed_id": "offset_4s",
+      "ablation": "full_all_features",
+      "groups_kept": "kinematic,social_geometry,game_state",
+      "n_features_active": 15,
+      "ade_forecast": 6.74827082930992,
+      "fde_forecast": 8.748206515447269,
+      "teacher_forced_ade_px": 4.96203931425972
+    },
+    {
+      "seed_id": "offset_4s",
+      "ablation": "kinematic_only",
+      "groups_kept": "kinematic",
+      "n_features_active": 5,
+      "ade_forecast": 39.60330149287659,
+      "fde_forecast": 42.94417839685792,
+      "teacher_forced_ade_px": 80.82502078466555
+    },
+    {
+      "seed_id": "offset_4s",
+      "ablation": "social_geometry_only",
+      "groups_kept": "social_geometry",
+      "n_features_active": 3,
+      "ade_forecast": 42.8815558272003,
+      "fde_forecast": 26.3801249350418,
+      "teacher_forced_ade_px": 56.778897181942185
+    },
+    {
+      "seed_id": "offset_4s",
+      "ablation": "game_state_only",
+      "groups_kept": "game_state",
+      "n_features_active": 7,
+      "ade_forecast": 52.61355728553294,
+      "fde_forecast": 33.677315408347816,
+      "teacher_forced_ade_px": 102.22515311661888
+    },
+    {
+      "seed_id": "offset_4s",
+      "ablation": "kinematic_plus_social",
+      "groups_kept": "kinematic,social_geometry",
+      "n_features_active": 8,
+      "ade_forecast": 33.173265749935666,
+      "fde_forecast": 29.826141305892,
+      "teacher_forced_ade_px": 51.2878034325207
+    },
+    {
+      "seed_id": "offset_4s",
+      "ablation": "kinematic_plus_game",
+      "groups_kept": "kinematic,game_state",
+      "n_features_active": 12,
+      "ade_forecast": 45.374181368045015,
+      "fde_forecast": 40.46806033936974,
+      "teacher_forced_ade_px": 78.77708309257731
+    },
+    {
+      "seed_id": "offset_4s",
+      "ablation": "no_game_state",
+      "groups_kept": "kinematic,social_geometry",
+      "n_features_active": 8,
+      "ade_forecast": 33.173265749935666,
+      "fde_forecast": 29.826141305892,
+      "teacher_forced_ade_px": 51.2878034325207
+    },
+    {
+      "seed_id": "offset_5s",
+      "ablation": "full_all_features",
+      "groups_kept": "kinematic,social_geometry,game_state",
+      "n_features_active": 15,
+      "ade_forecast": 50.644915659539095,
+      "fde_forecast": 57.11174788385294,
+      "teacher_forced_ade_px": 118.13771960454828
+    },
+    {
+      "seed_id": "offset_5s",
+      "ablation": "kinematic_only",
+      "groups_kept": "kinematic",
+      "n_features_active": 5,
+      "ade_forecast": 42.278767888789794,
+      "fde_forecast": 36.04933327330916,
+      "teacher_forced_ade_px": 113.66661548947587
+    },
+    {
+      "seed_id": "offset_5s",
+      "ablation": "social_geometry_only",
+      "groups_kept": "social_geometry",
+      "n_features_active": 3,
+      "ade_forecast": 38.616999605727784,
+      "fde_forecast": 33.75582727145135,
+      "teacher_forced_ade_px": 103.84877546955558
+    },
+    {
+      "seed_id": "offset_5s",
+      "ablation": "game_state_only",
+      "groups_kept": "game_state",
+      "n_features_active": 7,
+      "ade_forecast": 44.383850868980936,
+      "fde_forecast": 54.64484784220533,
+      "teacher_forced_ade_px": 130.23493330829282
+    },
+    {
+      "seed_id": "offset_5s",
+      "ablation": "kinematic_plus_social",
+      "groups_kept": "kinematic,social_geometry",
+      "n_features_active": 8,
+      "ade_forecast": 45.113645532399254,
+      "fde_forecast": 37.11291926555399,
+      "teacher_forced_ade_px": 117.48967768620042
+    },
+    {
+      "seed_id": "offset_5s",
+      "ablation": "kinematic_plus_game",
+      "groups_kept": "kinematic,game_state",
+      "n_features_active": 12,
+      "ade_forecast": 48.05465343093686,
+      "fde_forecast": 32.73015169352119,
+      "teacher_forced_ade_px": 122.23643149961444
+    },
+    {
+      "seed_id": "offset_5s",
+      "ablation": "no_game_state",
+      "groups_kept": "kinematic,social_geometry",
+      "n_features_active": 8,
+      "ade_forecast": 45.113645532399254,
+      "fde_forecast": 37.11291926555399,
+      "teacher_forced_ade_px": 117.48967768620042
+    },
+    {
+      "seed_id": "offset_6s",
+      "ablation": "full_all_features",
+      "groups_kept": "kinematic,social_geometry,game_state",
+      "n_features_active": 15,
+      "ade_forecast": 7.21561294189377,
+      "fde_forecast": 6.450360110751108,
+      "teacher_forced_ade_px": 4.965819933468147
+    },
+    {
+      "seed_id": "offset_6s",
+      "ablation": "kinematic_only",
+      "groups_kept": "kinematic",
+      "n_features_active": 5,
+      "ade_forecast": 39.47813779625083,
+      "fde_forecast": 39.52187952089572,
+      "teacher_forced_ade_px": 56.99583633559592
+    },
+    {
+      "seed_id": "offset_6s",
+      "ablation": "social_geometry_only",
+      "groups_kept": "social_geometry",
+      "n_features_active": 3,
+      "ade_forecast": 32.44516119556445,
+      "fde_forecast": 34.25396761430636,
+      "teacher_forced_ade_px": 59.78170142892529
+    },
+    {
+      "seed_id": "offset_6s",
+      "ablation": "game_state_only",
+      "groups_kept": "game_state",
+      "n_features_active": 7,
+      "ade_forecast": 41.56856855941081,
+      "fde_forecast": 45.41863108427095,
+      "teacher_forced_ade_px": 94.00178999506376
+    },
+    {
+      "seed_id": "offset_6s",
+      "ablation": "kinematic_plus_social",
+      "groups_kept": "kinematic,social_geometry",
+      "n_features_active": 8,
+      "ade_forecast": 31.96870687410608,
+      "fde_forecast": 41.388711021551536,
+      "teacher_forced_ade_px": 32.44943074610303
+    },
+    {
+      "seed_id": "offset_6s",
+      "ablation": "kinematic_plus_game",
+      "groups_kept": "kinematic,game_state",
+      "n_features_active": 12,
+      "ade_forecast": 24.522250575987997,
+      "fde_forecast": 31.320001112457305,
+      "teacher_forced_ade_px": 25.55104939492748
+    },
+    {
+      "seed_id": "offset_6s",
+      "ablation": "no_game_state",
+      "groups_kept": "kinematic,social_geometry",
+      "n_features_active": 8,
+      "ade_forecast": 31.96870687410608,
+      "fde_forecast": 41.388711021551536,
+      "teacher_forced_ade_px": 32.44943074610303
+    },
+    {
+      "seed_id": "offset_8s",
+      "ablation": "full_all_features",
+      "groups_kept": "kinematic,social_geometry,game_state",
+      "n_features_active": 15,
+      "ade_forecast": 8.871643634412237,
+      "fde_forecast": 9.446157311227672,
+      "teacher_forced_ade_px": 6.255611611965537
+    },
+    {
+      "seed_id": "offset_8s",
+      "ablation": "kinematic_only",
+      "groups_kept": "kinematic",
+      "n_features_active": 5,
+      "ade_forecast": 35.7852600633566,
+      "fde_forecast": 29.881357928881474,
+      "teacher_forced_ade_px": 63.30508269572399
+    },
+    {
+      "seed_id": "offset_8s",
+      "ablation": "social_geometry_only",
+      "groups_kept": "social_geometry",
+      "n_features_active": 3,
+      "ade_forecast": 39.89657246268824,
+      "fde_forecast": 46.152685696648774,
+      "teacher_forced_ade_px": 68.14445672669179
+    },
+    {
+      "seed_id": "offset_8s",
+      "ablation": "game_state_only",
+      "groups_kept": "game_state",
+      "n_features_active": 7,
+      "ade_forecast": 26.372387083475598,
+      "fde_forecast": 26.47595046397481,
+      "teacher_forced_ade_px": 25.435431697675902
+    },
+    {
+      "seed_id": "offset_8s",
+      "ablation": "kinematic_plus_social",
+      "groups_kept": "kinematic,social_geometry",
+      "n_features_active": 8,
+      "ade_forecast": 33.11469652061803,
+      "fde_forecast": 35.14868268162458,
+      "teacher_forced_ade_px": 40.92687773351839
+    },
+    {
+      "seed_id": "offset_8s",
+      "ablation": "kinematic_plus_game",
+      "groups_kept": "kinematic,game_state",
+      "n_features_active": 12,
+      "ade_forecast": 15.717774171002327,
+      "fde_forecast": 13.064470348364445,
+      "teacher_forced_ade_px": 14.691044555304671
+    },
+    {
+      "seed_id": "offset_8s",
+      "ablation": "no_game_state",
+      "groups_kept": "kinematic,social_geometry",
+      "n_features_active": 8,
+      "ade_forecast": 33.11469652061803,
+      "fde_forecast": 35.14868268162458,
+      "teacher_forced_ade_px": 40.92687773351839
+    }
+  ]
+}

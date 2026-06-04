@@ -98,19 +98,24 @@ flowchart LR
 
 ## Rule-aware LSTM (forecast horizon, 12 seeds @ 2s step)
 
-| Variant | Mean forecast ADE (px) | Notes |
-|---------|------------------------|--------|
-| **A3 graph** | **18.64 ± 16.71** | Best mean across 12 seeds |
-| **A1 rule features** | **18.88 ± 16.92** | Beats A0; best teacher-forced (~4.2 px on `offset_0s`) |
-| A0 plain | 20.29 ± 15.20 | Positions-only baseline |
-| A2 post-refine (game) | 21.83 ± 15.26 | Hurts forecasts |
-| A2 post-refine (physical) | 21.56 ± 15.62 | Slightly worse than A0 |
+**Training split (latest):** `held_out_seed` — train 11 seeds, validate `offset_0s`.
 
-**`offset_0s` slice:** A1 forecast ADE **8.86** vs A0 **9.19** vs linear **6.35** vs SAM aug **7.48** px.
+| Variant | Median forecast ADE (px) | Mean forecast ADE (px) | Notes |
+|---------|-------------------------|------------------------|--------|
+| **A1 rule features** | **7.51** | 18.88 | Beats A0 on **10/12** seeds (`lstm_per_seed_delta.csv`) |
+| A3 graph | — | 18.65 | Slight mean edge vs A0 |
+| A0 plain | — | 20.29 | Positions-only |
+| A1b (+ rule loss) | — | — | `lstm/lstm_rule_features_a1b/` |
 
-Per-rule post-refine (ΔADE vs plain on `offset_0s`): worst `convergence_pull` (+10.4), `cluster_cohesion` (+6.2); near-neutral physical rules.
+**Held-out `offset_0s`:** A0/A1 degrade (not in training); report **median over train seeds** for generalization.
+
+**Feature groups (A1 inference ablation):** `lstm_rule_feature_group_ablation.csv` — full 15-dim best on most train seeds; `game_state_only` competitive on some.
+
+**Autoregressive rule recompute:** `lstm_autoregressive_compare.csv` — mixed vs fixed SAM-derived rules; not uniformly better.
 
 Per-rule post-refine attribution: `lstm/lstm_rule_attribution.csv`, `figures/lstm_per_rule_delta_ade.png`.
+
+Diagnostics: `lstm/seed_diagnosis.json`, `lstm/lstm_ablation_robust.json`.
 
 ---
 
@@ -118,11 +123,12 @@ Per-rule post-refine attribution: `lstm/lstm_rule_attribution.csv`, `figures/lst
 
 ```bash
 py scripts/export_lstm_tensors.py --dataset sportsmot_example --all-seeds --with-rule-features
-py scripts/train_lstm.py --model plain --split temporal_all
-py scripts/train_lstm.py --model rule_features --split temporal_all
-py scripts/train_lstm.py --model graph --split temporal_all
-py scripts/eval_lstm_ablations.py --all-seeds
-py scripts/predict_lstm.py --post-refine game   # A2 on plain checkpoint
+py scripts/train_lstm.py --model plain --split held_out_seed --val-seed offset_0s
+py scripts/train_lstm.py --model rule_features --split held_out_seed --rule-loss-weight 0.001 --out-dir data/runs/sportsmot_example/lstm/lstm_rule_features_a1b
+py scripts/eval_lstm_ablations.py --all-seeds --diagnose-seeds
+py scripts/eval_rule_feature_ablation.py --all-seeds
+py scripts/eval_autoregressive_compare.py
+py scripts/diagnose_lstm_seeds.py
 ```
 
 See **README.md** (full pipeline) and **docs/PROJECT_PLAN.md** (multi-seed + LSTM ordering).

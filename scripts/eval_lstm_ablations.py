@@ -94,6 +94,7 @@ def run_variant(
     device,
     post_refine=None,
     out_name="predicted_tracks.json",
+    autoregressive=False,
 ):
     model, cfg = load_checkpoint(ckpt_path, device=device)
     seq = load_tensor_file(tensor_path)
@@ -101,7 +102,9 @@ def run_variant(
     if scale is None:
         scale = np.asarray(seq["scale"]).tolist()
     cfg = {**cfg, "scale": scale}
-    pred_pos, _ = rollout_positions(model, seq, cfg, device=device)
+    pred_pos, _ = rollout_positions(
+        model, seq, cfg, device=device, autoregressive=autoregressive
+    )
     tracks = positions_to_tracks(
         seq, pred_pos, meta_extra={"variant": variant_id, "checkpoint": str(ckpt_path)}
     )
@@ -181,6 +184,88 @@ def per_rule_attribution(plain_ckpt, tensor_path, gt_path, device, dataset):
     return rows, str(out_csv)
 
 
+def write_robust_report(seed_rows, lstm_root, dataset):
+    """Per-seed A1 vs A0 delta, median ADE, win rate."""
+    by_seed = {}
+    for row in seed_rows:
+        sid = row["seed_id"]
+        by_seed.setdefault(sid, {})[row["variant"]] = row
+
+    delta_rows = []
+    wins = losses = 0
+    for sid in sorted(by_seed.keys()):
+        a0 = by_seed[sid].get("A0_plain", {})
+        a1 = by_seed[sid].get("A1_rule_features", {})
+        a3 = by_seed[sid].get("A3_graph", {})
+        fc0 = a0.get("ade_forecast", float("nan"))
+        fc1 = a1.get("ade_forecast", float("nan"))
+        delta = fc1 - fc0 if fc0 == fc0 and fc1 == fc1 else float("nan")
+        if delta == delta:
+            if delta < -0.01:
+                wins += 1
+                winner = "A1"
+            elif delta > 0.01:
+                losses += 1
+                winner = "A0"
+            else:
+                winner = "tie"
+        else:
+            winner = "na"
+        delta_rows.append(
+            {
+                "seed_id": sid,
+                "A0_forecast_ade": fc0,
+                "A1_forecast_ade": fc1,
+                "A3_forecast_ade": a3.get("ade_forecast"),
+                "delta_A1_minus_A0": delta,
+                "winner": winner,
+                "A0_teacher_forced": a0.get("teacher_forced_ade_px"),
+                "A1_teacher_forced": a1.get("teacher_forced_ade_px"),
+            }
+        )
+
+    def collect(variant):
+        return [
+            r["ade_forecast"]
+            for r in seed_rows
+            if r["variant"] == variant and r.get("ade_forecast") == r.get("ade_forecast")
+        ]
+
+    summary = {
+        "n_seeds": len(delta_rows),
+        "A1_wins_vs_A0": wins,
+        "A0_wins_vs_A1": losses,
+        "per_seed_delta": delta_rows,
+        "robust_aggregate": {},
+    }
+    for variant in ("A0_plain", "A1_rule_features", "A3_graph"):
+        ades = collect(variant)
+        if ades:
+            summary["robust_aggregate"][variant] = {
+                "ade_forecast_mean": float(np.mean(ades)),
+                "ade_forecast_median": float(np.median(ades)),
+                "ade_forecast_std": float(np.std(ades)),
+                "n_seeds": len(ades),
+            }
+
+    report_path = lstm_root / "lstm_ablation_robust.json"
+    with open(report_path, "w", encoding="utf-8") as f:
+        json.dump(summary, f, indent=2)
+
+    csv_path = lstm_root / "lstm_per_seed_delta.csv"
+    if delta_rows:
+        with open(csv_path, "w", newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=list(delta_rows[0].keys()))
+            w.writeheader()
+            w.writerows(delta_rows)
+
+    print(
+        f"Robust report: A1 wins {wins}/{len(delta_rows)} seeds | "
+        f"median A1={summary['robust_aggregate'].get('A1_rule_features', {}).get('ade_forecast_median', float('nan')):.2f} px"
+    )
+    return report_path
+
+
 def plot_bars(rows, out_path):
     names = [r["variant"] for r in rows]
     ades = [r["ade_forecast"] for r in rows]
@@ -206,6 +291,16 @@ def main():
         "--all-seeds",
         action="store_true",
         help="Evaluate all seeds with exported tensors and write multi-seed aggregate",
+    )
+    parser.add_argument(
+        "--autoregressive",
+        action="store_true",
+        help="Recompute rule features from rolled-out positions (A1)",
+    )
+    parser.add_argument(
+        "--diagnose-seeds",
+        action="store_true",
+        help="Run seed diagnosis and write lstm/seed_diagnosis.json",
     )
     args = parser.parse_args()
 
@@ -250,7 +345,16 @@ def main():
             print(f"Skip {vid}: missing {ckpt}")
             continue
         out_name = f"predicted_{vid}.json"
-        r = run_variant(vid, ckpt, tensor_path, gt_path, device, post_refine=pr, out_name=out_name)
+        r = run_variant(
+            vid,
+            ckpt,
+            tensor_path,
+            gt_path,
+            device,
+            post_refine=pr,
+            out_name=out_name,
+            autoregressive=args.autoregressive,
+        )
         results.append(r)
         print(f"{vid}: forecast ADE={r['ade_forecast']:.3f}  teacher-forced={r['teacher_forced_ade_px']:.3f}")
 
@@ -300,6 +404,19 @@ def main():
 
     print(f"Wrote {summary_path}")
 
+    if args.diagnose_seeds:
+        import subprocess
+
+        subprocess.run(
+            [
+                sys.executable,
+                str(ROOT / "scripts" / "diagnose_lstm_seeds.py"),
+                "--dataset",
+                args.dataset,
+            ],
+            check=True,
+        )
+
     if args.all_seeds:
         seeds_root = runs_dir(args.dataset) / "seeds"
         seed_ids = sorted(
@@ -329,22 +446,24 @@ def main():
                     device,
                     post_refine=pr,
                     out_name=f"predicted_{sid}_{vid}.json",
+                    autoregressive=args.autoregressive,
                 )
                 seed_rows.append({**r, "seed_id": sid})
         agg_path = lstm_root / "lstm_ablation_multi_seed.json"
         by_var = {}
         for row in seed_rows:
             by_var.setdefault(row["variant"], []).append(row["ade_forecast"])
-        aggregate = {
-            v: {
+        aggregate = {}
+        for v, ades in by_var.items():
+            aggregate[v] = {
                 "ade_forecast_mean": float(np.mean(ades)),
+                "ade_forecast_median": float(np.median(ades)),
                 "ade_forecast_std": float(np.std(ades)),
                 "n_seeds": len(ades),
             }
-            for v, ades in by_var.items()
-        }
         with open(agg_path, "w", encoding="utf-8") as f:
             json.dump({"per_seed": seed_rows, "aggregate": aggregate}, f, indent=2)
+        write_robust_report(seed_rows, lstm_root, args.dataset)
         print(f"Wrote {agg_path}")
 
 

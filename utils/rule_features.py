@@ -52,6 +52,72 @@ RULE_FEATURE_NAMES = [
 
 RULE_FEATURE_DIM = len(RULE_FEATURE_NAMES)
 
+# Column index groups for ablation / masking (see RULE_FEATURE_NAMES order)
+FEATURE_GROUPS = {
+    "kinematic": [0, 1, 2, 6, 7],
+    "social_geometry": [3, 4, 5],
+    "game_state": [8, 9, 10, 11, 12, 13, 14],
+}
+
+GROUP_FEATURE_DIM = {g: len(idxs) for g, idxs in FEATURE_GROUPS.items()}
+
+
+def mask_rule_features(feats, groups_to_keep):
+    """
+    Zero out feature columns not in any of groups_to_keep.
+    feats: (T, P, F) or (B, T, P, F) numpy array.
+    """
+    keep = set()
+    for g in groups_to_keep:
+        keep.update(FEATURE_GROUPS[g])
+    out = np.array(feats, copy=True)
+    drop = [i for i in range(RULE_FEATURE_DIM) if i not in keep]
+    if out.ndim == 4:
+        out[..., drop] = 0.0
+    else:
+        out[..., drop] = 0.0
+    return out
+
+
+def positions_to_frames(positions, visibility, frame_numbers, player_ids):
+    """Build minimal tracks frames from (T, P, 2) arrays for rule feature computation."""
+    T = positions.shape[0]
+    frames = []
+    for t in range(T):
+        players = []
+        for slot, pid in enumerate(player_ids):
+            if pid < 0 or not visibility[t, slot]:
+                continue
+            x, y = float(positions[t, slot, 0]), float(positions[t, slot, 1])
+            players.append(
+                {
+                    "id": int(pid),
+                    "mask_center": {"x": x, "y": y},
+                }
+            )
+        frames.append({"frame_number": int(frame_numbers[t]), "players": players})
+    return frames
+
+
+def compute_rule_features_from_positions(
+    positions,
+    visibility,
+    frame_numbers,
+    player_ids,
+    frame_width=640,
+    frame_height=360,
+):
+    """Compute (T, P, F) rule features from position arrays (for autoregressive rollout)."""
+    frames = positions_to_frames(positions, visibility, frame_numbers, player_ids)
+    feats, _, _ = compute_rule_features_tensor(
+        frames=frames,
+        player_ids=player_ids,
+        frame_width=frame_width,
+        frame_height=frame_height,
+        max_players=len(player_ids),
+    )
+    return feats
+
 
 def _slot_players_from_frame(frame_players, player_ids, id_to_slot):
     """Build list of player dicts aligned to fixed slots."""
