@@ -683,7 +683,7 @@
         "y": 129.3
       },
       "corrected_pos": {
-        "x": 428.0,
+        "x": 433.7,
         "y": 142.9
       },
       "predicted": false
@@ -811,7 +811,7 @@
         "y": 122.5
       },
       "corrected_pos": {
-        "x": 428.0,
+        "x": 443.2,
         "y": 136.4
       },
       "predicted": false
@@ -939,7 +939,7 @@
         "y": 107.7
       },
       "corrected_pos": {
-        "x": 361.7,
+        "x": 376.9,
         "y": 123.5
       },
       "predicted": false
@@ -1083,7 +1083,7 @@
         "y": 93.3
       },
       "corrected_pos": {
-        "x": 306.1,
+        "x": 319.4,
         "y": 107.0
       },
       "predicted": false
@@ -1287,11 +1287,11 @@
       "confidence": 0.875,
       "game_state_active": "fast_break",
       "original_pos": {
-        "x": 306.1,
+        "x": 319.4,
         "y": 107.0
       },
       "corrected_pos": {
-        "x": 265.0,
+        "x": 280.8,
         "y": 98.1
       },
       "predicted": true
@@ -1467,8 +1467,8 @@
         "y": 91.0
       },
       "corrected_pos": {
-        "x": 137.2,
-        "y": 56.8
+        "x": 147.6,
+        "y": 51.8
       },
       "predicted": false
     },
@@ -1668,7 +1668,7 @@
       "frame_number": 12,
       "player_id": 6,
       "rule_fired": "velocity_cap",
-      "confidence": 0.875,
+      "confidence": 0.7777777777777778,
       "game_state_active": "fast_break",
       "original_pos": {
         "x": 152.4,
@@ -1700,7 +1700,7 @@
       "frame_number": 12,
       "player_id": 8,
       "rule_fired": "velocity_cap",
-      "confidence": 0.875,
+      "confidence": 0.7777777777777778,
       "game_state_active": "fast_break",
       "original_pos": {
         "x": 264.9,
@@ -1716,14 +1716,14 @@
       "frame_number": 12,
       "player_id": 0,
       "rule_fired": "cut_continuation",
-      "confidence": 0.878102065696715,
+      "confidence": 0.8304762963640852,
       "game_state_active": "cut",
       "original_pos": {
         "x": 203.2,
         "y": 92.1
       },
       "corrected_pos": {
-        "x": 187.0,
+        "x": 181.7,
         "y": 83.2
       },
       "predicted": false
@@ -1732,7 +1732,7 @@
       "frame_number": 12,
       "player_id": 5,
       "rule_fired": "spacing_push",
-      "confidence": 0.875,
+      "confidence": 0.7777777777777778,
       "game_state_active": "fast_break",
       "original_pos": {
         "x": 231.1,
@@ -1747,16 +1747,16 @@
     {
       "frame_number": 12,
       "player_id": 2,
-      "rule_fired": "spacing_push",
-      "confidence": 0.875,
-      "game_state_active": "fast_break",
+      "rule_fired": "cut_continuation",
+      "confidence": 0.8560749555582535,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 238.5,
         "y": 82.8
       },
       "corrected_pos": {
-        "x": 241.6,
-        "y": 75.4
+        "x": 248.9,
+        "y": 72.2
       },
       "predicted": false
     },
@@ -1780,7 +1780,7 @@
       "frame_number": 12,
       "player_id": 3,
       "rule_fired": "velocity_cap",
-      "confidence": 0.875,
+      "confidence": 0.7777777777777778,
       "game_state_active": "fast_break",
       "original_pos": {
         "x": 239.5,
@@ -1796,7 +1796,7 @@
       "frame_number": 12,
       "player_id": 1,
       "rule_fired": "collective_momentum",
-      "confidence": 0.875,
+      "confidence": 0.7777777777777778,
       "game_state_active": "fast_break",
       "original_pos": {
         "x": 101.8,
@@ -1812,7 +1812,7 @@
       "frame_number": 12,
       "player_id": 7,
       "rule_fired": "collective_momentum",
-      "confidence": 0.875,
+      "confidence": 0.7777777777777778,
       "game_state_active": "fast_break",
       "original_pos": {
         "x": 211.6,
@@ -1869,6 +1869,22 @@
       "corrected_pos": {
         "x": 80.5,
         "y": 90.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 13,
+      "player_id": 0,
+      "rule_fired": "cut_continuation",
+      "confidence": 0.8881788161613186,
+      "game_state_active": "cut",
+      "original_pos": {
+        "x": 220.7,
+        "y": 79.4
+      },
+      "corrected_pos": {
+        "x": 245.1,
+        "y": 88.6
       },
       "predicted": false
     },
@@ -1959,12 +1975,12 @@
       "confidence": 0.875,
       "game_state_active": "fast_break",
       "original_pos": {
-        "x": 241.6,
-        "y": 75.4
+        "x": 248.9,
+        "y": 72.2
       },
       "corrected_pos": {
-        "x": 249.9,
-        "y": 69.8
+        "x": 259.6,
+        "y": 65.5
       },
       "predicted": true
     },
@@ -2116,15 +2132,15 @@
       "frame_number": 15,
       "player_id": 10,
       "rule_fired": "divergence_spread",
-      "confidence": 0.9090909090909091,
+      "confidence": 0.8181818181818181,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 78.8,
         "y": 137.5
       },
       "corrected_pos": {
-        "x": 110.5,
-        "y": 181.8
+        "x": 112.5,
+        "y": 180.5
       },
       "predicted": false
     },
@@ -2132,15 +2148,15 @@
       "frame_number": 15,
       "player_id": 8,
       "rule_fired": "divergence_spread",
-      "confidence": 0.9090909090909091,
+      "confidence": 0.8181818181818181,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 353.0,
         "y": 113.1
       },
       "corrected_pos": {
-        "x": 424.9,
-        "y": 145.8
+        "x": 423.4,
+        "y": 145.5
       },
       "predicted": false
     },
@@ -2148,15 +2164,15 @@
       "frame_number": 15,
       "player_id": 0,
       "rule_fired": "divergence_spread",
-      "confidence": 0.9090909090909091,
+      "confidence": 0.8181818181818181,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 366.6,
         "y": 103.2
       },
       "corrected_pos": {
-        "x": 375.4,
-        "y": 78.7
+        "x": 378.1,
+        "y": 78.6
       },
       "predicted": false
     },
@@ -2164,15 +2180,15 @@
       "frame_number": 15,
       "player_id": 2,
       "rule_fired": "cut_continuation",
-      "confidence": 0.9373349813334335,
+      "confidence": 0.9496588945830733,
       "game_state_active": "cut",
       "original_pos": {
         "x": 253.3,
         "y": 92.2
       },
       "corrected_pos": {
-        "x": 263.4,
-        "y": 82.8
+        "x": 261.0,
+        "y": 83.9
       },
       "predicted": false
     },
@@ -2180,15 +2196,15 @@
       "frame_number": 15,
       "player_id": 4,
       "rule_fired": "divergence_spread",
-      "confidence": 0.9090909090909091,
+      "confidence": 0.8181818181818181,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 308.9,
         "y": 101.9
       },
       "corrected_pos": {
-        "x": 317.4,
-        "y": 110.8
+        "x": 315.5,
+        "y": 110.6
       },
       "predicted": false
     },
@@ -2196,15 +2212,15 @@
       "frame_number": 15,
       "player_id": 6,
       "rule_fired": "divergence_spread",
-      "confidence": 0.9090909090909091,
+      "confidence": 0.8181818181818181,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 177.0,
         "y": 72.3
       },
       "corrected_pos": {
-        "x": 226.5,
-        "y": 43.7
+        "x": 227.0,
+        "y": 45.0
       },
       "predicted": false
     },
@@ -2212,15 +2228,15 @@
       "frame_number": 15,
       "player_id": 3,
       "rule_fired": "divergence_spread",
-      "confidence": 0.9090909090909091,
+      "confidence": 0.8181818181818181,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 175.4,
         "y": 90.6
       },
       "corrected_pos": {
-        "x": 324.1,
-        "y": 55.9
+        "x": 323.6,
+        "y": 56.2
       },
       "predicted": false
     },
@@ -2228,15 +2244,15 @@
       "frame_number": 15,
       "player_id": 9,
       "rule_fired": "divergence_spread",
-      "confidence": 0.9090909090909091,
+      "confidence": 0.8181818181818181,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 344.3,
         "y": 118.0
       },
       "corrected_pos": {
-        "x": 414.3,
-        "y": 128.2
+        "x": 412.5,
+        "y": 128.0
       },
       "predicted": false
     },
@@ -2244,15 +2260,15 @@
       "frame_number": 15,
       "player_id": 7,
       "rule_fired": "divergence_spread",
-      "confidence": 0.9090909090909091,
+      "confidence": 0.8181818181818181,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 169.1,
         "y": 87.6
       },
       "corrected_pos": {
-        "x": 261.2,
-        "y": 56.6
+        "x": 261.0,
+        "y": 57.2
       },
       "predicted": false
     },
@@ -2260,15 +2276,15 @@
       "frame_number": 15,
       "player_id": 1,
       "rule_fired": "divergence_spread",
-      "confidence": 0.9090909090909091,
+      "confidence": 0.8181818181818181,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 252.3,
         "y": 94.6
       },
       "corrected_pos": {
-        "x": 298.0,
-        "y": 94.9
+        "x": 296.9,
+        "y": 95.0
       },
       "predicted": false
     },
@@ -2276,15 +2292,15 @@
       "frame_number": 15,
       "player_id": 5,
       "rule_fired": "divergence_spread",
-      "confidence": 0.9090909090909091,
+      "confidence": 0.8181818181818181,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 153.3,
         "y": 62.8
       },
       "corrected_pos": {
-        "x": 140.4,
-        "y": 33.4
+        "x": 141.1,
+        "y": 33.7
       },
       "predicted": true
     },
@@ -2292,15 +2308,15 @@
       "frame_number": 16,
       "player_id": 2,
       "rule_fired": "cut_continuation",
-      "confidence": 0.8817912623954618,
+      "confidence": 0.8729735124198398,
       "game_state_active": "cut",
       "original_pos": {
         "x": 102.9,
         "y": 139.8
       },
       "corrected_pos": {
-        "x": 167.0,
-        "y": 132.1
+        "x": 157.5,
+        "y": 136.3
       },
       "predicted": false
     },
@@ -2315,8 +2331,8 @@
         "y": 118.5
       },
       "corrected_pos": {
-        "x": 105.4,
-        "y": 61.2
+        "x": 106.1,
+        "y": 61.5
       },
       "predicted": false
     },
@@ -2331,8 +2347,8 @@
         "y": 110.1
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 220.0
+        "x": 494.1,
+        "y": 219.7
       },
       "predicted": false
     },
@@ -2347,8 +2363,8 @@
         "y": 94.3
       },
       "corrected_pos": {
-        "x": 356.1,
-        "y": 98.0
+        "x": 345.9,
+        "y": 95.0
       },
       "predicted": false
     },
@@ -2379,8 +2395,8 @@
         "y": 90.7
       },
       "corrected_pos": {
-        "x": 337.7,
-        "y": 108.5
+        "x": 336.7,
+        "y": 108.2
       },
       "predicted": false
     },
@@ -2395,8 +2411,8 @@
         "y": 81.3
       },
       "corrected_pos": {
-        "x": 299.8,
-        "y": 11.3
+        "x": 299.3,
+        "y": 11.6
       },
       "predicted": false
     },
@@ -2420,15 +2436,15 @@
       "frame_number": 16,
       "player_id": 7,
       "rule_fired": "cut_continuation",
-      "confidence": 0.9351709702262576,
+      "confidence": 0.9389071641669586,
       "game_state_active": "cut",
       "original_pos": {
         "x": 152.7,
         "y": 124.8
       },
       "corrected_pos": {
-        "x": 186.2,
-        "y": 100.9
+        "x": 186.1,
+        "y": 101.7
       },
       "predicted": false
     },
@@ -2439,11 +2455,11 @@
       "confidence": 0.8181818181818181,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 298.0,
-        "y": 94.9
+        "x": 296.9,
+        "y": 95.0
       },
       "corrected_pos": {
-        "x": 367.4,
+        "x": 365.8,
         "y": 79.0
       },
       "predicted": true
@@ -2455,12 +2471,12 @@
       "confidence": 0.8181818181818181,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 414.3,
-        "y": 128.2
+        "x": 412.5,
+        "y": 128.0
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 135.4
+        "x": 520.0,
+        "y": 135.2
       },
       "predicted": true
     },
@@ -2491,8 +2507,8 @@
         "y": 110.1
       },
       "corrected_pos": {
-        "x": 406.6,
-        "y": 240.0
+        "x": 473.1,
+        "y": 281.8
       },
       "predicted": false
     },
@@ -2507,7 +2523,7 @@
         "y": 98.4
       },
       "corrected_pos": {
-        "x": 186.3,
+        "x": 185.8,
         "y": 0.0
       },
       "predicted": false
@@ -2555,7 +2571,7 @@
         "y": 110.3
       },
       "corrected_pos": {
-        "x": 428.0,
+        "x": 437.0,
         "y": 105.5
       },
       "predicted": false
@@ -2571,8 +2587,8 @@
         "y": 108.0
       },
       "corrected_pos": {
-        "x": 319.6,
-        "y": 126.3
+        "x": 411.7,
+        "y": 125.4
       },
       "predicted": false
     },
@@ -2583,12 +2599,12 @@
       "confidence": 0.8181818181818181,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 356.1,
-        "y": 98.0
+        "x": 345.9,
+        "y": 95.0
       },
       "corrected_pos": {
-        "x": 412.4,
-        "y": 103.1
+        "x": 387.5,
+        "y": 95.1
       },
       "predicted": true
     },
@@ -2599,12 +2615,12 @@
       "confidence": 0.8181818181818181,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 167.0,
-        "y": 132.1
+        "x": 157.5,
+        "y": 136.3
       },
       "corrected_pos": {
-        "x": 131.2,
-        "y": 155.1
+        "x": 113.6,
+        "y": 162.2
       },
       "predicted": true
     },
@@ -2615,12 +2631,12 @@
       "confidence": 0.8181818181818181,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 337.7,
-        "y": 108.5
+        "x": 336.7,
+        "y": 108.2
       },
       "corrected_pos": {
-        "x": 419.8,
-        "y": 112.5
+        "x": 418.4,
+        "y": 111.4
       },
       "predicted": true
     },
@@ -2631,12 +2647,12 @@
       "confidence": 0.8181818181818181,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 105.4,
-        "y": 61.2
+        "x": 106.1,
+        "y": 61.5
       },
       "corrected_pos": {
-        "x": 68.2,
-        "y": 54.9
+        "x": 69.2,
+        "y": 55.3
       },
       "predicted": true
     },
@@ -2644,15 +2660,15 @@
       "frame_number": 18,
       "player_id": 10,
       "rule_fired": "hull_containment",
-      "confidence": 1.0,
+      "confidence": 0.8333333333333334,
       "game_state_active": "fast_break",
       "original_pos": {
         "x": 178.4,
         "y": 150.3
       },
       "corrected_pos": {
-        "x": 45.3,
-        "y": 122.3
+        "x": 43.9,
+        "y": 123.2
       },
       "predicted": false
     },
@@ -2660,31 +2676,31 @@
       "frame_number": 18,
       "player_id": 8,
       "rule_fired": "hull_containment",
-      "confidence": 1.0,
+      "confidence": 0.8333333333333334,
       "game_state_active": "fast_break",
       "original_pos": {
         "x": 250.4,
         "y": 115.9
       },
       "corrected_pos": {
-        "x": 290.3,
-        "y": 220.1
+        "x": 357.8,
+        "y": 262.1
       },
       "predicted": false
     },
     {
       "frame_number": 18,
       "player_id": 1,
-      "rule_fired": "velocity_cap",
-      "confidence": 1.0,
+      "rule_fired": "hull_containment",
+      "confidence": 0.8333333333333334,
       "game_state_active": "fast_break",
       "original_pos": {
         "x": 204.0,
         "y": 103.9
       },
       "corrected_pos": {
-        "x": 396.7,
-        "y": 108.5
+        "x": 375.1,
+        "y": 111.4
       },
       "predicted": false
     },
@@ -2692,31 +2708,31 @@
       "frame_number": 18,
       "player_id": 4,
       "rule_fired": "hull_containment",
-      "confidence": 1.0,
+      "confidence": 0.8333333333333334,
       "game_state_active": "fast_break",
       "original_pos": {
         "x": 294.3,
         "y": 106.0
       },
       "corrected_pos": {
-        "x": 404.4,
-        "y": 109.3
+        "x": 404.3,
+        "y": 108.3
       },
       "predicted": false
     },
     {
       "frame_number": 18,
       "player_id": 0,
-      "rule_fired": "hull_containment",
-      "confidence": 1.0,
-      "game_state_active": "fast_break",
+      "rule_fired": "cut_continuation",
+      "confidence": 0.8492875719985575,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 320.5,
         "y": 93.7
       },
       "corrected_pos": {
-        "x": 375.8,
-        "y": 113.1
+        "x": 307.6,
+        "y": 95.9
       },
       "predicted": false
     },
@@ -2724,7 +2740,7 @@
       "frame_number": 18,
       "player_id": 6,
       "rule_fired": "spacing_push",
-      "confidence": 1.0,
+      "confidence": 0.8333333333333334,
       "game_state_active": "fast_break",
       "original_pos": {
         "x": 225.0,
@@ -2740,15 +2756,15 @@
       "frame_number": 18,
       "player_id": 3,
       "rule_fired": "hull_containment",
-      "confidence": 1.0,
+      "confidence": 0.8333333333333334,
       "game_state_active": "fast_break",
       "original_pos": {
         "x": 301.1,
         "y": 102.4
       },
       "corrected_pos": {
-        "x": 171.0,
-        "y": 31.0
+        "x": 170.8,
+        "y": 30.8
       },
       "predicted": false
     },
@@ -2756,15 +2772,15 @@
       "frame_number": 18,
       "player_id": 2,
       "rule_fired": "collective_momentum",
-      "confidence": 1.0,
+      "confidence": 0.8333333333333334,
       "game_state_active": "fast_break",
       "original_pos": {
-        "x": 131.2,
-        "y": 155.1
+        "x": 113.6,
+        "y": 162.2
       },
       "corrected_pos": {
-        "x": 102.9,
-        "y": 178.8
+        "x": 79.5,
+        "y": 188.3
       },
       "predicted": true
     },
@@ -2772,15 +2788,15 @@
       "frame_number": 18,
       "player_id": 5,
       "rule_fired": "collective_momentum",
-      "confidence": 1.0,
+      "confidence": 0.8333333333333334,
       "game_state_active": "fast_break",
       "original_pos": {
-        "x": 68.2,
-        "y": 54.9
+        "x": 69.2,
+        "y": 55.3
       },
       "corrected_pos": {
-        "x": 39.8,
-        "y": 52.3
+        "x": 41.2,
+        "y": 52.8
       },
       "predicted": true
     },
@@ -2788,7 +2804,7 @@
       "frame_number": 18,
       "player_id": 7,
       "rule_fired": "collective_momentum",
-      "confidence": 1.0,
+      "confidence": 0.8333333333333334,
       "game_state_active": "fast_break",
       "original_pos": {
         "x": 119.4,
@@ -2804,15 +2820,15 @@
       "frame_number": 18,
       "player_id": 9,
       "rule_fired": "collective_momentum",
-      "confidence": 1.0,
+      "confidence": 0.8333333333333334,
       "game_state_active": "fast_break",
       "original_pos": {
-        "x": 319.6,
-        "y": 126.3
+        "x": 411.7,
+        "y": 125.4
       },
       "corrected_pos": {
-        "x": 329.6,
-        "y": 128.9
+        "x": 452.4,
+        "y": 127.7
       },
       "predicted": true
     },
@@ -2827,8 +2843,8 @@
         "y": 153.6
       },
       "corrected_pos": {
-        "x": 165.0,
-        "y": 114.4
+        "x": 164.2,
+        "y": 115.6
       },
       "predicted": false
     },
@@ -2836,22 +2852,22 @@
       "frame_number": 19,
       "player_id": 2,
       "rule_fired": "mirror_prediction",
-      "confidence": 0.8517156372902918,
+      "confidence": 0.8490394323311438,
       "game_state_active": "mirror",
       "original_pos": {
         "x": 360.0,
         "y": 133.5
       },
       "corrected_pos": {
-        "x": 229.7,
-        "y": 175.6
+        "x": 209.5,
+        "y": 183.7
       },
       "predicted": false
     },
     {
       "frame_number": 19,
       "player_id": 8,
-      "rule_fired": "velocity_cap",
+      "rule_fired": "hull_containment",
       "confidence": 0.7777777777777778,
       "game_state_active": "fast_break",
       "original_pos": {
@@ -2859,8 +2875,8 @@
         "y": 122.3
       },
       "corrected_pos": {
-        "x": 221.8,
-        "y": 189.5
+        "x": 191.8,
+        "y": 205.4
       },
       "predicted": false
     },
@@ -2868,15 +2884,15 @@
       "frame_number": 19,
       "player_id": 4,
       "rule_fired": "cut_continuation",
-      "confidence": 0.9502818608215888,
+      "confidence": 0.9435740565662744,
       "game_state_active": "cut",
       "original_pos": {
         "x": 194.5,
         "y": 117.8
       },
       "corrected_pos": {
-        "x": 307.9,
-        "y": 108.8
+        "x": 314.8,
+        "y": 118.2
       },
       "predicted": false
     },
@@ -2884,15 +2900,15 @@
       "frame_number": 19,
       "player_id": 9,
       "rule_fired": "cut_continuation",
-      "confidence": 0.9456912108251806,
+      "confidence": 0.9892434855897522,
       "game_state_active": "cut",
       "original_pos": {
         "x": 300.7,
         "y": 116.6
       },
       "corrected_pos": {
-        "x": 258.3,
-        "y": 114.9
+        "x": 311.4,
+        "y": 112.1
       },
       "predicted": false
     },
@@ -2900,15 +2916,15 @@
       "frame_number": 19,
       "player_id": 0,
       "rule_fired": "cut_continuation",
-      "confidence": 0.8863461979142436,
+      "confidence": 0.9960478572587378,
       "game_state_active": "cut",
       "original_pos": {
         "x": 338.4,
         "y": 99.2
       },
       "corrected_pos": {
-        "x": 332.5,
-        "y": 99.6
+        "x": 335.9,
+        "y": 100.6
       },
       "predicted": false
     },
@@ -2923,8 +2939,8 @@
         "y": 90.8
       },
       "corrected_pos": {
-        "x": 171.2,
-        "y": 57.5
+        "x": 171.1,
+        "y": 57.2
       },
       "predicted": false
     },
@@ -2932,15 +2948,15 @@
       "frame_number": 19,
       "player_id": 1,
       "rule_fired": "cut_continuation",
-      "confidence": 0.8383647709751727,
+      "confidence": 0.85633603180128,
       "game_state_active": "cut",
       "original_pos": {
         "x": 213.9,
         "y": 107.0
       },
       "corrected_pos": {
-        "x": 297.1,
-        "y": 134.2
+        "x": 279.2,
+        "y": 131.0
       },
       "predicted": false
     },
@@ -2951,12 +2967,12 @@
       "confidence": 0.7777777777777778,
       "game_state_active": "fast_break",
       "original_pos": {
-        "x": 39.8,
-        "y": 52.3
+        "x": 41.2,
+        "y": 52.8
       },
       "corrected_pos": {
-        "x": 6.3,
-        "y": 58.6
+        "x": 7.9,
+        "y": 59.2
       },
       "predicted": true
     },
@@ -2972,7 +2988,7 @@
       },
       "corrected_pos": {
         "x": 0.0,
-        "y": 240.0
+        "y": 249.6
       },
       "predicted": true
     },
@@ -2980,15 +2996,15 @@
       "frame_number": 20,
       "player_id": 9,
       "rule_fired": "cut_continuation",
-      "confidence": 0.9807482182119267,
+      "confidence": 0.9828943022956161,
       "game_state_active": "cut",
       "original_pos": {
         "x": 178.5,
         "y": 131.0
       },
       "corrected_pos": {
-        "x": 153.0,
-        "y": 125.7
+        "x": 166.7,
+        "y": 116.5
       },
       "predicted": false
     },
@@ -2996,15 +3012,15 @@
       "frame_number": 20,
       "player_id": 10,
       "rule_fired": "spacing_push",
-      "confidence": 0.5555555555555556,
-      "game_state_active": "fast_break",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "transition",
       "original_pos": {
         "x": 247.8,
         "y": 151.6
       },
       "corrected_pos": {
-        "x": 245.9,
-        "y": 118.2
+        "x": 245.3,
+        "y": 119.8
       },
       "predicted": false
     },
@@ -3012,31 +3028,31 @@
       "frame_number": 20,
       "player_id": 2,
       "rule_fired": "cut_continuation",
-      "confidence": 0.7861164274367244,
+      "confidence": 0.8033124925894264,
       "game_state_active": "cut",
       "original_pos": {
         "x": 217.7,
         "y": 112.1
       },
       "corrected_pos": {
-        "x": 250.2,
-        "y": 97.4
+        "x": 256.0,
+        "y": 95.1
       },
       "predicted": false
     },
     {
       "frame_number": 20,
       "player_id": 0,
-      "rule_fired": "hull_containment",
-      "confidence": 0.5555555555555556,
-      "game_state_active": "fast_break",
+      "rule_fired": "cut_continuation",
+      "confidence": 0.944426979591546,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 406.3,
         "y": 104.7
       },
       "corrected_pos": {
-        "x": 404.3,
-        "y": 105.2
+        "x": 418.8,
+        "y": 111.1
       },
       "predicted": false
     },
@@ -3044,15 +3060,15 @@
       "frame_number": 20,
       "player_id": 7,
       "rule_fired": "hull_containment",
-      "confidence": 0.5555555555555556,
-      "game_state_active": "fast_break",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "transition",
       "original_pos": {
         "x": 190.1,
         "y": 114.7
       },
       "corrected_pos": {
         "x": 47.1,
-        "y": 208.7
+        "y": 218.3
       },
       "predicted": false
     },
@@ -3060,8 +3076,8 @@
       "frame_number": 20,
       "player_id": 12,
       "rule_fired": "spacing_push",
-      "confidence": 0.5555555555555556,
-      "game_state_active": "fast_break",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "transition",
       "original_pos": {
         "x": 180.4,
         "y": 129.3
@@ -3075,16 +3091,16 @@
     {
       "frame_number": 20,
       "player_id": 6,
-      "rule_fired": "cut_continuation",
-      "confidence": 0.6521448132271684,
-      "game_state_active": "cut",
+      "rule_fired": "spacing_push",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "transition",
       "original_pos": {
         "x": 274.5,
         "y": 87.8
       },
       "corrected_pos": {
-        "x": 289.2,
-        "y": 87.2
+        "x": 277.1,
+        "y": 80.3
       },
       "predicted": false
     },
@@ -3092,15 +3108,15 @@
       "frame_number": 20,
       "player_id": 3,
       "rule_fired": "spacing_push",
-      "confidence": 0.5555555555555556,
-      "game_state_active": "fast_break",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "transition",
       "original_pos": {
         "x": 326.4,
         "y": 96.9
       },
       "corrected_pos": {
         "x": 218.0,
-        "y": 83.5
+        "y": 83.3
       },
       "predicted": false
     },
@@ -3108,8 +3124,8 @@
       "frame_number": 20,
       "player_id": 4,
       "rule_fired": "spacing_push",
-      "confidence": 0.5555555555555556,
-      "game_state_active": "fast_break",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "transition",
       "original_pos": {
         "x": 268.3,
         "y": 105.9
@@ -3123,16 +3139,16 @@
     {
       "frame_number": 20,
       "player_id": 8,
-      "rule_fired": "spacing_push",
-      "confidence": 0.5555555555555556,
-      "game_state_active": "fast_break",
+      "rule_fired": "velocity_cap",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "transition",
       "original_pos": {
         "x": 178.3,
         "y": 131.5
       },
       "corrected_pos": {
-        "x": 171.9,
-        "y": 147.5
+        "x": 125.0,
+        "y": 171.3
       },
       "predicted": false
     },
@@ -3140,15 +3156,15 @@
       "frame_number": 20,
       "player_id": 1,
       "rule_fired": "collective_momentum",
-      "confidence": 0.5555555555555556,
-      "game_state_active": "fast_break",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "transition",
       "original_pos": {
-        "x": 297.1,
-        "y": 134.2
+        "x": 279.2,
+        "y": 131.0
       },
       "corrected_pos": {
-        "x": 273.7,
-        "y": 152.6
+        "x": 250.3,
+        "y": 148.3
       },
       "predicted": true
     },
@@ -3156,239 +3172,239 @@
       "frame_number": 20,
       "player_id": 5,
       "rule_fired": "collective_momentum",
-      "confidence": 0.5555555555555556,
-      "game_state_active": "fast_break",
+      "confidence": 0.7272727272727273,
+      "game_state_active": "transition",
       "original_pos": {
-        "x": 6.3,
-        "y": 58.6
+        "x": 7.9,
+        "y": 59.2
       },
       "corrected_pos": {
         "x": 0.0,
-        "y": 57.7
+        "y": 58.4
       },
       "predicted": true
     },
     {
       "frame_number": 21,
       "player_id": 10,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "spacing_push",
+      "confidence": 0.5555555555555556,
+      "game_state_active": "fast_break",
       "original_pos": {
         "x": 345.4,
         "y": 157.9
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 140.6
+        "x": 320.5,
+        "y": 128.5
       },
       "predicted": false
     },
     {
       "frame_number": 21,
       "player_id": 8,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "spacing_push",
+      "confidence": 0.5555555555555556,
+      "game_state_active": "fast_break",
       "original_pos": {
         "x": 186.3,
         "y": 142.3
       },
       "corrected_pos": {
-        "x": 142.3,
-        "y": 118.5
+        "x": 186.6,
+        "y": 145.1
       },
       "predicted": false
     },
     {
       "frame_number": 21,
       "player_id": 1,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "spacing_push",
+      "confidence": 0.5555555555555556,
+      "game_state_active": "fast_break",
       "original_pos": {
         "x": 287.0,
         "y": 121.0
       },
       "corrected_pos": {
-        "x": 243.7,
-        "y": 125.8
+        "x": 288.6,
+        "y": 122.3
       },
       "predicted": false
     },
     {
       "frame_number": 21,
       "player_id": 12,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "spacing_push",
+      "confidence": 0.5555555555555556,
+      "game_state_active": "fast_break",
       "original_pos": {
         "x": 182.9,
         "y": 113.2
       },
       "corrected_pos": {
-        "x": 170.6,
-        "y": 104.5
+        "x": 182.6,
+        "y": 110.4
       },
       "predicted": false
     },
     {
       "frame_number": 21,
       "player_id": 5,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "spacing_push",
+      "confidence": 0.5555555555555556,
+      "game_state_active": "fast_break",
       "original_pos": {
         "x": 364.8,
         "y": 152.7
       },
       "corrected_pos": {
-        "x": 261.8,
-        "y": 170.6
+        "x": 164.0,
+        "y": 116.7
       },
       "predicted": false
     },
     {
       "frame_number": 21,
       "player_id": 0,
-      "rule_fired": "cut_continuation",
-      "confidence": 0.9285743237666806,
-      "game_state_active": "cut",
+      "rule_fired": "velocity_cap",
+      "confidence": 0.5555555555555556,
+      "game_state_active": "fast_break",
       "original_pos": {
         "x": 263.3,
         "y": 101.1
       },
       "corrected_pos": {
-        "x": 329.3,
-        "y": 97.2
+        "x": 404.0,
+        "y": 112.8
       },
       "predicted": false
     },
     {
       "frame_number": 21,
       "player_id": 3,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "spacing_push",
+      "confidence": 0.5555555555555556,
+      "game_state_active": "fast_break",
       "original_pos": {
         "x": 211.8,
         "y": 95.3
       },
       "corrected_pos": {
-        "x": 220.3,
-        "y": 115.2
+        "x": 212.2,
+        "y": 95.0
       },
       "predicted": false
     },
     {
       "frame_number": 21,
       "player_id": 6,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "spacing_push",
+      "confidence": 0.5555555555555556,
+      "game_state_active": "fast_break",
       "original_pos": {
         "x": 267.5,
         "y": 84.7
       },
       "corrected_pos": {
-        "x": 283.7,
-        "y": 74.6
+        "x": 269.7,
+        "y": 75.9
       },
       "predicted": false
     },
     {
       "frame_number": 21,
       "player_id": 9,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "velocity_cap",
+      "confidence": 0.5555555555555556,
+      "game_state_active": "fast_break",
       "original_pos": {
         "x": 344.5,
         "y": 155.0
       },
       "corrected_pos": {
-        "x": 158.0,
-        "y": 142.6
+        "x": 130.7,
+        "y": 125.6
       },
       "predicted": false
     },
     {
       "frame_number": 21,
       "player_id": 2,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "velocity_cap",
+      "confidence": 0.5555555555555556,
+      "game_state_active": "fast_break",
       "original_pos": {
         "x": 352.6,
         "y": 165.3
       },
       "corrected_pos": {
-        "x": 426.2,
-        "y": 83.2
+        "x": 330.7,
+        "y": 88.8
       },
       "predicted": false
     },
     {
       "frame_number": 21,
       "player_id": 4,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "collective_momentum",
+      "confidence": 0.5555555555555556,
+      "game_state_active": "fast_break",
       "original_pos": {
         "x": 265.7,
         "y": 113.4
       },
       "corrected_pos": {
-        "x": 202.8,
-        "y": 112.9
+        "x": 214.8,
+        "y": 114.1
       },
       "predicted": true
     },
     {
       "frame_number": 21,
       "player_id": 7,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "collective_momentum",
+      "confidence": 0.5555555555555556,
+      "game_state_active": "fast_break",
       "original_pos": {
         "x": 47.1,
-        "y": 208.7
+        "y": 218.3
       },
       "corrected_pos": {
-        "x": 17.1,
-        "y": 227.1
+        "x": 23.0,
+        "y": 237.2
       },
       "predicted": true
     },
     {
       "frame_number": 22,
       "player_id": 8,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "cut_continuation",
+      "confidence": 0.7217521905024864,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 214.2,
         "y": 155.3
       },
       "corrected_pos": {
-        "x": 131.3,
-        "y": 96.4
+        "x": 221.7,
+        "y": 138.6
       },
       "predicted": false
     },
     {
       "frame_number": 22,
       "player_id": 12,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "spacing_push",
+      "confidence": 0.5714285714285714,
+      "game_state_active": "fast_break",
       "original_pos": {
         "x": 173.2,
         "y": 117.5
       },
       "corrected_pos": {
-        "x": 154.7,
-        "y": 115.9
+        "x": 166.5,
+        "y": 116.3
       },
       "predicted": false
     },
@@ -3396,767 +3412,767 @@
       "frame_number": 22,
       "player_id": 0,
       "rule_fired": "cut_continuation",
-      "confidence": 0.9909510835960481,
+      "confidence": 0.9234937666167781,
       "game_state_active": "cut",
       "original_pos": {
         "x": 194.3,
         "y": 121.2
       },
       "corrected_pos": {
-        "x": 237.2,
-        "y": 111.6
+        "x": 262.4,
+        "y": 133.4
       },
       "predicted": false
     },
     {
       "frame_number": 22,
       "player_id": 3,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "spacing_push",
+      "confidence": 0.5714285714285714,
+      "game_state_active": "fast_break",
       "original_pos": {
         "x": 165.5,
         "y": 97.0
       },
       "corrected_pos": {
-        "x": 158.4,
-        "y": 103.3
+        "x": 163.2,
+        "y": 90.9
       },
       "predicted": false
     },
     {
       "frame_number": 22,
       "player_id": 6,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "cut_continuation",
+      "confidence": 0.7905969817361267,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 257.4,
         "y": 79.5
       },
       "corrected_pos": {
-        "x": 263.0,
-        "y": 77.3
+        "x": 262.0,
+        "y": 77.9
       },
       "predicted": false
     },
     {
       "frame_number": 22,
       "player_id": 1,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "collective_momentum",
+      "confidence": 0.5714285714285714,
+      "game_state_active": "fast_break",
       "original_pos": {
-        "x": 243.7,
-        "y": 125.8
+        "x": 288.6,
+        "y": 122.3
       },
       "corrected_pos": {
-        "x": 194.1,
-        "y": 143.0
+        "x": 259.8,
+        "y": 125.9
       },
       "predicted": true
     },
     {
       "frame_number": 22,
       "player_id": 2,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "collective_momentum",
+      "confidence": 0.5714285714285714,
+      "game_state_active": "fast_break",
       "original_pos": {
-        "x": 426.2,
-        "y": 83.2
+        "x": 330.7,
+        "y": 88.8
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 47.2
+        "x": 414.4,
+        "y": 55.6
       },
       "predicted": true
     },
     {
       "frame_number": 22,
       "player_id": 4,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "collective_momentum",
+      "confidence": 0.5714285714285714,
+      "game_state_active": "fast_break",
       "original_pos": {
-        "x": 202.8,
-        "y": 112.9
+        "x": 214.8,
+        "y": 114.1
       },
       "corrected_pos": {
-        "x": 120.7,
-        "y": 116.6
+        "x": 151.6,
+        "y": 116.0
       },
       "predicted": true
     },
     {
       "frame_number": 22,
       "player_id": 5,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "collective_momentum",
+      "confidence": 0.5714285714285714,
+      "game_state_active": "fast_break",
       "original_pos": {
-        "x": 261.8,
-        "y": 170.6
+        "x": 164.0,
+        "y": 116.7
       },
       "corrected_pos": {
-        "x": 350.0,
-        "y": 222.4
+        "x": 204.9,
+        "y": 138.0
       },
       "predicted": true
     },
     {
       "frame_number": 22,
       "player_id": 7,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "collective_momentum",
+      "confidence": 0.5714285714285714,
+      "game_state_active": "fast_break",
       "original_pos": {
-        "x": 17.1,
-        "y": 227.1
+        "x": 23.0,
+        "y": 237.2
       },
       "corrected_pos": {
-        "x": 0.0,
-        "y": 237.4
+        "x": 10.9,
+        "y": 249.1
       },
       "predicted": true
     },
     {
       "frame_number": 22,
       "player_id": 9,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "collective_momentum",
+      "confidence": 0.5714285714285714,
+      "game_state_active": "fast_break",
       "original_pos": {
-        "x": 158.0,
-        "y": 142.6
+        "x": 130.7,
+        "y": 125.6
       },
       "corrected_pos": {
-        "x": 88.1,
-        "y": 149.6
+        "x": 23.5,
+        "y": 124.9
       },
       "predicted": true
     },
     {
       "frame_number": 22,
       "player_id": 10,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "collective_momentum",
+      "confidence": 0.5714285714285714,
+      "game_state_active": "fast_break",
       "original_pos": {
-        "x": 428.0,
-        "y": 140.6
+        "x": 320.5,
+        "y": 128.5
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 148.1
+        "x": 412.7,
+        "y": 130.3
       },
       "predicted": true
     },
     {
       "frame_number": 23,
       "player_id": 0,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "collective_momentum",
+      "confidence": 0.5,
+      "game_state_active": "fast_break",
       "original_pos": {
-        "x": 237.2,
-        "y": 111.6
+        "x": 262.4,
+        "y": 133.4
       },
       "corrected_pos": {
-        "x": 198.3,
-        "y": 116.5
+        "x": 237.9,
+        "y": 144.3
       },
       "predicted": true
     },
     {
       "frame_number": 23,
       "player_id": 1,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "collective_momentum",
+      "confidence": 0.5,
+      "game_state_active": "fast_break",
       "original_pos": {
-        "x": 194.1,
-        "y": 143.0
+        "x": 259.8,
+        "y": 125.9
       },
       "corrected_pos": {
-        "x": 153.6,
-        "y": 150.6
+        "x": 253.3,
+        "y": 124.2
       },
       "predicted": true
     },
     {
       "frame_number": 23,
       "player_id": 2,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "collective_momentum",
+      "confidence": 0.5,
+      "game_state_active": "fast_break",
       "original_pos": {
-        "x": 428.0,
-        "y": 47.2
+        "x": 414.4,
+        "y": 55.6
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 0.0
+        "x": 482.7,
+        "y": 12.9
       },
       "predicted": true
     },
     {
       "frame_number": 23,
       "player_id": 3,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "collective_momentum",
+      "confidence": 0.5,
+      "game_state_active": "fast_break",
       "original_pos": {
-        "x": 158.4,
-        "y": 103.3
+        "x": 163.2,
+        "y": 90.9
       },
       "corrected_pos": {
-        "x": 150.7,
-        "y": 119.5
+        "x": 160.6,
+        "y": 102.1
       },
       "predicted": true
     },
     {
       "frame_number": 23,
       "player_id": 4,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "collective_momentum",
+      "confidence": 0.5,
+      "game_state_active": "fast_break",
       "original_pos": {
-        "x": 120.7,
-        "y": 116.6
+        "x": 151.6,
+        "y": 116.0
       },
       "corrected_pos": {
-        "x": 44.4,
-        "y": 121.0
+        "x": 97.2,
+        "y": 115.3
       },
       "predicted": true
     },
     {
       "frame_number": 23,
       "player_id": 5,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "collective_momentum",
+      "confidence": 0.5,
+      "game_state_active": "fast_break",
       "original_pos": {
-        "x": 350.0,
-        "y": 222.4
+        "x": 204.9,
+        "y": 138.0
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 240.0
+        "x": 270.6,
+        "y": 164.3
       },
       "predicted": true
     },
     {
       "frame_number": 23,
       "player_id": 6,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "collective_momentum",
+      "confidence": 0.5,
+      "game_state_active": "fast_break",
       "original_pos": {
-        "x": 263.0,
-        "y": 77.3
+        "x": 262.0,
+        "y": 77.9
       },
       "corrected_pos": {
-        "x": 270.4,
-        "y": 73.7
+        "x": 268.2,
+        "y": 75.7
       },
       "predicted": true
     },
     {
       "frame_number": 23,
       "player_id": 7,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "collective_momentum",
+      "confidence": 0.5,
+      "game_state_active": "fast_break",
       "original_pos": {
-        "x": 0.0,
-        "y": 237.4
+        "x": 10.9,
+        "y": 249.1
       },
       "corrected_pos": {
-        "x": 0.0,
-        "y": 236.6
+        "x": 14.5,
+        "y": 248.9
       },
       "predicted": true
     },
     {
       "frame_number": 23,
       "player_id": 8,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "collective_momentum",
+      "confidence": 0.5,
+      "game_state_active": "fast_break",
       "original_pos": {
-        "x": 131.3,
-        "y": 96.4
+        "x": 221.7,
+        "y": 138.6
       },
       "corrected_pos": {
-        "x": 92.9,
-        "y": 60.2
+        "x": 231.7,
+        "y": 116.3
       },
       "predicted": true
     },
     {
       "frame_number": 23,
       "player_id": 9,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "collective_momentum",
+      "confidence": 0.5,
+      "game_state_active": "fast_break",
       "original_pos": {
-        "x": 88.1,
-        "y": 149.6
+        "x": 23.5,
+        "y": 124.9
       },
       "corrected_pos": {
-        "x": 18.7,
-        "y": 164.0
+        "x": 0.0,
+        "y": 129.2
       },
       "predicted": true
     },
     {
       "frame_number": 23,
       "player_id": 10,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "collective_momentum",
+      "confidence": 0.5,
+      "game_state_active": "fast_break",
       "original_pos": {
-        "x": 428.0,
-        "y": 148.1
+        "x": 412.7,
+        "y": 130.3
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 161.2
+        "x": 495.5,
+        "y": 135.2
       },
       "predicted": true
     },
     {
       "frame_number": 23,
       "player_id": 12,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "collective_momentum",
+      "confidence": 0.5,
+      "game_state_active": "fast_break",
       "original_pos": {
-        "x": 154.7,
-        "y": 115.9
+        "x": 166.5,
+        "y": 116.3
       },
       "corrected_pos": {
-        "x": 131.7,
+        "x": 153.5,
+        "y": 115.2
+      },
+      "predicted": true
+    },
+    {
+      "frame_number": 24,
+      "player_id": 0,
+      "rule_fired": "divergence_spread",
+      "confidence": 0.8333333333333334,
+      "game_state_active": "divergence",
+      "original_pos": {
+        "x": 237.9,
+        "y": 144.3
+      },
+      "corrected_pos": {
+        "x": 162.5,
+        "y": 158.1
+      },
+      "predicted": true
+    },
+    {
+      "frame_number": 24,
+      "player_id": 1,
+      "rule_fired": "divergence_spread",
+      "confidence": 0.8333333333333334,
+      "game_state_active": "divergence",
+      "original_pos": {
+        "x": 253.3,
+        "y": 124.2
+      },
+      "corrected_pos": {
+        "x": 256.1,
+        "y": 115.3
+      },
+      "predicted": true
+    },
+    {
+      "frame_number": 24,
+      "player_id": 2,
+      "rule_fired": "divergence_spread",
+      "confidence": 0.8333333333333334,
+      "game_state_active": "divergence",
+      "original_pos": {
+        "x": 482.7,
+        "y": 12.9
+      },
+      "corrected_pos": {
+        "x": 576.7,
+        "y": 0.0
+      },
+      "predicted": true
+    },
+    {
+      "frame_number": 24,
+      "player_id": 3,
+      "rule_fired": "divergence_spread",
+      "confidence": 0.8333333333333334,
+      "game_state_active": "divergence",
+      "original_pos": {
+        "x": 160.6,
+        "y": 102.1
+      },
+      "corrected_pos": {
+        "x": 136.5,
+        "y": 108.8
+      },
+      "predicted": true
+    },
+    {
+      "frame_number": 24,
+      "player_id": 4,
+      "rule_fired": "divergence_spread",
+      "confidence": 0.8333333333333334,
+      "game_state_active": "divergence",
+      "original_pos": {
+        "x": 97.2,
+        "y": 115.3
+      },
+      "corrected_pos": {
+        "x": 27.0,
+        "y": 117.1
+      },
+      "predicted": true
+    },
+    {
+      "frame_number": 24,
+      "player_id": 5,
+      "rule_fired": "divergence_spread",
+      "confidence": 0.8333333333333334,
+      "game_state_active": "divergence",
+      "original_pos": {
+        "x": 270.6,
+        "y": 164.3
+      },
+      "corrected_pos": {
+        "x": 380.0,
+        "y": 214.4
+      },
+      "predicted": true
+    },
+    {
+      "frame_number": 24,
+      "player_id": 6,
+      "rule_fired": "divergence_spread",
+      "confidence": 0.8333333333333334,
+      "game_state_active": "divergence",
+      "original_pos": {
+        "x": 268.2,
+        "y": 75.7
+      },
+      "corrected_pos": {
+        "x": 265.4,
+        "y": 73.3
+      },
+      "predicted": true
+    },
+    {
+      "frame_number": 24,
+      "player_id": 7,
+      "rule_fired": "divergence_spread",
+      "confidence": 0.8333333333333334,
+      "game_state_active": "divergence",
+      "original_pos": {
+        "x": 14.5,
+        "y": 248.9
+      },
+      "corrected_pos": {
+        "x": 0.4,
+        "y": 261.0
+      },
+      "predicted": true
+    },
+    {
+      "frame_number": 24,
+      "player_id": 8,
+      "rule_fired": "divergence_spread",
+      "confidence": 0.8333333333333334,
+      "game_state_active": "divergence",
+      "original_pos": {
+        "x": 231.7,
+        "y": 116.3
+      },
+      "corrected_pos": {
+        "x": 275.1,
+        "y": 91.8
+      },
+      "predicted": true
+    },
+    {
+      "frame_number": 24,
+      "player_id": 9,
+      "rule_fired": "divergence_spread",
+      "confidence": 0.8333333333333334,
+      "game_state_active": "divergence",
+      "original_pos": {
+        "x": 0.0,
+        "y": 129.2
+      },
+      "corrected_pos": {
+        "x": 0.0,
+        "y": 133.8
+      },
+      "predicted": true
+    },
+    {
+      "frame_number": 24,
+      "player_id": 10,
+      "rule_fired": "divergence_spread",
+      "confidence": 0.8333333333333334,
+      "game_state_active": "divergence",
+      "original_pos": {
+        "x": 495.5,
+        "y": 135.2
+      },
+      "corrected_pos": {
+        "x": 599.8,
+        "y": 141.1
+      },
+      "predicted": true
+    },
+    {
+      "frame_number": 24,
+      "player_id": 12,
+      "rule_fired": "divergence_spread",
+      "confidence": 0.8333333333333334,
+      "game_state_active": "divergence",
+      "original_pos": {
+        "x": 153.5,
+        "y": 115.2
+      },
+      "corrected_pos": {
+        "x": 137.3,
         "y": 113.6
       },
       "predicted": true
     },
     {
-      "frame_number": 24,
+      "frame_number": 25,
       "player_id": 0,
       "rule_fired": "divergence_spread",
-      "confidence": 0.8333333333333334,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 198.3,
-        "y": 116.5
+        "x": 162.5,
+        "y": 158.1
       },
       "corrected_pos": {
-        "x": 112.5,
-        "y": 121.2
+        "x": 59.9,
+        "y": 177.4
       },
       "predicted": true
     },
     {
-      "frame_number": 24,
+      "frame_number": 25,
       "player_id": 1,
       "rule_fired": "divergence_spread",
-      "confidence": 0.8333333333333334,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 153.6,
-        "y": 150.6
+        "x": 256.1,
+        "y": 115.3
       },
       "corrected_pos": {
-        "x": 113.9,
-        "y": 159.9
+        "x": 248.1,
+        "y": 112.0
       },
       "predicted": true
     },
     {
-      "frame_number": 24,
+      "frame_number": 25,
       "player_id": 2,
       "rule_fired": "divergence_spread",
-      "confidence": 0.8333333333333334,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 428.0,
+        "x": 576.7,
         "y": 0.0
       },
       "corrected_pos": {
-        "x": 428.0,
+        "x": 681.4,
         "y": 0.0
       },
       "predicted": true
     },
     {
-      "frame_number": 24,
+      "frame_number": 25,
       "player_id": 3,
       "rule_fired": "divergence_spread",
-      "confidence": 0.8333333333333334,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 150.7,
-        "y": 119.5
+        "x": 136.5,
+        "y": 108.8
       },
       "corrected_pos": {
-        "x": 122.4,
-        "y": 134.0
+        "x": 104.2,
+        "y": 113.9
       },
       "predicted": true
     },
     {
-      "frame_number": 24,
+      "frame_number": 25,
       "player_id": 4,
       "rule_fired": "divergence_spread",
-      "confidence": 0.8333333333333334,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 44.4,
-        "y": 121.0
+        "x": 27.0,
+        "y": 117.1
       },
       "corrected_pos": {
         "x": 0.0,
-        "y": 125.2
+        "y": 119.1
       },
       "predicted": true
     },
     {
-      "frame_number": 24,
+      "frame_number": 25,
       "player_id": 5,
       "rule_fired": "divergence_spread",
-      "confidence": 0.8333333333333334,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 428.0,
-        "y": 240.0
+        "x": 380.0,
+        "y": 214.4
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 240.0
+        "x": 470.5,
+        "y": 258.3
       },
       "predicted": true
     },
     {
-      "frame_number": 24,
+      "frame_number": 25,
       "player_id": 6,
       "rule_fired": "divergence_spread",
-      "confidence": 0.8333333333333334,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 270.4,
-        "y": 73.7
+        "x": 265.4,
+        "y": 73.3
       },
       "corrected_pos": {
-        "x": 265.5,
-        "y": 67.9
+        "x": 264.0,
+        "y": 72.0
       },
       "predicted": true
     },
     {
-      "frame_number": 24,
+      "frame_number": 25,
       "player_id": 7,
       "rule_fired": "divergence_spread",
-      "confidence": 0.8333333333333334,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 0.0,
-        "y": 236.6
+        "x": 0.4,
+        "y": 261.0
       },
       "corrected_pos": {
         "x": 0.0,
-        "y": 240.0
+        "y": 270.4
       },
       "predicted": true
     },
     {
-      "frame_number": 24,
+      "frame_number": 25,
       "player_id": 8,
       "rule_fired": "divergence_spread",
-      "confidence": 0.8333333333333334,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 92.9,
-        "y": 60.2
+        "x": 275.1,
+        "y": 91.8
       },
       "corrected_pos": {
-        "x": 59.3,
-        "y": 24.6
+        "x": 311.7,
+        "y": 67.8
       },
       "predicted": true
     },
     {
-      "frame_number": 24,
+      "frame_number": 25,
       "player_id": 9,
       "rule_fired": "divergence_spread",
-      "confidence": 0.8333333333333334,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 18.7,
-        "y": 164.0
+        "x": 0.0,
+        "y": 133.8
       },
       "corrected_pos": {
         "x": 0.0,
-        "y": 179.8
+        "y": 136.7
       },
       "predicted": true
     },
     {
-      "frame_number": 24,
+      "frame_number": 25,
       "player_id": 10,
       "rule_fired": "divergence_spread",
-      "confidence": 0.8333333333333334,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 428.0,
-        "y": 161.2
+        "x": 599.8,
+        "y": 141.1
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 177.7
+        "x": 718.5,
+        "y": 146.0
       },
       "predicted": true
     },
     {
-      "frame_number": 24,
+      "frame_number": 25,
       "player_id": 12,
       "rule_fired": "divergence_spread",
-      "confidence": 0.8333333333333334,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 131.7,
+        "x": 137.3,
         "y": 113.6
       },
       "corrected_pos": {
-        "x": 106.6,
-        "y": 110.4
-      },
-      "predicted": true
-    },
-    {
-      "frame_number": 25,
-      "player_id": 0,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.9166666666666666,
-      "game_state_active": "divergence",
-      "original_pos": {
-        "x": 112.5,
-        "y": 121.2
-      },
-      "corrected_pos": {
-        "x": 20.4,
-        "y": 131.4
-      },
-      "predicted": true
-    },
-    {
-      "frame_number": 25,
-      "player_id": 1,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.9166666666666666,
-      "game_state_active": "divergence",
-      "original_pos": {
-        "x": 113.9,
-        "y": 159.9
-      },
-      "corrected_pos": {
-        "x": 80.3,
-        "y": 178.9
-      },
-      "predicted": true
-    },
-    {
-      "frame_number": 25,
-      "player_id": 2,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.9166666666666666,
-      "game_state_active": "divergence",
-      "original_pos": {
-        "x": 428.0,
-        "y": 0.0
-      },
-      "corrected_pos": {
-        "x": 428.0,
-        "y": 0.0
-      },
-      "predicted": true
-    },
-    {
-      "frame_number": 25,
-      "player_id": 3,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.9166666666666666,
-      "game_state_active": "divergence",
-      "original_pos": {
-        "x": 122.4,
-        "y": 134.0
-      },
-      "corrected_pos": {
-        "x": 81.4,
-        "y": 143.8
-      },
-      "predicted": true
-    },
-    {
-      "frame_number": 25,
-      "player_id": 4,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.9166666666666666,
-      "game_state_active": "divergence",
-      "original_pos": {
-        "x": 0.0,
-        "y": 125.2
-      },
-      "corrected_pos": {
-        "x": 0.0,
-        "y": 130.6
-      },
-      "predicted": true
-    },
-    {
-      "frame_number": 25,
-      "player_id": 5,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.9166666666666666,
-      "game_state_active": "divergence",
-      "original_pos": {
-        "x": 428.0,
-        "y": 240.0
-      },
-      "corrected_pos": {
-        "x": 428.0,
-        "y": 240.0
-      },
-      "predicted": true
-    },
-    {
-      "frame_number": 25,
-      "player_id": 6,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.9166666666666666,
-      "game_state_active": "divergence",
-      "original_pos": {
-        "x": 265.5,
-        "y": 67.9
-      },
-      "corrected_pos": {
-        "x": 260.8,
-        "y": 64.5
-      },
-      "predicted": true
-    },
-    {
-      "frame_number": 25,
-      "player_id": 7,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.9166666666666666,
-      "game_state_active": "divergence",
-      "original_pos": {
-        "x": 0.0,
-        "y": 240.0
-      },
-      "corrected_pos": {
-        "x": 0.0,
-        "y": 240.0
-      },
-      "predicted": true
-    },
-    {
-      "frame_number": 25,
-      "player_id": 8,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.9166666666666666,
-      "game_state_active": "divergence",
-      "original_pos": {
-        "x": 59.3,
-        "y": 24.6
-      },
-      "corrected_pos": {
-        "x": 24.0,
-        "y": 0.0
-      },
-      "predicted": true
-    },
-    {
-      "frame_number": 25,
-      "player_id": 9,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.9166666666666666,
-      "game_state_active": "divergence",
-      "original_pos": {
-        "x": 0.0,
-        "y": 179.8
-      },
-      "corrected_pos": {
-        "x": 0.0,
-        "y": 196.9
-      },
-      "predicted": true
-    },
-    {
-      "frame_number": 25,
-      "player_id": 10,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.9166666666666666,
-      "game_state_active": "divergence",
-      "original_pos": {
-        "x": 428.0,
-        "y": 177.7
-      },
-      "corrected_pos": {
-        "x": 428.0,
-        "y": 190.7
-      },
-      "predicted": true
-    },
-    {
-      "frame_number": 25,
-      "player_id": 12,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.9166666666666666,
-      "game_state_active": "divergence",
-      "original_pos": {
-        "x": 106.6,
-        "y": 110.4
-      },
-      "corrected_pos": {
-        "x": 79.7,
-        "y": 110.4
+        "x": 118.1,
+        "y": 114.1
       },
       "predicted": true
     },
     {
       "frame_number": 26,
       "player_id": 7,
-      "rule_fired": "cut_continuation",
-      "confidence": 1.0,
-      "game_state_active": "cut",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.8333333333333334,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 292.5,
         "y": 113.1
       },
       "corrected_pos": {
-        "x": 264.1,
-        "y": 128.5
+        "x": 252.3,
+        "y": 172.7
       },
       "predicted": false
     },
     {
       "frame_number": 26,
       "player_id": 2,
-      "rule_fired": "cut_continuation",
-      "confidence": 1.0,
-      "game_state_active": "cut",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.8333333333333334,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 328.3,
         "y": 127.1
       },
       "corrected_pos": {
-        "x": 328.3,
-        "y": 127.1
+        "x": 543.0,
+        "y": 114.6
       },
       "predicted": false
     },
@@ -4171,8 +4187,8 @@
         "y": 122.6
       },
       "corrected_pos": {
-        "x": 55.4,
-        "y": 61.0
+        "x": 241.8,
+        "y": 63.8
       },
       "predicted": false
     },
@@ -4187,8 +4203,8 @@
         "y": 85.6
       },
       "corrected_pos": {
-        "x": 94.4,
-        "y": 121.5
+        "x": 108.2,
+        "y": 100.1
       },
       "predicted": false
     },
@@ -4203,8 +4219,8 @@
         "y": 107.2
       },
       "corrected_pos": {
-        "x": 96.2,
-        "y": 126.6
+        "x": 112.4,
+        "y": 155.3
       },
       "predicted": false
     },
@@ -4219,8 +4235,8 @@
         "y": 74.2
       },
       "corrected_pos": {
-        "x": 160.2,
-        "y": 65.3
+        "x": 205.0,
+        "y": 66.7
       },
       "predicted": false
     },
@@ -4235,8 +4251,8 @@
         "y": 116.6
       },
       "corrected_pos": {
-        "x": 187.9,
-        "y": 166.4
+        "x": 299.0,
+        "y": 105.1
       },
       "predicted": false
     },
@@ -4248,11 +4264,11 @@
       "game_state_active": "divergence",
       "original_pos": {
         "x": 0.0,
-        "y": 130.6
+        "y": 119.1
       },
       "corrected_pos": {
         "x": 0.0,
-        "y": 136.3
+        "y": 120.5
       },
       "predicted": true
     },
@@ -4263,12 +4279,12 @@
       "confidence": 0.8333333333333334,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 428.0,
-        "y": 240.0
+        "x": 470.5,
+        "y": 258.3
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 240.0
+        "x": 580.3,
+        "y": 310.1
       },
       "predicted": true
     },
@@ -4280,11 +4296,11 @@
       "game_state_active": "divergence",
       "original_pos": {
         "x": 0.0,
-        "y": 196.9
+        "y": 136.7
       },
       "corrected_pos": {
         "x": 0.0,
-        "y": 215.7
+        "y": 140.7
       },
       "predicted": true
     },
@@ -4295,12 +4311,12 @@
       "confidence": 0.8333333333333334,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 428.0,
-        "y": 190.7
+        "x": 718.5,
+        "y": 146.0
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 205.8
+        "x": 845.9,
+        "y": 151.9
       },
       "predicted": true
     },
@@ -4311,12 +4327,12 @@
       "confidence": 0.8333333333333334,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 79.7,
-        "y": 110.4
+        "x": 118.1,
+        "y": 114.1
       },
       "corrected_pos": {
-        "x": 48.7,
-        "y": 106.9
+        "x": 98.0,
+        "y": 112.9
       },
       "predicted": true
     },
@@ -4324,31 +4340,31 @@
       "frame_number": 27,
       "player_id": 2,
       "rule_fired": "cut_continuation",
-      "confidence": 1.0,
+      "confidence": 0.7798559139429092,
       "game_state_active": "cut",
       "original_pos": {
         "x": 348.3,
         "y": 122.1
       },
       "corrected_pos": {
-        "x": 321.7,
-        "y": 162.8
+        "x": 324.6,
+        "y": 231.4
       },
       "predicted": false
     },
     {
       "frame_number": 27,
       "player_id": 7,
-      "rule_fired": "cut_continuation",
-      "confidence": 1.0,
-      "game_state_active": "cut",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 300.4,
         "y": 118.1
       },
       "corrected_pos": {
-        "x": 409.4,
-        "y": 83.8
+        "x": 433.7,
+        "y": 72.2
       },
       "predicted": false
     },
@@ -4356,15 +4372,15 @@
       "frame_number": 27,
       "player_id": 8,
       "rule_fired": "cut_continuation",
-      "confidence": 0.8450519357388853,
+      "confidence": 0.7970582048370065,
       "game_state_active": "cut",
       "original_pos": {
         "x": 142.8,
         "y": 118.1
       },
       "corrected_pos": {
-        "x": 138.9,
-        "y": 154.5
+        "x": 146.5,
+        "y": 68.4
       },
       "predicted": false
     },
@@ -4379,8 +4395,8 @@
         "y": 106.8
       },
       "corrected_pos": {
-        "x": 131.8,
-        "y": 104.0
+        "x": 154.1,
+        "y": 99.5
       },
       "predicted": false
     },
@@ -4388,31 +4404,31 @@
       "frame_number": 27,
       "player_id": 1,
       "rule_fired": "cut_continuation",
-      "confidence": 0.8729959985463315,
+      "confidence": 0.832577223180148,
       "game_state_active": "cut",
       "original_pos": {
         "x": 289.7,
         "y": 110.4
       },
       "corrected_pos": {
-        "x": 305.1,
-        "y": 133.4
+        "x": 292.0,
+        "y": 102.4
       },
       "predicted": false
     },
     {
       "frame_number": 27,
       "player_id": 5,
-      "rule_fired": "cut_continuation",
-      "confidence": 1.0,
-      "game_state_active": "cut",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 202.9,
         "y": 132.4
       },
       "corrected_pos": {
-        "x": 210.3,
-        "y": 135.9
+        "x": 415.0,
+        "y": 236.8
       },
       "predicted": false
     },
@@ -4427,8 +4443,8 @@
         "y": 85.1
       },
       "corrected_pos": {
-        "x": 113.5,
-        "y": 109.7
+        "x": 153.2,
+        "y": 85.2
       },
       "predicted": false
     },
@@ -4443,8 +4459,8 @@
         "y": 77.3
       },
       "corrected_pos": {
-        "x": 183.0,
-        "y": 69.2
+        "x": 183.1,
+        "y": 67.4
       },
       "predicted": false
     },
@@ -4455,12 +4471,12 @@
       "confidence": 0.75,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 96.2,
-        "y": 126.6
+        "x": 112.4,
+        "y": 155.3
       },
       "corrected_pos": {
-        "x": 54.5,
-        "y": 130.5
+        "x": 61.3,
+        "y": 160.8
       },
       "predicted": true
     },
@@ -4471,12 +4487,12 @@
       "confidence": 0.75,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 94.4,
-        "y": 121.5
+        "x": 108.2,
+        "y": 100.1
       },
       "corrected_pos": {
-        "x": 71.4,
-        "y": 122.2
+        "x": 86.9,
+        "y": 98.8
       },
       "predicted": true
     },
@@ -4488,11 +4504,11 @@
       "game_state_active": "divergence",
       "original_pos": {
         "x": 0.0,
-        "y": 215.7
+        "y": 140.7
       },
       "corrected_pos": {
         "x": 0.0,
-        "y": 235.0
+        "y": 144.6
       },
       "predicted": true
     },
@@ -4503,28 +4519,28 @@
       "confidence": 0.75,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 428.0,
-        "y": 205.8
+        "x": 845.9,
+        "y": 151.9
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 221.8
+        "x": 989.0,
+        "y": 158.6
       },
       "predicted": true
     },
     {
       "frame_number": 28,
       "player_id": 2,
-      "rule_fired": "spacing_push",
-      "confidence": 0.75,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.6666666666666667,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 351.1,
         "y": 113.6
       },
       "corrected_pos": {
-        "x": 352.0,
-        "y": 113.5
+        "x": 17.3,
+        "y": 348.3
       },
       "predicted": false
     },
@@ -4532,15 +4548,15 @@
       "frame_number": 28,
       "player_id": 5,
       "rule_fired": "cut_continuation",
-      "confidence": 1.0,
+      "confidence": 0.9925435868547222,
       "game_state_active": "cut",
       "original_pos": {
         "x": 204.3,
         "y": 132.0
       },
       "corrected_pos": {
-        "x": 129.7,
-        "y": 96.0
+        "x": 169.8,
+        "y": 120.5
       },
       "predicted": false
     },
@@ -4548,159 +4564,175 @@
       "frame_number": 28,
       "player_id": 0,
       "rule_fired": "cut_continuation",
-      "confidence": 0.990446305163101,
+      "confidence": 0.9073024453440723,
       "game_state_active": "cut",
       "original_pos": {
         "x": 301.6,
         "y": 105.6
       },
       "corrected_pos": {
-        "x": 217.3,
-        "y": 115.9
+        "x": 211.1,
+        "y": 118.2
       },
       "predicted": false
     },
     {
       "frame_number": 28,
       "player_id": 7,
-      "rule_fired": "hull_containment",
-      "confidence": 0.75,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.6666666666666667,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 318.0,
         "y": 116.5
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 15.5
+        "x": 735.3,
+        "y": 0.0
       },
       "predicted": false
     },
     {
       "frame_number": 28,
       "player_id": 4,
-      "rule_fired": "spacing_push",
-      "confidence": 0.75,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.6666666666666667,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 257.7,
         "y": 106.7
       },
       "corrected_pos": {
-        "x": 183.7,
-        "y": 108.9
+        "x": 337.8,
+        "y": 73.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 28,
+      "player_id": 8,
+      "rule_fired": "divergence_spread",
+      "confidence": 0.6666666666666667,
+      "game_state_active": "divergence",
+      "original_pos": {
+        "x": 152.5,
+        "y": 120.0
+      },
+      "corrected_pos": {
+        "x": 88.5,
+        "y": 139.6
       },
       "predicted": false
     },
     {
       "frame_number": 28,
       "player_id": 3,
-      "rule_fired": "velocity_cap",
-      "confidence": 0.75,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.6666666666666667,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 199.8,
         "y": 86.7
       },
       "corrected_pos": {
-        "x": 110.9,
-        "y": 103.2
+        "x": 144.2,
+        "y": 78.9
       },
       "predicted": false
     },
     {
       "frame_number": 28,
       "player_id": 6,
-      "rule_fired": "cut_continuation",
-      "confidence": 0.9435429152966571,
-      "game_state_active": "cut",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.6666666666666667,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 209.9,
         "y": 76.3
       },
       "corrected_pos": {
-        "x": 200.1,
-        "y": 72.9
+        "x": 196.1,
+        "y": 68.2
       },
       "predicted": false
     },
     {
       "frame_number": 28,
       "player_id": 1,
-      "rule_fired": "collective_momentum",
-      "confidence": 0.75,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.6666666666666667,
+      "game_state_active": "divergence",
       "original_pos": {
-        "x": 305.1,
-        "y": 133.4
+        "x": 292.0,
+        "y": 102.4
       },
       "corrected_pos": {
-        "x": 368.8,
-        "y": 124.6
+        "x": 306.4,
+        "y": 97.4
       },
       "predicted": true
     },
     {
       "frame_number": 28,
       "player_id": 9,
-      "rule_fired": "collective_momentum",
-      "confidence": 0.75,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.6666666666666667,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 0.0,
-        "y": 235.0
+        "y": 144.6
       },
       "corrected_pos": {
         "x": 0.0,
-        "y": 240.0
+        "y": 148.3
       },
       "predicted": true
     },
     {
       "frame_number": 28,
       "player_id": 10,
-      "rule_fired": "collective_momentum",
-      "confidence": 0.75,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.6666666666666667,
+      "game_state_active": "divergence",
       "original_pos": {
-        "x": 428.0,
-        "y": 221.8
+        "x": 989.0,
+        "y": 158.6
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 236.5
+        "x": 1144.7,
+        "y": 165.7
       },
       "predicted": true
     },
     {
       "frame_number": 28,
       "player_id": 12,
-      "rule_fired": "collective_momentum",
-      "confidence": 0.75,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.6666666666666667,
+      "game_state_active": "divergence",
       "original_pos": {
-        "x": 131.8,
-        "y": 104.0
+        "x": 154.1,
+        "y": 99.5
       },
       "corrected_pos": {
-        "x": 140.2,
-        "y": 101.9
+        "x": 158.3,
+        "y": 94.5
       },
       "predicted": true
     },
     {
       "frame_number": 29,
       "player_id": 2,
-      "rule_fired": "cut_continuation",
-      "confidence": 0.8827731409761185,
-      "game_state_active": "cut",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.6666666666666667,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 166.3,
         "y": 148.0
       },
       "corrected_pos": {
-        "x": 234.6,
-        "y": 130.6
+        "x": 0.0,
+        "y": 388.2
       },
       "predicted": false
     },
@@ -4715,7 +4747,7 @@
         "y": 112.1
       },
       "corrected_pos": {
-        "x": 428.0,
+        "x": 829.3,
         "y": 0.0
       },
       "predicted": false
@@ -4723,16 +4755,16 @@
     {
       "frame_number": 29,
       "player_id": 5,
-      "rule_fired": "stationary_persistence",
-      "confidence": 0.8,
-      "game_state_active": "stationary",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.6666666666666667,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 207.8,
         "y": 135.5
       },
       "corrected_pos": {
-        "x": 0.0,
-        "y": 29.0
+        "x": 56.8,
+        "y": 71.6
       },
       "predicted": false
     },
@@ -4740,15 +4772,15 @@
       "frame_number": 29,
       "player_id": 0,
       "rule_fired": "cut_continuation",
-      "confidence": 0.9987864136939647,
+      "confidence": 0.945936484819839,
       "game_state_active": "cut",
       "original_pos": {
         "x": 308.9,
         "y": 106.0
       },
       "corrected_pos": {
-        "x": 373.8,
-        "y": 108.0
+        "x": 332.1,
+        "y": 78.2
       },
       "predicted": false
     },
@@ -4763,8 +4795,8 @@
         "y": 107.8
       },
       "corrected_pos": {
-        "x": 372.2,
-        "y": 88.8
+        "x": 393.6,
+        "y": 103.1
       },
       "predicted": false
     },
@@ -4779,8 +4811,8 @@
         "y": 120.7
       },
       "corrected_pos": {
-        "x": 186.3,
-        "y": 141.2
+        "x": 124.6,
+        "y": 137.9
       },
       "predicted": false
     },
@@ -4795,8 +4827,8 @@
         "y": 88.5
       },
       "corrected_pos": {
-        "x": 197.7,
-        "y": 130.4
+        "x": 685.7,
+        "y": 116.6
       },
       "predicted": false
     },
@@ -4804,47 +4836,47 @@
       "frame_number": 29,
       "player_id": 3,
       "rule_fired": "cut_continuation",
-      "confidence": 0.8669727947147692,
+      "confidence": 0.8741975076156406,
       "game_state_active": "cut",
       "original_pos": {
         "x": 205.8,
         "y": 90.0
       },
       "corrected_pos": {
-        "x": 184.3,
-        "y": 80.0
+        "x": 246.2,
+        "y": 101.3
       },
       "predicted": false
     },
     {
       "frame_number": 29,
       "player_id": 6,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.6666666666666667,
-      "game_state_active": "divergence",
+      "rule_fired": "cut_continuation",
+      "confidence": 0.9702655443058458,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 216.5,
         "y": 81.6
       },
       "corrected_pos": {
-        "x": 245.0,
-        "y": 77.6
+        "x": 229.6,
+        "y": 81.0
       },
       "predicted": false
     },
     {
       "frame_number": 29,
       "player_id": 1,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.6666666666666667,
-      "game_state_active": "divergence",
+      "rule_fired": "cut_continuation",
+      "confidence": 0.7764417946457387,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 312.4,
         "y": 115.6
       },
       "corrected_pos": {
-        "x": 367.1,
-        "y": 110.3
+        "x": 321.1,
+        "y": 130.7
       },
       "predicted": false
     },
@@ -4856,11 +4888,11 @@
       "game_state_active": "divergence",
       "original_pos": {
         "x": 0.0,
-        "y": 240.0
+        "y": 148.3
       },
       "corrected_pos": {
         "x": 0.0,
-        "y": 240.0
+        "y": 152.2
       },
       "predicted": true
     },
@@ -4871,60 +4903,60 @@
       "confidence": 0.6666666666666667,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 140.2,
-        "y": 101.9
+        "x": 158.3,
+        "y": 94.5
       },
       "corrected_pos": {
-        "x": 156.3,
-        "y": 98.8
+        "x": 168.8,
+        "y": 87.1
       },
       "predicted": true
     },
     {
       "frame_number": 30,
       "player_id": 2,
-      "rule_fired": "cut_continuation",
-      "confidence": 0.7214569912406155,
-      "game_state_active": "cut",
+      "rule_fired": "hull_containment",
+      "confidence": 0.5,
+      "game_state_active": "fast_break",
       "original_pos": {
         "x": 190.4,
         "y": 154.8
       },
       "corrected_pos": {
-        "x": 146.6,
-        "y": 152.1
+        "x": 0.0,
+        "y": 337.1
       },
       "predicted": false
     },
     {
       "frame_number": 30,
       "player_id": 0,
-      "rule_fired": "hull_containment",
-      "confidence": 0.625,
+      "rule_fired": "spacing_push",
+      "confidence": 0.5,
       "game_state_active": "fast_break",
       "original_pos": {
         "x": 265.0,
         "y": 106.6
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 92.1
+        "x": 260.5,
+        "y": 106.5
       },
       "predicted": false
     },
     {
       "frame_number": 30,
       "player_id": 8,
-      "rule_fired": "spacing_push",
-      "confidence": 0.625,
-      "game_state_active": "fast_break",
+      "rule_fired": "cut_continuation",
+      "confidence": 0.732570221115208,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 189.6,
         "y": 119.7
       },
       "corrected_pos": {
-        "x": 188.7,
-        "y": 119.2
+        "x": 203.1,
+        "y": 136.3
       },
       "predicted": false
     },
@@ -4932,15 +4964,15 @@
       "frame_number": 30,
       "player_id": 5,
       "rule_fired": "hull_containment",
-      "confidence": 0.625,
+      "confidence": 0.5,
       "game_state_active": "fast_break",
       "original_pos": {
         "x": 219.0,
         "y": 134.7
       },
       "corrected_pos": {
-        "x": 5.8,
-        "y": 28.2
+        "x": 0.0,
+        "y": 3.5
       },
       "predicted": false
     },
@@ -4948,15 +4980,15 @@
       "frame_number": 30,
       "player_id": 7,
       "rule_fired": "hull_containment",
-      "confidence": 0.625,
+      "confidence": 0.5,
       "game_state_active": "fast_break",
       "original_pos": {
         "x": 291.0,
         "y": 107.1
       },
       "corrected_pos": {
-        "x": 349.1,
-        "y": 15.5
+        "x": 734.2,
+        "y": 23.3
       },
       "predicted": false
     },
@@ -4964,7 +4996,7 @@
       "frame_number": 30,
       "player_id": 6,
       "rule_fired": "spacing_push",
-      "confidence": 0.625,
+      "confidence": 0.5,
       "game_state_active": "fast_break",
       "original_pos": {
         "x": 229.8,
@@ -4980,7 +5012,7 @@
       "frame_number": 30,
       "player_id": 3,
       "rule_fired": "spacing_push",
-      "confidence": 0.625,
+      "confidence": 0.5,
       "game_state_active": "fast_break",
       "original_pos": {
         "x": 214.6,
@@ -4996,15 +5028,15 @@
       "frame_number": 30,
       "player_id": 10,
       "rule_fired": "cut_continuation",
-      "confidence": 0.6374204783684558,
+      "confidence": 0.980583896879671,
       "game_state_active": "cut",
       "original_pos": {
         "x": 214.0,
         "y": 94.5
       },
       "corrected_pos": {
-        "x": 135.1,
-        "y": 37.0
+        "x": 94.3,
+        "y": 67.7
       },
       "predicted": false
     },
@@ -5012,15 +5044,15 @@
       "frame_number": 30,
       "player_id": 1,
       "rule_fired": "collective_momentum",
-      "confidence": 0.625,
+      "confidence": 0.5,
       "game_state_active": "fast_break",
       "original_pos": {
-        "x": 367.1,
-        "y": 110.3
+        "x": 321.1,
+        "y": 130.7
       },
       "corrected_pos": {
-        "x": 426.8,
-        "y": 91.6
+        "x": 328.5,
+        "y": 139.2
       },
       "predicted": true
     },
@@ -5028,15 +5060,15 @@
       "frame_number": 30,
       "player_id": 4,
       "rule_fired": "collective_momentum",
-      "confidence": 0.625,
+      "confidence": 0.5,
       "game_state_active": "fast_break",
       "original_pos": {
-        "x": 372.2,
-        "y": 88.8
+        "x": 393.6,
+        "y": 103.1
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 73.0
+        "x": 524.8,
+        "y": 97.3
       },
       "predicted": true
     },
@@ -5044,15 +5076,15 @@
       "frame_number": 30,
       "player_id": 9,
       "rule_fired": "collective_momentum",
-      "confidence": 0.625,
+      "confidence": 0.5,
       "game_state_active": "fast_break",
       "original_pos": {
         "x": 0.0,
-        "y": 240.0
+        "y": 152.2
       },
       "corrected_pos": {
         "x": 0.0,
-        "y": 240.0
+        "y": 156.0
       },
       "predicted": true
     },
@@ -5060,31 +5092,31 @@
       "frame_number": 30,
       "player_id": 12,
       "rule_fired": "collective_momentum",
-      "confidence": 0.625,
+      "confidence": 0.5,
       "game_state_active": "fast_break",
       "original_pos": {
-        "x": 156.3,
-        "y": 98.8
+        "x": 168.8,
+        "y": 87.1
       },
       "corrected_pos": {
-        "x": 192.2,
-        "y": 96.1
+        "x": 192.4,
+        "y": 78.5
       },
       "predicted": true
     },
     {
       "frame_number": 31,
       "player_id": 2,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "cut_continuation",
+      "confidence": 0.8697734368007047,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 355.6,
         "y": 154.0
       },
       "corrected_pos": {
-        "x": 147.7,
-        "y": 194.3
+        "x": 290.6,
+        "y": 170.2
       },
       "predicted": false
     },
@@ -5092,15 +5124,15 @@
       "frame_number": 31,
       "player_id": 12,
       "rule_fired": "divergence_spread",
-      "confidence": 0.75,
+      "confidence": 0.6666666666666667,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 238.0,
         "y": 108.0
       },
       "corrected_pos": {
-        "x": 258.8,
-        "y": 92.3
+        "x": 251.2,
+        "y": 97.2
       },
       "predicted": false
     },
@@ -5108,15 +5140,15 @@
       "frame_number": 31,
       "player_id": 8,
       "rule_fired": "divergence_spread",
-      "confidence": 0.75,
+      "confidence": 0.6666666666666667,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 250.7,
         "y": 133.8
       },
       "corrected_pos": {
-        "x": 270.0,
-        "y": 144.8
+        "x": 299.0,
+        "y": 135.7
       },
       "predicted": false
     },
@@ -5124,79 +5156,79 @@
       "frame_number": 31,
       "player_id": 1,
       "rule_fired": "divergence_spread",
-      "confidence": 0.75,
+      "confidence": 0.6666666666666667,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 241.5,
         "y": 111.4
       },
       "corrected_pos": {
-        "x": 350.7,
-        "y": 78.9
+        "x": 288.2,
+        "y": 152.0
       },
       "predicted": false
     },
     {
       "frame_number": 31,
       "player_id": 0,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "cut_continuation",
+      "confidence": 0.9818127622497532,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 262.5,
         "y": 108.6
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 84.3
+        "x": 287.4,
+        "y": 108.4
       },
       "predicted": false
     },
     {
       "frame_number": 31,
       "player_id": 9,
-      "rule_fired": "cut_continuation",
-      "confidence": 1.0,
-      "game_state_active": "cut",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.6666666666666667,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 245.5,
         "y": 102.0
       },
       "corrected_pos": {
-        "x": 229.0,
-        "y": 111.2
+        "x": 221.3,
+        "y": 106.7
       },
       "predicted": false
     },
     {
       "frame_number": 31,
       "player_id": 6,
-      "rule_fired": "cut_continuation",
-      "confidence": 0.9633414072012424,
-      "game_state_active": "cut",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.6666666666666667,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 256.8,
         "y": 82.5
       },
       "corrected_pos": {
-        "x": 279.5,
-        "y": 79.6
+        "x": 282.7,
+        "y": 77.4
       },
       "predicted": false
     },
     {
       "frame_number": 31,
       "player_id": 7,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "cut_continuation",
+      "confidence": 0.9235189729624551,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 254.6,
         "y": 134.0
       },
       "corrected_pos": {
-        "x": 221.3,
-        "y": 84.5
+        "x": 341.5,
+        "y": 132.8
       },
       "predicted": false
     },
@@ -5204,31 +5236,31 @@
       "frame_number": 31,
       "player_id": 4,
       "rule_fired": "divergence_spread",
-      "confidence": 0.75,
+      "confidence": 0.6666666666666667,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 245.9,
         "y": 99.9
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 62.9
+        "x": 439.3,
+        "y": 123.8
       },
       "predicted": false
     },
     {
       "frame_number": 31,
       "player_id": 5,
-      "rule_fired": "cut_continuation",
-      "confidence": 0.8045936858941142,
-      "game_state_active": "cut",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.6666666666666667,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 272.8,
         "y": 149.0
       },
       "corrected_pos": {
-        "x": 148.9,
-        "y": 81.2
+        "x": 96.7,
+        "y": 28.6
       },
       "predicted": false
     },
@@ -5236,15 +5268,15 @@
       "frame_number": 31,
       "player_id": 3,
       "rule_fired": "divergence_spread",
-      "confidence": 0.75,
+      "confidence": 0.6666666666666667,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 222.1,
         "y": 110.8
       },
       "corrected_pos": {
-        "x": 265.9,
-        "y": 116.3
+        "x": 258.2,
+        "y": 115.9
       },
       "predicted": true
     },
@@ -5252,15 +5284,15 @@
       "frame_number": 31,
       "player_id": 10,
       "rule_fired": "divergence_spread",
-      "confidence": 0.75,
+      "confidence": 0.6666666666666667,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 135.1,
-        "y": 37.0
+        "x": 94.3,
+        "y": 67.7
       },
       "corrected_pos": {
-        "x": 14.6,
-        "y": 0.0
+        "x": 0.0,
+        "y": 28.0
       },
       "predicted": true
     },
@@ -5275,24 +5307,24 @@
         "y": 140.5
       },
       "corrected_pos": {
-        "x": 247.9,
-        "y": 210.9
+        "x": 512.4,
+        "y": 38.1
       },
       "predicted": false
     },
     {
       "frame_number": 32,
       "player_id": 5,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.6666666666666667,
-      "game_state_active": "divergence",
+      "rule_fired": "cut_continuation",
+      "confidence": 0.8021182933666681,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 285.4,
         "y": 138.3
       },
       "corrected_pos": {
-        "x": 330.5,
-        "y": 143.4
+        "x": 244.9,
+        "y": 71.8
       },
       "predicted": false
     },
@@ -5307,40 +5339,40 @@
         "y": 123.4
       },
       "corrected_pos": {
-        "x": 239.9,
-        "y": 119.3
+        "x": 370.8,
+        "y": 126.8
       },
       "predicted": false
     },
     {
       "frame_number": 32,
       "player_id": 0,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.6666666666666667,
-      "game_state_active": "divergence",
+      "rule_fired": "cut_continuation",
+      "confidence": 0.8577406512332573,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 278.0,
         "y": 109.4
       },
       "corrected_pos": {
-        "x": 370.2,
-        "y": 83.3
+        "x": 263.3,
+        "y": 122.8
       },
       "predicted": false
     },
     {
       "frame_number": 32,
       "player_id": 4,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.6666666666666667,
-      "game_state_active": "divergence",
+      "rule_fired": "cut_continuation",
+      "confidence": 0.9183936963850196,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 204.0,
         "y": 120.1
       },
       "corrected_pos": {
-        "x": 325.4,
-        "y": 77.6
+        "x": 306.0,
+        "y": 128.8
       },
       "predicted": false
     },
@@ -5355,40 +5387,40 @@
         "y": 111.4
       },
       "corrected_pos": {
-        "x": 174.4,
-        "y": 160.7
+        "x": 30.6,
+        "y": 200.9
       },
       "predicted": false
     },
     {
       "frame_number": 32,
       "player_id": 6,
-      "rule_fired": "cut_continuation",
-      "confidence": 0.9827093966155253,
-      "game_state_active": "cut",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.6666666666666667,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 258.8,
         "y": 91.8
       },
       "corrected_pos": {
-        "x": 273.9,
-        "y": 104.4
+        "x": 280.4,
+        "y": 101.8
       },
       "predicted": false
     },
     {
       "frame_number": 32,
       "player_id": 3,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.6666666666666667,
-      "game_state_active": "divergence",
+      "rule_fired": "cut_continuation",
+      "confidence": 0.8358049497725966,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 251.8,
         "y": 86.5
       },
       "corrected_pos": {
-        "x": 263.4,
-        "y": 76.3
+        "x": 243.2,
+        "y": 73.7
       },
       "predicted": false
     },
@@ -5399,12 +5431,12 @@
       "confidence": 0.6666666666666667,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 350.7,
-        "y": 78.9
+        "x": 288.2,
+        "y": 152.0
       },
       "corrected_pos": {
-        "x": 347.1,
-        "y": 61.5
+        "x": 282.2,
+        "y": 174.0
       },
       "predicted": true
     },
@@ -5415,12 +5447,12 @@
       "confidence": 0.6666666666666667,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 229.0,
-        "y": 111.2
+        "x": 221.3,
+        "y": 106.7
       },
       "corrected_pos": {
-        "x": 312.0,
-        "y": 52.1
+        "x": 302.8,
+        "y": 80.0
       },
       "predicted": true
     },
@@ -5431,8 +5463,8 @@
       "confidence": 0.6666666666666667,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 14.6,
-        "y": 0.0
+        "x": 0.0,
+        "y": 28.0
       },
       "corrected_pos": {
         "x": 0.0,
@@ -5447,19 +5479,19 @@
       "confidence": 0.6666666666666667,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 258.8,
-        "y": 92.3
+        "x": 251.2,
+        "y": 97.2
       },
       "corrected_pos": {
-        "x": 306.0,
-        "y": 87.0
+        "x": 288.3,
+        "y": 97.2
       },
       "predicted": true
     },
     {
       "frame_number": 33,
       "player_id": 2,
-      "rule_fired": "velocity_cap",
+      "rule_fired": "hull_containment",
       "confidence": 0.5714285714285714,
       "game_state_active": "fast_break",
       "original_pos": {
@@ -5467,8 +5499,8 @@
         "y": 137.2
       },
       "corrected_pos": {
-        "x": 322.8,
-        "y": 206.3
+        "x": 708.1,
+        "y": 0.0
       },
       "predicted": false
     },
@@ -5483,56 +5515,56 @@
         "y": 133.8
       },
       "corrected_pos": {
-        "x": 304.7,
-        "y": 134.5
+        "x": 303.7,
+        "y": 96.1
       },
       "predicted": false
     },
     {
       "frame_number": 33,
       "player_id": 8,
-      "rule_fired": "cut_continuation",
-      "confidence": 0.8733770183539826,
-      "game_state_active": "cut",
+      "rule_fired": "spacing_push",
+      "confidence": 0.5714285714285714,
+      "game_state_active": "fast_break",
       "original_pos": {
         "x": 200.4,
         "y": 126.6
       },
       "corrected_pos": {
-        "x": 202.6,
-        "y": 135.8
+        "x": 364.8,
+        "y": 119.5
       },
       "predicted": false
     },
     {
       "frame_number": 33,
       "player_id": 3,
-      "rule_fired": "spacing_push",
-      "confidence": 0.5714285714285714,
-      "game_state_active": "fast_break",
+      "rule_fired": "cut_continuation",
+      "confidence": 0.6533831745915011,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 247.7,
         "y": 92.4
       },
       "corrected_pos": {
-        "x": 240.4,
-        "y": 101.4
+        "x": 248.9,
+        "y": 95.3
       },
       "predicted": false
     },
     {
       "frame_number": 33,
       "player_id": 0,
-      "rule_fired": "spacing_push",
-      "confidence": 0.5714285714285714,
-      "game_state_active": "fast_break",
+      "rule_fired": "cut_continuation",
+      "confidence": 0.806116893114029,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 324.8,
         "y": 106.8
       },
       "corrected_pos": {
-        "x": 325.3,
-        "y": 106.1
+        "x": 346.7,
+        "y": 106.2
       },
       "predicted": false
     },
@@ -5547,15 +5579,15 @@
         "y": 109.4
       },
       "corrected_pos": {
-        "x": 128.1,
-        "y": 223.3
+        "x": 0.0,
+        "y": 243.6
       },
       "predicted": false
     },
     {
       "frame_number": 33,
       "player_id": 1,
-      "rule_fired": "spacing_push",
+      "rule_fired": "velocity_cap",
       "confidence": 0.5714285714285714,
       "game_state_active": "fast_break",
       "original_pos": {
@@ -5563,8 +5595,8 @@
         "y": 107.9
       },
       "corrected_pos": {
-        "x": 280.1,
-        "y": 64.6
+        "x": 244.9,
+        "y": 163.6
       },
       "predicted": false
     },
@@ -5595,8 +5627,8 @@
         "y": 106.1
       },
       "corrected_pos": {
-        "x": 306.2,
-        "y": 85.4
+        "x": 303.3,
+        "y": 104.0
       },
       "predicted": false
     },
@@ -5607,12 +5639,12 @@
       "confidence": 0.5714285714285714,
       "game_state_active": "fast_break",
       "original_pos": {
-        "x": 325.4,
-        "y": 77.6
+        "x": 306.0,
+        "y": 128.8
       },
       "corrected_pos": {
-        "x": 309.8,
-        "y": 73.9
+        "x": 276.8,
+        "y": 137.4
       },
       "predicted": true
     },
@@ -5623,12 +5655,12 @@
       "confidence": 0.5714285714285714,
       "game_state_active": "fast_break",
       "original_pos": {
-        "x": 312.0,
-        "y": 52.1
+        "x": 302.8,
+        "y": 80.0
       },
       "corrected_pos": {
-        "x": 416.0,
-        "y": 0.0
+        "x": 403.7,
+        "y": 55.9
       },
       "predicted": true
     },
@@ -5652,15 +5684,15 @@
       "frame_number": 34,
       "player_id": 2,
       "rule_fired": "divergence_spread",
-      "confidence": 1.0,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 381.0,
         "y": 136.9
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 153.3
+        "x": 807.0,
+        "y": 0.0
       },
       "predicted": false
     },
@@ -5668,31 +5700,31 @@
       "frame_number": 34,
       "player_id": 8,
       "rule_fired": "divergence_spread",
-      "confidence": 1.0,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 189.1,
         "y": 129.6
       },
       "corrected_pos": {
-        "x": 153.9,
-        "y": 125.3
+        "x": 308.0,
+        "y": 120.0
       },
       "predicted": false
     },
     {
       "frame_number": 34,
       "player_id": 10,
-      "rule_fired": "divergence_spread",
+      "rule_fired": "cut_continuation",
       "confidence": 1.0,
-      "game_state_active": "divergence",
+      "game_state_active": "cut",
       "original_pos": {
         "x": 296.5,
         "y": 134.5
       },
       "corrected_pos": {
-        "x": 227.4,
-        "y": 135.3
+        "x": 268.3,
+        "y": 96.4
       },
       "predicted": false
     },
@@ -5700,15 +5732,15 @@
       "frame_number": 34,
       "player_id": 1,
       "rule_fired": "divergence_spread",
-      "confidence": 1.0,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 221.9,
         "y": 103.7
       },
       "corrected_pos": {
-        "x": 161.9,
-        "y": 114.0
+        "x": 188.7,
+        "y": 87.4
       },
       "predicted": false
     },
@@ -5716,31 +5748,31 @@
       "frame_number": 34,
       "player_id": 12,
       "rule_fired": "divergence_spread",
-      "confidence": 1.0,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 295.8,
         "y": 133.6
       },
       "corrected_pos": {
-        "x": 302.0,
-        "y": 137.6
+        "x": 304.6,
+        "y": 135.4
       },
       "predicted": false
     },
     {
       "frame_number": 34,
       "player_id": 3,
-      "rule_fired": "divergence_spread",
-      "confidence": 1.0,
-      "game_state_active": "divergence",
+      "rule_fired": "cut_continuation",
+      "confidence": 0.9734164303407011,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 245.3,
         "y": 92.0
       },
       "corrected_pos": {
-        "x": 228.2,
-        "y": 72.4
+        "x": 233.1,
+        "y": 74.7
       },
       "predicted": false
     },
@@ -5748,15 +5780,15 @@
       "frame_number": 34,
       "player_id": 7,
       "rule_fired": "divergence_spread",
-      "confidence": 1.0,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 308.9,
         "y": 109.5
       },
       "corrected_pos": {
-        "x": 212.1,
-        "y": 240.0
+        "x": 0.0,
+        "y": 221.5
       },
       "predicted": false
     },
@@ -5764,15 +5796,15 @@
       "frame_number": 34,
       "player_id": 6,
       "rule_fired": "divergence_spread",
-      "confidence": 1.0,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 252.7,
         "y": 80.8
       },
       "corrected_pos": {
-        "x": 248.4,
-        "y": 69.9
+        "x": 247.2,
+        "y": 70.6
       },
       "predicted": false
     },
@@ -5780,15 +5812,15 @@
       "frame_number": 34,
       "player_id": 5,
       "rule_fired": "divergence_spread",
-      "confidence": 1.0,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 298.7,
         "y": 137.5
       },
       "corrected_pos": {
-        "x": 371.3,
-        "y": 177.7
+        "x": 392.4,
+        "y": 198.7
       },
       "predicted": false
     },
@@ -5796,15 +5828,15 @@
       "frame_number": 34,
       "player_id": 4,
       "rule_fired": "divergence_spread",
-      "confidence": 1.0,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 252.1,
         "y": 100.1
       },
       "corrected_pos": {
-        "x": 183.5,
-        "y": 123.9
+        "x": 180.5,
+        "y": 98.9
       },
       "predicted": false
     },
@@ -5812,15 +5844,15 @@
       "frame_number": 34,
       "player_id": 0,
       "rule_fired": "divergence_spread",
-      "confidence": 1.0,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 267.8,
         "y": 89.5
       },
       "corrected_pos": {
-        "x": 206.9,
-        "y": 90.4
+        "x": 337.1,
+        "y": 92.5
       },
       "predicted": false
     },
@@ -5828,31 +5860,31 @@
       "frame_number": 34,
       "player_id": 9,
       "rule_fired": "divergence_spread",
-      "confidence": 1.0,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 416.0,
-        "y": 0.0
+        "x": 403.7,
+        "y": 55.9
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 0.0
+        "x": 574.2,
+        "y": 9.7
       },
       "predicted": true
     },
     {
       "frame_number": 35,
       "player_id": 5,
-      "rule_fired": "cut_continuation",
-      "confidence": 0.9225724770703806,
-      "game_state_active": "cut",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.8333333333333334,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 282.1,
         "y": 134.5
       },
       "corrected_pos": {
-        "x": 339.0,
-        "y": 171.8
+        "x": 433.9,
+        "y": 265.7
       },
       "predicted": false
     },
@@ -5867,8 +5899,8 @@
         "y": 136.6
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 115.4
+        "x": 683.1,
+        "y": 97.9
       },
       "predicted": false
     },
@@ -5883,8 +5915,8 @@
         "y": 133.0
       },
       "corrected_pos": {
-        "x": 169.0,
-        "y": 138.4
+        "x": 171.5,
+        "y": 140.3
       },
       "predicted": false
     },
@@ -5899,24 +5931,24 @@
         "y": 115.7
       },
       "corrected_pos": {
-        "x": 370.8,
-        "y": 204.4
+        "x": 253.6,
+        "y": 165.0
       },
       "predicted": false
     },
     {
       "frame_number": 35,
       "player_id": 3,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.8333333333333334,
-      "game_state_active": "divergence",
+      "rule_fired": "cut_continuation",
+      "confidence": 0.8738603896981579,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 238.5,
         "y": 98.8
       },
       "corrected_pos": {
-        "x": 222.6,
-        "y": 98.4
+        "x": 232.0,
+        "y": 100.0
       },
       "predicted": false
     },
@@ -5931,8 +5963,8 @@
         "y": 109.2
       },
       "corrected_pos": {
-        "x": 207.2,
-        "y": 107.4
+        "x": 427.5,
+        "y": 100.0
       },
       "predicted": false
     },
@@ -5947,8 +5979,8 @@
         "y": 113.3
       },
       "corrected_pos": {
-        "x": 87.0,
-        "y": 150.1
+        "x": 236.8,
+        "y": 98.3
       },
       "predicted": false
     },
@@ -5963,8 +5995,8 @@
         "y": 86.3
       },
       "corrected_pos": {
-        "x": 251.2,
-        "y": 73.6
+        "x": 248.7,
+        "y": 74.3
       },
       "predicted": false
     },
@@ -5975,12 +6007,12 @@
       "confidence": 0.8333333333333334,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 183.5,
-        "y": 123.9
+        "x": 180.5,
+        "y": 98.9
       },
       "corrected_pos": {
-        "x": 81.1,
-        "y": 145.8
+        "x": 72.9,
+        "y": 87.1
       },
       "predicted": true
     },
@@ -5991,11 +6023,11 @@
       "confidence": 0.8333333333333334,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 428.0,
-        "y": 0.0
+        "x": 574.2,
+        "y": 9.7
       },
       "corrected_pos": {
-        "x": 428.0,
+        "x": 720.3,
         "y": 0.0
       },
       "predicted": true
@@ -6007,12 +6039,12 @@
       "confidence": 0.8333333333333334,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 227.4,
-        "y": 135.3
+        "x": 268.3,
+        "y": 96.4
       },
       "corrected_pos": {
-        "x": 310.0,
-        "y": 197.9
+        "x": 377.0,
+        "y": 131.8
       },
       "predicted": true
     },
@@ -6023,44 +6055,44 @@
       "confidence": 0.8333333333333334,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 302.0,
-        "y": 137.6
+        "x": 304.6,
+        "y": 135.4
       },
       "corrected_pos": {
-        "x": 321.1,
-        "y": 154.9
+        "x": 318.9,
+        "y": 152.3
       },
       "predicted": true
     },
     {
       "frame_number": 36,
       "player_id": 5,
-      "rule_fired": "cut_continuation",
-      "confidence": 0.8743459199090547,
-      "game_state_active": "cut",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.9166666666666666,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 282.0,
         "y": 131.6
       },
       "corrected_pos": {
-        "x": 274.4,
-        "y": 130.6
+        "x": 414.6,
+        "y": 304.1
       },
       "predicted": false
     },
     {
       "frame_number": 36,
       "player_id": 8,
-      "rule_fired": "cut_continuation",
-      "confidence": 0.840132151920587,
-      "game_state_active": "cut",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.9166666666666666,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 204.2,
         "y": 125.9
       },
       "corrected_pos": {
-        "x": 200.2,
-        "y": 125.5
+        "x": 131.7,
+        "y": 133.8
       },
       "predicted": false
     },
@@ -6068,15 +6100,15 @@
       "frame_number": 36,
       "player_id": 2,
       "rule_fired": "divergence_spread",
-      "confidence": 0.8333333333333334,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 379.1,
         "y": 136.2
       },
       "corrected_pos": {
-        "x": 405.4,
-        "y": 113.0
+        "x": 420.4,
+        "y": 237.3
       },
       "predicted": false
     },
@@ -6084,15 +6116,15 @@
       "frame_number": 36,
       "player_id": 7,
       "rule_fired": "divergence_spread",
-      "confidence": 0.8333333333333334,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 331.3,
         "y": 117.1
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 136.1
+        "x": 466.5,
+        "y": 93.6
       },
       "predicted": false
     },
@@ -6100,15 +6132,15 @@
       "frame_number": 36,
       "player_id": 0,
       "rule_fired": "divergence_spread",
-      "confidence": 0.8333333333333334,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 250.2,
         "y": 92.5
       },
       "corrected_pos": {
-        "x": 221.1,
-        "y": 83.3
+        "x": 372.0,
+        "y": 89.3
       },
       "predicted": false
     },
@@ -6116,15 +6148,15 @@
       "frame_number": 36,
       "player_id": 12,
       "rule_fired": "divergence_spread",
-      "confidence": 0.8333333333333334,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 202.5,
         "y": 100.5
       },
       "corrected_pos": {
-        "x": 252.2,
-        "y": 176.8
+        "x": 252.8,
+        "y": 166.7
       },
       "predicted": false
     },
@@ -6132,15 +6164,15 @@
       "frame_number": 36,
       "player_id": 1,
       "rule_fired": "divergence_spread",
-      "confidence": 0.8333333333333334,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 224.6,
         "y": 112.9
       },
       "corrected_pos": {
-        "x": 25.8,
-        "y": 200.7
+        "x": 218.0,
+        "y": 90.8
       },
       "predicted": false
     },
@@ -6148,15 +6180,15 @@
       "frame_number": 36,
       "player_id": 3,
       "rule_fired": "divergence_spread",
-      "confidence": 0.8333333333333334,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 201.6,
         "y": 80.7
       },
       "corrected_pos": {
-        "x": 177.6,
-        "y": 64.3
+        "x": 173.9,
+        "y": 66.1
       },
       "predicted": false
     },
@@ -6164,7 +6196,7 @@
       "frame_number": 36,
       "player_id": 4,
       "rule_fired": "divergence_spread",
-      "confidence": 0.8333333333333334,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 211.0,
@@ -6172,7 +6204,7 @@
       },
       "corrected_pos": {
         "x": 0.0,
-        "y": 163.2
+        "y": 37.4
       },
       "predicted": false
     },
@@ -6180,15 +6212,15 @@
       "frame_number": 36,
       "player_id": 6,
       "rule_fired": "divergence_spread",
-      "confidence": 0.8333333333333334,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 251.2,
-        "y": 73.6
+        "x": 248.7,
+        "y": 74.3
       },
       "corrected_pos": {
-        "x": 244.6,
-        "y": 60.3
+        "x": 236.5,
+        "y": 61.7
       },
       "predicted": true
     },
@@ -6196,14 +6228,14 @@
       "frame_number": 36,
       "player_id": 9,
       "rule_fired": "divergence_spread",
-      "confidence": 0.8333333333333334,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 428.0,
+        "x": 720.3,
         "y": 0.0
       },
       "corrected_pos": {
-        "x": 428.0,
+        "x": 897.2,
         "y": 0.0
       },
       "predicted": true
@@ -6212,63 +6244,79 @@
       "frame_number": 36,
       "player_id": 10,
       "rule_fired": "divergence_spread",
-      "confidence": 0.8333333333333334,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 310.0,
-        "y": 197.9
+        "x": 377.0,
+        "y": 131.8
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 240.0
+        "x": 537.4,
+        "y": 187.4
       },
       "predicted": true
     },
     {
       "frame_number": 37,
       "player_id": 2,
-      "rule_fired": "hull_containment",
-      "confidence": 0.5,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 420.3,
         "y": 139.7
       },
       "corrected_pos": {
-        "x": 417.7,
-        "y": 135.2
+        "x": 74.6,
+        "y": 381.3
       },
       "predicted": false
     },
     {
       "frame_number": 37,
       "player_id": 8,
-      "rule_fired": "spacing_push",
-      "confidence": 0.5,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 209.6,
         "y": 125.6
       },
       "corrected_pos": {
-        "x": 196.0,
-        "y": 123.2
+        "x": 25.9,
+        "y": 140.1
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 37,
+      "player_id": 5,
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
+      "original_pos": {
+        "x": 301.4,
+        "y": 124.2
+      },
+      "corrected_pos": {
+        "x": 328.2,
+        "y": 237.1
       },
       "predicted": false
     },
     {
       "frame_number": 37,
       "player_id": 7,
-      "rule_fired": "velocity_cap",
-      "confidence": 0.5,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 342.9,
         "y": 115.4
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 94.6
+        "x": 793.0,
+        "y": 0.0
       },
       "predicted": false
     },
@@ -6276,47 +6324,47 @@
       "frame_number": 37,
       "player_id": 0,
       "rule_fired": "cut_continuation",
-      "confidence": 0.8278568029284366,
+      "confidence": 0.9657240687391616,
       "game_state_active": "cut",
       "original_pos": {
         "x": 256.0,
         "y": 97.3
       },
       "corrected_pos": {
-        "x": 272.4,
-        "y": 99.6
+        "x": 318.4,
+        "y": 87.3
       },
       "predicted": false
     },
     {
       "frame_number": 37,
       "player_id": 4,
-      "rule_fired": "hull_containment",
-      "confidence": 0.5,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 219.0,
         "y": 109.1
       },
       "corrected_pos": {
-        "x": 23.7,
-        "y": 153.3
+        "x": 35.7,
+        "y": 46.7
       },
       "predicted": false
     },
     {
       "frame_number": 37,
       "player_id": 1,
-      "rule_fired": "hull_containment",
-      "confidence": 0.5,
-      "game_state_active": "fast_break",
+      "rule_fired": "cut_continuation",
+      "confidence": 0.9501076483735669,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 194.9,
         "y": 117.0
       },
       "corrected_pos": {
-        "x": 47.8,
-        "y": 202.7
+        "x": 195.0,
+        "y": 141.6
       },
       "predicted": false
     },
@@ -6324,62 +6372,62 @@
       "frame_number": 37,
       "player_id": 6,
       "rule_fired": "cut_continuation",
-      "confidence": 0.9404200742587161,
+      "confidence": 0.8777330273065715,
       "game_state_active": "cut",
       "original_pos": {
         "x": 195.6,
         "y": 111.8
       },
       "corrected_pos": {
-        "x": 162.5,
-        "y": 132.0
+        "x": 162.9,
+        "y": 131.7
       },
       "predicted": false
     },
     {
       "frame_number": 37,
       "player_id": 3,
-      "rule_fired": "cut_continuation",
-      "confidence": 0.6388838803877089,
-      "game_state_active": "cut",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 197.1,
         "y": 111.2
       },
       "corrected_pos": {
-        "x": 202.2,
-        "y": 117.9
+        "x": 196.8,
+        "y": 117.1
       },
       "predicted": false
     },
     {
       "frame_number": 37,
       "player_id": 12,
-      "rule_fired": "cut_continuation",
-      "confidence": 0.6677668951795018,
-      "game_state_active": "cut",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 216.9,
         "y": 126.9
       },
       "corrected_pos": {
-        "x": 202.1,
-        "y": 125.8
+        "x": 194.7,
+        "y": 127.5
       },
       "predicted": false
     },
     {
       "frame_number": 37,
       "player_id": 9,
-      "rule_fired": "collective_momentum",
-      "confidence": 0.5,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
-        "x": 428.0,
+        "x": 897.2,
         "y": 0.0
       },
       "corrected_pos": {
-        "x": 428.0,
+        "x": 1098.3,
         "y": 0.0
       },
       "predicted": true
@@ -6387,128 +6435,128 @@
     {
       "frame_number": 37,
       "player_id": 10,
-      "rule_fired": "collective_momentum",
-      "confidence": 0.5,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
-        "x": 428.0,
-        "y": 240.0
+        "x": 537.4,
+        "y": 187.4
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 240.0
+        "x": 757.4,
+        "y": 262.1
       },
       "predicted": true
     },
     {
       "frame_number": 38,
       "player_id": 1,
-      "rule_fired": "cut_continuation",
-      "confidence": 0.7512317638077911,
-      "game_state_active": "cut",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 266.5,
         "y": 105.5
       },
       "corrected_pos": {
-        "x": 227.3,
-        "y": 158.1
+        "x": 208.7,
+        "y": 157.3
       },
       "predicted": false
     },
     {
       "frame_number": 38,
       "player_id": 2,
-      "rule_fired": "cut_continuation",
-      "confidence": 0.6947256183884456,
-      "game_state_active": "cut",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 339.3,
         "y": 163.3
       },
       "corrected_pos": {
-        "x": 358.6,
-        "y": 167.1
+        "x": 0.0,
+        "y": 453.0
       },
       "predicted": false
     },
     {
       "frame_number": 38,
       "player_id": 8,
-      "rule_fired": "cut_continuation",
-      "confidence": 0.7157268609288429,
-      "game_state_active": "cut",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 210.3,
         "y": 131.2
       },
       "corrected_pos": {
-        "x": 226.7,
-        "y": 130.0
+        "x": 61.7,
+        "y": 131.2
       },
       "predicted": false
     },
     {
       "frame_number": 38,
       "player_id": 5,
-      "rule_fired": "cut_continuation",
-      "confidence": 0.745201934747866,
-      "game_state_active": "cut",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 317.3,
         "y": 114.7
       },
       "corrected_pos": {
-        "x": 310.1,
-        "y": 95.7
+        "x": 239.2,
+        "y": 145.2
       },
       "predicted": false
     },
     {
       "frame_number": 38,
       "player_id": 7,
-      "rule_fired": "hull_containment",
-      "confidence": 0.5714285714285714,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 352.9,
         "y": 110.1
       },
       "corrected_pos": {
-        "x": 416.1,
-        "y": 31.7
+        "x": 900.5,
+        "y": 0.0
       },
       "predicted": false
     },
     {
       "frame_number": 38,
       "player_id": 12,
-      "rule_fired": "spacing_push",
-      "confidence": 0.5714285714285714,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 183.9,
         "y": 118.7
       },
       "corrected_pos": {
-        "x": 181.3,
-        "y": 117.5
+        "x": 125.9,
+        "y": 105.4
       },
       "predicted": false
     },
     {
       "frame_number": 38,
       "player_id": 0,
-      "rule_fired": "spacing_push",
-      "confidence": 0.5714285714285714,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 281.7,
         "y": 105.2
       },
       "corrected_pos": {
-        "x": 291.6,
-        "y": 105.0
+        "x": 232.6,
+        "y": 103.2
       },
       "predicted": false
     },
@@ -6516,62 +6564,62 @@
       "frame_number": 38,
       "player_id": 3,
       "rule_fired": "cut_continuation",
-      "confidence": 0.8433724667511165,
+      "confidence": 0.8024643531010863,
       "game_state_active": "cut",
       "original_pos": {
         "x": 246.1,
         "y": 91.3
       },
       "corrected_pos": {
-        "x": 249.8,
-        "y": 86.0
+        "x": 246.6,
+        "y": 85.5
       },
       "predicted": false
     },
     {
       "frame_number": 38,
       "player_id": 4,
-      "rule_fired": "collective_momentum",
-      "confidence": 0.5714285714285714,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
-        "x": 23.7,
-        "y": 153.3
+        "x": 35.7,
+        "y": 46.7
       },
       "corrected_pos": {
         "x": 0.0,
-        "y": 163.1
+        "y": 24.6
       },
       "predicted": true
     },
     {
       "frame_number": 38,
       "player_id": 6,
-      "rule_fired": "collective_momentum",
-      "confidence": 0.5714285714285714,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
-        "x": 162.5,
-        "y": 132.0
+        "x": 162.9,
+        "y": 131.7
       },
       "corrected_pos": {
-        "x": 133.9,
-        "y": 152.7
+        "x": 127.1,
+        "y": 153.6
       },
       "predicted": true
     },
     {
       "frame_number": 38,
       "player_id": 9,
-      "rule_fired": "collective_momentum",
-      "confidence": 0.5714285714285714,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
-        "x": 428.0,
+        "x": 1098.3,
         "y": 0.0
       },
       "corrected_pos": {
-        "x": 428.0,
+        "x": 1279.0,
         "y": 0.0
       },
       "predicted": true
@@ -6579,16 +6627,16 @@
     {
       "frame_number": 38,
       "player_id": 10,
-      "rule_fired": "collective_momentum",
-      "confidence": 0.5714285714285714,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
-        "x": 428.0,
-        "y": 240.0
+        "x": 757.4,
+        "y": 262.1
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 240.0
+        "x": 957.3,
+        "y": 329.1
       },
       "predicted": true
     },
@@ -6596,15 +6644,15 @@
       "frame_number": 39,
       "player_id": 0,
       "rule_fired": "divergence_spread",
-      "confidence": 0.6363636363636364,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 291.6,
-        "y": 105.0
+        "x": 232.6,
+        "y": 103.2
       },
       "corrected_pos": {
-        "x": 325.1,
-        "y": 104.0
+        "x": 149.8,
+        "y": 104.6
       },
       "predicted": true
     },
@@ -6612,15 +6660,15 @@
       "frame_number": 39,
       "player_id": 1,
       "rule_fired": "divergence_spread",
-      "confidence": 0.6363636363636364,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 227.3,
-        "y": 158.1
+        "x": 208.7,
+        "y": 157.3
       },
       "corrected_pos": {
-        "x": 268.1,
-        "y": 167.4
+        "x": 202.7,
+        "y": 181.9
       },
       "predicted": true
     },
@@ -6628,15 +6676,15 @@
       "frame_number": 39,
       "player_id": 2,
       "rule_fired": "divergence_spread",
-      "confidence": 0.6363636363636364,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 358.6,
-        "y": 167.1
+        "x": 0.0,
+        "y": 453.0
       },
       "corrected_pos": {
-        "x": 338.9,
-        "y": 188.6
+        "x": 0.0,
+        "y": 622.7
       },
       "predicted": true
     },
@@ -6644,15 +6692,15 @@
       "frame_number": 39,
       "player_id": 3,
       "rule_fired": "divergence_spread",
-      "confidence": 0.6363636363636364,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 249.8,
-        "y": 86.0
+        "x": 246.6,
+        "y": 85.5
       },
       "corrected_pos": {
-        "x": 257.7,
-        "y": 80.3
+        "x": 252.4,
+        "y": 79.1
       },
       "predicted": true
     },
@@ -6660,15 +6708,15 @@
       "frame_number": 39,
       "player_id": 4,
       "rule_fired": "divergence_spread",
-      "confidence": 0.6363636363636364,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 0.0,
-        "y": 163.1
+        "y": 24.6
       },
       "corrected_pos": {
         "x": 0.0,
-        "y": 169.4
+        "y": 0.0
       },
       "predicted": true
     },
@@ -6676,15 +6724,15 @@
       "frame_number": 39,
       "player_id": 5,
       "rule_fired": "divergence_spread",
-      "confidence": 0.6363636363636364,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 310.1,
-        "y": 95.7
+        "x": 239.2,
+        "y": 145.2
       },
       "corrected_pos": {
-        "x": 303.9,
-        "y": 66.4
+        "x": 184.8,
+        "y": 86.8
       },
       "predicted": true
     },
@@ -6692,15 +6740,15 @@
       "frame_number": 39,
       "player_id": 6,
       "rule_fired": "divergence_spread",
-      "confidence": 0.6363636363636364,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 133.9,
-        "y": 152.7
+        "x": 127.1,
+        "y": 153.6
       },
       "corrected_pos": {
-        "x": 86.2,
-        "y": 181.8
+        "x": 73.3,
+        "y": 180.3
       },
       "predicted": true
     },
@@ -6708,14 +6756,14 @@
       "frame_number": 39,
       "player_id": 7,
       "rule_fired": "divergence_spread",
-      "confidence": 0.6363636363636364,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 416.1,
-        "y": 31.7
+        "x": 900.5,
+        "y": 0.0
       },
       "corrected_pos": {
-        "x": 428.0,
+        "x": 1175.7,
         "y": 0.0
       },
       "predicted": true
@@ -6724,15 +6772,15 @@
       "frame_number": 39,
       "player_id": 8,
       "rule_fired": "divergence_spread",
-      "confidence": 0.6363636363636364,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 226.7,
-        "y": 130.0
+        "x": 61.7,
+        "y": 131.2
       },
       "corrected_pos": {
-        "x": 243.9,
-        "y": 130.3
+        "x": 15.1,
+        "y": 126.9
       },
       "predicted": true
     },
@@ -6740,14 +6788,14 @@
       "frame_number": 39,
       "player_id": 9,
       "rule_fired": "divergence_spread",
-      "confidence": 0.6363636363636364,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 428.0,
+        "x": 1279.0,
         "y": 0.0
       },
       "corrected_pos": {
-        "x": 428.0,
+        "x": 1279.0,
         "y": 0.0
       },
       "predicted": true
@@ -6756,15 +6804,15 @@
       "frame_number": 39,
       "player_id": 10,
       "rule_fired": "divergence_spread",
-      "confidence": 0.6363636363636364,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 428.0,
-        "y": 240.0
+        "x": 957.3,
+        "y": 329.1
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 240.0
+        "x": 1204.3,
+        "y": 411.7
       },
       "predicted": true
     },
@@ -6772,15 +6820,15 @@
       "frame_number": 39,
       "player_id": 12,
       "rule_fired": "divergence_spread",
-      "confidence": 0.6363636363636364,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 181.3,
-        "y": 117.5
+        "x": 125.9,
+        "y": 105.4
       },
       "corrected_pos": {
-        "x": 125.5,
-        "y": 104.1
+        "x": 43.7,
+        "y": 86.0
       },
       "predicted": true
     },
@@ -6795,8 +6843,8 @@
         "y": 145.5
       },
       "corrected_pos": {
-        "x": 219.2,
-        "y": 138.4
+        "x": 611.8,
+        "y": 109.1
       },
       "predicted": false
     },
@@ -6804,15 +6852,15 @@
       "frame_number": 40,
       "player_id": 1,
       "rule_fired": "divergence_spread",
-      "confidence": 0.9090909090909091,
+      "confidence": 0.8333333333333334,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 215.7,
         "y": 104.6
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 66.0
+        "x": 219.4,
+        "y": 165.0
       },
       "predicted": false
     },
@@ -6820,15 +6868,15 @@
       "frame_number": 40,
       "player_id": 7,
       "rule_fired": "divergence_spread",
-      "confidence": 0.9090909090909091,
+      "confidence": 0.8333333333333334,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 167.5,
         "y": 148.0
       },
       "corrected_pos": {
-        "x": 185.2,
-        "y": 26.9
+        "x": 739.3,
+        "y": 115.5
       },
       "predicted": false
     },
@@ -6836,31 +6884,31 @@
       "frame_number": 40,
       "player_id": 0,
       "rule_fired": "divergence_spread",
-      "confidence": 0.9090909090909091,
+      "confidence": 0.8333333333333334,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 92.2,
         "y": 113.0
       },
       "corrected_pos": {
-        "x": 221.1,
-        "y": 109.9
+        "x": 0.0,
+        "y": 121.8
       },
       "predicted": false
     },
     {
       "frame_number": 40,
       "player_id": 8,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.9090909090909091,
-      "game_state_active": "divergence",
+      "rule_fired": "cut_continuation",
+      "confidence": 0.8931504208206553,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 149.6,
         "y": 87.3
       },
       "corrected_pos": {
-        "x": 223.8,
-        "y": 111.5
+        "x": 97.6,
+        "y": 91.7
       },
       "predicted": false
     },
@@ -6868,15 +6916,15 @@
       "frame_number": 40,
       "player_id": 2,
       "rule_fired": "divergence_spread",
-      "confidence": 0.9090909090909091,
+      "confidence": 0.8333333333333334,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 175.4,
         "y": 121.0
       },
       "corrected_pos": {
-        "x": 188.7,
-        "y": 200.9
+        "x": 87.9,
+        "y": 401.6
       },
       "predicted": false
     },
@@ -6884,15 +6932,15 @@
       "frame_number": 40,
       "player_id": 3,
       "rule_fired": "divergence_spread",
-      "confidence": 0.9090909090909091,
+      "confidence": 0.8333333333333334,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 257.7,
-        "y": 80.3
+        "x": 252.4,
+        "y": 79.1
       },
       "corrected_pos": {
-        "x": 290.8,
-        "y": 81.9
+        "x": 277.5,
+        "y": 76.9
       },
       "predicted": true
     },
@@ -6900,15 +6948,15 @@
       "frame_number": 40,
       "player_id": 4,
       "rule_fired": "divergence_spread",
-      "confidence": 0.9090909090909091,
+      "confidence": 0.8333333333333334,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 0.0,
-        "y": 169.4
+        "y": 0.0
       },
       "corrected_pos": {
         "x": 0.0,
-        "y": 171.6
+        "y": 0.0
       },
       "predicted": true
     },
@@ -6916,15 +6964,15 @@
       "frame_number": 40,
       "player_id": 5,
       "rule_fired": "divergence_spread",
-      "confidence": 0.9090909090909091,
+      "confidence": 0.8333333333333334,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 303.9,
-        "y": 66.4
+        "x": 184.8,
+        "y": 86.8
       },
       "corrected_pos": {
-        "x": 318.9,
-        "y": 41.2
+        "x": 87.9,
+        "y": 0.0
       },
       "predicted": true
     },
@@ -6932,15 +6980,15 @@
       "frame_number": 40,
       "player_id": 6,
       "rule_fired": "divergence_spread",
-      "confidence": 0.9090909090909091,
+      "confidence": 0.8333333333333334,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 86.2,
-        "y": 181.8
+        "x": 73.3,
+        "y": 180.3
       },
       "corrected_pos": {
-        "x": 17.8,
-        "y": 231.6
+        "x": 3.6,
+        "y": 226.9
       },
       "predicted": true
     },
@@ -6948,15 +6996,15 @@
       "frame_number": 40,
       "player_id": 10,
       "rule_fired": "divergence_spread",
-      "confidence": 0.9090909090909091,
+      "confidence": 0.8333333333333334,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 428.0,
-        "y": 240.0
+        "x": 1204.3,
+        "y": 411.7
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 240.0
+        "x": 1279.0,
+        "y": 502.9
       },
       "predicted": true
     },
@@ -6964,79 +7012,79 @@
       "frame_number": 40,
       "player_id": 12,
       "rule_fired": "divergence_spread",
-      "confidence": 0.9090909090909091,
+      "confidence": 0.8333333333333334,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 125.5,
-        "y": 104.1
+        "x": 43.7,
+        "y": 86.0
       },
       "corrected_pos": {
-        "x": 70.7,
-        "y": 75.6
+        "x": 0.0,
+        "y": 53.5
       },
       "predicted": true
     },
     {
       "frame_number": 41,
       "player_id": 4,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.7272727272727273,
-      "game_state_active": "divergence",
+      "rule_fired": "cut_continuation",
+      "confidence": 1.0,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 245.4,
         "y": 150.2
       },
       "corrected_pos": {
-        "x": 147.7,
-        "y": 178.8
+        "x": 148.6,
+        "y": 76.0
       },
       "predicted": false
     },
     {
       "frame_number": 41,
       "player_id": 7,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.7272727272727273,
-      "game_state_active": "divergence",
+      "rule_fired": "cut_continuation",
+      "confidence": 0.9176426958499828,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 43.3,
         "y": 122.1
       },
       "corrected_pos": {
-        "x": 0.0,
-        "y": 70.3
+        "x": 93.6,
+        "y": 207.5
       },
       "predicted": false
     },
     {
       "frame_number": 41,
       "player_id": 2,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.7272727272727273,
-      "game_state_active": "divergence",
+      "rule_fired": "cut_continuation",
+      "confidence": 0.8795518110983065,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 124.9,
         "y": 114.7
       },
       "corrected_pos": {
-        "x": 21.4,
-        "y": 173.4
+        "x": 197.1,
+        "y": 105.7
       },
       "predicted": false
     },
     {
       "frame_number": 41,
       "player_id": 1,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.7272727272727273,
-      "game_state_active": "divergence",
+      "rule_fired": "cut_continuation",
+      "confidence": 0.8280444626829924,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 220.1,
         "y": 92.6
       },
       "corrected_pos": {
-        "x": 425.2,
-        "y": 0.0
+        "x": 214.0,
+        "y": 76.7
       },
       "predicted": false
     },
@@ -7044,15 +7092,15 @@
       "frame_number": 41,
       "player_id": 8,
       "rule_fired": "cut_continuation",
-      "confidence": 0.7661850016898655,
+      "confidence": 0.8423425154597922,
       "game_state_active": "cut",
       "original_pos": {
         "x": 184.3,
         "y": 84.2
       },
       "corrected_pos": {
-        "x": 170.2,
-        "y": 68.9
+        "x": 179.3,
+        "y": 60.4
       },
       "predicted": false
     },
@@ -7060,15 +7108,15 @@
       "frame_number": 41,
       "player_id": 5,
       "rule_fired": "divergence_spread",
-      "confidence": 0.7272727272727273,
+      "confidence": 0.6666666666666667,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 237.2,
         "y": 117.7
       },
       "corrected_pos": {
-        "x": 275.0,
-        "y": 52.9
+        "x": 84.8,
+        "y": 0.0
       },
       "predicted": false
     },
@@ -7083,8 +7131,8 @@
         "y": 86.5
       },
       "corrected_pos": {
-        "x": 154.5,
-        "y": 128.7
+        "x": 0.0,
+        "y": 172.9
       },
       "predicted": false
     },
@@ -7092,15 +7140,15 @@
       "frame_number": 41,
       "player_id": 12,
       "rule_fired": "divergence_spread",
-      "confidence": 0.7272727272727273,
+      "confidence": 0.6666666666666667,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 231.4,
         "y": 85.6
       },
       "corrected_pos": {
-        "x": 100.4,
-        "y": 52.1
+        "x": 64.1,
+        "y": 36.8
       },
       "predicted": false
     },
@@ -7108,15 +7156,15 @@
       "frame_number": 41,
       "player_id": 0,
       "rule_fired": "divergence_spread",
-      "confidence": 0.7272727272727273,
+      "confidence": 0.6666666666666667,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 221.1,
-        "y": 109.9
+        "x": 0.0,
+        "y": 121.8
       },
       "corrected_pos": {
-        "x": 207.4,
-        "y": 115.1
+        "x": 0.0,
+        "y": 137.1
       },
       "predicted": true
     },
@@ -7124,15 +7172,15 @@
       "frame_number": 41,
       "player_id": 3,
       "rule_fired": "divergence_spread",
-      "confidence": 0.7272727272727273,
+      "confidence": 0.6666666666666667,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 290.8,
-        "y": 81.9
+        "x": 277.5,
+        "y": 76.9
       },
       "corrected_pos": {
-        "x": 327.2,
-        "y": 68.8
+        "x": 310.3,
+        "y": 62.5
       },
       "predicted": true
     },
@@ -7140,15 +7188,15 @@
       "frame_number": 41,
       "player_id": 6,
       "rule_fired": "divergence_spread",
-      "confidence": 0.7272727272727273,
+      "confidence": 0.6666666666666667,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 17.8,
-        "y": 231.6
+        "x": 3.6,
+        "y": 226.9
       },
       "corrected_pos": {
         "x": 0.0,
-        "y": 240.0
+        "y": 267.0
       },
       "predicted": true
     },
@@ -7156,47 +7204,47 @@
       "frame_number": 41,
       "player_id": 10,
       "rule_fired": "divergence_spread",
-      "confidence": 0.7272727272727273,
+      "confidence": 0.6666666666666667,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 428.0,
-        "y": 240.0
+        "x": 1279.0,
+        "y": 502.9
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 240.0
+        "x": 1279.0,
+        "y": 596.0
       },
       "predicted": true
     },
     {
       "frame_number": 42,
       "player_id": 10,
-      "rule_fired": "cut_continuation",
-      "confidence": 1.0,
-      "game_state_active": "cut",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.9166666666666666,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 210.0,
         "y": 143.0
       },
       "corrected_pos": {
-        "x": 214.1,
-        "y": 144.8
+        "x": 617.3,
+        "y": 456.4
       },
       "predicted": false
     },
     {
       "frame_number": 42,
       "player_id": 4,
-      "rule_fired": "divergence_spread",
-      "confidence": 0.75,
-      "game_state_active": "divergence",
+      "rule_fired": "cut_continuation",
+      "confidence": 1.0,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 211.2,
         "y": 147.2
       },
       "corrected_pos": {
-        "x": 300.5,
-        "y": 160.7
+        "x": 280.4,
+        "y": 160.9
       },
       "predicted": false
     },
@@ -7204,7 +7252,7 @@
       "frame_number": 42,
       "player_id": 7,
       "rule_fired": "divergence_spread",
-      "confidence": 0.75,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 58.9,
@@ -7212,7 +7260,7 @@
       },
       "corrected_pos": {
         "x": 0.0,
-        "y": 177.6
+        "y": 316.0
       },
       "predicted": false
     },
@@ -7220,15 +7268,15 @@
       "frame_number": 42,
       "player_id": 2,
       "rule_fired": "divergence_spread",
-      "confidence": 0.75,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 173.5,
         "y": 109.7
       },
       "corrected_pos": {
-        "x": 0.0,
-        "y": 93.6
+        "x": 240.3,
+        "y": 0.0
       },
       "predicted": false
     },
@@ -7236,15 +7284,15 @@
       "frame_number": 42,
       "player_id": 0,
       "rule_fired": "divergence_spread",
-      "confidence": 0.75,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 226.9,
         "y": 96.1
       },
       "corrected_pos": {
-        "x": 207.1,
-        "y": 87.1
+        "x": 44.3,
+        "y": 132.2
       },
       "predicted": false
     },
@@ -7252,15 +7300,15 @@
       "frame_number": 42,
       "player_id": 8,
       "rule_fired": "divergence_spread",
-      "confidence": 0.75,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 188.0,
         "y": 83.1
       },
       "corrected_pos": {
-        "x": 163.0,
-        "y": 60.6
+        "x": 253.4,
+        "y": 54.8
       },
       "predicted": false
     },
@@ -7268,15 +7316,15 @@
       "frame_number": 42,
       "player_id": 1,
       "rule_fired": "divergence_spread",
-      "confidence": 0.75,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 211.6,
         "y": 95.6
       },
       "corrected_pos": {
-        "x": 373.4,
-        "y": 0.0
+        "x": 206.4,
+        "y": 58.7
       },
       "predicted": false
     },
@@ -7284,31 +7332,31 @@
       "frame_number": 42,
       "player_id": 12,
       "rule_fired": "divergence_spread",
-      "confidence": 0.75,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 210.6,
         "y": 139.7
       },
       "corrected_pos": {
-        "x": 152.5,
-        "y": 70.7
+        "x": 169.1,
+        "y": 57.8
       },
       "predicted": false
     },
     {
       "frame_number": 42,
       "player_id": 5,
-      "rule_fired": "cut_continuation",
-      "confidence": 0.7538111839353326,
-      "game_state_active": "cut",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.9166666666666666,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 253.5,
         "y": 110.2
       },
       "corrected_pos": {
-        "x": 238.9,
-        "y": 125.9
+        "x": 150.8,
+        "y": 17.3
       },
       "predicted": false
     },
@@ -7316,15 +7364,15 @@
       "frame_number": 42,
       "player_id": 3,
       "rule_fired": "divergence_spread",
-      "confidence": 0.75,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 327.2,
-        "y": 68.8
+        "x": 310.3,
+        "y": 62.5
       },
       "corrected_pos": {
-        "x": 358.8,
-        "y": 61.7
+        "x": 336.5,
+        "y": 51.1
       },
       "predicted": true
     },
@@ -7332,15 +7380,15 @@
       "frame_number": 42,
       "player_id": 6,
       "rule_fired": "divergence_spread",
-      "confidence": 0.75,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
         "x": 0.0,
-        "y": 240.0
+        "y": 267.0
       },
       "corrected_pos": {
         "x": 0.0,
-        "y": 240.0
+        "y": 313.2
       },
       "predicted": true
     },
@@ -7348,207 +7396,239 @@
       "frame_number": 42,
       "player_id": 9,
       "rule_fired": "divergence_spread",
-      "confidence": 0.75,
+      "confidence": 0.9166666666666666,
       "game_state_active": "divergence",
       "original_pos": {
-        "x": 154.5,
-        "y": 128.7
+        "x": 0.0,
+        "y": 172.9
       },
       "corrected_pos": {
-        "x": 43.1,
-        "y": 181.9
+        "x": 0.0,
+        "y": 245.9
       },
       "predicted": true
     },
     {
       "frame_number": 43,
+      "player_id": 12,
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
+      "original_pos": {
+        "x": 164.2,
+        "y": 139.3
+      },
+      "corrected_pos": {
+        "x": 290.8,
+        "y": 102.8
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 43,
       "player_id": 7,
-      "rule_fired": "hull_containment",
-      "confidence": 0.5454545454545454,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 57.1,
         "y": 119.3
       },
       "corrected_pos": {
         "x": 0.0,
-        "y": 239.2
+        "y": 333.6
       },
       "predicted": false
     },
     {
       "frame_number": 43,
       "player_id": 1,
-      "rule_fired": "hull_containment",
-      "confidence": 0.5454545454545454,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 225.3,
         "y": 97.2
       },
       "corrected_pos": {
-        "x": 238.3,
-        "y": 20.8
+        "x": 227.2,
+        "y": 60.7
       },
       "predicted": false
     },
     {
       "frame_number": 43,
       "player_id": 6,
-      "rule_fired": "cut_continuation",
-      "confidence": 1.0,
-      "game_state_active": "cut",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 188.6,
         "y": 79.8
       },
       "corrected_pos": {
-        "x": 113.0,
-        "y": 139.6
+        "x": 181.2,
+        "y": 186.2
       },
       "predicted": false
     },
     {
       "frame_number": 43,
       "player_id": 2,
-      "rule_fired": "velocity_cap",
-      "confidence": 0.5454545454545454,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 229.8,
         "y": 109.8
       },
       "corrected_pos": {
-        "x": 13.7,
-        "y": 63.2
+        "x": 378.5,
+        "y": 0.0
       },
       "predicted": false
     },
     {
       "frame_number": 43,
       "player_id": 8,
-      "rule_fired": "spacing_push",
-      "confidence": 0.5454545454545454,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 179.8,
         "y": 83.7
       },
       "corrected_pos": {
-        "x": 168.2,
-        "y": 88.8
+        "x": 313.9,
+        "y": 46.9
       },
       "predicted": false
     },
     {
       "frame_number": 43,
       "player_id": 5,
-      "rule_fired": "spacing_push",
-      "confidence": 0.5454545454545454,
-      "game_state_active": "fast_break",
+      "rule_fired": "cut_continuation",
+      "confidence": 0.9184000103930019,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 250.9,
         "y": 103.2
       },
       "corrected_pos": {
-        "x": 257.1,
-        "y": 101.3
+        "x": 260.1,
+        "y": 85.1
       },
       "predicted": false
     },
     {
       "frame_number": 43,
       "player_id": 0,
-      "rule_fired": "collective_momentum",
-      "confidence": 0.5454545454545454,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
-        "x": 207.1,
-        "y": 87.1
+        "x": 44.3,
+        "y": 132.2
       },
       "corrected_pos": {
-        "x": 167.8,
-        "y": 81.5
+        "x": 1.0,
+        "y": 142.3
       },
       "predicted": true
     },
     {
       "frame_number": 43,
       "player_id": 3,
-      "rule_fired": "collective_momentum",
-      "confidence": 0.5454545454545454,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
-        "x": 358.8,
-        "y": 61.7
+        "x": 336.5,
+        "y": 51.1
       },
       "corrected_pos": {
-        "x": 392.5,
-        "y": 55.5
+        "x": 370.5,
+        "y": 38.8
       },
       "predicted": true
     },
     {
       "frame_number": 43,
       "player_id": 4,
-      "rule_fired": "collective_momentum",
-      "confidence": 0.5454545454545454,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
-        "x": 300.5,
-        "y": 160.7
+        "x": 280.4,
+        "y": 160.9
       },
       "corrected_pos": {
-        "x": 400.7,
-        "y": 157.8
+        "x": 393.8,
+        "y": 228.4
       },
       "predicted": true
     },
     {
       "frame_number": 43,
       "player_id": 9,
-      "rule_fired": "collective_momentum",
-      "confidence": 0.5454545454545454,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
-        "x": 43.1,
-        "y": 181.9
+        "x": 0.0,
+        "y": 245.9
       },
       "corrected_pos": {
         "x": 0.0,
-        "y": 240.0
+        "y": 356.6
       },
       "predicted": true
     },
     {
       "frame_number": 43,
       "player_id": 10,
-      "rule_fired": "collective_momentum",
-      "confidence": 0.5454545454545454,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
-        "x": 214.1,
-        "y": 144.8
+        "x": 617.3,
+        "y": 456.4
       },
       "corrected_pos": {
-        "x": 142.8,
-        "y": 113.1
+        "x": 444.8,
+        "y": 508.9
       },
       "predicted": true
     },
     {
       "frame_number": 44,
-      "player_id": 2,
+      "player_id": 12,
       "rule_fired": "velocity_cap",
-      "confidence": 0.5,
-      "game_state_active": "fast_break",
+      "confidence": 0.4166666666666667,
+      "game_state_active": "transition",
+      "original_pos": {
+        "x": 103.9,
+        "y": 144.0
+      },
+      "corrected_pos": {
+        "x": 304.1,
+        "y": 138.5
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 44,
+      "player_id": 2,
+      "rule_fired": "hull_containment",
+      "confidence": 0.4166666666666667,
+      "game_state_active": "transition",
       "original_pos": {
         "x": 267.0,
         "y": 119.5
       },
       "corrected_pos": {
-        "x": 87.0,
-        "y": 47.1
+        "x": 425.1,
+        "y": 9.2
       },
       "predicted": false
     },
@@ -7556,15 +7636,15 @@
       "frame_number": 44,
       "player_id": 6,
       "rule_fired": "cut_continuation",
-      "confidence": 1.0,
+      "confidence": 0.6945886704364742,
       "game_state_active": "cut",
       "original_pos": {
         "x": 180.1,
         "y": 82.4
       },
       "corrected_pos": {
-        "x": 242.6,
-        "y": 36.9
+        "x": 292.4,
+        "y": 73.9
       },
       "predicted": false
     },
@@ -7572,63 +7652,63 @@
       "frame_number": 44,
       "player_id": 7,
       "rule_fired": "hull_containment",
-      "confidence": 0.5,
-      "game_state_active": "fast_break",
+      "confidence": 0.4166666666666667,
+      "game_state_active": "transition",
       "original_pos": {
         "x": 42.8,
         "y": 118.5
       },
       "corrected_pos": {
-        "x": 28.5,
-        "y": 240.0
+        "x": 0.0,
+        "y": 274.3
       },
       "predicted": false
     },
     {
       "frame_number": 44,
       "player_id": 5,
-      "rule_fired": "cut_continuation",
-      "confidence": 0.9434328931106295,
-      "game_state_active": "cut",
+      "rule_fired": "spacing_push",
+      "confidence": 0.4166666666666667,
+      "game_state_active": "transition",
       "original_pos": {
         "x": 244.6,
         "y": 106.1
       },
       "corrected_pos": {
-        "x": 241.6,
-        "y": 131.8
+        "x": 251.8,
+        "y": 114.1
       },
       "predicted": false
     },
     {
       "frame_number": 44,
       "player_id": 8,
-      "rule_fired": "cut_continuation",
-      "confidence": 0.8305953550792954,
-      "game_state_active": "cut",
+      "rule_fired": "velocity_cap",
+      "confidence": 0.4166666666666667,
+      "game_state_active": "transition",
       "original_pos": {
         "x": 160.7,
         "y": 90.7
       },
       "corrected_pos": {
-        "x": 151.1,
-        "y": 100.7
+        "x": 307.7,
+        "y": 57.0
       },
       "predicted": false
     },
     {
       "frame_number": 44,
       "player_id": 0,
-      "rule_fired": "spacing_push",
-      "confidence": 0.5,
-      "game_state_active": "fast_break",
+      "rule_fired": "cut_continuation",
+      "confidence": 0.9621220009610697,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 235.5,
         "y": 96.0
       },
       "corrected_pos": {
-        "x": 247.3,
-        "y": 97.7
+        "x": 152.3,
+        "y": 115.1
       },
       "predicted": false
     },
@@ -7636,15 +7716,15 @@
       "frame_number": 44,
       "player_id": 3,
       "rule_fired": "hull_containment",
-      "confidence": 0.5,
-      "game_state_active": "fast_break",
+      "confidence": 0.4166666666666667,
+      "game_state_active": "transition",
       "original_pos": {
         "x": 224.5,
         "y": 94.4
       },
       "corrected_pos": {
-        "x": 324.0,
-        "y": 72.6
+        "x": 313.3,
+        "y": 60.1
       },
       "predicted": false
     },
@@ -7652,15 +7732,15 @@
       "frame_number": 44,
       "player_id": 1,
       "rule_fired": "collective_momentum",
-      "confidence": 0.5,
-      "game_state_active": "fast_break",
+      "confidence": 0.4166666666666667,
+      "game_state_active": "transition",
       "original_pos": {
-        "x": 238.3,
-        "y": 20.8
+        "x": 227.2,
+        "y": 60.7
       },
       "corrected_pos": {
-        "x": 175.1,
-        "y": 5.7
+        "x": 229.8,
+        "y": 25.9
       },
       "predicted": true
     },
@@ -7668,15 +7748,15 @@
       "frame_number": 44,
       "player_id": 4,
       "rule_fired": "collective_momentum",
-      "confidence": 0.5,
-      "game_state_active": "fast_break",
+      "confidence": 0.4166666666666667,
+      "game_state_active": "transition",
       "original_pos": {
-        "x": 400.7,
-        "y": 157.8
+        "x": 393.8,
+        "y": 228.4
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 153.2
+        "x": 525.1,
+        "y": 304.5
       },
       "predicted": true
     },
@@ -7684,15 +7764,15 @@
       "frame_number": 44,
       "player_id": 9,
       "rule_fired": "collective_momentum",
-      "confidence": 0.5,
-      "game_state_active": "fast_break",
+      "confidence": 0.4166666666666667,
+      "game_state_active": "transition",
       "original_pos": {
         "x": 0.0,
-        "y": 240.0
+        "y": 356.6
       },
       "corrected_pos": {
         "x": 0.0,
-        "y": 240.0
+        "y": 439.1
       },
       "predicted": true
     },
@@ -7700,30 +7780,30 @@
       "frame_number": 44,
       "player_id": 10,
       "rule_fired": "collective_momentum",
-      "confidence": 0.5,
-      "game_state_active": "fast_break",
+      "confidence": 0.4166666666666667,
+      "game_state_active": "transition",
       "original_pos": {
-        "x": 142.8,
-        "y": 113.1
+        "x": 444.8,
+        "y": 508.9
       },
       "corrected_pos": {
-        "x": 47.7,
-        "y": 70.8
+        "x": 166.7,
+        "y": 510.9
       },
       "predicted": true
     },
     {
       "frame_number": 45,
       "player_id": 6,
-      "rule_fired": "hull_containment",
-      "confidence": 0.625,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 187.5,
         "y": 89.5
       },
       "corrected_pos": {
-        "x": 363.6,
+        "x": 482.2,
         "y": 0.0
       },
       "predicted": false
@@ -7731,64 +7811,64 @@
     {
       "frame_number": 45,
       "player_id": 2,
-      "rule_fired": "velocity_cap",
-      "confidence": 0.625,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 282.1,
         "y": 130.6
       },
       "corrected_pos": {
-        "x": 161.4,
-        "y": 56.9
+        "x": 477.1,
+        "y": 140.8
       },
       "predicted": false
     },
     {
       "frame_number": 45,
       "player_id": 12,
-      "rule_fired": "spacing_push",
-      "confidence": 0.625,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 53.0,
         "y": 151.0
       },
       "corrected_pos": {
-        "x": 53.3,
-        "y": 151.7
+        "x": 231.8,
+        "y": 210.6
       },
       "predicted": false
     },
     {
       "frame_number": 45,
       "player_id": 5,
-      "rule_fired": "cut_continuation",
-      "confidence": 0.9469117072482202,
-      "game_state_active": "cut",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 230.3,
         "y": 111.9
       },
       "corrected_pos": {
-        "x": 235.6,
-        "y": 113.3
+        "x": 273.4,
+        "y": 153.3
       },
       "predicted": false
     },
     {
       "frame_number": 45,
       "player_id": 7,
-      "rule_fired": "velocity_cap",
-      "confidence": 0.625,
-      "game_state_active": "fast_break",
+      "rule_fired": "cut_continuation",
+      "confidence": 1.0,
+      "game_state_active": "cut",
       "original_pos": {
         "x": 40.6,
         "y": 119.9
       },
       "corrected_pos": {
-        "x": 42.0,
-        "y": 220.8
+        "x": 27.1,
+        "y": 143.6
       },
       "predicted": false
     },
@@ -7796,15 +7876,15 @@
       "frame_number": 45,
       "player_id": 0,
       "rule_fired": "cut_continuation",
-      "confidence": 0.9810667505512021,
+      "confidence": 0.9836759035184226,
       "game_state_active": "cut",
       "original_pos": {
         "x": 189.9,
         "y": 90.0
       },
       "corrected_pos": {
-        "x": 200.1,
-        "y": 94.3
+        "x": 254.4,
+        "y": 79.3
       },
       "predicted": false
     },
@@ -7812,79 +7892,95 @@
       "frame_number": 45,
       "player_id": 3,
       "rule_fired": "cut_continuation",
-      "confidence": 0.9800440664601088,
+      "confidence": 0.9970229498560504,
       "game_state_active": "cut",
       "original_pos": {
         "x": 218.5,
         "y": 103.1
       },
       "corrected_pos": {
-        "x": 229.5,
-        "y": 95.4
+        "x": 234.6,
+        "y": 94.6
+      },
+      "predicted": false
+    },
+    {
+      "frame_number": 45,
+      "player_id": 8,
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
+      "original_pos": {
+        "x": 147.8,
+        "y": 95.0
+      },
+      "corrected_pos": {
+        "x": 244.9,
+        "y": 80.1
       },
       "predicted": false
     },
     {
       "frame_number": 45,
       "player_id": 1,
-      "rule_fired": "velocity_cap",
-      "confidence": 0.625,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 282.1,
         "y": 111.1
       },
       "corrected_pos": {
-        "x": 144.7,
-        "y": 42.7
+        "x": 286.4,
+        "y": 57.7
       },
       "predicted": false
     },
     {
       "frame_number": 45,
       "player_id": 4,
-      "rule_fired": "collective_momentum",
-      "confidence": 0.625,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
-        "x": 428.0,
-        "y": 153.2
+        "x": 525.1,
+        "y": 304.5
       },
       "corrected_pos": {
-        "x": 428.0,
-        "y": 144.7
+        "x": 677.2,
+        "y": 400.3
       },
       "predicted": true
     },
     {
       "frame_number": 45,
       "player_id": 9,
-      "rule_fired": "collective_momentum",
-      "confidence": 0.625,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
         "x": 0.0,
-        "y": 240.0
+        "y": 439.1
       },
       "corrected_pos": {
         "x": 0.0,
-        "y": 240.0
+        "y": 543.3
       },
       "predicted": true
     },
     {
       "frame_number": 45,
       "player_id": 10,
-      "rule_fired": "collective_momentum",
-      "confidence": 0.625,
-      "game_state_active": "fast_break",
+      "rule_fired": "divergence_spread",
+      "confidence": 0.75,
+      "game_state_active": "divergence",
       "original_pos": {
-        "x": 47.7,
-        "y": 70.8
+        "x": 166.7,
+        "y": 510.9
       },
       "corrected_pos": {
         "x": 0.0,
-        "y": 14.4
+        "y": 527.0
       },
       "predicted": true
     }
