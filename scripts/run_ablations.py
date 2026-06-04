@@ -170,7 +170,6 @@ def main():
         raise ValueError("frame_width/frame_height required")
 
     only = {x.strip() for x in args.only.split(",")} if args.only else None
-    output_root = Path(args.output_root)
     summary_rows = []
 
     for name, rules, sanitize, gap_fill, extra in ABLATION_CONFIGS:

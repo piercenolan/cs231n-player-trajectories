@@ -9,6 +9,7 @@ basket locations, and camera calibration assumptions.
 import argparse
 import json
 import math
+import sys
 from collections import defaultdict
 from pathlib import Path
 
@@ -1542,6 +1543,10 @@ def main():
     parser.add_argument("--max-gap-frames", type=int, default=3)
     parser.add_argument("--max-players", type=int, default=12)
     args = parser.parse_args()
+
+    root = Path(__file__).resolve().parents[1]
+    if str(root) not in sys.path:
+        sys.path.insert(0, str(root))
 
     from utils.datasets import augmented_tracks_path, baseline_tracks_path
 

@@ -207,7 +207,7 @@ def main(
 
     out_local = baseline_tracks_path(dataset, seed_id or None)
     remote_out = output_path or (
-        "/data/" + str(out_local.relative_to(ROOT / "data")).as_posix()
+        "/data/" + out_local.relative_to(ROOT / "data").as_posix()
     )
     rel_baseline = str(out_local.relative_to(ROOT)).replace("\\", "/")
     rel_frames = f"data/runs/{dataset}/frames"

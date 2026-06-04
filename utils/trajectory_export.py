@@ -133,12 +133,18 @@ def main():
     parser.add_argument("--max-slot-empty-frac", type=float, default=0.30)
     args = parser.parse_args()
 
-    from utils.datasets import augmented_tracks_path, runs_dir
+    root = Path(__file__).resolve().parents[1]
+    if str(root) not in sys.path:
+        sys.path.insert(0, str(root))
 
-    tracks_path = args.tracks or str(augmented_tracks_path(args.dataset))
+    from utils.datasets import resolve_augmented_tracks_path, runs_dir
+
+    tracks_path = Path(args.tracks) if args.tracks else resolve_augmented_tracks_path(args.dataset)
     output_path = args.output or str(runs_dir(args.dataset) / "trajectory_tensors.json")
+    if not args.tracks:
+        print(f"Using augmented tracks: {tracks_path}")
 
-    export = export_trajectories(tracks_path, output_path, max_players=args.max_players)
+    export = export_trajectories(str(tracks_path), output_path, max_players=args.max_players)
 
     if args.validate:
         passed, report = validate_export(

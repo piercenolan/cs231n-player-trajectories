@@ -15,7 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from utils.datasets import get_dataset
+from utils.datasets import baseline_tracks_path, get_dataset
 from utils.gt_align import (
     align_mot_gt_to_tracks,
     build_smoothed_proxy_gt,
@@ -66,9 +66,20 @@ def main():
     args = parser.parse_args()
 
     ds = get_dataset(args.dataset)
-    tracks_path = Path(args.tracks or ROOT / "data" / "runs" / args.dataset / "baseline_tracks.json")
+    tracks_path = Path(args.tracks) if args.tracks else baseline_tracks_path(args.dataset)
     output_path = args.output or str(ds["gt_json"])
     extract_fps = args.extract_fps if args.extract_fps is not None else float(ds["extract_fps"])
+
+    if not tracks_path.is_file():
+        raise SystemExit(
+            f"Baseline tracks not found: {tracks_path}\n\n"
+            "Run SAM3 first, then download from Modal (after a successful run):\n"
+            f"  py -m modal run scripts/run_modal.py --dataset {args.dataset} "
+            "--skip-extract --max-frames 45 --resize-scale 0.67\n"
+            f"  py -m modal volume get sports-data runs/{args.dataset}/baseline_tracks.json "
+            f"{tracks_path}\n\n"
+            "Or pass an existing tracks file: --tracks path/to/baseline_tracks.json"
+        )
 
     with open(tracks_path, encoding="utf-8") as f:
         tracks_data = json.load(f)

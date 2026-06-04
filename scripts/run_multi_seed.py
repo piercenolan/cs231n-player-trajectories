@@ -2,8 +2,8 @@
 """
 Multi-seed validation: augmentation + metrics per seed, then aggregate ADE.
 
-Expects baseline tracks at data/outputs/seeds/{seed_id}/baseline_tracks.json
-or bootstraps frame windows from a single baseline when --bootstrap-from is set.
+Expects baseline tracks at data/runs/{dataset}/seeds/{seed_id}/baseline_tracks.json
+(from Modal --seed-id runs). Do not use --bootstrap-from for paper results.
 """
 
 import argparse
@@ -19,10 +19,11 @@ from scripts.run_ablations import run_one_ablation
 from utils.trajectory_metrics import find_sportsmot_gt
 
 
+# 15s not 20s: 500 frames @ 25fps ≈ 20s total; frame 501+ is out of range.
 DEFAULT_SEEDS = [
     ("offset_0s", 0.0),
     ("offset_10s", 10.0),
-    ("offset_20s", 20.0),
+    ("offset_15s", 15.0),
 ]
 
 

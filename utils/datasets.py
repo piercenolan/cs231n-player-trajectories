@@ -72,3 +72,42 @@ def find_gt_path(dataset="sportsmot_example", prefer_json=True):
 
 def frames_dir(dataset="sportsmot_example"):
     return get_dataset(dataset)["frames_dir"]
+
+
+def resolve_augmented_tracks_path(dataset="sportsmot_example"):
+    """
+    Return path to augmented tracks for export / metrics.
+
+    Prefers data/runs/{dataset}/augmented_tracks.json, then the LSTM v1 ablation
+    from recommended_config.json, then any ablation output if present.
+    """
+    import json
+
+    primary = augmented_tracks_path(dataset)
+    if primary.exists():
+        return primary
+
+    rec_path = ablations_dir(dataset) / "recommended_config.json"
+    if rec_path.exists():
+        with open(rec_path, encoding="utf-8") as f:
+            rec = json.load(f)
+        for key in ("recommended_ablation_lstm_v1", "recommended_ablation_ade_proxy"):
+            name = rec.get(key)
+            if not name:
+                continue
+            cand = ablations_dir(dataset) / name / "augmented_tracks.json"
+            if cand.exists():
+                return cand
+
+    ab_root = ablations_dir(dataset)
+    if ab_root.is_dir():
+        for sub in sorted(ab_root.iterdir()):
+            cand = sub / "augmented_tracks.json"
+            if cand.is_file():
+                return cand
+
+    raise FileNotFoundError(
+        f"No augmented tracks for dataset '{dataset}'. Run:\n"
+        f"  py utils/augmentation.py --dataset {dataset} --rules velocity_cap --no-gap-fill\n"
+        "or complete run_ablations.py first."
+    )

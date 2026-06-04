@@ -1,216 +1,229 @@
 # CS231N Player Trajectories (SAM3.1)
 
-Research project for evaluating **SAM3.1** tracking on basketball broadcast video, then improving it with a basketball-domain, geometry-free augmentation layer.
+Research project: **SAM3.1** player tracking on basketball video, a **geometry-free augmentation** layer, evaluation against **SportsMOT** ground truth, and (next) an **LSTM** trajectory forecaster.
 
-## Project Goal
+**Write-up:** [docs/MILESTONE_CHECKLIST.md](docs/MILESTONE_CHECKLIST.md) · **Living plan:** [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.md)
 
-Phase 1 objective:
-- run SAM3.1 on basketball clips,
-- extract per-frame player tracks,
-- measure baseline failures (ID switches, tracking loss),
-- apply augmentation rules,
-- compare baseline vs augmented outputs quantitatively and qualitatively.
+---
 
-## Current Architecture
+## Architecture
 
-End-to-end pipeline:
+```mermaid
+flowchart TB
+  subgraph data [Data layer]
+    DS[data/datasets/sportsmot_example\nframes + gt.txt]
+  end
+  subgraph runs [Run outputs data/runs/sportsmot_example]
+    FR[frames/]
+    BT[baseline_tracks.json]
+    AB[ablations/ + sanitize_grid/]
+    TT[trajectory_tensors.json]
+  end
+  subgraph scripts [Scripts]
+    MOD[run_modal.py / run_sam3.py]
+    GT[setup_sportsmot_gt.py]
+    ABL[run_ablations.py]
+    MS[run_multi_seed.py]
+    EXP[trajectory_export.py]
+  end
+  subgraph utils [Utils]
+    AUG[augmentation.py]
+    MET[metrics.py]
+    TM[trajectory_metrics.py]
+    VIZ[visualize.py]
+  end
+  DS --> MOD
+  MOD --> FR
+  MOD --> BT
+  BT --> GT
+  BT --> AUG
+  AUG --> AB
+  AB --> EXP
+  EXP --> TT
+  AB --> MET
+  BT --> MS
+```
 
-1. **Tracking (`scripts/run_sam3.py`)**
-   - Extracts JPEG frames from input video (`extract_frames`, default 5 FPS sampling).
-   - Loads SAM3.1 multiplex predictor.
-   - Starts session and prompts frame 0 with text `"basketball players"`.
-   - Propagates tracking across video.
-   - Saves raw tracks JSON to `data/outputs/tracks.json`.
+| Stage | Component | Output |
+|-------|-----------|--------|
+| 1. Track | SAM3.1 + mask filters | `baseline_tracks.json` |
+| 2. Align GT | MOT `gt.txt` → track space | `gt/gt.json` |
+| 3. Augment | sanitize → rules → optional gap-fill | `ablations/*/augmented_tracks.json` |
+| 4. Evaluate | metrics, ADE/FDE, ablations, grid | CSV + `recommended_config.json` |
+| 5. Export | Fixed `(T,P,2)` tensors + validation | `trajectory_tensors.json` |
+| 6. Multi-seed | SAM3 at time offsets (pre-LSTM) | `seeds/*/baseline_tracks.json` |
+| 7. LSTM | Sequence model (planned) | TBD |
 
-2. **Baseline / Evaluation (`utils/metrics.py`)**
-   - Loads tracks JSON.
-   - Computes ID stability and coverage metrics.
-   - Generates report + plots (baseline or augmented labels supported).
+Paths are resolved via `utils/datasets.py` (`--dataset sportsmot_example`).
 
-3. **Augmentation (`utils/augmentation.py`)**
-   - Stage 0: `sanitize_detections` (drop merged boxes, cap roster).
-   - Stage 1: per-rule corrections (`--rules velocity_cap` for single-rule ablations).
-   - Stage 2: gated `reid_gap_fill` (only when roster is short; `--no-gap-fill` to disable).
-   - Saves augmented tracks + `corrections.json`.
+---
 
-4. **Visualization (`utils/visualize.py`)**
-   - Draws tracks on frames.
-   - Creates baseline vs augmented side-by-side comparisons.
-   - Creates summary figure for paper/slides.
+## Milestone status (short)
 
-## Repository Layout
+| Phase | Status |
+|-------|--------|
+| SportsMOT data + SAM3 baseline (45f) | Done |
+| Real GT + ablations + sanitize grid | Done |
+| LSTM export validation gate | Passed (visibility 0.94) |
+| Multi-seed SAM3 | **Next** — see below |
+| LSTM training | Not started |
+
+Details: [docs/MILESTONE_CHECKLIST.md](docs/MILESTONE_CHECKLIST.md).
+
+---
+
+## Repository layout
 
 ```text
 cs231n-player-trajectories/
+├── docs/
+│   ├── MILESTONE_CHECKLIST.md   # one-page report status
+│   └── PROJECT_PLAN.md          # phases, architecture, multi-seed, LSTM
 ├── scripts/
-│   ├── run_sam3.py              # SAM3 tracking (video or SportsMOT frames)
-│   ├── run_modal.py             # Modal GPU runner
-│   ├── setup_sportsmot_gt.py    # Align gt.txt → gt.json
-│   └── run_ablations.py         # Per-rule ablation sweep
+│   ├── run_sam3.py              # SAM3 (local GPU)
+│   ├── run_modal.py             # SAM3 (Modal A10G)
+│   ├── setup_sportsmot_gt.py
+│   ├── run_ablations.py
+│   ├── run_sanitize_grid.py
+│   ├── run_multi_seed.py
+│   └── aggregate_experiments.py
 ├── utils/
-│   ├── datasets.py              # Canonical paths (use --dataset)
+│   ├── datasets.py              # canonical paths
 │   ├── augmentation.py
 │   ├── metrics.py
+│   ├── trajectory_metrics.py
+│   ├── trajectory_export.py
 │   └── visualize.py
 ├── data/
-│   ├── datasets/
-│   │   └── sportsmot_example/   # PRIMARY: upload zip frames + gt.txt here
-│   ├── runs/
-│   │   └── sportsmot_example/   # SAM3 + augmentation outputs (generated)
-│   ├── archive/                 # Legacy video_1 era artifacts
-│   └── outputs/                 # Old run outputs (deprecated)
+│   ├── datasets/sportsmot_example/   # upload frames + gt.txt
+│   ├── runs/sportsmot_example/       # all pipeline outputs
+│   ├── archive/                      # legacy video_1 era
+│   └── outputs/                      # deprecated
 └── CONTEXT.md
 ```
 
-See `data/datasets/sportsmot_example/README.md` for upload instructions.
+---
 
 ## Requirements
 
 - Python 3.11+
-- CUDA-capable GPU (for SAM3.1 tracking)
-- Hugging Face access to gated repo: `facebook/sam3.1`
-
-Python packages used in current code:
-- `sam3`
-- `torch`
-- `opencv-python` (or `opencv-python-headless` in headless env)
-- `numpy`
-- `matplotlib`
-
-Install example:
+- CUDA GPU for local SAM3, or Modal account for cloud runs
+- Hugging Face access: `facebook/sam3.1`
 
 ```bash
 pip install sam3 torch opencv-python numpy matplotlib
 ```
 
-If `ImportError: No module named cv2`:
+---
 
-```bash
-pip install opencv-python
-```
+## Data setup
 
-## Data Expectations
+Copy from the SportsMOT example zip:
 
-**Primary dataset:** SportsMOT example zip → `data/datasets/sportsmot_example/`
-
-| Zip contents | Repo path |
-|--------------|-----------|
+| Zip | Repo path |
+|-----|-----------|
 | `img1/*.jpg` | `data/datasets/sportsmot_example/frames/` |
 | `gt/gt.txt` | `data/datasets/sportsmot_example/gt/gt.txt` |
-| `seqinfo.ini` | `data/datasets/sportsmot_example/seqinfo.ini` |
+| `seqinfo.ini` | `data/datasets/sportsmot_example/seqinfo.ini` (optional) |
 
-Legacy `data/videos/video_1.mp4` has unknown provenance — do not use for ADE/FDE.
+Do not use `data/videos/video_1.mp4` (unknown source) or proxy GT under `data/gt/sportsmot/video_1/`.
 
-Prepared SAM frames for a run live at `data/runs/sportsmot_example/frames/` (`00000.jpg`, …).
-Track `frame_number` is 1-indexed: frame 1 = first prepared JPEG.
+---
 
-## Alternate tracks.json format
+## Pipeline commands (SportsMOT example)
 
-If your tracks file uses `"frame"` instead of `"frame_number"` or lacks `mask_center`,
-normalize it before running the pipeline:
+### 1) SAM3 tracking (Modal)
 
-```bash
-python utils/convert_tracks.py --input tracks.json --output data/outputs/tracks.json
-```
-
-This sets `frame_number`, derives `mask_center` from each bbox center, and preserves `predicted` flags.
-
-## Quick Start (SportsMOT example)
-
-### 0) Upload data from the SportsMOT example zip
-
-Copy `img1/*.jpg` and `gt/gt.txt` into `data/datasets/sportsmot_example/` (see README there).
-
-### 1) Run SAM3.1 tracking (Modal or local)
-
-Modal (uploads frames, runs on GPU):
-
-```bash
-py -m modal run scripts/run_modal.py --dataset sportsmot_example --max-frames 45 --resize-scale 0.67
-```
-
-Local (if you have a GPU):
-
-```bash
-python scripts/run_sam3.py --dataset sportsmot_example --skip-extract --max-frames 45 --resize-scale 0.67
+```powershell
+py -m modal run scripts/run_modal.py --dataset sportsmot_example --skip-extract --max-frames 45 --resize-scale 0.67
+py -m modal volume get sports-data runs/sportsmot_example/baseline_tracks.json data/runs/sportsmot_example/baseline_tracks.json
+py -m modal volume get sports-data runs/sportsmot_example/frames data/runs/sportsmot_example/frames --force
 ```
 
 ### 2) Align ground truth
 
-```bash
-python scripts/setup_sportsmot_gt.py --dataset sportsmot_example --start-time-sec 0
+```powershell
+py scripts/setup_sportsmot_gt.py --dataset sportsmot_example
 ```
 
-Uses real `gt.txt` (not proxy). For consecutive SportsMOT frames, alignment uses 25 FPS by default.
+### 3) Augmentation + evaluation
 
-### 3) Augmentation + ablations
-
-```bash
-python utils/augmentation.py --dataset sportsmot_example
-python scripts/run_ablations.py --dataset sportsmot_example
-python scripts/run_sanitize_grid.py --dataset sportsmot_example
-python scripts/run_multi_seed.py --dataset sportsmot_example
-python utils/trajectory_export.py --dataset sportsmot_example --validate
+```powershell
+py scripts/run_ablations.py --dataset sportsmot_example
+py scripts/run_sanitize_grid.py --dataset sportsmot_example
+py utils/trajectory_export.py --dataset sportsmot_example --validate
 ```
 
-### 4) Metrics and visualization
+Optional canonical augmented file (LSTM v1 policy: sanitize + velocity_cap, no gap-fill):
 
-```bash
-python utils/metrics.py --tracks data/runs/sportsmot_example/baseline_tracks.json \
-  --compare data/runs/sportsmot_example/augmented_tracks.json --exclude-predicted
-
-python utils/trajectory_metrics.py --tracks data/runs/sportsmot_example/augmented_tracks.json
-
-python utils/visualize.py \
-  --frames data/runs/sportsmot_example/frames \
-  --baseline data/runs/sportsmot_example/baseline_tracks.json \
-  --augmented data/runs/sportsmot_example/augmented_tracks.json \
-  --output data/runs/sportsmot_example/figures/summary_figure.png \
-  --summary --n-frames 4
+```powershell
+py utils/augmentation.py --dataset sportsmot_example --rules velocity_cap --no-gap-fill
 ```
 
-## Quick Start (custom video clip)
+### 4) Multi-seed SAM3 (before LSTM)
 
-```bash
-python scripts/run_sam3.py \
-  --dataset sportsmot_example \
-  --video_path data/clips/60.0_clip.mp4 \
-  --max-frames 45
+Three temporal windows on the 500-frame sequence (25 FPS). Use **15s** instead of 20s so frames stay within 1–500.
+
+```powershell
+py -m modal run scripts/run_modal.py --dataset sportsmot_example --skip-extract --max-frames 45 --resize-scale 0.67 --start-time-sec 0 --seed-id offset_0s
+
+py -m modal run scripts/run_modal.py --dataset sportsmot_example --skip-extract --max-frames 45 --resize-scale 0.67 --start-time-sec 10 --seed-id offset_10s --skip-upload
+
+py -m modal run scripts/run_modal.py --dataset sportsmot_example --skip-extract --max-frames 45 --resize-scale 0.67 --start-time-sec 15 --seed-id offset_15s --skip-upload
 ```
 
-## Output Files
+Download seeds:
 
-Typical generated artifacts under `data/runs/sportsmot_example/`:
+```powershell
+py -m modal volume get sports-data runs/sportsmot_example/seeds/offset_0s/baseline_tracks.json data/runs/sportsmot_example/seeds/offset_0s/baseline_tracks.json
+py -m modal volume get sports-data runs/sportsmot_example/seeds/offset_10s/baseline_tracks.json data/runs/sportsmot_example/seeds/offset_10s/baseline_tracks.json
+py -m modal volume get sports-data runs/sportsmot_example/seeds/offset_15s/baseline_tracks.json data/runs/sportsmot_example/seeds/offset_15s/baseline_tracks.json
+```
 
-- `baseline_tracks.json` – raw SAM3.1 tracks
-- `augmented_tracks.json` – augmented tracks
-- `ablations/` – per-rule metrics + `recommended_config.json`
-- `frames/` – prepared JPEGs used for that SAM run
-- `figures/summary_figure.png` – paper-ready summary panel
+Aggregate ADE across seeds (applies `recommended_config.json` ablation per seed):
 
-Legacy paths under `data/outputs/` are from the old `video_1` layout.
+```powershell
+py scripts/run_multi_seed.py --dataset sportsmot_example
+```
 
-## Notes on Methodology
+Full notes: [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.md#multi-seed-runs-before-lstm).
 
-- Augmentation intentionally avoids hardcoded court geometry, basket positions, and camera calibration.
-- Rules rely on relative player relationships and velocity patterns so they transfer across broadcast camera pans/zooms/cuts.
-- `predicted: true` marks players re-added by augmentation re-identification logic.
+### 5) Visualization
 
-## Common Issues
+```powershell
+py utils/visualize.py --frames data/runs/sportsmot_example/frames ^
+  --baseline data/runs/sportsmot_example/baseline_tracks.json ^
+  --augmented data/runs/sportsmot_example/ablations/sanitize_plus_velocity_cap/augmented_tracks.json ^
+  --output data/runs/sportsmot_example/figures/summary_figure.png --summary --n-frames 4
+```
 
-1. **`No module named cv2`**
-   - Install OpenCV in the same Python environment used to run scripts.
+### 6) LSTM (next phase)
 
-2. **No annotated frames saved**
-   - Check `--frames` directory path.
-   - Confirm JPEG frames exist and are numerically named (`0.jpg`, `1.jpg`, ... or zero-padded numeric stems).
+Train on `data/runs/sportsmot_example/trajectory_tensors.json` after multi-seed is complete. See [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.md#phase-4--lstm-trajectory-model-next).
 
-3. **HF checkpoint access errors**
-   - Ensure access to `facebook/sam3.1` and that your HF auth token is active in the runtime environment.
+---
 
-## Citation / Internal Use
+## Key outputs
 
-This repository is currently structured for CS231N milestone and paper workflows:
-- reproducible baseline,
-- augmentation ablations,
-- metrics and qualitative comparisons for reporting.
+Under `data/runs/sportsmot_example/`:
+
+- `baseline_tracks.json` — SAM3.1 tracks (45 frames)
+- `ablations/ablation_summary.csv` — per-rule metrics + ADE
+- `ablations/recommended_config.json` — ADE vs LSTM v1 policy
+- `sanitize_grid/best_sanitize.json` — best sanitize hyperparameters
+- `trajectory_tensors.json` / `trajectory_validation.json` — LSTM-ready arrays + gate
+- `seeds/multi_seed_summary.json` — after multi-seed step
+
+---
+
+## Methodology notes
+
+- Augmentation uses **relative** player geometry and motion only (no court model).
+- `predicted: true` marks gap-fill re-introductions; excluded from ADE by default.
+- Default SAM window: **45 frames** at **0.67** resize (Modal A10G memory tradeoff).
+
+## Common issues
+
+- **`No module named utils`** when running `py utils/...` — scripts insert repo root; use paths above or run from repo root.
+- **`No module named torch`** locally — use Modal for SAM3, or install PyTorch in your venv.
+- **Multi-seed at 20s** on a 500-frame clip — frame index exceeds sequence; use 0s / 10s / 15s offsets.
