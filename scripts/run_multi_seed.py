@@ -1,0 +1,189 @@
+#!/usr/bin/env python3
+"""
+Multi-seed validation: augmentation + metrics per seed, then aggregate ADE.
+
+Expects baseline tracks at data/runs/{dataset}/seeds/{seed_id}/baseline_tracks.json
+(from Modal --seed-id runs). Uses per-seed gt_aligned.json (see align_seed_gt.py).
+"""
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+
+from scripts.run_ablations import run_one_ablation
+from utils.datasets import SEED_OFFSETS, ablations_dir, resolve_seed_gt_path, runs_dir
+from utils.seed_schedule import list_seed_entries
+
+
+def bootstrap_seed_baselines(source_baseline, seeds_root, num_frames=45):
+    """
+    Create pseudo-seeds by slicing one baseline into contiguous windows.
+    Used when SAM3 multi-offset tracks are not yet available.
+    """
+    with open(source_baseline, encoding="utf-8") as f:
+        data = json.load(f)
+    frames = sorted(data.get("frames", []), key=lambda fr: int(fr["frame_number"]))
+    meta = dict(data.get("meta") or {})
+    chunk = max(1, len(frames) // 3)
+
+    created = []
+    for i, (seed_id, _offset) in enumerate(SEED_OFFSETS.items()):
+        start = i * chunk
+        end = min(len(frames), start + chunk)
+        if start >= len(frames):
+            break
+        subset = frames[start:end]
+        for j, fr in enumerate(subset, start=1):
+            fr["frame_number"] = j
+        seed_dir = Path(seeds_root) / seed_id
+        seed_dir.mkdir(parents=True, exist_ok=True)
+        out = seed_dir / "baseline_tracks.json"
+        payload = {
+            "meta": {
+                **meta,
+                "seed_id": seed_id,
+                "bootstrap": True,
+                "source_window": [start, end],
+            },
+            "frames": subset,
+        }
+        with open(out, "w", encoding="utf-8") as f:
+            json.dump(payload, f, indent=2)
+        created.append((seed_id, out))
+    return created
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Multi-seed augmentation validation")
+    parser.add_argument("--dataset", default="sportsmot_example")
+    parser.add_argument(
+        "--seeds-root",
+        default=None,
+        help="Root directory for per-seed outputs",
+    )
+    parser.add_argument(
+        "--bootstrap-from",
+        default=None,
+        help="Bootstrap pseudo-seeds from one baseline JSON",
+    )
+    parser.add_argument(
+        "--recommended-config",
+        default=None,
+        help="JSON with recommended_ablation name",
+    )
+    parser.add_argument(
+        "--align-gt",
+        action="store_true",
+        help="Build missing per-seed gt_aligned.json before evaluation",
+    )
+    parser.add_argument("--sequence", default=None)
+    args = parser.parse_args()
+
+    sequence = args.sequence or args.dataset
+    seeds_root = Path(args.seeds_root or runs_dir(args.dataset) / "seeds")
+    rec_path = Path(
+        args.recommended_config or ablations_dir(args.dataset) / "recommended_config.json"
+    )
+
+    if args.bootstrap_from:
+        seed_list = bootstrap_seed_baselines(args.bootstrap_from, seeds_root)
+        print(f"Bootstrapped {len(seed_list)} pseudo-seeds from {args.bootstrap_from}")
+    else:
+        seed_list = []
+        for seed_id, _ in list_seed_entries(args.dataset):
+            p = seeds_root / seed_id / "baseline_tracks.json"
+            if p.exists():
+                seed_list.append((seed_id, p))
+        if not seed_list:
+            for seed_id in SEED_OFFSETS:
+                p = seeds_root / seed_id / "baseline_tracks.json"
+                if p.exists():
+                    seed_list.append((seed_id, p))
+        if not seed_list:
+            raise FileNotFoundError(
+                f"No seed baselines under {seeds_root}. "
+                "Run SAM3 with --seed-id offset_0s|offset_10s|offset_15s."
+            )
+
+    rec_name = "sanitize_plus_velocity_cap"
+    if rec_path.exists():
+        with open(rec_path, encoding="utf-8") as f:
+            rec = json.load(f)
+        rec_name = rec.get("recommended_ablation_lstm_v1") or rec.get(
+            "recommended_ablation", rec_name
+        )
+
+    from scripts.run_ablations import ABLATION_CONFIGS
+
+    cfg = {c[0]: c for c in ABLATION_CONFIGS}.get(rec_name)
+    if not cfg:
+        cfg = ("sanitize_plus_velocity_cap", "velocity_cap", True, False, {})
+
+    all_metrics = []
+    for seed_id, baseline_path in seed_list:
+        gt_path = resolve_seed_gt_path(
+            args.dataset,
+            seed_id,
+            baseline_path,
+            align_if_missing=args.align_gt,
+        )
+        with open(baseline_path, encoding="utf-8") as f:
+            track_data = json.load(f)
+        meta = track_data.get("meta", {})
+        fw = meta.get("frame_width")
+        fh = meta.get("frame_height")
+        num_frames = len(track_data.get("frames", []))
+        out_dir = seeds_root / seed_id / rec_name
+        print(f"\nSeed {seed_id} -> {rec_name} (GT: {gt_path}, T={num_frames})")
+        m = run_one_ablation(
+            name=rec_name,
+            baseline_path=str(baseline_path),
+            output_dir=out_dir,
+            frame_width=int(fw),
+            frame_height=int(fh),
+            rules=cfg[1],
+            sanitize=cfg[2],
+            gap_fill=cfg[3],
+            gt_path=str(gt_path),
+            gt_sequence=sequence,
+            extra_kwargs=cfg[4],
+        )
+        m["seed_id"] = seed_id
+        m["gt_path"] = str(gt_path)
+        m["num_track_frames"] = num_frames
+        if "ade_fde" in m:
+            m["ade_fde"]["num_frames"] = m["ade_fde"].get("num_frames", num_frames)
+        all_metrics.append(m)
+        with open(out_dir / "metrics.json", "w", encoding="utf-8") as f:
+            json.dump(m, f, indent=2)
+
+    ades = [m["ade_fde"]["ade"] for m in all_metrics if "ade_fde" in m]
+    frame_counts = [m.get("num_track_frames") for m in all_metrics]
+    summary = {
+        "recommended_ablation": rec_name,
+        "num_seeds": len(all_metrics),
+        "ade_mean": sum(ades) / len(ades) if ades else None,
+        "ade_values": ades,
+        "num_frames_per_seed": dict(zip([m["seed_id"] for m in all_metrics], frame_counts)),
+        "seeds": [m["seed_id"] for m in all_metrics],
+    }
+    if len(ades) > 1:
+        import numpy as np
+
+        summary["ade_std"] = float(np.std(ades))
+
+    out_summary = seeds_root / "multi_seed_summary.json"
+    with open(out_summary, "w", encoding="utf-8") as f:
+        json.dump(summary, f, indent=2)
+    print(f"\nMulti-seed summary: {out_summary}")
+    if summary.get("ade_mean") is not None:
+        std = summary.get("ade_std", 0)
+        print(f"ADE: {summary['ade_mean']:.3f} ± {std:.3f} over {len(ades)} seeds")
+
+
+if __name__ == "__main__":
+    main()
