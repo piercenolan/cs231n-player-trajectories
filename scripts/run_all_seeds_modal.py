@@ -147,7 +147,7 @@ def post_process(dataset: str, schedule: list[dict], dry_run: bool) -> int:
 
     for extra in (
         ["scripts/run_multi_seed.py", "--dataset", dataset, "--align-gt"],
-        ["scripts/export_lstm_tensors.py", "--dataset", dataset, "--all-seeds"],
+        ["scripts/export_lstm_tensors.py", "--dataset", dataset, "--all-seeds", "--with-rule-features"],
     ):
         code = run_cmd([sys.executable] + extra, dry_run=dry_run)
         rc = rc or code
@@ -184,8 +184,8 @@ def main():
     parser.add_argument(
         "--modal-wait-sec",
         type=int,
-        default=120,
-        help="Pause between Modal jobs to reduce CUDA OOM on warm GPU",
+        default=0,
+        help="Seconds to sleep between Modal jobs (default 0). Use 30-60 only if you see GPU OOM on back-to-back runs",
     )
     parser.add_argument("--skip-modal", action="store_true")
     parser.add_argument("--skip-download", action="store_true")
@@ -285,7 +285,8 @@ def main():
                 continue
 
             skip_upload = True
-            if args.upload_frames and not uploaded_frames:
+            # First job uploads frames unless they are already on the volume.
+            if not uploaded_frames:
                 skip_upload = False
                 uploaded_frames = True
 

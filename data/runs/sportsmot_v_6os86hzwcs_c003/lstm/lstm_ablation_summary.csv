@@ -1,0 +1,4 @@
+variant,checkpoint,tracks_path,ade_full,fde_full,ade_forecast,fde_forecast,num_matches,teacher_forced_ade_px,persistence_ade_px,post_refine
+A1_residual,data\runs\sportsmot_example\lstm\lstm_rule_features_residual\checkpoint.pt,data\runs\sportsmot_example\lstm\lstm_rule_features_residual\predicted_A1_residual.json,3.741197259764938,5.5342715899155,3.6412524430368354,5.5342715899155,450,394.8035508660709,3.3484010634396006,
+SAM_augmented,,,,,3.5539608008126957,3.7693558574819406,,nan,nan,
+linear_baseline,,,,,3.677998968366946,5.421433289725725,,nan,nan,

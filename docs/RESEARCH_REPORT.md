@@ -97,14 +97,20 @@ Baseline ADE vs aligned GT ~7.16 px; best sanitize-grid ADE ~5.87 px (reported i
 
 Auto-generated tables: `docs/PAPER_RESULTS.md`.
 
-### 4.3 Cross-sequence transfer
+### 4.3 Cross-sequence transfer (eval-only)
 
-| Dataset | Median residual ADE | Median linear ADE | Status |
-|---------|---------------------|-------------------|--------|
-| sportsmot_example | 5.81 | 5.81 | Complete |
-| (3 planned clips) | — | — | **Blocked** — truncated zip |
+Same **A1 residual** checkpoint trained on `sportsmot_example` only; no fine-tuning on new clips.
 
-See `data/datasets/EXTRACTION_STATUS.md`.
+| Dataset | Seeds eval | Median residual ADE | Median linear ADE | Residual vs linear |
+|---------|------------|---------------------|-------------------|--------------------|
+| sportsmot_example (train) | 12 | 5.81 | 5.81 | tie |
+| sportsmot_v_6os86hzwcs_c001 | 16 | 4.94 | 4.84 | linear wins |
+| sportsmot_v_6os86hzwcs_c003 | 8 | 5.56 | 5.41 | linear wins |
+| sportsmot_v_00hrwkvvjtq_c001 (holdout) | 23 | **4.99** | 5.01 | **residual wins** |
+
+Holdout val clip (`v_00HRwkvvjtQ_c001`) shows slight transfer gain over linear on median ADE; train-split clips are within ~0.1–0.2 px of linear. See `data/runs/multiseq_transfer_summary.csv`.
+
+Late-window seeds excluded from export where tensor validation failed (end-of-clip tracking dropout).
 
 ---
 
@@ -120,13 +126,11 @@ See `data/datasets/EXTRACTION_STATUS.md`.
 
 ## 6. Limitations and Future Work
 
-1. **Single training clip** for LSTM; generalization to new games pending full SportsMOT re-download.
-2. **Truncated** `data/sportsmot_publish.zip` prevents extracting sprint sequences (`EXTRACTION_STATUS.md`).
-3. **No pooled multi-sequence training** (deferred; see `docs/DEFERRED_MULTISEQ.md`).
-4. SAM-on-future-frames is an oracle ceiling, not comparable to causal forecasters.
-5. NBA clips in `data/clips/` lack SportsMOT GT for the same protocol.
-
-**Next steps after zip fix:** Extract 3 sequences → Modal batch (~2–3 h) → transfer eval → update Section 4.3 in this report.
+1. **Single training clip** for LSTM; other clips evaluated via transfer only.
+2. **No pooled multi-sequence training** (deferred; see `docs/DEFERRED_MULTISEQ.md`).
+3. SAM-on-future-frames is an oracle ceiling, not comparable to causal forecasters.
+4. NBA clips in `data/clips/` lack SportsMOT GT for the same protocol.
+5. End-of-clip seeds may fail tensor validation on shorter or noisy windows.
 
 ---
 

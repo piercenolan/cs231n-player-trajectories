@@ -18,10 +18,13 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import shutil
+import stat
 import subprocess
 import sys
+import time
 import urllib.request
 import zipfile
 from pathlib import Path
@@ -33,6 +36,40 @@ HF_SPLITS_BASE = "https://huggingface.co/datasets/MCG-NJU/SportsMOT/resolve/main
 ZIP_ROOT_PREFIX = "sportsmot_publish/"
 DATASET_PREFIX = f"{ZIP_ROOT_PREFIX}dataset/"
 SPLITS = ("train", "val", "test")
+
+
+def _chmod_writable(func, path, exc_info):
+    """Clear read-only flag (Windows/OneDrive) then retry delete."""
+    try:
+        os.chmod(path, stat.S_IWRITE | stat.S_IREAD)
+        func(path)
+    except OSError:
+        raise exc_info[1].with_traceback(exc_info[2])
+
+
+def safe_rmtree(path: Path, retries: int = 3) -> None:
+    """Remove a directory tree; tolerate Windows/OneDrive permission quirks."""
+    if not path.exists():
+        return
+    for attempt in range(retries):
+        try:
+            shutil.rmtree(path, onexc=_chmod_writable)
+            return
+        except PermissionError:
+            if attempt + 1 >= retries:
+                raise
+            time.sleep(1.0 * (attempt + 1))
+
+
+def sequence_complete(seq_dir: Path) -> bool:
+    """True if img1 has frames and gt.txt exists."""
+    img1 = seq_dir / "img1"
+    gt = seq_dir / "gt" / "gt.txt"
+    if not gt.is_file():
+        return False
+    if not img1.is_dir():
+        return False
+    return any(img1.glob("*.jpg"))
 
 
 def parse_args():
@@ -97,6 +134,16 @@ def parse_args():
         "--dry-run",
         action="store_true",
         help="Alias for --list-only",
+    )
+    p.add_argument(
+        "--skip-existing",
+        action="store_true",
+        help="Skip sequences that already have img1/*.jpg and gt/gt.txt",
+    )
+    p.add_argument(
+        "--force",
+        action="store_true",
+        help="Re-extract even if destination exists (uses safe_rmtree on Windows)",
     )
     return p.parse_args()
 
@@ -310,11 +357,18 @@ def extract_from_tree(found: dict, source_dir: Path, out_dir: Path):
         dest = out_dir / info["split"] / seq
         dest.parent.mkdir(parents=True, exist_ok=True)
         if dest.exists():
-            shutil.rmtree(dest)
+            safe_rmtree(dest)
         shutil.copytree(src, dest)
 
 
-def extract_from_zip(zip_path: Path, found: dict, out_dir: Path, use_tar: bool):
+def extract_from_zip(
+    zip_path: Path,
+    found: dict,
+    out_dir: Path,
+    use_tar: bool,
+    skip_existing: bool = False,
+    force: bool = False,
+):
     by_split: dict[str, list[str]] = {s: [] for s in SPLITS}
     for seq, info in found.items():
         by_split[info["split"]].append(seq)
@@ -326,30 +380,36 @@ def extract_from_zip(zip_path: Path, found: dict, out_dir: Path, use_tar: bool):
             prefix = found[seq].get("prefix") or f"{DATASET_PREFIX}{split}/{seq}"
             dest_parent = out_dir / split
             dest_parent.mkdir(parents=True, exist_ok=True)
-            tmp_extract = out_dir / "_tmp_extract" / ZIP_ROOT_PREFIX.rstrip("/")
-            if tmp_extract.exists():
-                shutil.rmtree(tmp_extract.parent)
-            tmp_extract.parent.mkdir(parents=True, exist_ok=True)
+            dest = out_dir / split / seq
+            if skip_existing and not force and sequence_complete(dest):
+                print(f"  skip {split}/{seq} (already complete)")
+                continue
+            tmp_root = out_dir / "_tmp_extract"
+            if tmp_root.exists():
+                safe_rmtree(tmp_root)
+            tmp_extract = tmp_root / ZIP_ROOT_PREFIX.rstrip("/")
+            tmp_root.mkdir(parents=True, exist_ok=True)
 
-            cmd = ["tar", "-xf", str(zip_path), "-C", str(tmp_extract.parent), prefix]
+            cmd = ["tar", "-xf", str(zip_path), "-C", str(tmp_root), prefix]
             print(f"  extracting {split}/{seq} ...")
             proc = subprocess.run(cmd, capture_output=True, text=True)
             if proc.returncode != 0:
                 err = proc.stderr.strip() or proc.stdout.strip()
+                safe_rmtree(tmp_root)
                 raise RuntimeError(
                     f"Failed to extract {prefix}:\n{err}\n"
                     "Zip archive may be truncated. Re-download or use --source-dir."
                 )
 
             src = tmp_extract / "dataset" / split / seq
-            dest = out_dir / split / seq
             if dest.exists():
-                shutil.rmtree(dest)
+                safe_rmtree(dest)
             if src.is_dir():
                 shutil.move(str(src), str(dest))
+            safe_rmtree(tmp_root)
 
         if (out_dir / "_tmp_extract").exists():
-            shutil.rmtree(out_dir / "_tmp_extract")
+            safe_rmtree(out_dir / "_tmp_extract")
 
 
 def write_manifest(out_dir: Path, sequences: list[str], found: dict, zip_path, source_dir):
@@ -479,7 +539,14 @@ def main():
     if source_dir:
         extract_from_tree(found, source_dir, out_dir)
     else:
-        extract_from_zip(zip_path, found, out_dir, args.use_tar or not _zipfile_ok(zip_path))
+        extract_from_zip(
+            zip_path,
+            found,
+            out_dir,
+            args.use_tar or not _zipfile_ok(zip_path),
+            skip_existing=args.skip_existing,
+            force=args.force,
+        )
 
     manifest_path = write_manifest(out_dir, sequences, found, zip_path, source_dir)
     print(f"\nDone. {len(present)} sequences extracted.")

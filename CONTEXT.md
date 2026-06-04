@@ -63,7 +63,7 @@ See `docs/MILESTONE_CHECKLIST.md` for report tables and `docs/PROJECT_PLAN.md` f
 
 A1 beats A0 on **10/12** seeds; **residual LSTM ties linear** on median and beats linear on **5/12** seeds. Three failure seeds (`offset_0s`, `offset_5s`, `offset_15s`) reflect SAM tracking collapse. See `docs/PAPER_RESULTS.md`.
 
-**Write-up framing:** SAM3 provides perception; sanitize cleans inputs; **residual rule-LSTM** learns corrections over constant-velocity linear; post-hoc game rules on predictions (A2) hurt ADE. Cross-sequence transfer: `docs/MODAL_SPRINT_RUNBOOK.md`.
+**Write-up framing:** SAM3 provides perception; sanitize cleans inputs; **residual rule-LSTM** learns corrections over constant-velocity linear; post-hoc game rules on predictions (A2) hurt ADE. **Cross-sequence transfer** complete — see `data/runs/multiseq_transfer_summary.csv` and `docs/PAPER_RESULTS.md` Section 5.
 
 ## Conventions
 

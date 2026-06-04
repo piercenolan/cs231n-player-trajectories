@@ -1,6 +1,6 @@
 # Modal sprint runbook (36h)
 
-**Blocker (2026-05-28):** `data/sportsmot_publish.zip` is truncated — extraction fails. Re-download before steps 1–2. See `data/datasets/EXTRACTION_STATUS.md`.
+If extraction fails with `PermissionError` on Windows/OneDrive, use `--force` or delete the partial folder under `data/datasets/sportsmot_basketball/train/`.
 
 Run these in an **external terminal** where `py -m modal` is authenticated (Cursor terminal may not connect).
 
@@ -26,7 +26,9 @@ py scripts/run_batch_sportsmot_modal.py --step-sec 2 --skip-existing `
   --datasets sportsmot_v_6os86hzwcs_c001 sportsmot_v_6os86hzwcs_c003 sportsmot_v_00hrwkvvjtq_c001
 ```
 
-Replace names with those from registration output if different.
+The first Modal job per dataset **uploads local frames** to the `sports-data` volume automatically. Re-deploy Modal after pulling dataset-registry fixes (`utils/datasets.py`, `scripts/run_modal.py`).
+
+(~30–60 min per dataset; 3 clips ≈ 2–3 hours total.)
 
 ## 3. Tensors + transfer eval
 

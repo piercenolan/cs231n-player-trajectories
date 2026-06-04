@@ -1,0 +1,6 @@
+{
+  "seed_id": "offset_12s",
+  "ablation": "sanitize_plus_velocity_cap",
+  "tracks": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_00hrwkvvjtq_c001\\seeds\\offset_12s\\sanitize_plus_velocity_cap\\augmented_tracks.json",
+  "tensor": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_00hrwkvvjtq_c001\\seeds\\offset_12s\\trajectory_tensors.json"
+}

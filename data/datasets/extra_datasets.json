@@ -1,0 +1,41 @@
+{
+  "sportsmot_v_6os86hzwcs_c001": {
+    "description": "SportsMOT basketball v_-6Os86HzwCs_c001 (train)",
+    "frames_dir": "data/datasets/sportsmot_v_6os86hzwcs_c001/frames",
+    "gt_mot": "data/datasets/sportsmot_v_6os86hzwcs_c001/gt/gt.txt",
+    "gt_json": null,
+    "seqinfo": "data/datasets/sportsmot_v_6os86hzwcs_c001/seqinfo.ini",
+    "video": null,
+    "source_fps": 25.0,
+    "extract_fps": 25.0,
+    "sportsmot_seq_id": "v_-6Os86HzwCs_c001",
+    "sportsmot_split": "train",
+    "eval_only_holdout": false
+  },
+  "sportsmot_v_6os86hzwcs_c003": {
+    "description": "SportsMOT basketball v_-6Os86HzwCs_c003 (train)",
+    "frames_dir": "data/datasets/sportsmot_v_6os86hzwcs_c003/frames",
+    "gt_mot": "data/datasets/sportsmot_v_6os86hzwcs_c003/gt/gt.txt",
+    "gt_json": null,
+    "seqinfo": "data/datasets/sportsmot_v_6os86hzwcs_c003/seqinfo.ini",
+    "video": null,
+    "source_fps": 25.0,
+    "extract_fps": 25.0,
+    "sportsmot_seq_id": "v_-6Os86HzwCs_c003",
+    "sportsmot_split": "train",
+    "eval_only_holdout": false
+  },
+  "sportsmot_v_00hrwkvvjtq_c001": {
+    "description": "SportsMOT basketball v_00HRwkvvjtQ_c001 (val)",
+    "frames_dir": "data/datasets/sportsmot_v_00hrwkvvjtq_c001/frames",
+    "gt_mot": "data/datasets/sportsmot_v_00hrwkvvjtq_c001/gt/gt.txt",
+    "gt_json": null,
+    "seqinfo": "data/datasets/sportsmot_v_00hrwkvvjtq_c001/seqinfo.ini",
+    "video": null,
+    "source_fps": 25.0,
+    "extract_fps": 25.0,
+    "sportsmot_seq_id": "v_00HRwkvvjtQ_c001",
+    "sportsmot_split": "val",
+    "eval_only_holdout": true
+  }
+}
