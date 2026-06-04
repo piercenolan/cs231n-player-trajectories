@@ -3,12 +3,11 @@
 Multi-seed validation: augmentation + metrics per seed, then aggregate ADE.
 
 Expects baseline tracks at data/runs/{dataset}/seeds/{seed_id}/baseline_tracks.json
-(from Modal --seed-id runs). Do not use --bootstrap-from for paper results.
+(from Modal --seed-id runs). Uses per-seed gt_aligned.json (see align_seed_gt.py).
 """
 
 import argparse
 import json
-import shutil
 import sys
 from pathlib import Path
 
@@ -16,15 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from scripts.run_ablations import run_one_ablation
-from utils.trajectory_metrics import find_sportsmot_gt
-
-
-# 15s not 20s: 500 frames @ 25fps ≈ 20s total; frame 501+ is out of range.
-DEFAULT_SEEDS = [
-    ("offset_0s", 0.0),
-    ("offset_10s", 10.0),
-    ("offset_15s", 15.0),
-]
+from utils.datasets import SEED_OFFSETS, ablations_dir, resolve_seed_gt_path, runs_dir
 
 
 def bootstrap_seed_baselines(source_baseline, seeds_root, num_frames=45):
@@ -39,7 +30,7 @@ def bootstrap_seed_baselines(source_baseline, seeds_root, num_frames=45):
     chunk = max(1, len(frames) // 3)
 
     created = []
-    for i, (seed_id, _offset) in enumerate(DEFAULT_SEEDS):
+    for i, (seed_id, _offset) in enumerate(SEED_OFFSETS.items()):
         start = i * chunk
         end = min(len(frames), start + chunk)
         if start >= len(frames):
@@ -83,15 +74,16 @@ def main():
         default=None,
         help="JSON with recommended_ablation name",
     )
-    parser.add_argument("--gt", default=None)
+    parser.add_argument(
+        "--align-gt",
+        action="store_true",
+        help="Build missing per-seed gt_aligned.json before evaluation",
+    )
     parser.add_argument("--sequence", default=None)
     args = parser.parse_args()
 
-    from utils.datasets import ablations_dir, baseline_tracks_path, find_gt_path, runs_dir
-
     sequence = args.sequence or args.dataset
     seeds_root = Path(args.seeds_root or runs_dir(args.dataset) / "seeds")
-    gt = args.gt or find_gt_path(args.dataset) or find_sportsmot_gt(sequence)
     rec_path = Path(
         args.recommended_config or ablations_dir(args.dataset) / "recommended_config.json"
     )
@@ -101,14 +93,14 @@ def main():
         print(f"Bootstrapped {len(seed_list)} pseudo-seeds from {args.bootstrap_from}")
     else:
         seed_list = []
-        for seed_id, _ in DEFAULT_SEEDS:
+        for seed_id in SEED_OFFSETS:
             p = seeds_root / seed_id / "baseline_tracks.json"
             if p.exists():
                 seed_list.append((seed_id, p))
         if not seed_list:
             raise FileNotFoundError(
                 f"No seed baselines under {seeds_root}. "
-                "Run SAM3 with --seed-id or pass --bootstrap-from."
+                "Run SAM3 with --seed-id offset_0s|offset_10s|offset_15s."
             )
 
     rec_name = "sanitize_plus_velocity_cap"
@@ -119,7 +111,6 @@ def main():
             "recommended_ablation", rec_name
         )
 
-    # Map recommended ablation to rules/gap_fill
     from scripts.run_ablations import ABLATION_CONFIGS
 
     cfg = {c[0]: c for c in ABLATION_CONFIGS}.get(rec_name)
@@ -128,12 +119,20 @@ def main():
 
     all_metrics = []
     for seed_id, baseline_path in seed_list:
+        gt_path = resolve_seed_gt_path(
+            args.dataset,
+            seed_id,
+            baseline_path,
+            align_if_missing=args.align_gt,
+        )
         with open(baseline_path, encoding="utf-8") as f:
-            meta = json.load(f).get("meta", {})
+            track_data = json.load(f)
+        meta = track_data.get("meta", {})
         fw = meta.get("frame_width")
         fh = meta.get("frame_height")
+        num_frames = len(track_data.get("frames", []))
         out_dir = seeds_root / seed_id / rec_name
-        print(f"\nSeed {seed_id} -> {rec_name}")
+        print(f"\nSeed {seed_id} -> {rec_name} (GT: {gt_path}, T={num_frames})")
         m = run_one_ablation(
             name=rec_name,
             baseline_path=str(baseline_path),
@@ -143,22 +142,27 @@ def main():
             rules=cfg[1],
             sanitize=cfg[2],
             gap_fill=cfg[3],
-            gt_path=gt,
+            gt_path=str(gt_path),
             gt_sequence=sequence,
             extra_kwargs=cfg[4],
         )
         m["seed_id"] = seed_id
+        m["gt_path"] = str(gt_path)
+        m["num_track_frames"] = num_frames
+        if "ade_fde" in m:
+            m["ade_fde"]["num_frames"] = m["ade_fde"].get("num_frames", num_frames)
         all_metrics.append(m)
         with open(out_dir / "metrics.json", "w", encoding="utf-8") as f:
             json.dump(m, f, indent=2)
 
-    # Aggregate ADE
     ades = [m["ade_fde"]["ade"] for m in all_metrics if "ade_fde" in m]
+    frame_counts = [m.get("num_track_frames") for m in all_metrics]
     summary = {
         "recommended_ablation": rec_name,
         "num_seeds": len(all_metrics),
         "ade_mean": sum(ades) / len(ades) if ades else None,
         "ade_values": ades,
+        "num_frames_per_seed": dict(zip([m["seed_id"] for m in all_metrics], frame_counts)),
         "seeds": [m["seed_id"] for m in all_metrics],
     }
     if len(ades) > 1:

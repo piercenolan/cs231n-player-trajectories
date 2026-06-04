@@ -53,7 +53,7 @@ Related docs: [MILESTONE_CHECKLIST.md](MILESTONE_CHECKLIST.md), [README.md](../R
 | `setup_sportsmot_gt.py` → aligned `gt.json` | Done |
 | `run_ablations.py` with ADE in summary CSV | Done |
 | `trajectory_export.py` + `--validate` | Done (passed) |
-| **Multi-seed SAM3** (real temporal offsets) | **Pending** |
+| **Multi-seed SAM3** (real temporal offsets) | **In progress** — `docs/MULTI_SEED_COMMANDS.md` |
 | Regenerate summary figure on SportsMOT frames | Pending |
 
 **Outputs:** `gt/gt.json`, `trajectory_tensors.json`, `trajectory_validation.json`
@@ -148,6 +148,8 @@ flowchart TB
 Default code uses `offset_20s`; for SportsMOT example prefer **`offset_15s`** or change `DEFAULT_SEEDS` in `run_multi_seed.py`.
 
 ### Step A — SAM3 on Modal (three jobs)
+
+**CUDA OOM on the 2nd/3rd run?** Modal often **reuses the same GPU container**. The first job leaves SAM3 weights in PyTorch’s CUDA cache; the second job loads the model again and can exceed A10G 24 GB. Fixes: wait for each run to finish, use the repo’s post-run GPU cleanup (in `run_sam3.release_sam3_predictor`), or lower `--resize-scale 0.5` / `--max-frames 30` / `--max-num-objects 12`. Do not start two `modal run` jobs at the same time.
 
 Upload frames once; then run each seed (`--skip-upload` after first):
 

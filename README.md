@@ -162,33 +162,24 @@ py utils/augmentation.py --dataset sportsmot_example --rules velocity_cap --no-g
 
 ### 4) Multi-seed SAM3 (before LSTM)
 
-Three temporal windows on the 500-frame sequence (25 FPS). Use **15s** instead of 20s so frames stay within 1–500.
+Copy-paste command sheet: **[docs/MULTI_SEED_COMMANDS.md](docs/MULTI_SEED_COMMANDS.md)** (download seed 1, run seeds 2–3, align GT, aggregate ADE).
 
 ```powershell
-py -m modal run scripts/run_modal.py --dataset sportsmot_example --skip-extract --max-frames 45 --resize-scale 0.67 --start-time-sec 0 --seed-id offset_0s
-
-py -m modal run scripts/run_modal.py --dataset sportsmot_example --skip-extract --max-frames 45 --resize-scale 0.67 --start-time-sec 10 --seed-id offset_10s --skip-upload
-
-py -m modal run scripts/run_modal.py --dataset sportsmot_example --skip-extract --max-frames 45 --resize-scale 0.67 --start-time-sec 15 --seed-id offset_15s --skip-upload
+py scripts/align_seed_gt.py --dataset sportsmot_example
+py scripts/run_multi_seed.py --dataset sportsmot_example --align-gt
 ```
 
-Download seeds:
+`run_multi_seed.py` uses per-seed `gt_aligned.json` (not the 0s-only global GT).
+
+### 5) Pre-LSTM gauge figures
 
 ```powershell
-py -m modal volume get sports-data runs/sportsmot_example/seeds/offset_0s/baseline_tracks.json data/runs/sportsmot_example/seeds/offset_0s/baseline_tracks.json
-py -m modal volume get sports-data runs/sportsmot_example/seeds/offset_10s/baseline_tracks.json data/runs/sportsmot_example/seeds/offset_10s/baseline_tracks.json
-py -m modal volume get sports-data runs/sportsmot_example/seeds/offset_15s/baseline_tracks.json data/runs/sportsmot_example/seeds/offset_15s/baseline_tracks.json
+py scripts/plot_pre_lstm_gauge.py --dataset sportsmot_example
 ```
 
-Aggregate ADE across seeds (applies `recommended_config.json` ablation per seed):
+See `data/runs/sportsmot_example/figures/PRE_LSTM_GAUGE.md` for interpretation.
 
-```powershell
-py scripts/run_multi_seed.py --dataset sportsmot_example
-```
-
-Full notes: [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.md#multi-seed-runs-before-lstm).
-
-### 5) Visualization
+### 6) Visualization
 
 ```powershell
 py utils/visualize.py --frames data/runs/sportsmot_example/frames ^

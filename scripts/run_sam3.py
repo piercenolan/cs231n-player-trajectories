@@ -165,6 +165,28 @@ def load_sam3_predictor(
     return predictor
 
 
+def release_sam3_predictor(predictor):
+    """Drop SAM3 weights and session state so a reused Modal container can run again."""
+    import gc
+
+    if predictor is None:
+        return
+    try:
+        if hasattr(predictor, "_all_inference_states"):
+            predictor._all_inference_states.clear()
+        if hasattr(predictor, "model") and predictor.model is not None:
+            predictor.model.cpu()
+            del predictor.model
+        del predictor
+    except Exception as exc:
+        print(f"[WARN] Predictor cleanup: {exc}")
+    gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+        torch.cuda.synchronize()
+    free_cuda_memory("After model release")
+
+
 # -----------------------------
 # Frame extraction
 # -----------------------------
@@ -519,17 +541,18 @@ def run_tracking(
 
     free_cuda_memory("Before tracking")
 
-    predictor = load_sam3_predictor(
-        checkpoint,
-        use_fp16_weights=use_fp16_weights,
-        use_fa3=use_fa3,
-        max_num_objects=max_num_objects,
-        async_loading_frames=async_loading_frames,
-    )
-
     session_id = None
+    predictor = None
 
     try:
+        predictor = load_sam3_predictor(
+            checkpoint,
+            use_fp16_weights=use_fp16_weights,
+            use_fa3=use_fa3,
+            max_num_objects=max_num_objects,
+            async_loading_frames=async_loading_frames,
+        )
+
         session_id = start_video_session(
             predictor,
             frames_dir,
@@ -581,7 +604,7 @@ def run_tracking(
         print("Saved:", output_path)
 
     finally:
-        if session_id:
+        if session_id and predictor is not None:
             try:
                 predictor.handle_request({
                     "type": "close_session",
@@ -589,6 +612,7 @@ def run_tracking(
                 })
             except Exception:
                 pass
+        release_sam3_predictor(predictor)
 
 
 # -----------------------------

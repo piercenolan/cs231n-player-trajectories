@@ -78,6 +78,7 @@ def run_pipeline(
     start_time_sec: float = 0.0,
     extract_fps: float = 25.0,
     source_fps: float = 25.0,
+    seed_id: str = "",
 ):
     import gc
     import glob
@@ -175,8 +176,24 @@ def run_pipeline(
     )
 
     with open(output_path, encoding="utf-8") as f:
-        meta = json.load(f).get("meta", {})
-    print(f"Track metadata: {meta}")
+        track_data = json.load(f)
+    track_data.setdefault("meta", {})
+    track_data["meta"]["start_time_sec"] = start_time_sec
+    track_data["meta"]["extract_fps"] = extract_fps
+    track_data["meta"]["source_fps"] = source_fps
+    track_data["meta"]["max_frames"] = max_frames
+    track_data["meta"]["resize_scale"] = resize_scale
+    if seed_id:
+        track_data["meta"]["seed_id"] = seed_id
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(track_data, f, indent=2)
+    print(f"Track metadata: {track_data.get('meta', {})}")
+
+    gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+        torch.cuda.synchronize()
+    free_cuda_memory("End of pipeline")
 
     volume.commit()
     print(f"Done. Results saved to {output_path}")
@@ -237,6 +254,7 @@ def main(
             start_time_sec=start_time_sec,
             extract_fps=fps,
             source_fps=source_fps,
+            seed_id=seed_id,
         )
     else:
         if not video_path:
@@ -269,6 +287,7 @@ def main(
             start_time_sec=start_time_sec,
             extract_fps=fps,
             source_fps=source_fps,
+            seed_id=seed_id,
         )
 
     vol_baseline = rel_baseline.replace("data/", "", 1)

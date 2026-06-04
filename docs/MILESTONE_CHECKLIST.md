@@ -51,7 +51,7 @@ flowchart LR
 | 5 | **Per-rule ablations** + ADE/FDE | Done | `ablations/ablation_summary.csv` |
 | 6 | **Sanitize grid** (ADE-ranked) | Done | `sanitize_grid/best_sanitize.json` → `w0.4_y0.1_p10` |
 | 7 | **LSTM export** + validation gate | Done | `trajectory_tensors.json`, `trajectory_validation.json` (`passed: true`) |
-| 8 | **Multi-seed SAM3** (0s / 10s / 15s offsets) | **Pending** | See `docs/PROJECT_PLAN.md` § Multi-seed |
+| 8 | **Multi-seed SAM3** (0s / 10s / 15s offsets) | **In progress** | `docs/MULTI_SEED_COMMANDS.md` + `align_seed_gt.py` |
 | 9 | **Paper figures** (SportsMOT run) | Pending | Regenerate under `data/runs/.../figures/` |
 | 10 | **LSTM v1** train / eval | Not started | Input: `(T, P, 2)` + visibility mask |
 

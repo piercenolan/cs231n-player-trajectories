@@ -1,0 +1,36 @@
+{
+  "corrections": [
+    {
+      "frame_number": 4,
+      "player_id": 1,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 24,
+      "player_id": 2,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 36,
+      "player_id": 4,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 43,
+      "player_id": 3,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    }
+  ]
+}
