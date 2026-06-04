@@ -1,0 +1,33 @@
+{
+  "seed_id": "offset_0s",
+  "gt_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_6os86hzwcs_c003\\seeds\\offset_0s\\gt_aligned.json",
+  "results": [
+    {
+      "variant": "A1_residual",
+      "checkpoint": "data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\checkpoint.pt",
+      "tracks_path": "data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\predicted_A1_residual.json",
+      "ade_full": 3.741197259764938,
+      "fde_full": 5.5342715899155,
+      "ade_forecast": 3.6412524430368354,
+      "fde_forecast": 5.5342715899155,
+      "num_matches": 450,
+      "teacher_forced_ade_px": 394.8035508660709,
+      "persistence_ade_px": 3.3484010634396006,
+      "post_refine": null
+    },
+    {
+      "variant": "SAM_augmented",
+      "ade_forecast": 3.5539608008126957,
+      "fde_forecast": 3.7693558574819406,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
+    },
+    {
+      "variant": "linear_baseline",
+      "ade_forecast": 3.677998968366946,
+      "fde_forecast": 5.421433289725725,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
+    }
+  ]
+}

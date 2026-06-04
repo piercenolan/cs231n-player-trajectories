@@ -1,0 +1,25 @@
+{
+  "dataset": "sportsmot_v_6os86hzwcs_c001",
+  "ablation": "sanitize_plus_velocity_cap",
+  "with_rule_features": true,
+  "exported": {
+    "offset_0s": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_6os86hzwcs_c001\\seeds\\offset_0s\\trajectory_tensors.json",
+    "offset_2s": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_6os86hzwcs_c001\\seeds\\offset_2s\\trajectory_tensors.json",
+    "offset_4s": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_6os86hzwcs_c001\\seeds\\offset_4s\\trajectory_tensors.json",
+    "offset_6s": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_6os86hzwcs_c001\\seeds\\offset_6s\\trajectory_tensors.json",
+    "offset_8s": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_6os86hzwcs_c001\\seeds\\offset_8s\\trajectory_tensors.json",
+    "offset_10s": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_6os86hzwcs_c001\\seeds\\offset_10s\\trajectory_tensors.json",
+    "offset_12s": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_6os86hzwcs_c001\\seeds\\offset_12s\\trajectory_tensors.json",
+    "offset_14s": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_6os86hzwcs_c001\\seeds\\offset_14s\\trajectory_tensors.json",
+    "offset_16s": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_6os86hzwcs_c001\\seeds\\offset_16s\\trajectory_tensors.json",
+    "offset_18s": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_6os86hzwcs_c001\\seeds\\offset_18s\\trajectory_tensors.json",
+    "offset_20s": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_6os86hzwcs_c001\\seeds\\offset_20s\\trajectory_tensors.json",
+    "offset_22s": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_6os86hzwcs_c001\\seeds\\offset_22s\\trajectory_tensors.json",
+    "offset_24s": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_6os86hzwcs_c001\\seeds\\offset_24s\\trajectory_tensors.json",
+    "offset_28s": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_6os86hzwcs_c001\\seeds\\offset_28s\\trajectory_tensors.json"
+  },
+  "failed": {
+    "offset_26s": "Validation failed for C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_6os86hzwcs_c001\\seeds\\offset_26s\\trajectory_tensors.json: {'global_visibility_fraction': 0.8977777777777778, 'frames_with_zero_visible': 0, 'per_slot_visibility': [1.0, 1.0, 1.0, 0.9777777777777777, 0.9777777777777777, 0.9777777777777777, 0.9555555555555556, 0.9111111111111111, 0.8666666666666667, 0.3111111111111111], 'per_slot_empty_fraction': [0.0, 0.0, 0.0, 0.022222222222222254, 0.022222222222222254, 0.022222222222222254, 0.0444444444444444, 0.0888888888888889, 0.1333333333333333, 0.6888888888888889], 'min_global_visibility_threshold': 0.7, 'max_slot_empty_fraction_threshold': 0.6, 'passed': False}",
+    "offset_30s": "Validation failed for C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_6os86hzwcs_c001\\seeds\\offset_30s\\trajectory_tensors.json: {'global_visibility_fraction': 0.8911111111111111, 'frames_with_zero_visible': 0, 'per_slot_visibility': [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9333333333333333, 0.9111111111111111, 0.06666666666666667], 'per_slot_empty_fraction': [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.06666666666666665, 0.0888888888888889, 0.9333333333333333], 'min_global_visibility_threshold': 0.7, 'max_slot_empty_fraction_threshold': 0.6, 'passed': False}"
+  }
+}

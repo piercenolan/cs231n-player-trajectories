@@ -1,0 +1,264 @@
+{
+  "per_seed": [
+    {
+      "variant": "linear_baseline",
+      "seed_id": "offset_0s",
+      "ade_forecast": 3.5643896562014388,
+      "fde_forecast": 5.421433289725725,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
+    },
+    {
+      "variant": "SAM_augmented",
+      "seed_id": "offset_0s",
+      "ade_forecast": 3.41353234481182,
+      "fde_forecast": 3.7693558574819406,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
+    },
+    {
+      "variant": "A1_residual",
+      "checkpoint": "data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\checkpoint.pt",
+      "tracks_path": "data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\predicted_offset_0s_A1_residual.json",
+      "ade_full": 3.741197259764938,
+      "fde_full": 5.5342715899155,
+      "ade_forecast": 3.6412524430368354,
+      "fde_forecast": 5.5342715899155,
+      "num_matches": 450,
+      "teacher_forced_ade_px": 394.8035508660709,
+      "persistence_ade_px": 3.3484010634396006,
+      "post_refine": null,
+      "seed_id": "offset_0s"
+    },
+    {
+      "variant": "linear_baseline",
+      "seed_id": "offset_10s",
+      "ade_forecast": 5.327628173726087,
+      "fde_forecast": 6.902352785549731,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
+    },
+    {
+      "variant": "SAM_augmented",
+      "seed_id": "offset_10s",
+      "ade_forecast": 5.049976712472095,
+      "fde_forecast": 6.868096163497718,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
+    },
+    {
+      "variant": "A1_residual",
+      "checkpoint": "data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\checkpoint.pt",
+      "tracks_path": "data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\predicted_offset_10s_A1_residual.json",
+      "ade_full": 5.3519585383353965,
+      "fde_full": 8.49431923207756,
+      "ade_forecast": 5.561272978708771,
+      "fde_forecast": 8.49431923207756,
+      "num_matches": 384,
+      "teacher_forced_ade_px": 417.6614567344625,
+      "persistence_ade_px": 10.733015153384516,
+      "post_refine": null,
+      "seed_id": "offset_10s"
+    },
+    {
+      "variant": "linear_baseline",
+      "seed_id": "offset_12s",
+      "ade_forecast": 6.757609648018407,
+      "fde_forecast": 18.345867547305208,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
+    },
+    {
+      "variant": "SAM_augmented",
+      "seed_id": "offset_12s",
+      "ade_forecast": 6.335236067094671,
+      "fde_forecast": 7.590507587028635,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
+    },
+    {
+      "variant": "A1_residual",
+      "checkpoint": "data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\checkpoint.pt",
+      "tracks_path": "data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\predicted_offset_12s_A1_residual.json",
+      "ade_full": 7.019691615886922,
+      "fde_full": 18.169875024666357,
+      "ade_forecast": 6.807868168629398,
+      "fde_forecast": 18.169875024666357,
+      "num_matches": 176,
+      "teacher_forced_ade_px": 454.6452762585508,
+      "persistence_ade_px": 38.672468228032145,
+      "post_refine": null,
+      "seed_id": "offset_12s"
+    },
+    {
+      "variant": "linear_baseline",
+      "seed_id": "offset_14s",
+      "ade_forecast": 5.444960438876151,
+      "fde_forecast": 7.38009321160409,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
+    },
+    {
+      "variant": "SAM_augmented",
+      "seed_id": "offset_14s",
+      "ade_forecast": 5.1037285036672495,
+      "fde_forecast": 5.373688512878077,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
+    },
+    {
+      "variant": "A1_residual",
+      "checkpoint": "data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\checkpoint.pt",
+      "tracks_path": "data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\predicted_offset_14s_A1_residual.json",
+      "ade_full": 5.89410300765938,
+      "fde_full": 7.936314520718122,
+      "ade_forecast": 5.568501268533371,
+      "fde_forecast": 7.936314520718122,
+      "num_matches": 283,
+      "teacher_forced_ade_px": 381.9171741510692,
+      "persistence_ade_px": 29.47396532475556,
+      "post_refine": null,
+      "seed_id": "offset_14s"
+    },
+    {
+      "variant": "linear_baseline",
+      "seed_id": "offset_2s",
+      "ade_forecast": 5.509003554852399,
+      "fde_forecast": 8.945657826276285,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
+    },
+    {
+      "variant": "SAM_augmented",
+      "seed_id": "offset_2s",
+      "ade_forecast": 4.933702084676955,
+      "fde_forecast": 4.465393464831083,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
+    },
+    {
+      "variant": "A1_residual",
+      "checkpoint": "data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\checkpoint.pt",
+      "tracks_path": "data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\predicted_offset_2s_A1_residual.json",
+      "ade_full": 5.413462004313259,
+      "fde_full": 9.09402822133321,
+      "ade_forecast": 5.5669666032017515,
+      "fde_forecast": 9.09402822133321,
+      "num_matches": 405,
+      "teacher_forced_ade_px": 390.4114963643691,
+      "persistence_ade_px": 4.581476402633331,
+      "post_refine": null,
+      "seed_id": "offset_2s"
+    },
+    {
+      "variant": "linear_baseline",
+      "seed_id": "offset_4s",
+      "ade_forecast": 14.201085188503098,
+      "fde_forecast": 21.9979599934163,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
+    },
+    {
+      "variant": "SAM_augmented",
+      "seed_id": "offset_4s",
+      "ade_forecast": 12.65114256809809,
+      "fde_forecast": 12.785409701708105,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
+    },
+    {
+      "variant": "A1_residual",
+      "checkpoint": "data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\checkpoint.pt",
+      "tracks_path": "data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\predicted_offset_4s_A1_residual.json",
+      "ade_full": 12.888344224223836,
+      "fde_full": 18.100704021969648,
+      "ade_forecast": 14.205439893048721,
+      "fde_forecast": 18.100704021969648,
+      "num_matches": 405,
+      "teacher_forced_ade_px": 421.04946217256435,
+      "persistence_ade_px": 6.103983105478041,
+      "post_refine": null,
+      "seed_id": "offset_4s"
+    },
+    {
+      "variant": "linear_baseline",
+      "seed_id": "offset_6s",
+      "ade_forecast": 4.675398177782452,
+      "fde_forecast": 7.163215071964966,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
+    },
+    {
+      "variant": "SAM_augmented",
+      "seed_id": "offset_6s",
+      "ade_forecast": 4.387491762804888,
+      "fde_forecast": 4.292978822195883,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
+    },
+    {
+      "variant": "A1_residual",
+      "checkpoint": "data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\checkpoint.pt",
+      "tracks_path": "data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\predicted_offset_6s_A1_residual.json",
+      "ade_full": 4.797098185131848,
+      "fde_full": 7.2856714952251975,
+      "ade_forecast": 4.632382822908564,
+      "fde_forecast": 7.2856714952251975,
+      "num_matches": 405,
+      "teacher_forced_ade_px": 384.8628688251271,
+      "persistence_ade_px": 4.536956763946835,
+      "post_refine": null,
+      "seed_id": "offset_6s"
+    },
+    {
+      "variant": "linear_baseline",
+      "seed_id": "offset_8s",
+      "ade_forecast": 5.384277708432482,
+      "fde_forecast": 6.374764831120269,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
+    },
+    {
+      "variant": "SAM_augmented",
+      "seed_id": "offset_8s",
+      "ade_forecast": 4.861887787167374,
+      "fde_forecast": 4.381594581521966,
+      "teacher_forced_ade_px": NaN,
+      "persistence_ade_px": NaN
+    },
+    {
+      "variant": "A1_residual",
+      "checkpoint": "data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\checkpoint.pt",
+      "tracks_path": "data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\predicted_offset_8s_A1_residual.json",
+      "ade_full": 5.299548550562152,
+      "fde_full": 6.438576184738617,
+      "ade_forecast": 5.3651980497319185,
+      "fde_forecast": 6.438576184738617,
+      "num_matches": 450,
+      "teacher_forced_ade_px": 377.925848792581,
+      "persistence_ade_px": 6.489920379769276,
+      "post_refine": null,
+      "seed_id": "offset_8s"
+    }
+  ],
+  "aggregate": {
+    "linear_baseline": {
+      "ade_forecast_mean": 6.358044068299065,
+      "ade_forecast_median": 5.4146190736543165,
+      "ade_forecast_std": 3.0796371170156376,
+      "n_seeds": 8
+    },
+    "SAM_augmented": {
+      "ade_forecast_mean": 5.842087228849143,
+      "ade_forecast_median": 4.991839398574525,
+      "ade_forecast_std": 2.6827859674475723,
+      "n_seeds": 8
+    },
+    "A1_residual": {
+      "ade_forecast_mean": 6.418610278474916,
+      "ade_forecast_median": 5.564119790955261,
+      "ade_forecast_std": 3.061520232421135,
+      "n_seeds": 8
+    }
+  }
+}

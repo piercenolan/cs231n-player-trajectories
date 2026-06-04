@@ -13,20 +13,67 @@ DATA_ROOT = REPO_ROOT / "data"
 EXTRA_DATASETS_JSON = DATA_ROOT / "datasets" / "extra_datasets.json"
 
 
+def _resolve_dataset_cfg(cfg: dict) -> dict:
+    """Turn repo-relative paths in extra_datasets.json into absolute Paths."""
+    def _p(key):
+        v = cfg.get(key)
+        if not v:
+            return None
+        path = Path(v)
+        return path if path.is_absolute() else REPO_ROOT / path
+
+    return {
+        **cfg,
+        "frames_dir": _p("frames_dir"),
+        "gt_mot": _p("gt_mot"),
+        "gt_json": _p("gt_json"),
+        "seqinfo": _p("seqinfo"),
+    }
+
+
+# Sprint basketball clips (Modal must know these even if extra_datasets.json is missing).
+SPRINT_BUILTIN_DATASETS = {
+    "sportsmot_v_6os86hzwcs_c001": {
+        "description": "SportsMOT basketball v_-6Os86HzwCs_c001 (train)",
+        "frames_dir": DATA_ROOT / "datasets" / "sportsmot_v_6os86hzwcs_c001" / "frames",
+        "gt_mot": DATA_ROOT / "datasets" / "sportsmot_v_6os86hzwcs_c001" / "gt" / "gt.txt",
+        "gt_json": None,
+        "seqinfo": DATA_ROOT / "datasets" / "sportsmot_v_6os86hzwcs_c001" / "seqinfo.ini",
+        "video": None,
+        "source_fps": 25.0,
+        "extract_fps": 25.0,
+    },
+    "sportsmot_v_6os86hzwcs_c003": {
+        "description": "SportsMOT basketball v_-6Os86HzwCs_c003 (train)",
+        "frames_dir": DATA_ROOT / "datasets" / "sportsmot_v_6os86hzwcs_c003" / "frames",
+        "gt_mot": DATA_ROOT / "datasets" / "sportsmot_v_6os86hzwcs_c003" / "gt" / "gt.txt",
+        "gt_json": None,
+        "seqinfo": DATA_ROOT / "datasets" / "sportsmot_v_6os86hzwcs_c003" / "seqinfo.ini",
+        "video": None,
+        "source_fps": 25.0,
+        "extract_fps": 25.0,
+    },
+    "sportsmot_v_00hrwkvvjtq_c001": {
+        "description": "SportsMOT basketball v_00HRwkvvjtQ_c001 (val holdout)",
+        "frames_dir": DATA_ROOT / "datasets" / "sportsmot_v_00hrwkvvjtq_c001" / "frames",
+        "gt_mot": DATA_ROOT / "datasets" / "sportsmot_v_00hrwkvvjtq_c001" / "gt" / "gt.txt",
+        "gt_json": None,
+        "seqinfo": DATA_ROOT / "datasets" / "sportsmot_v_00hrwkvvjtq_c001" / "seqinfo.ini",
+        "video": None,
+        "source_fps": 25.0,
+        "extract_fps": 25.0,
+    },
+}
+
+
 def _load_extra_datasets():
+    out = dict(SPRINT_BUILTIN_DATASETS)
     if not EXTRA_DATASETS_JSON.is_file():
-        return {}
+        return out
     with open(EXTRA_DATASETS_JSON, encoding="utf-8") as f:
         raw = json.load(f)
-    out = {}
     for name, cfg in raw.items():
-        out[name] = {
-            **cfg,
-            "frames_dir": REPO_ROOT / cfg["frames_dir"],
-            "gt_mot": REPO_ROOT / cfg["gt_mot"] if cfg.get("gt_mot") else None,
-            "gt_json": REPO_ROOT / cfg["gt_json"] if cfg.get("gt_json") else None,
-            "seqinfo": REPO_ROOT / cfg["seqinfo"] if cfg.get("seqinfo") else None,
-        }
+        out[name] = _resolve_dataset_cfg(cfg)
     return out
 
 

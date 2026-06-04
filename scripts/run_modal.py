@@ -17,6 +17,30 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
+# Sync code + small dataset registry JSON; exclude frames/GT blobs (use Modal volume).
+_MODAL_DATA_ALLOW = frozenset(
+    {
+        "extra_datasets.json",
+        "sprint_sequences.json",
+        "EXTRACTION_STATUS.md",
+    }
+)
+
+
+def _modal_sync_ignore(path) -> bool:
+    p = Path(path)
+    parts = p.parts
+    if ".git" in parts or "__pycache__" in parts:
+        return True
+    if "data" not in parts:
+        return False
+    if "datasets" in parts and p.name in _MODAL_DATA_ALLOW:
+        return False
+    if "datasets" in parts and p.suffix == ".md":
+        return False
+    return True
+
+
 app = modal.App("sports-trajectory")
 
 volume = modal.Volume.from_name("sports-data", create_if_missing=True)
@@ -50,11 +74,7 @@ image = (
     .add_local_dir(
         str(ROOT),
         remote_path="/project",
-        ignore=lambda p: (
-            ".git" in p.parts
-            or "__pycache__" in p.parts
-            or "data" in p.parts
-        ),
+        ignore=lambda p: _modal_sync_ignore(p),
     )
 )
 

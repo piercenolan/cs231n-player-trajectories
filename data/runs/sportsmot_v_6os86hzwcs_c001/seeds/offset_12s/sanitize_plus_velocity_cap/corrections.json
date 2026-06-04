@@ -1,0 +1,12 @@
+{
+  "corrections": [
+    {
+      "frame_number": 2,
+      "player_id": 4,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    }
+  ]
+}

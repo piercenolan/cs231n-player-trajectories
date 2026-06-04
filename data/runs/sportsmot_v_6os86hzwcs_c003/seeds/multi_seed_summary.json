@@ -1,0 +1,36 @@
+{
+  "recommended_ablation": "sanitize_plus_velocity_cap",
+  "num_seeds": 8,
+  "ade_mean": 5.883404430225642,
+  "ade_values": [
+    3.5539608008126957,
+    4.914343869026136,
+    11.52532543988394,
+    4.554306939877863,
+    4.885715727095848,
+    4.919175780638074,
+    7.2415136231490935,
+    5.472893261321486
+  ],
+  "num_frames_per_seed": {
+    "offset_0s": 45,
+    "offset_2s": 45,
+    "offset_4s": 45,
+    "offset_6s": 45,
+    "offset_8s": 45,
+    "offset_10s": 45,
+    "offset_12s": 45,
+    "offset_14s": 45
+  },
+  "seeds": [
+    "offset_0s",
+    "offset_2s",
+    "offset_4s",
+    "offset_6s",
+    "offset_8s",
+    "offset_10s",
+    "offset_12s",
+    "offset_14s"
+  ],
+  "ade_std": 2.342574930730441
+}

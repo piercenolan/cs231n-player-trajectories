@@ -1,17 +1,9 @@
 {
-  "status": "blocked_truncated_zip",
-  "planned_sequences": [
-    "v_-6Os86HzwCs_c001",
-    "v_-6Os86HzwCs_c003",
-    "v_00HRwkvvjtQ_c001"
-  ],
-  "holdout": "v_00HRwkvvjtQ_c001",
-  "example_clip_complete": true,
-  "commands_after_extract": [
-    "py scripts/register_sportsmot_sequence.py v_-6Os86HzwCs_c001",
-    "py scripts/register_sportsmot_sequence.py v_-6Os86HzwCs_c003",
-    "py scripts/register_sportsmot_sequence.py v_00HRwkvvjtQ_c001 --holdout",
-    "py scripts/run_batch_sportsmot_modal.py --step-sec 2 --skip-existing --datasets <names_from_extra_datasets.json>"
-  ],
-  "runbook": "docs/MODAL_SPRINT_RUNBOOK.md"
+  "status": "complete_transfer_eval",
+  "modal_seeds": "done",
+  "tensor_export_with_rule_features": "done",
+  "transfer_eval": "done",
+  "multiseq_csv": "data/runs/multiseq_transfer_summary.csv",
+  "paper_results": "docs/PAPER_RESULTS.md",
+  "note": "LSTM trained locally on sportsmot_example only; no Modal LSTM trainer in repo."
 }

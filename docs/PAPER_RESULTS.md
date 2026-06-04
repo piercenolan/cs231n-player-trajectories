@@ -48,6 +48,9 @@
 | Dataset | Median residual ADE | Median linear ADE | Residual beats linear |
 |---------|---------------------|-------------------|------------------------|
 | sportsmot_example | 5.81 | 5.81 | tie |
+| sportsmot_v_00hrwkvvjtq_c001 | 4.99 | 5.01 | Y |
+| sportsmot_v_6os86hzwcs_c001 | 4.94 | 4.84 | N |
+| sportsmot_v_6os86hzwcs_c003 | 5.56 | 5.41 | N |
 
 ## Section 6 - Honest limitations
 

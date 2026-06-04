@@ -1,0 +1,92 @@
+{
+  "corrections": [
+    {
+      "frame_number": 12,
+      "player_id": 2,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 14,
+      "player_id": 6,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 15,
+      "player_id": 6,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 16,
+      "player_id": 6,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 18,
+      "player_id": 3,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 25,
+      "player_id": 9,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 25,
+      "player_id": 3,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 26,
+      "player_id": 6,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 27,
+      "player_id": 6,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 31,
+      "player_id": 9,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    },
+    {
+      "frame_number": 31,
+      "player_id": 10,
+      "rule_fired": "sanitize",
+      "confidence": 1.0,
+      "game_state_active": "merged_bbox",
+      "predicted": false
+    }
+  ]
+}
