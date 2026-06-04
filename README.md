@@ -148,6 +148,17 @@ pip install sam3 torch opencv-python numpy matplotlib
 
 ## Data setup
 
+### SportsMOT full dataset (basketball only)
+
+The 16GB `sportsmot_publish.zip` contains basketball, football, and volleyball. Extract **only basketball** (~80 clips):
+
+```powershell
+py scripts/extract_sportsmot_basketball.py --zip data/sportsmot_publish.zip --list-only
+py scripts/extract_sportsmot_basketball.py --zip data/sportsmot_publish.zip
+```
+
+Output: `data/datasets/sportsmot_basketball/` (gitignored). See [data/datasets/sportsmot_basketball/README.md](data/datasets/sportsmot_basketball/README.md).
+
 Copy from the SportsMOT example zip:
 
 | Zip | Repo path |
@@ -157,6 +168,17 @@ Copy from the SportsMOT example zip:
 | `seqinfo.ini` | `data/datasets/sportsmot_example/seqinfo.ini` (optional) |
 
 See [data/datasets/sportsmot_example/README.md](data/datasets/sportsmot_example/README.md).
+
+### 36-hour sprint (report + transfer eval)
+
+| Doc | Purpose |
+|-----|---------|
+| [docs/RESEARCH_REPORT.md](docs/RESEARCH_REPORT.md) | Full project write-up |
+| [docs/PAPER_RESULTS.md](docs/PAPER_RESULTS.md) | Auto-generated result tables |
+| [docs/MODAL_SPRINT_RUNBOOK.md](docs/MODAL_SPRINT_RUNBOOK.md) | Extract, register, Modal batch |
+| [data/datasets/EXTRACTION_STATUS.md](data/datasets/EXTRACTION_STATUS.md) | Zip integrity / blocker |
+
+Register an extracted sequence: `py scripts/register_sportsmot_sequence.py <seq_id>`. Extra datasets load from `data/datasets/extra_datasets.json`.
 
 ---
 

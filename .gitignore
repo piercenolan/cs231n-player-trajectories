@@ -1,5 +1,13 @@
 data/*.mp4
 
+# SportsMOT (large download; do not commit)
+data/sportsmot_publish.zip
+data/sportsmot_publish/
+**/sportsmot_publish/
+data/datasets/sportsmot_basketball/*
+!data/datasets/sportsmot_basketball/README.md
+data/sportsmot_extract/
+
 # Python
 __pycache__/
 *.py[cod]

@@ -10,6 +10,25 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DATA_ROOT = REPO_ROOT / "data"
+EXTRA_DATASETS_JSON = DATA_ROOT / "datasets" / "extra_datasets.json"
+
+
+def _load_extra_datasets():
+    if not EXTRA_DATASETS_JSON.is_file():
+        return {}
+    with open(EXTRA_DATASETS_JSON, encoding="utf-8") as f:
+        raw = json.load(f)
+    out = {}
+    for name, cfg in raw.items():
+        out[name] = {
+            **cfg,
+            "frames_dir": REPO_ROOT / cfg["frames_dir"],
+            "gt_mot": REPO_ROOT / cfg["gt_mot"] if cfg.get("gt_mot") else None,
+            "gt_json": REPO_ROOT / cfg["gt_json"] if cfg.get("gt_json") else None,
+            "seqinfo": REPO_ROOT / cfg["seqinfo"] if cfg.get("seqinfo") else None,
+        }
+    return out
+
 
 DATASETS = {
     "sportsmot_example": {
@@ -35,10 +54,17 @@ DATASETS = {
 }
 
 
+def all_datasets():
+    merged = dict(DATASETS)
+    merged.update(_load_extra_datasets())
+    return merged
+
+
 def get_dataset(name="sportsmot_example"):
-    if name not in DATASETS:
-        raise ValueError(f"Unknown dataset '{name}'. Valid: {sorted(DATASETS)}")
-    return DATASETS[name]
+    merged = all_datasets()
+    if name not in merged:
+        raise ValueError(f"Unknown dataset '{name}'. Valid: {sorted(merged)}")
+    return merged[name]
 
 
 def runs_dir(dataset="sportsmot_example", seed_id=None):
