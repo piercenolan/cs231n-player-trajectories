@@ -173,10 +173,11 @@ See [data/datasets/sportsmot_example/README.md](data/datasets/sportsmot_example/
 
 | Doc | Purpose |
 |-----|---------|
+| [docs/PROJECT_STATUS.md](docs/PROJECT_STATUS.md) | **Start here** — honest answers, claims, limitations, regenerate commands |
 | [docs/RESEARCH_REPORT.md](docs/RESEARCH_REPORT.md) | Full project write-up |
 | [docs/PAPER_RESULTS.md](docs/PAPER_RESULTS.md) | Auto-generated result tables |
 | [docs/MODAL_SPRINT_RUNBOOK.md](docs/MODAL_SPRINT_RUNBOOK.md) | Extract, register, Modal batch |
-| [data/datasets/EXTRACTION_STATUS.md](data/datasets/EXTRACTION_STATUS.md) | Zip integrity / blocker |
+| [data/datasets/EXTRACTION_STATUS.md](data/datasets/EXTRACTION_STATUS.md) | Extracted sequences + seed counts |
 
 Register an extracted sequence: `py scripts/register_sportsmot_sequence.py <seq_id>`. Extra datasets load from `data/datasets/extra_datasets.json`.
 

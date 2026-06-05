@@ -6,7 +6,11 @@ data/sportsmot_publish/
 **/sportsmot_publish/
 data/datasets/sportsmot_basketball/*
 !data/datasets/sportsmot_basketball/README.md
+data/datasets/sportsmot_basketball_test/
 data/sportsmot_extract/
+
+# Duplicate Modal volume downloads (bulk get artifact)
+data/runs/*/seeds/seeds/
 
 # Python
 __pycache__/
