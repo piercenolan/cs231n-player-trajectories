@@ -294,7 +294,11 @@ py utils/visualize.py --frames data/runs/sportsmot_example/frames ^
   --baseline data/runs/sportsmot_example/baseline_tracks.json ^
   --augmented data/runs/sportsmot_example/ablations/sanitize_plus_velocity_cap/augmented_tracks.json ^
   --output data/runs/sportsmot_example/figures/summary_figure.png --summary --n-frames 4
+
+py scripts/plot_forecast_qualitative.py --dataset sportsmot_example --seed-id offset_0s
 ```
+
+Forecast overlay figure: `figures/forecast_qualitative.png` (observed 8f, LSTM vs GT vs linear 4f).
 
 ---
 
@@ -319,6 +323,7 @@ Under `data/runs/sportsmot_example/`:
 | `lstm/lstm_rule_features_a1b/` | A1 + soft rule penalty checkpoint |
 | `figures/lstm_rule_ablation_bar.png` | Variant comparison bar chart |
 | `figures/lstm_per_rule_delta_ade.png` | Post-refine rule attribution |
+| `figures/forecast_qualitative.png` | LSTM forecast vs GT trajectory overlays |
 
 ---
 
