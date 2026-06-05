@@ -37,6 +37,7 @@
    - `data/runs/sportsmot_example/figures/lstm_comparison.png`
    - `data/runs/figures/multiseq_perclip_bar.png`
    - `data/runs/figures/multiseq_train_vs_transfer.png`
+4. **Full agent chat (cleaned):** [CONVERSATION_TRANSCRIPT.md](CONVERSATION_TRANSCRIPT.md)
 
 ## Regenerate artifacts
 
@@ -46,4 +47,5 @@ py scripts/generate_paper_results.py
 py scripts/plot_lstm_vs_baselines.py
 py scripts/plot_multiseq_transfer.py
 py scripts/plot_pre_lstm_gauge.py
+py scripts/export_conversation_transcript.py
 ```

@@ -130,4 +130,4 @@ py scripts/eval_autoregressive_compare.py
 py scripts/diagnose_lstm_seeds.py
 ```
 
-See **README.md** (full pipeline), **docs/PROJECT_STATUS.md** (report-ready status + claims), and **docs/PROJECT_PLAN.md** (multi-seed + LSTM ordering).
+See **README.md** (full pipeline), **docs/PROJECT_STATUS.md** (report-ready status + claims), **docs/CONVERSATION_TRANSCRIPT.md** (clean agent chat export), and **docs/PROJECT_PLAN.md** (multi-seed + LSTM ordering).
