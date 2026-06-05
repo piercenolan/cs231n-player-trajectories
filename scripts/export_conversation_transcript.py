@@ -168,8 +168,12 @@ def main():
     header = [
         "# CS231N Project — Agent Conversation Transcript",
         "",
+        "> **AI session transcript (Cursor Agent).** Canonical chat log for CS231N generative-AI attribution.",
+        "> Index: [GENERATIVE_AI_USE.md](GENERATIVE_AI_USE.md) · Prompts: [AI_PROMPT_INDEX.md](AI_PROMPT_INDEX.md)",
+        "",
         f"**Generated:** {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}",
         f"**Source:** `{jsonl_path}`",
+        f"**Tool:** Cursor Agent (Cursor IDE)",
         f"**Turns:** {len(turns)} user messages ({substantive} with content)",
         "",
         "This is a cleaned export of the Cursor Agent chat. Internal reasoning marked",

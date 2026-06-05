@@ -1,6 +1,8 @@
 # Project Plan — SAM3.1 Tracking → Augmentation → Rule-Aware LSTM
 
-Living plan for `cs231n-player-trajectories`. Updated after 12-seed rule-aware LSTM training (May 2026).
+> **AI-assisted documentation (Cursor Agent).** Living plan; authors verify execution. Attribution: [GENERATIVE_AI_USE.md](GENERATIVE_AI_USE.md).
+
+Updated after 12-seed rule-aware LSTM training (May 2026).
 
 Related docs: [MILESTONE_CHECKLIST.md](MILESTONE_CHECKLIST.md), [README.md](../README.md), [MULTI_SEED_COMMANDS.md](MULTI_SEED_COMMANDS.md), [data/datasets/sportsmot_example/README.md](../data/datasets/sportsmot_example/README.md).
 

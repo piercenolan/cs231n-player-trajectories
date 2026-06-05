@@ -1,4 +1,7 @@
 # Video processing utilities for CS231N project
+
+> **AI session transcript (Cursor UI export).** Secondary/partial log. **Canonical transcript:** [docs/CONVERSATION_TRANSCRIPT.md](docs/CONVERSATION_TRANSCRIPT.md) · Hub: [docs/GENERATIVE_AI_USE.md](docs/GENERATIVE_AI_USE.md)
+
 _Exported on 6/4/2026 at 17:14:40 PDT from Cursor (3.6.31)_
 
 ---

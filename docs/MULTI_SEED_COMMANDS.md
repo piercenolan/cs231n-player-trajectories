@@ -1,5 +1,7 @@
 # Multi-seed Modal commands (SportsMOT example)
 
+> **AI-assisted documentation (Cursor Agent).** Attribution: [GENERATIVE_AI_USE.md](GENERATIVE_AI_USE.md).
+
 ## One-command pipeline (recommended)
 
 Generates seeds every **2s** (12 windows) or **5s** across 500 frames, runs Modal sequentially, downloads from volume, aligns GT, runs augmentation metrics, and exports LSTM tensors:

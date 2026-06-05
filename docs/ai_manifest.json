@@ -1,0 +1,738 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-06-05T13:56:29Z",
+  "tool": "Cursor Agent (Cursor IDE)",
+  "tool_version_note": "Cursor IDE 3.6.31+; underlying LLM model not logged per turn in repo",
+  "policy": "CS231N Generative AI Use Policy \u2014 all AI-assisted artifacts listed; authors responsible for verification.",
+  "summary": {
+    "ai_generated_code_files": 50,
+    "ai_generated_doc_files": 22,
+    "ai_generated_figures": 16,
+    "excluded_glob_patterns": 7
+  },
+  "artifacts": {
+    "code": [
+      {
+        "path": "scripts/__init__.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/aggregate_experiments.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/aggregate_multiseq_eval.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/align_seed_gt.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/audit_lstm.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/check_sprint_ready.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/diagnose_lstm_seeds.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/eval_autoregressive_compare.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/eval_lstm.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/eval_lstm_ablations.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/eval_rule_feature_ablation.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/export_conversation_transcript.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/export_lstm_tensors.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/extract_sportsmot_basketball.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/generate_ai_attribution_docs.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/generate_paper_results.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/plot_forecast_qualitative.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/plot_lstm_vs_baselines.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/plot_multiseq_transfer.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/plot_pre_lstm_gauge.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/predict_lstm.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/register_sportsmot_sequence.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/run_ablations.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/run_all_seeds_modal.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/run_batch_sportsmot_modal.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/run_modal.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/run_multi_seed.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/run_sam3.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/run_sanitize_grid.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/setup_sportsmot_gt.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/train_lstm.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "utils/augmentation.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "utils/convert_tracks.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "utils/datasets.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "utils/forecast_visualize.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "utils/gt_align.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "utils/linear_baseline.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "utils/lstm_dataset.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "utils/lstm_predict.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "utils/lstm_val_metrics.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "utils/metrics.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "utils/rule_features.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "utils/seed_schedule.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "utils/trajectory_export.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "utils/trajectory_metrics.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "utils/video_utils.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "utils/visualize.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "models/__init__.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "models/trajectory_graph_lstm.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "models/trajectory_lstm.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      }
+    ],
+    "documentation": [
+      {
+        "path": "docs/AI_ARTIFACT_REGISTRY.md",
+        "category": "documentation",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "AI-assisted drafting; authors responsible for factual claims."
+      },
+      {
+        "path": "docs/AI_FIGURES.md",
+        "category": "documentation",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "AI-assisted drafting; authors responsible for factual claims."
+      },
+      {
+        "path": "docs/AI_PLANS.md",
+        "category": "documentation",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "AI-assisted drafting; authors responsible for factual claims."
+      },
+      {
+        "path": "docs/AI_PROMPT_INDEX.md",
+        "category": "documentation",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "AI-assisted drafting; authors responsible for factual claims."
+      },
+      {
+        "path": "docs/AI_TRANSCRIPTS.md",
+        "category": "documentation",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "AI-assisted drafting; authors responsible for factual claims."
+      },
+      {
+        "path": "docs/CONVERSATION_TRANSCRIPT.md",
+        "category": "documentation",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "AI-assisted drafting; authors responsible for factual claims."
+      },
+      {
+        "path": "docs/DEFERRED_MULTISEQ.md",
+        "category": "documentation",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "AI-assisted drafting; authors responsible for factual claims."
+      },
+      {
+        "path": "docs/GENERATIVE_AI_USE.md",
+        "category": "documentation",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "AI-assisted drafting; authors responsible for factual claims."
+      },
+      {
+        "path": "docs/MILESTONE_CHECKLIST.md",
+        "category": "documentation",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "AI-assisted drafting; authors responsible for factual claims."
+      },
+      {
+        "path": "docs/MODAL_SPRINT_RUNBOOK.md",
+        "category": "documentation",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "AI-assisted drafting; authors responsible for factual claims."
+      },
+      {
+        "path": "docs/MULTI_SEED_COMMANDS.md",
+        "category": "documentation",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "AI-assisted drafting; authors responsible for factual claims."
+      },
+      {
+        "path": "docs/PAPER_RESULTS.md",
+        "category": "documentation",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "AI-assisted drafting; authors responsible for factual claims."
+      },
+      {
+        "path": "docs/PROJECT_PLAN.md",
+        "category": "documentation",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "AI-assisted drafting; authors responsible for factual claims."
+      },
+      {
+        "path": "docs/PROJECT_STATUS.md",
+        "category": "documentation",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "AI-assisted drafting; authors responsible for factual claims."
+      },
+      {
+        "path": "docs/RESEARCH_REPORT.md",
+        "category": "documentation",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "AI-assisted drafting; authors responsible for factual claims."
+      },
+      {
+        "path": "scripts/CODE_AI_ATTRIBUTION.md",
+        "category": "documentation",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Directory-level AI attribution marker."
+      },
+      {
+        "path": "utils/CODE_AI_ATTRIBUTION.md",
+        "category": "documentation",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Directory-level AI attribution marker."
+      },
+      {
+        "path": "models/CODE_AI_ATTRIBUTION.md",
+        "category": "documentation",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Directory-level AI attribution marker."
+      },
+      {
+        "path": "data/runs/FIGURES_AI_ATTRIBUTION.md",
+        "category": "documentation",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Directory-level AI attribution marker."
+      },
+      {
+        "path": "README.md",
+        "category": "documentation",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "AI-assisted drafting; authors responsible for factual claims."
+      },
+      {
+        "path": "CURSOR_TRANSCRIPT.md",
+        "category": "documentation",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "AI-assisted drafting; authors responsible for factual claims."
+      },
+      {
+        "path": "GENERATIVE_AI_USE.md",
+        "category": "documentation",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "AI-assisted drafting; authors responsible for factual claims."
+      }
+    ],
+    "figures": [
+      {
+        "path": "data/runs/sportsmot_example/figures/summary_figure.png",
+        "category": "figure",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "generator": "utils/visualize.py",
+        "description": "SAM3.1 raw vs augmentation side-by-side",
+        "on_disk": true,
+        "notes": "Rendered by AI-assisted script from experimental outputs."
+      },
+      {
+        "path": "data/runs/sportsmot_example/figures/baseline_metrics.png",
+        "category": "figure",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "generator": "scripts/plot_pre_lstm_gauge.py",
+        "description": "Pre-LSTM tracking continuity gauges",
+        "on_disk": true,
+        "notes": "Rendered by AI-assisted script from experimental outputs."
+      },
+      {
+        "path": "data/runs/sportsmot_example/figures/ablation_ade_bar.png",
+        "category": "figure",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "generator": "scripts/run_ablations.py / utils/metrics.py",
+        "description": "Augmentation ablation detection ADE",
+        "on_disk": true,
+        "notes": "Rendered by AI-assisted script from experimental outputs."
+      },
+      {
+        "path": "data/runs/sportsmot_example/figures/lstm_comparison.png",
+        "category": "figure",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "generator": "scripts/plot_lstm_vs_baselines.py",
+        "description": "Forecast ADE all seeds vs clean seeds",
+        "on_disk": true,
+        "notes": "Rendered by AI-assisted script from experimental outputs."
+      },
+      {
+        "path": "data/runs/sportsmot_example/figures/lstm_ade_bar.png",
+        "category": "figure",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "generator": "scripts/plot_lstm_vs_baselines.py",
+        "description": "LSTM variant ADE bar chart",
+        "on_disk": true,
+        "notes": "Rendered by AI-assisted script from experimental outputs."
+      },
+      {
+        "path": "data/runs/sportsmot_example/figures/lstm_rule_ablation_bar.png",
+        "category": "figure",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "generator": "scripts/eval_lstm_ablations.py",
+        "description": "A0\u2013A3 forecast ablation bars",
+        "on_disk": true,
+        "notes": "Rendered by AI-assisted script from experimental outputs."
+      },
+      {
+        "path": "data/runs/sportsmot_example/figures/lstm_per_rule_delta_ade.png",
+        "category": "figure",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "generator": "scripts/eval_lstm_ablations.py",
+        "description": "Per-rule post-refine \u0394ADE",
+        "on_disk": true,
+        "notes": "Rendered by AI-assisted script from experimental outputs."
+      },
+      {
+        "path": "data/runs/sportsmot_example/figures/multi_seed_ade_bar.png",
+        "category": "figure",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "generator": "scripts/plot_pre_lstm_gauge.py",
+        "description": "Multi-seed detection ADE",
+        "on_disk": true,
+        "notes": "Rendered by AI-assisted script from experimental outputs."
+      },
+      {
+        "path": "data/runs/sportsmot_example/figures/forecast_qualitative.png",
+        "category": "figure",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "generator": "scripts/plot_forecast_qualitative.py",
+        "description": "LSTM forecast vs GT trajectory overlays",
+        "on_disk": true,
+        "notes": "Rendered by AI-assisted script from experimental outputs."
+      },
+      {
+        "path": "data/runs/figures/multiseq_perclip_bar.png",
+        "category": "figure",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "generator": "scripts/plot_multiseq_transfer.py",
+        "description": "Per-clip residual vs linear",
+        "on_disk": true,
+        "notes": "Rendered by AI-assisted script from experimental outputs."
+      },
+      {
+        "path": "data/runs/figures/multiseq_train_vs_transfer.png",
+        "category": "figure",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "generator": "scripts/plot_multiseq_transfer.py",
+        "description": "Per-clip train vs transfer baseline",
+        "on_disk": true,
+        "notes": "Rendered by AI-assisted script from experimental outputs."
+      },
+      {
+        "path": "data/runs/figures/multiseq_transfer_bar.png",
+        "category": "figure",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "generator": "scripts/plot_multiseq_transfer.py",
+        "description": "Transfer eval bar chart",
+        "on_disk": true,
+        "notes": "Rendered by AI-assisted script from experimental outputs."
+      },
+      {
+        "path": "data/runs/sportsmot_v_00hrwkvvjtq_c001/figures/lstm_rule_ablation_bar.png",
+        "category": "figure",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "generator": "scripts/eval_lstm_ablations.py",
+        "description": "Per-clip LSTM rule ablation bar",
+        "on_disk": true,
+        "notes": "Rendered by AI-assisted script from experimental outputs."
+      },
+      {
+        "path": "data/runs/sportsmot_v_6os86hzwcs_c001/figures/lstm_rule_ablation_bar.png",
+        "category": "figure",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "generator": "scripts/eval_lstm_ablations.py",
+        "description": "Per-clip LSTM rule ablation bar",
+        "on_disk": true,
+        "notes": "Rendered by AI-assisted script from experimental outputs."
+      },
+      {
+        "path": "data/runs/sportsmot_v_6os86hzwcs_c003/figures/lstm_rule_ablation_bar-LaptopStudio.png",
+        "category": "figure",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "generator": "scripts/eval_lstm_ablations.py",
+        "description": "Per-clip LSTM rule ablation bar",
+        "on_disk": true,
+        "notes": "Rendered by AI-assisted script from experimental outputs."
+      },
+      {
+        "path": "data/runs/sportsmot_v_6os86hzwcs_c003/figures/lstm_rule_ablation_bar.png",
+        "category": "figure",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "generator": "scripts/eval_lstm_ablations.py",
+        "description": "Per-clip LSTM rule ablation bar",
+        "on_disk": true,
+        "notes": "Rendered by AI-assisted script from experimental outputs."
+      }
+    ]
+  },
+  "not_ai_generated": [
+    {
+      "glob": "data/runs/**/checkpoint.pt",
+      "category": "model_weights",
+      "ai_generated": false,
+      "notes": "PyTorch checkpoints trained on SportsMOT-derived tensors"
+    },
+    {
+      "glob": "data/runs/**/*.csv",
+      "category": "experiment_table",
+      "ai_generated": false,
+      "notes": "Metrics tables from pipeline runs"
+    },
+    {
+      "glob": "data/runs/**/baseline_tracks.json",
+      "category": "experiment_data",
+      "ai_generated": false,
+      "notes": "SAM3.1 tracking output"
+    },
+    {
+      "glob": "data/runs/**/augmented_tracks.json",
+      "category": "experiment_data",
+      "ai_generated": false,
+      "notes": "Rule-augmented tracks"
+    },
+    {
+      "glob": "data/runs/**/trajectory_tensors.json",
+      "category": "experiment_data",
+      "ai_generated": false,
+      "notes": "LSTM training tensors"
+    },
+    {
+      "glob": "data/runs/**/predicted_*.json",
+      "category": "experiment_data",
+      "ai_generated": false,
+      "notes": "LSTM rollout predictions"
+    },
+    {
+      "glob": "data/datasets/**",
+      "category": "external_dataset",
+      "ai_generated": false,
+      "notes": "SportsMOT frames and ground truth"
+    }
+  ],
+  "transcripts": {
+    "canonical": "docs/CONVERSATION_TRANSCRIPT.md",
+    "raw_jsonl": "C:\\Users\\63npi\\.cursor\\projects\\c-Users-63npi-OneDrive-Desktop-CS231N-cs231n-player-trajectories\\agent-transcripts\\c9cd51f6-def0-4582-b4bd-b9e6d7fde87d\\c9cd51f6-def0-4582-b4bd-b9e6d7fde87d.jsonl",
+    "cursor_ui_export": "CURSOR_TRANSCRIPT.md"
+  },
+  "plans": {
+    "consolidated": "docs/AI_PLANS.md",
+    "living_plan": "docs/PROJECT_PLAN.md"
+  }
+}

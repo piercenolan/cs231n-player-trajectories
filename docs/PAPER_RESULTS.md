@@ -1,5 +1,7 @@
 # Paper Results (auto-generated)
 
+> **AI-assisted documentation (Cursor Agent).** Generated from run artifacts via `scripts/generate_paper_results.py`. Attribution: [GENERATIVE_AI_USE.md](GENERATIVE_AI_USE.md).
+
 ## Section 1 - Detection metrics (pre-LSTM)
 
 | Metric | SAM3.1 baseline | Augmented |

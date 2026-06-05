@@ -1,5 +1,7 @@
 # Project status (report-ready)
 
+> **AI-assisted documentation (Cursor Agent).** Attribution: [GENERATIVE_AI_USE.md](GENERATIVE_AI_USE.md).
+
 **Last updated:** after per-clip LSTM retrain on 3 new basketball clips
 
 ## Direct answers
@@ -38,6 +40,7 @@
    - `data/runs/figures/multiseq_perclip_bar.png`
    - `data/runs/figures/multiseq_train_vs_transfer.png`
 4. **Full agent chat (cleaned):** [CONVERSATION_TRANSCRIPT.md](CONVERSATION_TRANSCRIPT.md)
+5. **Generative AI attribution:** [GENERATIVE_AI_USE.md](GENERATIVE_AI_USE.md)
 
 ## Regenerate artifacts
 

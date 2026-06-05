@@ -2,6 +2,8 @@
 
 **CS231N Final Project Report**
 
+> **AI-assisted documentation (Cursor Agent).** Draft report prose; authors verify all claims. Formal generative-AI use statement is in the external PDF submission. Repo attribution: [GENERATIVE_AI_USE.md](GENERATIVE_AI_USE.md).
+
 ## Abstract
 
 We build an end-to-end pipeline for multi-player tracking and short-horizon trajectory forecasting on SportsMOT basketball footage. SAM3.1 produces per-frame detections; a geometry-free augmentation layer (sanitize + velocity cap) stabilizes tracks before forecasting. We compare plain LSTM, rule-conditioned LSTM, graph LSTM, and a **residual LSTM** that predicts corrections over a constant-velocity linear baseline. On our primary clip (`sportsmot_example`, 12 temporal seeds at 2s spacing), the residual model **ties the linear baseline** on median rollout ADE (~5.8 px) while plain LSTM remains far worse (~10.7 px). Rule features improve A1 over A0 but only match linear once trained as a residual head. We evaluate **transfer** of the same checkpoint on three additional basketball clips (47 Modal seeds): holdout median ADE slightly favors residual (4.99 vs 5.01 px) under transfer-only eval. We then **retrain per clip** on all three new sequences (~5 min/clip CPU): `c001` residual beats linear (4.82 vs 4.84 px); `c003` and holdout remain near linear.

@@ -4,6 +4,8 @@ Research project: **SAM3.1** player tracking on basketball video, a **geometry-f
 
 **Write-up:** [docs/MILESTONE_CHECKLIST.md](docs/MILESTONE_CHECKLIST.md) · **Living plan:** [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.md) · **Multi-seed:** [docs/MULTI_SEED_COMMANDS.md](docs/MULTI_SEED_COMMANDS.md)
 
+**Generative AI attribution (CS231N policy):** [docs/GENERATIVE_AI_USE.md](docs/GENERATIVE_AI_USE.md) — transcripts, prompts, plans, and registry of all AI-assisted artifacts in this repo.
+
 ---
 
 ## Architecture
@@ -299,6 +301,15 @@ py scripts/plot_forecast_qualitative.py --dataset sportsmot_example --seed-id of
 ```
 
 Forecast overlay figure: `figures/forecast_qualitative.png` (observed 8f, LSTM vs GT vs linear 4f).
+
+### 8) Generative AI attribution (CS231N policy)
+
+```powershell
+py scripts/export_conversation_transcript.py
+py scripts/generate_ai_attribution_docs.py
+```
+
+Hub: [docs/GENERATIVE_AI_USE.md](docs/GENERATIVE_AI_USE.md) (transcripts, prompts, plans, artifact registry).
 
 ---
 

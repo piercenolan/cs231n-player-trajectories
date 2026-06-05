@@ -1,5 +1,7 @@
 # Modal sprint runbook (36h)
 
+> **AI-assisted documentation (Cursor Agent).** Attribution: [GENERATIVE_AI_USE.md](GENERATIVE_AI_USE.md).
+
 If extraction fails with `PermissionError` on Windows/OneDrive, use `--force` or delete the partial folder under `data/datasets/sportsmot_basketball/train/`.
 
 Run these in an **external terminal** where `py -m modal` is authenticated (Cursor terminal may not connect).

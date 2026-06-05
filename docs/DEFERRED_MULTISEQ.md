@@ -1,5 +1,7 @@
 # Deferred: pooled multi-sequence training
 
+> **AI-assisted documentation (Cursor Agent).** Attribution: [GENERATIVE_AI_USE.md](GENERATIVE_AI_USE.md).
+
 Per the 36-hour sprint plan, the following are **explicitly out of scope** until after the report deadline:
 
 - `registry.json` with full manifest-driven training
