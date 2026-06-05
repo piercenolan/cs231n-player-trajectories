@@ -54,7 +54,8 @@ flowchart LR
 | 13 | **Step-sec 2 multi-seed (12 windows)** | Done | 12 seeds @ 2s step; tensors + rule features exported |
 | 14 | **A1 residual LSTM** (forecast ADE, ties linear) | Done | `lstm/lstm_rule_features_residual/`; see `docs/PAPER_RESULTS.md` |
 | 15 | **36h sprint infra** (register, batch Modal, transfer CSV) | Done | `scripts/register_sportsmot_sequence.py`, `MODAL_SPRINT_RUNBOOK.md` |
-| 16 | **Cross-sequence transfer (3 clips)** | Done | `multiseq_transfer_summary.csv`; holdout residual 4.99 vs linear 5.01 |
+| 16 | **Cross-sequence transfer (3 clips)** | Done | `multiseq_transfer_baseline.csv` |
+| 17 | **Per-clip LSTM retrain (3 new clips)** | Done | `multiseq_perclip_summary.csv`; `c001` beats linear |
 
 ---
 

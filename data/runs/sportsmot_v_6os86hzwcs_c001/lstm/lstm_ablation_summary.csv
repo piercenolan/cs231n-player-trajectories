@@ -1,4 +1,4 @@
 variant,checkpoint,tracks_path,ade_full,fde_full,ade_forecast,fde_forecast,num_matches,teacher_forced_ade_px,persistence_ade_px,post_refine
-A1_residual,data\runs\sportsmot_example\lstm\lstm_rule_features_residual\checkpoint.pt,data\runs\sportsmot_example\lstm\lstm_rule_features_residual\predicted_A1_residual.json,4.315125521636326,14.500480355753677,4.517849579649026,14.500480355753677,450,332.29328136444093,6.73758661259404,
+A1_residual,C:\Users\63npi\OneDrive\Desktop\CS231N\cs231n-player-trajectories\data\runs\sportsmot_v_6os86hzwcs_c001\lstm\lstm_rule_features_residual\checkpoint.pt,C:\Users\63npi\OneDrive\Desktop\CS231N\cs231n-player-trajectories\data\runs\sportsmot_v_6os86hzwcs_c001\lstm\lstm_rule_features_residual\predicted_A1_residual.json,4.342176349393065,14.061265411219509,4.550749235028843,14.061265411219509,450,331.5763964933508,6.73758661259404,
 SAM_augmented,,,,,3.7420969781247337,4.8332547652669,,nan,nan,
 linear_baseline,,,,,4.343911852307567,14.162962318360645,,nan,nan,

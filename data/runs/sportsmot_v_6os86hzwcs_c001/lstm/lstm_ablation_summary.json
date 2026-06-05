@@ -4,14 +4,14 @@
   "results": [
     {
       "variant": "A1_residual",
-      "checkpoint": "data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\checkpoint.pt",
-      "tracks_path": "data\\runs\\sportsmot_example\\lstm\\lstm_rule_features_residual\\predicted_A1_residual.json",
-      "ade_full": 4.315125521636326,
-      "fde_full": 14.500480355753677,
-      "ade_forecast": 4.517849579649026,
-      "fde_forecast": 14.500480355753677,
+      "checkpoint": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_6os86hzwcs_c001\\lstm\\lstm_rule_features_residual\\checkpoint.pt",
+      "tracks_path": "C:\\Users\\63npi\\OneDrive\\Desktop\\CS231N\\cs231n-player-trajectories\\data\\runs\\sportsmot_v_6os86hzwcs_c001\\lstm\\lstm_rule_features_residual\\predicted_A1_residual.json",
+      "ade_full": 4.342176349393065,
+      "fde_full": 14.061265411219509,
+      "ade_forecast": 4.550749235028843,
+      "fde_forecast": 14.061265411219509,
       "num_matches": 450,
-      "teacher_forced_ade_px": 332.29328136444093,
+      "teacher_forced_ade_px": 331.5763964933508,
       "persistence_ade_px": 6.73758661259404,
       "post_refine": null
     },

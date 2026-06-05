@@ -4,7 +4,7 @@
 
 ## Abstract
 
-We build an end-to-end pipeline for multi-player tracking and short-horizon trajectory forecasting on SportsMOT basketball footage. SAM3.1 produces per-frame detections; a geometry-free augmentation layer (sanitize + velocity cap) stabilizes tracks before forecasting. We compare plain LSTM, rule-conditioned LSTM, graph LSTM, and a **residual LSTM** that predicts corrections over a constant-velocity linear baseline. On our primary clip (`sportsmot_example`, 12 temporal seeds at 2s spacing), the residual model **ties the linear baseline** on median rollout ADE (~5.8 px) while plain LSTM remains far worse (~10.7 px). Rule features improve A1 over A0 but only match linear once trained as a residual head. We evaluate **transfer** of the same checkpoint on three additional basketball clips (47 Modal seeds): holdout median ADE slightly favors residual (4.99 vs 5.01 px); two train-split clips slightly favor linear.
+We build an end-to-end pipeline for multi-player tracking and short-horizon trajectory forecasting on SportsMOT basketball footage. SAM3.1 produces per-frame detections; a geometry-free augmentation layer (sanitize + velocity cap) stabilizes tracks before forecasting. We compare plain LSTM, rule-conditioned LSTM, graph LSTM, and a **residual LSTM** that predicts corrections over a constant-velocity linear baseline. On our primary clip (`sportsmot_example`, 12 temporal seeds at 2s spacing), the residual model **ties the linear baseline** on median rollout ADE (~5.8 px) while plain LSTM remains far worse (~10.7 px). Rule features improve A1 over A0 but only match linear once trained as a residual head. We evaluate **transfer** of the same checkpoint on three additional basketball clips (47 Modal seeds): holdout median ADE slightly favors residual (4.99 vs 5.01 px) under transfer-only eval. We then **retrain per clip** on all three new sequences (~5 min/clip CPU): `c001` residual beats linear (4.82 vs 4.84 px); `c003` and holdout remain near linear.
 
 ---
 
@@ -59,9 +59,9 @@ Recommended stack: `sanitize_plus_velocity_cap` (prune spurious detections, cap 
 
 **Training (headline model):** `held_out_seed` split — train 11 seeds, validate `offset_0s`; 80 epochs with scheduled sampling (p: 0 to 0.3) and `--optimize-forecast-ade`.
 
-### 3.5 Cross-sequence transfer (planned)
+### 3.5 Multi-clip evaluation
 
-Checkpoint trained only on `sportsmot_example` is evaluated on held-out basketball sequences without fine-tuning. Registration via `scripts/register_sportsmot_sequence.py` and `data/datasets/extra_datasets.json`. See `docs/MODAL_SPRINT_RUNBOOK.md`.
+Each clip gets its own residual LSTM checkpoint (`held_out_seed`, val `offset_0s`, 80 epochs). Transfer baseline (example checkpoint, no retrain) is retained in `multiseq_transfer_baseline.csv` for comparison.
 
 ---
 
@@ -97,18 +97,28 @@ Baseline ADE vs aligned GT ~7.16 px; best sanitize-grid ADE ~5.87 px (reported i
 
 Auto-generated tables: `docs/PAPER_RESULTS.md`.
 
-### 4.3 Cross-sequence transfer (eval-only)
+### 4.3 Multi-clip eval (per-clip trained residual LSTM)
 
-Same **A1 residual** checkpoint trained on `sportsmot_example` only; no fine-tuning on new clips.
+Each clip uses its own `lstm_rule_features_residual/checkpoint.pt` (same hyperparameters as §3). Linear baseline unchanged.
 
-| Dataset | Seeds eval | Median residual ADE | Median linear ADE | Residual vs linear |
-|---------|------------|---------------------|-------------------|--------------------|
-| sportsmot_example (train) | 12 | 5.81 | 5.81 | tie |
-| sportsmot_v_6os86hzwcs_c001 | 16 | 4.94 | 4.84 | linear wins |
-| sportsmot_v_6os86hzwcs_c003 | 8 | 5.56 | 5.41 | linear wins |
-| sportsmot_v_00hrwkvvjtq_c001 (holdout) | 23 | **4.99** | 5.01 | **residual wins** |
+| Dataset | Seeds | Median residual ADE | Median linear ADE | Residual vs linear |
+|---------|-------|---------------------|-------------------|--------------------|
+| sportsmot_example | 12 | 5.81 | 5.81 | tie |
+| sportsmot_v_6os86hzwcs_c001 | 16 | **4.82** | 4.84 | **residual wins** |
+| sportsmot_v_6os86hzwcs_c003 | 8 | 5.48 | 5.41 | linear wins |
+| sportsmot_v_00hrwkvvjtq_c001 (holdout) | 23 | 5.16 | 5.01 | linear wins |
 
-Holdout val clip (`v_00HRwkvvjtQ_c001`) shows slight transfer gain over linear on median ADE; train-split clips are within ~0.1–0.2 px of linear. See `data/runs/multiseq_transfer_summary.csv`.
+**Transfer baseline** (example checkpoint only, no retrain on new clips):
+
+| Dataset | Transfer residual | Transfer linear | Δ vs per-clip residual |
+|---------|-------------------|-----------------|------------------------|
+| sportsmot_v_6os86hzwcs_c001 | 4.94 | 4.84 | −0.12 px (per-clip better) |
+| sportsmot_v_6os86hzwcs_c003 | 5.56 | 5.41 | −0.08 px (per-clip better) |
+| sportsmot_v_00hrwkvvjtq_c001 | 4.99 | 5.01 | +0.17 px (transfer better) |
+
+Per-clip training helps train-split clips modestly; holdout is mixed — transfer from `sportsmot_example` generalizes slightly better on median ADE for that sequence. See `data/runs/multiseq_perclip_summary.csv`, `multiseq_transfer_baseline.csv`.
+
+**Figures:** `data/runs/figures/multiseq_perclip_bar.png`, `multiseq_train_vs_transfer.png`.
 
 Late-window seeds excluded from export where tensor validation failed (end-of-clip tracking dropout).
 
@@ -126,11 +136,10 @@ Late-window seeds excluded from export where tensor validation failed (end-of-cl
 
 ## 6. Limitations and Future Work
 
-1. **Single training clip** for LSTM; other clips evaluated via transfer only.
-2. **No pooled multi-sequence training** (deferred; see `docs/DEFERRED_MULTISEQ.md`).
+1. **No pooled multi-sequence training** — each clip trained independently (see `docs/DEFERRED_MULTISEQ.md`).
+2. A0/A1 non-residual variants not retrained on new clips.
 3. SAM-on-future-frames is an oracle ceiling, not comparable to causal forecasters.
-4. NBA clips in `data/clips/` lack SportsMOT GT for the same protocol.
-5. End-of-clip seeds may fail tensor validation on shorter or noisy windows.
+4. End-of-clip seeds may fail tensor validation on shorter or noisy windows.
 
 ---
 
@@ -140,13 +149,12 @@ Late-window seeds excluded from export where tensor validation failed (end-of-cl
 # Example clip (complete)
 py scripts/eval_lstm_ablations.py --dataset sportsmot_example --all-seeds --skip-attribution
 py scripts/plot_lstm_vs_baselines.py
-py scripts/generate_paper_results.py --multiseq-csv data/runs/multiseq_transfer_summary.csv
+py scripts/generate_paper_results.py
 
-# After re-download SportsMOT zip
-py scripts/extract_sportsmot_basketball.py --zip data/sportsmot_publish.zip --sequences v_-6Os86HzwCs_c001 v_-6Os86HzwCs_c003 v_00HRwkvvjtQ_c001
-py scripts/register_sportsmot_sequence.py v_00HRwkvvjtQ_c001 --holdout
-# External terminal:
-py scripts/run_batch_sportsmot_modal.py --step-sec 2 --skip-existing --datasets <registered_names>
+# Per-clip retrain (new clips)
+py scripts/train_lstm.py --dataset sportsmot_v_6os86hzwcs_c001 --model rule_features --residual --split held_out_seed --val-seed offset_0s --epochs 80 --scheduled-sampling --optimize-forecast-ade
+py scripts/aggregate_multiseq_eval.py --output data/runs/multiseq_perclip_summary.csv --training-mode per_clip
+py scripts/plot_multiseq_transfer.py
 ```
 
 Artifacts: `data/runs/sportsmot_example/lstm/lstm_rule_features_residual/checkpoint.pt`, `lstm_ablation_robust.json`, `lstm_per_seed_delta.csv`.

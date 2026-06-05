@@ -43,17 +43,29 @@
 - Three failure seeds (`offset_0s`, `offset_5s`, `offset_15s`): high ADE on all models — SAM3.1 tracking failure, not LSTM-specific.
 - Teacher-forced A1 median: 4.97 px; rollout gap reflects exposure bias during training.
 
-## Section 5 - Cross-sequence transfer (eval-only)
+## Section 5 - Multi-clip eval (per-clip trained residual LSTM)
 
-| Dataset | Median residual ADE | Median linear ADE | Residual beats linear |
-|---------|---------------------|-------------------|------------------------|
-| sportsmot_example | 5.81 | 5.81 | tie |
-| sportsmot_v_00hrwkvvjtq_c001 | 4.99 | 5.01 | Y |
-| sportsmot_v_6os86hzwcs_c001 | 4.94 | 4.84 | N |
-| sportsmot_v_6os86hzwcs_c003 | 5.56 | 5.41 | N |
+Each clip uses its own `lstm_rule_features_residual/checkpoint.pt` (`held_out_seed`, val `offset_0s`, 80 epochs, scheduled sampling).
 
-## Section 6 - Honest limitations
+| Dataset | Median residual ADE | Median linear ADE | Residual beats linear | Seeds |
+|---------|---------------------|-------------------|------------------------|-------|
+| sportsmot_example | 5.81 | 5.81 | tie | 12 |
+| sportsmot_v_00hrwkvvjtq_c001 | 5.16 | 5.01 | N | 23 |
+| sportsmot_v_6os86hzwcs_c001 | 4.82 | 4.84 | Y | 16 |
+| sportsmot_v_6os86hzwcs_c003 | 5.48 | 5.41 | N | 8 |
 
-- LSTM trained only on `sportsmot_example`; other clips use the same checkpoint (transfer).
+## Section 6 - Transfer baseline (example checkpoint, no retrain)
+
+| Dataset | Transfer residual | Transfer linear | Per-clip residual | Delta residual (per-clip - transfer) |
+|---------|-------------------|-----------------|-------------------|--------------------------------------|
+| sportsmot_example | 5.81 | 5.81 | 5.81 | +0.00 |
+| sportsmot_v_00hrwkvvjtq_c001 | 4.99 | 5.01 | 5.16 | +0.17 |
+| sportsmot_v_6os86hzwcs_c001 | 4.94 | 4.84 | 4.82 | -0.12 |
+| sportsmot_v_6os86hzwcs_c003 | 5.56 | 5.41 | 5.48 | -0.08 |
+
+## Section 7 - Honest limitations
+
+- Per-clip training does not pool tensors across sequences; holdout clip is trained/evaluated only within itself.
+- A0/A1 plain variants were not retrained on new clips — only A1 residual per clip.
 - Game-rules post-refine (A2) hurts rather than helps — see ablation attribution.
 - SAM augmented tracks on future frames are a detection ceiling, not a fair forecast baseline.

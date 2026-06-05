@@ -59,7 +59,13 @@ def main():
     )
     p.add_argument(
         "--output",
-        default=str(ROOT / "data" / "runs" / "multiseq_transfer_summary.csv"),
+        default=str(ROOT / "data" / "runs" / "multiseq_perclip_summary.csv"),
+    )
+    p.add_argument(
+        "--training-mode",
+        default="per_clip",
+        choices=("per_clip", "transfer"),
+        help="Label for CSV metadata (per-clip local checkpoint vs transfer from sportsmot_example)",
     )
     args = p.parse_args()
 
@@ -84,6 +90,7 @@ def main():
         rows.append(
             {
                 "dataset": ds,
+                "training_mode": args.training_mode,
                 "median_residual_ade": f"{med_res:.2f}",
                 "median_linear_ade": f"{med_lin:.2f}",
                 "median_residual_ade_clean": f"{med_res_clean:.2f}",

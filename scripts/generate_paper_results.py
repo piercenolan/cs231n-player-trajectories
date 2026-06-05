@@ -82,7 +82,12 @@ def main():
     parser.add_argument(
         "--multiseq-csv",
         default=None,
-        help="Optional aggregate CSV from scripts/aggregate_multiseq_eval.py",
+        help="Per-clip summary CSV from scripts/aggregate_multiseq_eval.py",
+    )
+    parser.add_argument(
+        "--transfer-csv",
+        default=None,
+        help="Optional transfer baseline CSV (sportsmot_example checkpoint on other clips)",
     )
     args = parser.parse_args()
 
@@ -190,28 +195,63 @@ def main():
     lines.append(f"- Teacher-forced A1 median: {tf_med:.2f} px; rollout gap reflects exposure bias during training.")
     lines.append("")
 
-    multiseq_path = Path(args.multiseq_csv or ROOT / "data" / "runs" / "multiseq_transfer_summary.csv")
+    multiseq_path = Path(args.multiseq_csv or ROOT / "data" / "runs" / "multiseq_perclip_summary.csv")
+    transfer_path = Path(
+        args.transfer_csv or ROOT / "data" / "runs" / "multiseq_transfer_baseline.csv"
+    )
     if multiseq_path.is_file():
         ms_rows = load_csv_rows(multiseq_path)
-        lines.append("## Section 5 - Cross-sequence transfer (eval-only)")
+        lines.append("## Section 5 - Multi-clip eval (per-clip trained residual LSTM)")
         lines.append("")
-        lines.append("| Dataset | Median residual ADE | Median linear ADE | Residual beats linear |")
-        lines.append("|---------|---------------------|-------------------|------------------------|")
+        lines.append(
+            "Each clip uses its own `lstm_rule_features_residual/checkpoint.pt` "
+            "(`held_out_seed`, val `offset_0s`, 80 epochs, scheduled sampling)."
+        )
+        lines.append("")
+        lines.append("| Dataset | Median residual ADE | Median linear ADE | Residual beats linear | Seeds |")
+        lines.append("|---------|---------------------|-------------------|------------------------|-------|")
         for r in ms_rows:
             lines.append(
                 f"| {r.get('dataset')} | {r.get('median_residual_ade', 'n/a')} | "
-                f"{r.get('median_linear_ade', 'n/a')} | {r.get('residual_beats_linear', 'n/a')} |"
+                f"{r.get('median_linear_ade', 'n/a')} | {r.get('residual_beats_linear', 'n/a')} | "
+                f"{r.get('n_seeds', 'n/a')} |"
             )
         lines.append("")
-        sec_lim = 6
+
+        if transfer_path.is_file():
+            tr_rows = {r["dataset"]: r for r in load_csv_rows(transfer_path)}
+            lines.append("## Section 6 - Transfer baseline (example checkpoint, no retrain)")
+            lines.append("")
+            lines.append("| Dataset | Transfer residual | Transfer linear | Per-clip residual | Delta residual (per-clip - transfer) |")
+            lines.append("|---------|-------------------|-----------------|-------------------|--------------------------------------|")
+            for r in ms_rows:
+                ds = r.get("dataset")
+                tr = tr_rows.get(ds, {})
+                try:
+                    pc = float(r.get("median_residual_ade", "nan"))
+                    tr_res = float(tr.get("median_residual_ade", "nan"))
+                    delta = pc - tr_res if pc == pc and tr_res == tr_res else float("nan")
+                    delta_s = f"{delta:+.2f}" if delta == delta else "n/a"
+                except (TypeError, ValueError):
+                    delta_s = "n/a"
+                tr_lin = tr.get("median_linear_ade", "n/a")
+                tr_res_s = tr.get("median_residual_ade", "n/a") if tr else "n/a"
+                lines.append(
+                    f"| {ds} | {tr_res_s} | {tr_lin} | {r.get('median_residual_ade', 'n/a')} | {delta_s} |"
+                )
+            lines.append("")
+            sec_lim = 7
+        else:
+            sec_lim = 6
     else:
         sec_lim = 5
 
     lines.append(f"## Section {sec_lim} - Honest limitations")
     lines.append("")
     if not multiseq_path.is_file():
-        lines.append("- Cross-sequence transfer table pending (`scripts/aggregate_multiseq_eval.py`).")
-    lines.append("- LSTM trained only on `sportsmot_example`; other clips use the same checkpoint (transfer).")
+        lines.append("- Multi-clip summary pending (`scripts/aggregate_multiseq_eval.py`).")
+    lines.append("- Per-clip training does not pool tensors across sequences; holdout clip is trained/evaluated only within itself.")
+    lines.append("- A0/A1 plain variants were not retrained on new clips — only A1 residual per clip.")
     lines.append("- Game-rules post-refine (A2) hurts rather than helps — see ablation attribution.")
     lines.append("- SAM augmented tracks on future frames are a detection ceiling, not a fair forecast baseline.")
     lines.append("")

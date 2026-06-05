@@ -1,0 +1,5 @@
+dataset,training_mode,median_residual_ade,median_linear_ade,median_residual_ade_clean,median_linear_ade_clean,residual_beats_linear,residual_beats_linear_seeds,n_seeds
+sportsmot_example,per_clip,5.81,5.81,5.95,5.94,tie,5,12
+sportsmot_v_00hrwkvvjtq_c001,per_clip,5.16,5.01,5.08,4.98,N,4,23
+sportsmot_v_6os86hzwcs_c001,per_clip,4.82,4.84,5.09,5.13,Y,9,16
+sportsmot_v_6os86hzwcs_c003,per_clip,5.48,5.41,5.49,5.44,N,1,8

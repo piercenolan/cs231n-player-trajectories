@@ -265,13 +265,29 @@ py scripts/eval_lstm.py --dataset sportsmot_example --linear-baseline
 
 **Training split:** Default for the report is `--split held_out_seed --val-seed offset_0s` (train 11 seeds, validate on `offset_0s`). For maximum training windows on all clips, use `--split temporal_all`. Do not mix run-root `trajectory_tensors.json` (0.67 resize) with `seeds/offset_*` tensors (0.5 resize).
 
-### 5) Pre-LSTM gauge figures
+### 5) Per-clip retrain on new basketball sequences
+
+After Modal + tensor export on registered clips (`extra_datasets.json`):
+
+```powershell
+foreach ($ds in @("sportsmot_v_6os86hzwcs_c001","sportsmot_v_6os86hzwcs_c003","sportsmot_v_00hrwkvvjtq_c001")) {
+  py scripts/train_lstm.py --dataset $ds --model rule_features --residual --split held_out_seed --val-seed offset_0s --epochs 80 --scheduled-sampling --optimize-forecast-ade
+  py scripts/eval_lstm_ablations.py --dataset $ds --all-seeds --skip-attribution
+}
+py scripts/aggregate_multiseq_eval.py --output data/runs/multiseq_perclip_summary.csv --training-mode per_clip
+py scripts/plot_multiseq_transfer.py
+py scripts/generate_paper_results.py
+```
+
+Figures: `data/runs/figures/multiseq_perclip_bar.png`, `multiseq_train_vs_transfer.png`.
+
+### 6) Pre-LSTM gauge figures
 
 ```powershell
 py scripts/plot_pre_lstm_gauge.py --dataset sportsmot_example
 ```
 
-### 6) Visualization
+### 7) Visualization
 
 ```powershell
 py utils/visualize.py --frames data/runs/sportsmot_example/frames ^

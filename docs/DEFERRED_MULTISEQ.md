@@ -7,6 +7,6 @@ Per the 36-hour sprint plan, the following are **explicitly out of scope** until
 - Retraining residual LSTM on 4+ clips jointly
 - Scaling to all 30 basketball GT sequences
 
-**Current approach:** Train on `sportsmot_example` only; evaluate the same residual checkpoint on additional clips via transfer (`--a1-residual-checkpoint`).
+**Current approach (completed for sprint):** Per-clip residual LSTM training on all 4 clips; transfer baseline preserved in `multiseq_transfer_baseline.csv`.
 
-**When to revisit:** After the report deadline, if you want pooled training across the four sprint clips or scaling to all 30 basketball GT sequences (extraction for the sprint clips is already complete — see `data/datasets/EXTRACTION_STATUS.md`).
+**Still deferred:**

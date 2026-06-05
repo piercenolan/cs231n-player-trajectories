@@ -19,7 +19,8 @@ Evaluate **SAM3.1** on basketball broadcast video, improve tracks with a **geome
 | **Primary train/eval clip** | `data/datasets/sportsmot_example/` — 500 frames |
 | **Transfer clips (3)** | `sportsmot_v_6os86hzwcs_c001`, `sportsmot_v_6os86hzwcs_c003`, `sportsmot_v_00hrwkvvjtq_c001` (holdout) |
 | **Run artifacts** | `data/runs/{dataset}/` — seeds, ablations, LSTM |
-| **Transfer summary** | `data/runs/multiseq_transfer_summary.csv` |
+| **Per-clip summary** | `data/runs/multiseq_perclip_summary.csv` |
+| **Transfer baseline** | `data/runs/multiseq_transfer_baseline.csv` |
 | **Legacy (do not cite)** | `data/outputs/`, proxy GT under `data/gt/` |
 
 ## Repository structure

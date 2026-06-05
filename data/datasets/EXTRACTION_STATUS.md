@@ -10,7 +10,7 @@ All 3 basketball sequences extracted, registered, Modal-tracked, and transfer-ev
 | `v_-6Os86HzwCs_c003` | `sportsmot_v_6os86hzwcs_c003` | 8 | 7 passed validation |
 | `v_00HRwkvvjtQ_c001` (holdout) | `sportsmot_v_00hrwkvvjtq_c001` | 23 | 22 passed validation |
 
-Transfer results: `data/runs/multiseq_transfer_summary.csv`
+Transfer results: `data/runs/multiseq_perclip_summary.csv` (per-clip train); baseline transfer: `multiseq_transfer_baseline.csv`
 
 ## Windows extract tip
 
