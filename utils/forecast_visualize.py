@@ -17,9 +17,15 @@ from utils.visualize import (
     _frame_path_for_number,
     _get_sorted_frame_paths,
     _track_display_scales,
-    get_player_color,
     load_tracks_by_frame,
 )
+
+# BGR colors aligned with matplotlib legend in create_forecast_summary_figure
+COLOR_OBS_BGR = (208, 208, 208)      # #d0d0d0
+COLOR_GT_BGR = (0, 220, 0)           # #00dc00
+COLOR_PRED_BGR = (255, 229, 0)       # #00e5ff (cyan in RGB)
+COLOR_LINEAR_BGR = (0, 165, 255)     # #ffa500 (orange in RGB)
+COLOR_ANCHOR_BGR = (255, 255, 255)
 
 
 def resolve_run_frames_dir(dataset: str, seed_id: str | None = None) -> Path | None:
@@ -255,6 +261,37 @@ def pick_forecast_windows(
     return picks[:n_windows]
 
 
+def _select_player_slots(
+    gt_pos,
+    vis,
+    player_ids,
+    window_start,
+    obs_len,
+    pred_len,
+    max_players=4,
+):
+    """Pick visible players with largest motion in the window (reduces overlay clutter)."""
+    anchor_t = window_start + obs_len - 1
+    t_end = window_start + obs_len + pred_len
+    scores = []
+    for slot, pid in enumerate(player_ids):
+        if int(pid) < 0 or not vis[anchor_t, slot]:
+            continue
+        pts = []
+        for t in range(window_start, min(t_end, gt_pos.shape[0])):
+            if vis[t, slot]:
+                pts.append(gt_pos[t, slot])
+        if len(pts) < 2:
+            continue
+        pts = np.asarray(pts, dtype=np.float32)
+        length = float(np.sum(np.linalg.norm(np.diff(pts, axis=0), axis=1)))
+        scores.append((length, slot))
+    scores.sort(reverse=True)
+    if max_players is None or max_players <= 0:
+        return [slot for _, slot in scores]
+    return [slot for _, slot in scores[:max_players]]
+
+
 def draw_forecast_window(
     frame_bgr,
     gt_pos,
@@ -269,11 +306,12 @@ def draw_forecast_window(
     scale_y=1.0,
     show_linear=True,
     draw_panel_legend=True,
+    max_players=4,
 ):
     """
     Draw one forecast window on the last-observed frame.
 
-    Observed history: solid per-player color.
+    Observed history: solid gray (matches legend).
     GT future: green solid.
     LSTM prediction: cyan dashed.
     Linear baseline: orange dashed (optional).
@@ -283,7 +321,12 @@ def draw_forecast_window(
     t_pred_start = window_start + obs_len
     t_pred_end = t_pred_start + pred_len
 
-    for slot, pid in enumerate(player_ids):
+    slots = _select_player_slots(
+        gt_pos, vis, player_ids, window_start, obs_len, pred_len, max_players=max_players
+    )
+
+    for slot in slots:
+        pid = player_ids[slot]
         if int(pid) < 0:
             continue
         if not vis[anchor_t, slot]:
@@ -291,55 +334,54 @@ def draw_forecast_window(
         if not np.any(vis[window_start:t_pred_end, slot]):
             continue
 
-        player_color = get_player_color(int(pid))
-
         obs_pts = []
         for t in range(window_start, window_start + obs_len):
             if not vis[t, slot]:
                 continue
             obs_pts.append(_scale_point(gt_pos[t, slot, 0], gt_pos[t, slot, 1], scale_x, scale_y))
-        _draw_polyline(out, obs_pts, player_color, thickness=2, dashed=False)
 
         gt_future = [
             _scale_point(gt_pos[t, slot, 0], gt_pos[t, slot, 1], scale_x, scale_y)
             for t in range(t_pred_start, t_pred_end)
             if vis[t, slot]
         ]
-        if obs_pts and gt_future:
-            gt_chain = [obs_pts[-1]] + gt_future
-            _draw_polyline(out, gt_chain, (0, 220, 0), thickness=2, dashed=False)
-            for pt in gt_future:
-                cv2.circle(out, pt, 5, (0, 220, 0), -1, cv2.LINE_AA)
-
         pred_future = [
             _scale_point(pred_pos[t, slot, 0], pred_pos[t, slot, 1], scale_x, scale_y)
             for t in range(t_pred_start, t_pred_end)
             if vis[t, slot]
         ]
-        if obs_pts and pred_future:
-            pred_chain = [obs_pts[-1]] + pred_future
-            _draw_polyline(out, pred_chain, (255, 255, 0), thickness=2, dashed=True)
-            for pt in pred_future:
-                cv2.circle(out, pt, 4, (255, 255, 0), -1, cv2.LINE_AA)
-
+        lin_future = []
         if show_linear and linear_pos is not None:
             lin_future = [
                 _scale_point(linear_pos[t, slot, 0], linear_pos[t, slot, 1], scale_x, scale_y)
                 for t in range(t_pred_start, t_pred_end)
                 if vis[t, slot]
             ]
-            if obs_pts and lin_future:
-                lin_chain = [obs_pts[-1]] + lin_future
-                _draw_polyline(out, lin_chain, (0, 165, 255), thickness=2, dashed=True)
+
+        # Draw back-to-front: observed, GT, LSTM, then linear on top (often ~1px from GT).
+        if obs_pts:
+            _draw_polyline(out, obs_pts, COLOR_OBS_BGR, thickness=2, dashed=False)
+        if obs_pts and gt_future:
+            _draw_polyline(out, [obs_pts[-1]] + gt_future, COLOR_GT_BGR, thickness=3, dashed=False)
+            for pt in gt_future:
+                cv2.circle(out, pt, 5, COLOR_GT_BGR, -1, cv2.LINE_AA)
+        if obs_pts and pred_future:
+            _draw_polyline(out, [obs_pts[-1]] + pred_future, COLOR_PRED_BGR, thickness=3, dashed=True)
+            for pt in pred_future:
+                cv2.circle(out, pt, 4, COLOR_PRED_BGR, -1, cv2.LINE_AA)
+        if obs_pts and lin_future:
+            _draw_polyline(out, [obs_pts[-1]] + lin_future, COLOR_LINEAR_BGR, thickness=3, dashed=True)
+            for pt in lin_future:
+                cv2.circle(out, pt, 7, COLOR_LINEAR_BGR, 2, cv2.LINE_AA)
 
         ax, ay = _scale_point(
             gt_pos[anchor_t, slot, 0], gt_pos[anchor_t, slot, 1], scale_x, scale_y
         )
-        cv2.circle(out, (ax, ay), 6, player_color, -1, cv2.LINE_AA)
-        cv2.circle(out, (ax, ay), 7, (255, 255, 255), 1, cv2.LINE_AA)
+        cv2.circle(out, (ax, ay), 5, COLOR_ANCHOR_BGR, -1, cv2.LINE_AA)
+        cv2.circle(out, (ax, ay), 6, (0, 0, 0), 1, cv2.LINE_AA)
 
     if draw_panel_legend:
-        _draw_forecast_legend(out)
+        _draw_forecast_legend(out, obs_len, pred_len, show_linear=show_linear)
     return out
 
 
@@ -371,22 +413,23 @@ def _forecast_legend_handles(obs_len: int, pred_len: int, show_linear: bool = Tr
     return handles
 
 
-def _draw_forecast_legend(image_bgr):
+def _draw_forecast_legend(image_bgr, obs_len, pred_len, show_linear=True):
     """Compact legend for trajectory styles."""
     h, w = image_bgr.shape[:2]
     pad = 8
-    box_w, box_h = 220, 92
+    box_w, box_h = 220, 92 if show_linear else 74
     x0, y0 = pad, h - box_h - pad
     overlay = image_bgr.copy()
     cv2.rectangle(overlay, (x0, y0), (x0 + box_w, y0 + box_h), (0, 0, 0), -1)
     cv2.addWeighted(overlay, 0.55, image_bgr, 0.45, 0, image_bgr)
 
     entries = [
-        ("Observed (8f)", (200, 200, 200), False),
-        ("Ground truth (4f)", (0, 220, 0), False),
-        ("LSTM forecast (4f)", (255, 255, 0), True),
-        ("Linear baseline (4f)", (0, 165, 255), True),
+        (f"Observed ({obs_len}f)", COLOR_OBS_BGR, False),
+        (f"Ground truth ({pred_len}f)", COLOR_GT_BGR, False),
+        (f"LSTM forecast ({pred_len}f)", COLOR_PRED_BGR, True),
     ]
+    if show_linear:
+        entries.append((f"Linear baseline ({pred_len}f)", COLOR_LINEAR_BGR, True))
     y = y0 + 18
     for label, color, dashed in entries:
         x1, x2 = x0 + 12, x0 + 52
@@ -420,6 +463,7 @@ def render_forecast_panel(
     seed_id: str | None = None,
     show_linear: bool = True,
     draw_panel_legend: bool = True,
+    max_players: int = 4,
 ):
     """Render one forecast window panel."""
     anchor_t = window_start + obs_len - 1
@@ -452,6 +496,7 @@ def render_forecast_panel(
         scale_y=sy,
         show_linear=show_linear,
         draw_panel_legend=draw_panel_legend,
+        max_players=max_players,
     )
     ade = _window_forecast_ade(
         gt_pos, pred_pos, seq["visibility"], window_start, obs_len, pred_len
@@ -488,6 +533,7 @@ def create_forecast_summary_figure(
     seed_id: str | None = None,
     show_linear: bool = True,
     title: str | None = None,
+    max_players: int = 4,
 ):
     """Build multi-row publication figure with forecast overlays."""
     seq = load_tensor_file(tensor_path)
@@ -529,6 +575,7 @@ def create_forecast_summary_figure(
             seed_id=seed_id,
             show_linear=show_linear,
             draw_panel_legend=False,
+            max_players=max_players,
         )
         panels.append((panel, ws, frame_number, ade))
 
