@@ -24,8 +24,6 @@ def main():
     ok = True
     print("Sprint sequence IDs:", extract_ids)
     for name, cfg in sorted(all_datasets().items()):
-        if name in ("video_1_legacy",):
-            continue
         fd = Path(cfg["frames_dir"])
         gt = Path(cfg["gt_mot"]) if cfg.get("gt_mot") else None
         n_frames = len(list(fd.glob("*.jpg"))) if fd.is_dir() else 0

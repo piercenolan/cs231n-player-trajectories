@@ -2,7 +2,7 @@
 Trajectory accuracy metrics (ADE / FDE) against ground truth.
 
 Supports SportsMOT-style MOT gt.txt and a simple JSON GT format.
-Primary use: evaluate augmented tracks on video_1 (SportsMOT source).
+Primary use: evaluate augmented tracks against SportsMOT ground truth.
 """
 
 import argparse

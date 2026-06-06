@@ -1,5 +1,18 @@
-# Legacy GT layout (deprecated)
+# SportsMOT ground truth (legacy layout)
 
-Use **`data/datasets/sportsmot_example/`** instead. See that folder's README for upload instructions.
+**Do not use this tree for reporting.**
 
-Old proxy GT from the unknown `video_1.mp4` run may still exist under `video_1/gt/` — do not use it for ADE/FDE reporting.
+Canonical GT for all current experiments lives under each dataset:
+
+```
+data/datasets/{dataset}/gt/gt.txt
+data/datasets/{dataset}/gt/gt.json   # after setup_sportsmot_gt.py / align_seed_gt.py
+```
+
+Per-seed aligned GT for evaluation:
+
+```
+data/runs/{dataset}/seeds/{seed_id}/gt_aligned.json
+```
+
+The old proxy GT under `video_1/` was removed during the final repository audit.

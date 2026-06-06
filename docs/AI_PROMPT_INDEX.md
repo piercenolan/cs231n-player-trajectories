@@ -155,6 +155,7 @@ Full responses and tool traces: [CONVERSATION_TRANSCRIPT.md](CONVERSATION_TRANSC
 | 146 | instead of turning it into a png, turn this chart into a copy/paste md for LaTeX upload for me to put in the report |
 | 147 | Why was A2 so bad? why did adding rule features after the LSTM cause higher ADE than adding before the LSTM or not at all |
 | 148 | Why was A2 so bad? why did adding rule features after the LSTM cause higher ADE than adding before the LSTM or not at all |
+| 149 | I want you to do one last full audit of the entire repository. In this audit I want you to do the following:  - for every artifact, make sure that it has bee... |
 
 ## Representative prompts by topic
 

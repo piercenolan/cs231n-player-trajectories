@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-06-05T22:28:27Z",
+  "generated_at_utc": "2026-06-06T02:11:55Z",
   "tool": "Cursor Agent (Cursor IDE)",
   "tool_version_note": "Cursor IDE 3.6.31+; underlying LLM model not logged per turn in repo",
   "policy": "CS231N Generative AI Use Policy \u2014 all AI-assisted artifacts listed; authors responsible for verification.",
   "summary": {
-    "ai_generated_code_files": 50,
-    "ai_generated_doc_files": 21,
-    "ai_generated_figures": 16,
+    "ai_generated_code_files": 51,
+    "ai_generated_doc_files": 23,
+    "ai_generated_figures": 15,
     "excluded_glob_patterns": 7
   },
   "artifacts": {
@@ -42,6 +42,13 @@
       },
       {
         "path": "scripts/audit_lstm.py",
+        "category": "code",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "Drafted/refactored via Cursor Agent; reviewed and executed by project authors."
+      },
+      {
+        "path": "scripts/audit_repository.py",
         "category": "code",
         "ai_generated": true,
         "tool": "Cursor Agent (Cursor IDE)",
@@ -510,6 +517,21 @@
         "ai_generated": true,
         "tool": "Cursor Agent (Cursor IDE)",
         "notes": "AI-assisted drafting; authors responsible for factual claims."
+      },
+      {
+        "path": "CONTEXT.md",
+        "category": "documentation",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "notes": "AI-assisted drafting; authors responsible for factual claims."
+      },
+      {
+        "path": "data/runs/sportsmot_example/figures/PRE_LSTM_GAUGE.md",
+        "category": "documentation",
+        "ai_generated": true,
+        "tool": "Cursor Agent (Cursor IDE)",
+        "generator": "scripts/plot_pre_lstm_gauge.py",
+        "notes": "Auto-generated gauge report from pipeline metrics."
       }
     ],
     "figures": [
@@ -645,16 +667,6 @@
       },
       {
         "path": "data/runs/sportsmot_v_6os86hzwcs_c001/figures/lstm_rule_ablation_bar.png",
-        "category": "figure",
-        "ai_generated": true,
-        "tool": "Cursor Agent (Cursor IDE)",
-        "generator": "scripts/eval_lstm_ablations.py",
-        "description": "Per-clip LSTM rule ablation bar",
-        "on_disk": true,
-        "notes": "Rendered by AI-assisted script from experimental outputs."
-      },
-      {
-        "path": "data/runs/sportsmot_v_6os86hzwcs_c003/figures/lstm_rule_ablation_bar-LaptopStudio.png",
         "category": "figure",
         "ai_generated": true,
         "tool": "Cursor Agent (Cursor IDE)",

@@ -88,16 +88,6 @@ DATASETS = {
         "source_fps": 25.0,
         "extract_fps": 25.0,
     },
-    "video_1_legacy": {
-        "description": "Legacy unknown-source clip (deprecated; use sportsmot_example)",
-        "frames_dir": DATA_ROOT / "archive" / "video_1_legacy" / "frames",
-        "gt_mot": DATA_ROOT / "archive" / "video_1_legacy" / "gt" / "gt.txt",
-        "gt_json": DATA_ROOT / "archive" / "video_1_legacy" / "gt" / "gt.json",
-        "seqinfo": None,
-        "video": DATA_ROOT / "archive" / "video_1_legacy" / "video_1.mp4",
-        "source_fps": 25.0,
-        "extract_fps": 1.0,
-    },
 }
 
 

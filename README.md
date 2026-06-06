@@ -4,7 +4,7 @@ Research project: **SAM3.1** player tracking on basketball video, a **geometry-f
 
 **Write-up:** [docs/MILESTONE_CHECKLIST.md](docs/MILESTONE_CHECKLIST.md) · **Living plan:** [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.md) · **Multi-seed:** [docs/MULTI_SEED_COMMANDS.md](docs/MULTI_SEED_COMMANDS.md)
 
-**Generative AI attribution (CS231N policy):** [docs/GENERATIVE_AI_USE.md](docs/GENERATIVE_AI_USE.md) — transcripts, prompts, plans, and registry of all AI-assisted artifacts in this repo.
+**Generative AI attribution (CS231N policy):** [docs/GENERATIVE_AI_USE.md](docs/GENERATIVE_AI_USE.md) — transcripts, prompts, plans, and registry of all AI-assisted artifacts. Run `py scripts/audit_repository.py` to verify coverage.
 
 ---
 

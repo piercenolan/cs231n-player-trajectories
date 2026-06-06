@@ -1,13 +1,20 @@
 # Archive (legacy layout)
 
-Old pipeline artifacts live here after the dataset reorganization:
+Legacy pipeline artifacts were **removed from the repository** during the final audit (June 2026). Do not recreate these paths.
 
-| Old path | Notes |
-|----------|--------|
-| `data/outputs/` | Previous SAM3 + augmentation runs (45-frame `video_1` era) |
-| `data/frames/`, `data/frames_dir/` | Mixed / duplicate extracted JPEGs |
+| Former path | Notes |
+|-------------|--------|
+| `data/outputs/` | Pre-reorg SAM3 + augmentation runs (`video_1` era) |
+| `data/frames/`, `data/frames_dir/` | Duplicate / unpadded extracted JPEGs |
 | `data/videos/video_1.mp4` | Unknown source — **do not use for paper ADE** |
-| `data/gt/sportsmot/video_1/` | Proxy smoothed GT from old baseline |
+| Root `tracks.json`, `output.log` | Early single-file SAM outputs |
 
-**Primary dataset going forward:** `data/datasets/sportsmot_example/`  
-**Current run outputs:** `data/runs/sportsmot_example/` (12 seeds, rule-aware LSTM under `lstm/`). See repo [README.md](../../README.md).
+**Canonical layout:**
+
+| Role | Location |
+|------|----------|
+| Static inputs | `data/datasets/{dataset}/` |
+| Experiment outputs | `data/runs/{dataset}/` |
+| Multi-clip summaries | `data/runs/multiseq_*.csv` |
+
+See [README.md](../../README.md) and [CONTEXT.md](../../CONTEXT.md).

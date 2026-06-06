@@ -72,7 +72,7 @@ def main():
     names = args.datasets
     if not names:
         names = ["sportsmot_example"]
-        names.extend(k for k in sorted(all_datasets()) if k != "sportsmot_example" and k != "video_1_legacy")
+        names.extend(k for k in sorted(all_datasets()) if k != "sportsmot_example")
 
     rows = []
     for ds in names:

@@ -51,4 +51,6 @@ py scripts/plot_lstm_vs_baselines.py
 py scripts/plot_multiseq_transfer.py
 py scripts/plot_pre_lstm_gauge.py
 py scripts/export_conversation_transcript.py
+py scripts/generate_ai_attribution_docs.py
+py scripts/audit_repository.py
 ```

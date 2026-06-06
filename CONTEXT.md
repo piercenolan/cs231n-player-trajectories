@@ -21,7 +21,7 @@ Evaluate **SAM3.1** on basketball broadcast video, improve tracks with a **geome
 | **Run artifacts** | `data/runs/{dataset}/` — seeds, ablations, LSTM |
 | **Per-clip summary** | `data/runs/multiseq_perclip_summary.csv` |
 | **Transfer baseline** | `data/runs/multiseq_transfer_baseline.csv` |
-| **Legacy (do not cite)** | `data/outputs/`, proxy GT under `data/gt/` |
+| **Legacy (removed from repo)** | Was `data/outputs/`, `data/frames*` — see `data/archive/README.md` |
 
 ## Repository structure
 

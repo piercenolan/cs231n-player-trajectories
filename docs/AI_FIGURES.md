@@ -17,6 +17,7 @@ Figures are **rendered from experimental outputs** (tracks, tensors, metrics). T
 | `data/runs/sportsmot_example/figures/lstm_rule_ablation_bar.png` | `scripts/eval_lstm_ablations.py` | A0–A3 ablation |
 | `data/runs/sportsmot_example/figures/lstm_per_rule_delta_ade.png` | `scripts/eval_lstm_ablations.py` | A2 per-rule ΔADE |
 | `data/runs/sportsmot_example/figures/forecast_qualitative.png` | `scripts/plot_forecast_qualitative.py` | LSTM vs GT trajectory overlays |
+| `data/runs/sportsmot_example/figures/PRE_LSTM_GAUGE.md` | `scripts/plot_pre_lstm_gauge.py` | Pre-LSTM gauge text report |
 
 ## Multi-clip
 

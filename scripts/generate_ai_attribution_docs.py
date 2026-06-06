@@ -52,7 +52,10 @@ CODE_ATTRIBUTION_MARKERS = (
     "models/CODE_AI_ATTRIBUTION.md",
 )
 DATA_ATTRIBUTION_MARKERS = ("data/runs/FIGURES_AI_ATTRIBUTION.md",)
-README_FILES = ("README.md", "GENERATIVE_AI_USE.md")
+README_FILES = ("README.md", "GENERATIVE_AI_USE.md", "CONTEXT.md")
+GENERATED_REPORT_PATHS = (
+    "data/runs/sportsmot_example/figures/PRE_LSTM_GAUGE.md",
+)
 
 FIGURES = [
     {
@@ -117,7 +120,8 @@ FIGURES = [
     },
 ]
 
-PER_CLIP_FIGURE_GLOB = "data/runs/sportsmot_v_*/figures/lstm_rule_ablation_bar*.png"
+PER_CLIP_FIGURE_GLOB = "data/runs/sportsmot_v_*/figures/lstm_rule_ablation_bar.png"
+DUPLICATE_FIGURE_SUFFIXES = ("-LaptopStudio", "-Copy", " (1)")
 
 
 def rel(path: Path) -> str:
@@ -188,6 +192,19 @@ def collect_doc_artifacts() -> list[dict]:
                     "notes": "AI-assisted drafting; authors responsible for factual claims.",
                 }
             )
+    for rp in GENERATED_REPORT_PATHS:
+        path = ROOT / rp
+        if path.is_file():
+            items.append(
+                {
+                    "path": rp,
+                    "category": "documentation",
+                    "ai_generated": True,
+                    "tool": TOOL,
+                    "generator": "scripts/plot_pre_lstm_gauge.py",
+                    "notes": "Auto-generated gauge report from pipeline metrics.",
+                }
+            )
     return items
 
 
@@ -208,6 +225,8 @@ def collect_figure_artifacts() -> list[dict]:
             }
         )
     for path in sorted(ROOT.glob(PER_CLIP_FIGURE_GLOB)):
+        if any(suffix in path.name for suffix in DUPLICATE_FIGURE_SUFFIXES):
+            continue
         items.append(
             {
                 "path": rel(path),

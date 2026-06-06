@@ -9,8 +9,21 @@ data/datasets/sportsmot_basketball/*
 data/datasets/sportsmot_basketball_test/
 data/sportsmot_extract/
 
+# Legacy pre-reorg artifacts (canonical paths: data/runs/, data/datasets/)
+data/outputs/
+data/frames/
+data/frames_dir/
+data/frames_modal
+data/videos/
+data/gt/sportsmot/video_1/
+tracks.json
+output.log
+
 # Duplicate Modal volume downloads (bulk get artifact)
 data/runs/*/seeds/seeds/
+
+# IDE
+.idea/
 
 # Python
 __pycache__/

@@ -7,9 +7,6 @@ quality against VRAM. Uses CPU video offload and bf16 multiplex inference.
 Usage:
     # SportsMOT example (upload frames once, then skip video):
     py -m modal run scripts/run_modal.py --dataset sportsmot_example --skip-extract
-
-    # Legacy video clip:
-    py -m modal run scripts/run_modal.py --video-path data/archive/video_1_legacy/video_1.mp4
 """
 
 import modal

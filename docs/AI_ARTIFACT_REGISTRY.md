@@ -1,7 +1,7 @@
 # AI artifact registry
 
 > **AI-generated documentation.** Machine-maintained inventory for CS231N generative-AI attribution.
-> Regenerate: `py scripts/generate_ai_attribution_docs.py` · Last updated: 2026-06-05T22:28:27Z
+> Regenerate: `py scripts/generate_ai_attribution_docs.py` · Last updated: 2026-06-06T02:11:55Z
 
 See [GENERATIVE_AI_USE.md](GENERATIVE_AI_USE.md) for the full attribution hub.
 
@@ -11,9 +11,9 @@ See [GENERATIVE_AI_USE.md](GENERATIVE_AI_USE.md) for the full attribution hub.
 
 | Category | Count |
 |----------|------:|
-| Python code (`scripts/`, `utils/`, `models/`) | 50 |
-| Documentation (Markdown) | 21 |
-| Figures (PNG, AI-assisted scripts) | 16 |
+| Python code (`scripts/`, `utils/`, `models/`) | 51 |
+| Documentation (Markdown) | 23 |
+| Figures (PNG, AI-assisted scripts) | 15 |
 
 ## Code (AI-generated)
 
@@ -24,6 +24,7 @@ See [GENERATIVE_AI_USE.md](GENERATIVE_AI_USE.md) for the full attribution hub.
 | `scripts/aggregate_multiseq_eval.py` | Drafted/refactored via Cursor Agent; reviewed and executed by project authors. |
 | `scripts/align_seed_gt.py` | Drafted/refactored via Cursor Agent; reviewed and executed by project authors. |
 | `scripts/audit_lstm.py` | Drafted/refactored via Cursor Agent; reviewed and executed by project authors. |
+| `scripts/audit_repository.py` | Drafted/refactored via Cursor Agent; reviewed and executed by project authors. |
 | `scripts/check_sprint_ready.py` | Drafted/refactored via Cursor Agent; reviewed and executed by project authors. |
 | `scripts/diagnose_lstm_seeds.py` | Drafted/refactored via Cursor Agent; reviewed and executed by project authors. |
 | `scripts/eval_autoregressive_compare.py` | Drafted/refactored via Cursor Agent; reviewed and executed by project authors. |
@@ -95,6 +96,8 @@ See [GENERATIVE_AI_USE.md](GENERATIVE_AI_USE.md) for the full attribution hub.
 | `data/runs/FIGURES_AI_ATTRIBUTION.md` | Directory-level AI attribution marker. |
 | `README.md` | AI-assisted drafting; authors responsible for factual claims. |
 | `GENERATIVE_AI_USE.md` | AI-assisted drafting; authors responsible for factual claims. |
+| `CONTEXT.md` | AI-assisted drafting; authors responsible for factual claims. |
+| `data/runs/sportsmot_example/figures/PRE_LSTM_GAUGE.md` | Auto-generated gauge report from pipeline metrics. |
 
 ## Figures (AI-assisted rendering scripts)
 
@@ -114,7 +117,6 @@ See [GENERATIVE_AI_USE.md](GENERATIVE_AI_USE.md) for the full attribution hub.
 | `data/runs/figures/multiseq_transfer_bar.png` | `scripts/plot_multiseq_transfer.py` | Transfer eval bar chart | yes |
 | `data/runs/sportsmot_v_00hrwkvvjtq_c001/figures/lstm_rule_ablation_bar.png` | `scripts/eval_lstm_ablations.py` | Per-clip LSTM rule ablation bar | yes |
 | `data/runs/sportsmot_v_6os86hzwcs_c001/figures/lstm_rule_ablation_bar.png` | `scripts/eval_lstm_ablations.py` | Per-clip LSTM rule ablation bar | yes |
-| `data/runs/sportsmot_v_6os86hzwcs_c003/figures/lstm_rule_ablation_bar-LaptopStudio.png` | `scripts/eval_lstm_ablations.py` | Per-clip LSTM rule ablation bar | yes |
 | `data/runs/sportsmot_v_6os86hzwcs_c003/figures/lstm_rule_ablation_bar.png` | `scripts/eval_lstm_ablations.py` | Per-clip LSTM rule ablation bar | yes |
 
 ## Not generative-AI artifacts (experimental / external)

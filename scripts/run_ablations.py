@@ -44,7 +44,7 @@ def run_one_ablation(
     gap_fill=True,
     expected_players=10,
     gt_path=None,
-    gt_sequence="video_1",
+    gt_sequence="sportsmot_example",
     extra_kwargs=None,
 ):
     output_dir = Path(output_dir)

@@ -157,12 +157,13 @@ py scripts/eval_lstm_ablations.py --dataset sportsmot_example --all-seeds
 
 ---
 
-## Legacy / deprecated
+## Legacy / deprecated (removed from repo)
 
-| Item | Location | Note |
-|------|----------|------|
-| `video_1.mp4` | `data/videos/`, `data/archive/` | Do not cite for ADE |
-| Proxy GT | `data/gt/sportsmot/video_1/` | Superseded by SportsMOT example |
+| Item | Former location | Note |
+|------|-----------------|------|
+| `video_1.mp4` | `data/videos/` | Unknown provenance — removed |
+| Proxy GT | `data/gt/sportsmot/video_1/` | Removed; use `data/datasets/*/gt/` |
+| Pre-reorg runs | `data/outputs/`, `data/frames*` | Removed; use `data/runs/` |
 | Run-root tensor at 0.67 | `trajectory_tensors.json` | Different resize than `seeds/` — do not mix in training |
 
 Canonical status: this file + `MILESTONE_CHECKLIST.md`.

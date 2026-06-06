@@ -17,7 +17,7 @@
 | Material | Location | Purpose |
 |----------|----------|---------|
 | **Transcripts** | [AI_TRANSCRIPTS.md](AI_TRANSCRIPTS.md) | Canonical vs raw chat exports |
-| **Prompts** | [AI_PROMPT_INDEX.md](AI_PROMPT_INDEX.md) | 148 indexed user prompts |
+| **Prompts** | [AI_PROMPT_INDEX.md](AI_PROMPT_INDEX.md) | 149 indexed user prompts |
 | **Plans** | [AI_PLANS.md](AI_PLANS.md) | Phased work plans (AI-assisted) |
 | **Artifact registry** | [AI_ARTIFACT_REGISTRY.md](AI_ARTIFACT_REGISTRY.md) | Every AI-generated / AI-assisted file |
 | **Figure attribution** | [AI_FIGURES.md](AI_FIGURES.md) | PNG figures + generator scripts |
@@ -25,9 +25,9 @@
 
 ## Quick counts (auto-generated)
 
-- **50** Python modules (`scripts/`, `utils/`, `models/`)
-- **21** Markdown docs (including this file)
-- **16** figure paths (AI-assisted plot scripts)
+- **51** Python modules (`scripts/`, `utils/`, `models/`)
+- **23** Markdown docs (including this file)
+- **15** figure paths (AI-assisted plot scripts)
 
 ## What is NOT generative-AI authorship
 
@@ -46,4 +46,4 @@ py scripts/export_conversation_transcript.py
 py scripts/generate_ai_attribution_docs.py
 ```
 
-Last manifest update: **2026-06-05T22:28:27Z**
+Last manifest update: **2026-06-06T02:11:55Z**
