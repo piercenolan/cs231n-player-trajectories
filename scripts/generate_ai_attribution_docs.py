@@ -34,6 +34,7 @@ _export_mod = importlib.util.module_from_spec(_export_spec)
 _export_spec.loader.exec_module(_export_mod)
 DEFAULT_JSONL = _export_mod.DEFAULT_JSONL
 load_turns = _export_mod.load_turns
+published_turns = _export_mod.published_turns
 
 DOCS = ROOT / "docs"
 MANIFEST_PATH = DOCS / "ai_manifest.json"
@@ -51,7 +52,7 @@ CODE_ATTRIBUTION_MARKERS = (
     "models/CODE_AI_ATTRIBUTION.md",
 )
 DATA_ATTRIBUTION_MARKERS = ("data/runs/FIGURES_AI_ATTRIBUTION.md",)
-README_FILES = ("README.md", "CURSOR_TRANSCRIPT.md", "GENERATIVE_AI_USE.md")
+README_FILES = ("README.md", "GENERATIVE_AI_USE.md")
 
 FIGURES = [
     {
@@ -272,7 +273,6 @@ def build_manifest() -> dict:
         "transcripts": {
             "canonical": "docs/CONVERSATION_TRANSCRIPT.md",
             "raw_jsonl": str(DEFAULT_JSONL),
-            "cursor_ui_export": "CURSOR_TRANSCRIPT.md",
         },
         "plans": {
             "consolidated": "docs/AI_PLANS.md",
@@ -349,7 +349,7 @@ def write_prompt_index(jsonl_path: Path) -> int:
         )
         return 0
 
-    turns = load_turns(jsonl_path)
+    turns = published_turns(load_turns(jsonl_path))
     lines = [
         "# AI prompt index",
         "",
@@ -381,8 +381,7 @@ def write_prompt_index(jsonl_path: Path) -> int:
         "| SAM3.1 Multiplex migration | ~30–40 |",
         "| LSTM pipeline (A0–A3, residual) | ~50–80 |",
         "| Multi-seed Modal sprint | ~90–110 |",
-        "| Report writing / experiments | ~115–132 |",
-        "| Forecast qualitative overlays | latest sessions |",
+        "| Forecast qualitative overlays / AI attribution | ~130+ |",
         "",
     ]
     PROMPT_INDEX_PATH.write_text("\n".join(lines), encoding="utf-8")

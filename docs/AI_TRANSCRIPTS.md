@@ -20,14 +20,6 @@ Regenerate from JSONL:
 py scripts/export_conversation_transcript.py
 ```
 
-## Secondary export (Cursor UI)
-
-| File | Description |
-|------|-------------|
-| **[../CURSOR_TRANSCRIPT.md](../CURSOR_TRANSCRIPT.md)** | Partial export from Cursor UI (3.6.31, 2026-06-04). Subset/overlap with canonical transcript; kept for provenance. |
-
-Use **CONVERSATION_TRANSCRIPT.md** as the authoritative full log unless course staff request the raw JSONL.
-
 ## Prompt index
 
 User prompts only (no assistant text): **[AI_PROMPT_INDEX.md](AI_PROMPT_INDEX.md)**
@@ -36,7 +28,7 @@ User prompts only (no assistant text): **[AI_PROMPT_INDEX.md](AI_PROMPT_INDEX.md
 
 - Implementation requests (SAM3, augmentation, LSTM, Modal, plotting)
 - Debugging sessions (Modal auth, import errors, track schema)
-- Report/experiment planning dialogue
+- Experiment planning and repo documentation
 - Tool use is summarized per turn (not full tool I/O)
 
 Internal chain-of-thought marked `[REDACTED]` in source JSONL is **omitted** from cleaned export.

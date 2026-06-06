@@ -21,6 +21,9 @@ DEFAULT_JSONL = (
     / "c9cd51f6-def0-4582-b4bd-b9e6d7fde87d.jsonl"
 )
 
+# Raw JSONL user-turn indices omitted from the published transcript.
+EXCLUDED_RAW_TURNS = frozenset(range(133, 146)) | {162, 163}
+
 
 def strip_user_query(text: str) -> str:
     m = re.search(r"<user_query>\s*(.*?)\s*</user_query>", text, flags=re.DOTALL)
@@ -35,15 +38,6 @@ def clean_assistant_text(text: str) -> str:
     text = re.sub(r"`?\[REDACTED\]`?", "", text)
     text = re.sub(r"\n{3,}", "\n\n", text)
     return text.strip()
-
-
-def is_substantive(text: str) -> bool:
-    t = clean_assistant_text(text)
-    if not t:
-        return False
-    if len(t) < 40 and t.endswith("..."):
-        return False
-    return True
 
 
 def summarize_tools(content: list) -> list[str]:
@@ -112,7 +106,6 @@ def merge_assistant(parts: list[str]) -> str:
         seen.add(key)
         merged.append(part)
     if len(merged) > 1:
-        # Often the last chunk is the user-facing summary; if it's long, use it plus prior unique blocks
         last = merged[-1]
         if len(last) > 400:
             body = merged[:-1]
@@ -120,6 +113,17 @@ def merge_assistant(parts: list[str]) -> str:
             if body:
                 return "\n\n".join(body + [last])
     return "\n\n".join(merged)
+
+
+def published_turns(turns: list[dict]) -> list[dict]:
+    kept: list[dict] = []
+    for raw_idx, turn in enumerate(turns, start=1):
+        if raw_idx in EXCLUDED_RAW_TURNS:
+            continue
+        if not turn["user"] and not merge_assistant(turn["assistant_parts"]):
+            continue
+        kept.append(turn)
+    return kept
 
 
 def format_turn(idx: int, turn: dict) -> str:
@@ -162,7 +166,7 @@ def main():
         print(f"Missing transcript: {jsonl_path}", file=sys.stderr)
         sys.exit(1)
 
-    turns = load_turns(jsonl_path)
+    turns = published_turns(load_turns(jsonl_path))
     substantive = sum(1 for t in turns if t["user"] or merge_assistant(t["assistant_parts"]))
 
     header = [
@@ -183,11 +187,7 @@ def main():
         "",
     ]
 
-    body = []
-    for i, turn in enumerate(turns, start=1):
-        if not turn["user"] and not merge_assistant(turn["assistant_parts"]):
-            continue
-        body.append(format_turn(i, turn))
+    body = [format_turn(i, turn) for i, turn in enumerate(turns, start=1)]
 
     out_path = Path(args.output)
     out_path.parent.mkdir(parents=True, exist_ok=True)

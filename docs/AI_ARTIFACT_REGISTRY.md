@@ -1,7 +1,7 @@
 # AI artifact registry
 
 > **AI-generated documentation.** Machine-maintained inventory for CS231N generative-AI attribution.
-> Regenerate: `py scripts/generate_ai_attribution_docs.py` · Last updated: 2026-06-05T13:56:29Z
+> Regenerate: `py scripts/generate_ai_attribution_docs.py` · Last updated: 2026-06-05T22:28:27Z
 
 See [GENERATIVE_AI_USE.md](GENERATIVE_AI_USE.md) for the full attribution hub.
 
@@ -12,7 +12,7 @@ See [GENERATIVE_AI_USE.md](GENERATIVE_AI_USE.md) for the full attribution hub.
 | Category | Count |
 |----------|------:|
 | Python code (`scripts/`, `utils/`, `models/`) | 50 |
-| Documentation (Markdown) | 22 |
+| Documentation (Markdown) | 21 |
 | Figures (PNG, AI-assisted scripts) | 16 |
 
 ## Code (AI-generated)
@@ -94,7 +94,6 @@ See [GENERATIVE_AI_USE.md](GENERATIVE_AI_USE.md) for the full attribution hub.
 | `models/CODE_AI_ATTRIBUTION.md` | Directory-level AI attribution marker. |
 | `data/runs/FIGURES_AI_ATTRIBUTION.md` | Directory-level AI attribution marker. |
 | `README.md` | AI-assisted drafting; authors responsible for factual claims. |
-| `CURSOR_TRANSCRIPT.md` | AI-assisted drafting; authors responsible for factual claims. |
 | `GENERATIVE_AI_USE.md` | AI-assisted drafting; authors responsible for factual claims. |
 
 ## Figures (AI-assisted rendering scripts)

@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-06-05T13:56:29Z",
+  "generated_at_utc": "2026-06-05T22:28:27Z",
   "tool": "Cursor Agent (Cursor IDE)",
   "tool_version_note": "Cursor IDE 3.6.31+; underlying LLM model not logged per turn in repo",
   "policy": "CS231N Generative AI Use Policy \u2014 all AI-assisted artifacts listed; authors responsible for verification.",
   "summary": {
     "ai_generated_code_files": 50,
-    "ai_generated_doc_files": 22,
+    "ai_generated_doc_files": 21,
     "ai_generated_figures": 16,
     "excluded_glob_patterns": 7
   },
@@ -505,13 +505,6 @@
         "notes": "AI-assisted drafting; authors responsible for factual claims."
       },
       {
-        "path": "CURSOR_TRANSCRIPT.md",
-        "category": "documentation",
-        "ai_generated": true,
-        "tool": "Cursor Agent (Cursor IDE)",
-        "notes": "AI-assisted drafting; authors responsible for factual claims."
-      },
-      {
         "path": "GENERATIVE_AI_USE.md",
         "category": "documentation",
         "ai_generated": true,
@@ -728,8 +721,7 @@
   ],
   "transcripts": {
     "canonical": "docs/CONVERSATION_TRANSCRIPT.md",
-    "raw_jsonl": "C:\\Users\\63npi\\.cursor\\projects\\c-Users-63npi-OneDrive-Desktop-CS231N-cs231n-player-trajectories\\agent-transcripts\\c9cd51f6-def0-4582-b4bd-b9e6d7fde87d\\c9cd51f6-def0-4582-b4bd-b9e6d7fde87d.jsonl",
-    "cursor_ui_export": "CURSOR_TRANSCRIPT.md"
+    "raw_jsonl": "C:\\Users\\63npi\\.cursor\\projects\\c-Users-63npi-OneDrive-Desktop-CS231N-cs231n-player-trajectories\\agent-transcripts\\c9cd51f6-def0-4582-b4bd-b9e6d7fde87d\\c9cd51f6-def0-4582-b4bd-b9e6d7fde87d.jsonl"
   },
   "plans": {
     "consolidated": "docs/AI_PLANS.md",

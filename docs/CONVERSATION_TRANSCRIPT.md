@@ -3,10 +3,10 @@
 > **AI session transcript (Cursor Agent).** Canonical chat log for CS231N generative-AI attribution.
 > Index: [GENERATIVE_AI_USE.md](GENERATIVE_AI_USE.md) · Prompts: [AI_PROMPT_INDEX.md](AI_PROMPT_INDEX.md)
 
-**Generated:** 2026-06-05 13:56 UTC
+**Generated:** 2026-06-05 22:28 UTC
 **Source:** `C:\Users\63npi\.cursor\projects\c-Users-63npi-OneDrive-Desktop-CS231N-cs231n-player-trajectories\agent-transcripts\c9cd51f6-def0-4582-b4bd-b9e6d7fde87d\c9cd51f6-def0-4582-b4bd-b9e6d7fde87d.jsonl`
 **Tool:** Cursor Agent (Cursor IDE)
-**Turns:** 154 user messages (154 with content)
+**Turns:** 148 user messages (148 with content)
 
 This is a cleaned export of the Cursor Agent chat. Internal reasoning marked
 `[REDACTED]` in the source file is omitted. Tool call details are summarized, not full outputs.
@@ -9956,2581 +9956,6 @@ _Tools used: Read, Grep, Write, Shell, StrReplace_
 
 ### User
 
-I am starting on the report. I do not want you to generate chunks for me to incorporate, but instead provide a list of bullets that answer all the parts of the specs and requirements for me to synthesize. First is the Methods section which has these two separate descriptsion. the first from the course website which is the all encompassing one, the second from an Ed Discussion post meant to help go into more detail
-
-Methods (30%): Discuss your approach for solving the problems that you set up in the introduction. Why is your approach the right thing to do? Did you consider alternative approaches? You should demonstrate that you have applied ideas and skills built up during the quarter to tackling your problem of choice. It may be helpful to include figures, diagrams, or tables to describe your method or compare it with other methods.
-
-Section 3: Methods (2 pages)
-
-Describe your learning algorithms, proposed algorithm(s), or theoretical proof(s). Make sure to include relevant mathematical notation, e.g. when you formulate your input(s), output(s) and the loss function(s). It is okay to use formulas from the lecture notes. For each algorithm, give a brief description (2-3 sentences) of how it works. Again, we are looking for your understanding of how these deep learning algorithms work. Although the teaching staff probably know the algorithms, future readers may not (reports will be posted on the class website). Additionally, if you are using a niche or cutting-edge algorithm, you may want to explain your algorithm using several paragraphs. Note: Theory/Algorithms projects may have an appendix showing extended proofs (see appendix description below). Assume the reader has completed CS231N. You don’t need to explain filters and max-pooling, but if you use something like stochastic strides, you should explain that.
-
-If you used an existing codebase and built on top of it, you must state this and explain what you wrote versus what the starter code already came with.
-
-### Assistant
-
-Reviewing the project's pipeline and documentation to produce accurate Methods bullets aligned with the course requirements.
-
-Here is a **bullet checklist** you can use to synthesize your ~2-page Methods section. It maps to both rubrics (course “why/alternatives/skills” + Ed “notation/algorithms/codebase attribution”).
-
----
-
-## A. Problem setup & notation (Ed: inputs / outputs)
-
-- **Task:** Short-horizon **multi-player trajectory forecasting** on broadcast basketball video, built on top of SAM3.1 tracks.
-- **Two sub-problems:** (1) perception/tracking quality vs SportsMOT GT; (2) forecasting future player positions given past observations.
-- **Primary data:** SportsMOT basketball clips (`sportsmot_example` + 3 additional sequences); MOTChallenge-format `gt.txt`, aligned to per-seed windows.
-- **Multi-seed protocol:** 12 temporal windows per clip, start times every **2 s**, **45-frame** SAM context, **resize_scale 0.5** for seed tensors (do not mix with other resize settings).
-- **Fixed-slot representation:** Up to **P = 10** players per frame; positions stored as mask centers \((x, y)\) in pixel space, normalized per clip by frame width/height for LSTM training.
-- **Forecasting window:** **obs_len = 8** past frames → predict **pred_len = 4** future frames (~0.16 s at 25 FPS export rate).
-- **Visibility mask:** Boolean \(m_{t,p}\) for whether player slot \(p\) is visible at frame \(t\); losses and metrics only over visible pairs.
-- **Sliding windows:** Many training samples per seed via stride-1 windows over tensor sequences.
-
----
-
-## B. End-to-end pipeline (good for one figure/diagram)
-
-- **Stage 1:** SAM3.1 video tracking → `baseline_tracks.json`
-- **Stage 2:** Geometry-free augmentation → `augmented_tracks.json`
-- **Stage 3:** Export to LSTM tensors + optional 15-D rule features → `trajectory_tensors.json`
-- **Stage 4:** Train/eval forecasters (A0/A1/A3/residual/linear)
-- **Stage 5 (extension):** Per-clip retrain + transfer baseline across 4 clips
-
----
-
-## C. Stage 1 — SAM3.1 tracking
-
-**Algorithm (2–3 sentences):**
-- Load **SAM3.1** multiplex video predictor (Meta `facebookresearch/sam3`, HF checkpoint); start a session on a frame directory; prompt frame 0 with text **“basketball players on the court”**; propagate masks/IDs through the clip via `propagate_in_video`.
-
-**Inputs / outputs:**
-- **Input:** JPEG frame sequence (from SportsMOT `img1` or extracted clip)
-- **Output:** Per-frame player IDs, bounding boxes, mask centers saved as JSON tracks
-
-**Your code vs existing codebase (required disclosure):**
-- **Existing:** SAM3.1 model, predictor API, checkpoint download (`build_sam3_multiplex_video_predictor`, Hugging Face weights)
-- **You wrote:** `scripts/run_sam3.py` (prompting, propagation loop, JSON export, CUDA memory handling, upstream API patch for `start_session` kwargs); `scripts/run_modal.py` / `run_all_seeds_modal.py` (Modal A10G orchestration, multi-seed batching); frame prep, filtering geometry-only detections, dataset path helpers
-- **Early project code you wrote:** `utils/video_utils.py` (frame extraction/loading) — mention if still relevant to data prep
-
-**Why this stage:**
-- Strong open-vocabulary segmentation/tracking without training a detector from scratch on limited project time
-- Provides the **perception front-end** your forecasting models consume
-
-**Alternatives considered (mention briefly):**
-- Classical detectors + DeepSORT/ByteTrack
-- Training a custom YOLO/detector on basketball
-- Point-grid prompting vs text prompt (you ended on **text prompt** for SAM3.1)
-- Full 500-frame sessions vs **45-frame windows** (VRAM / stability tradeoff)
-
-**CS231N tie-in:**
-- Using a **pretrained foundation model** as a frozen/perception module; evaluating its outputs quantitatively before downstream learning
-
----
-
-## D. Stage 2 — Geometry-free augmentation
-
-**Motivation (why right thing to do):**
-- SAM outputs can include crowd false positives, oversized boxes, ID noise
-- You deliberately avoid **court homography / calibrated coordinates** (hard on broadcast footage) and instead use **relative kinematics + heuristics**
-
-**Algorithm (2–3 sentences):**
-- Post-process track JSON with rule-based stages: **sanitize** (size/aspect/court-fraction filters, max players), optional **velocity cap**, optional game-state rules (fast break, clustering, etc.); ablate each rule and score vs aligned GT.
-
-**Headline policy for LSTM:**
-- **`sanitize_plus_velocity_cap`** — minimal physical cleanup without heavy game-rule post-refine on tracks
-
-**Inputs / outputs:**
-- **Input:** `baseline_tracks.json`
-- **Output:** `augmented_tracks.json`, per-rule correction logs, detection metrics (ADE/FDE, ID switches, players/frame)
-
-**Alternatives considered:**
-- Full game-rule stack (`full`) — **hurts detection ADE** on real GT in your ablations
-- Gap-fill / re-ID stage — gated; not headline path
-- Sanitize parameter grid search (`w0.4_y0.1_p10` etc.) vs single default
-- **A2 post-refine on LSTM predictions** (later) — also hurt; important negative result
-
-**CS231N tie-in:**
-- Structured **ablation study**; precision/recall-style tradeoffs in a tracking domain; designing inductive biases without learning new weights
-
-**Figure/table ideas:**
-- Pipeline diagram: baseline → sanitize → velocity cap
-- Table: detection ADE for baseline vs augmented vs rule stacks
-
----
-
-## E. Stage 3 — Tensor export & rule features
-
-**Fixed-slot export (2–3 sentences):**
-- Map variable-ID tracks into fixed player slots up to `max_players=10`; build arrays \(X \in \mathbb{R}^{T \times P \times 2}\), visibility \(V \in \{0,1\}^{T \times P}\); validate export (min visibility, empty-frame limits) before LSTM.
-
-**Rule features (A1 conditioning) — define notation:**
-- Per frame, per slot: **15-D** vector \(r_{t,p} \in \mathbb{R}^{15}\) from `utils/rule_features.py`
-- Groups: **kinematic** (speed, velocity, stationary, direction change), **social geometry** (hull margin, nearest neighbor, spacing), **game state** (fast break, transition, half-court, convergence/divergence, dead ball, cluster)
-- All computed from **track history only** — still geometry-free (no court map)
-
-**Alternatives considered:**
-- No rule features (A0 positions-only)
-- Feature-group ablations (`kinematic` only, `game_state` only, etc.)
-- **Autoregressive rule recompute** during rollout vs fixed SAM-derived rules — mixed results
-
----
-
-## F. Stage 4 — Forecasting models (core learning content)
-
-### F1. Linear baseline (must define clearly — your main comparator)
-
-- **Model:** Constant-velocity extrapolation from last two observed frames
-- **Math:** For each player, \(\mathbf{v}_t = \mathbf{x}_{t} - \mathbf{x}_{t-1}\); forecast \(\hat{\mathbf{x}}_{t+k} = \mathbf{x}_t + k \mathbf{v}_t\) for \(k = 1,\ldots,H\) with \(H=\) `pred_len`
-- **Why include:** Strong inductive bias for smooth short horizons; fair **causal** baseline (unlike using SAM tracks on future frames)
-
-### F2. A0 — Plain LSTM
-
-- **Input:** Normalized positions \(\mathbf{x}_{t,p}\) over obs window
-- **Architecture:** 2-layer LSTM, hidden 128; flatten all players each timestep → linear head predicts all future positions
-- **Output:** \(\hat{Y} \in \mathbb{R}^{H \times P \times 2}\) directly
-- **2–3 sentence mechanism:** Encodes joint multi-player motion history; decodes entire future horizon from final hidden state
-
-### F3. A1 — Rule-conditioned LSTM
-
-- **Input:** Concatenate \([\mathbf{x}_{t,p}; \mathbf{r}_{t,p}]\) per player per frame
-- **Same LSTM backbone** with larger input dim \(P(2 + 15)\)
-- **Hypothesis:** Basketball phase/social cues help beyond raw positions
-
-### F4. A3 — Graph-style LSTM (social encoding)
-
-- **Mechanism (2–3 sentences):** Each timestep, encode each player with \((x,y)\) plus **mean relative offset to visible neighbors**; small MLP per node; flatten encoded nodes → LSTM → head
-- **CS231N tie-in:** Lightweight **social interaction** encoding (related to social LSTM / graph ideas from lecture) without full GNN stack
-
-### F5. A1 Residual (headline model)
-
-- **Key idea:** Predict **correction** on top of linear baseline, not absolute positions
-- **Math:** \(\hat{Y} = Y_{\text{linear}} + f_\theta(X, R)\) where \(f_\theta\) is rule-LSTM
-- **Why:** Linear already explains most short-horizon motion; residual learning targets **only what physics prior misses**
-- **Why this is the “right” formulation (course rubric):** Plain A1 still loses to linear under rollout; residual aligns train target with strong baseline (lecture theme: good priors + learned residuals)
-
----
-
-## G. Loss functions & training (Ed: mathematical detail)
-
-**Primary training loss (masked MSE in normalized space):**
-\[
-\mathcal{L}_{\text{MSE}} = \frac{1}{\sum m_{t,p}} \sum_{t,p} m_{t,p} \|\hat{\mathbf{y}}_{t,p} - \mathbf{y}_{t,p}\|_2^2
-\]
-
-**Optional pixel L1 term** (when `--optimize-forecast-ade`):
-- Add \(\lambda_{\text{L1}} \mathcal{L}_{\text{L1-px}}\) to better match **ADE in pixels** (L1 closer to mean error than MSE)
-
-**Optional A1b rule penalty** (velocity cap / spacing soft constraints on predictions) — mention if you trained `lstm_rule_features_a1b`
-
-**Optimizer:** Adam, lr \(10^{-3}\), batch size 16, **80 epochs**
-
-**Scheduled sampling (explain — niche but important):**
-- During training, with probability \(p\) ramping **0 → 0.3** over epochs, replace last few observation frames with model predictions to reduce **exposure bias** (lecture: train/infer mismatch in autoregressive models)
-
-**Checkpoint selection:**
-- Best checkpoint by **validation rollout forecast ADE (px)** on held-out seed `offset_0s`, not just teacher-forced loss
-
-**Train/val split:**
-- **`held_out_seed`:** train on 11 seeds, validate on `offset_0s` (report generalization caveat for that seed)
-- Alternative you explored: `temporal_all` (more windows, overlapping train/val)
-
-**Multi-clip extension:**
-- **Per-clip retrain:** separate residual checkpoint per sequence (same hyperparams)
-- **Transfer baseline:** evaluate `sportsmot_example` checkpoint on other clips without fine-tuning
-- **Deferred:** pooled multi-sequence training (`DEFERRED_MULTISEQ.md`)
-
----
-
-## H. Inference & evaluation protocol (Methods must define how you score)
-
-**Teacher-forced vs rollout (critical distinction):**
-- **Teacher-forced:** feed ground-truth past positions during multi-step prediction (optimistic)
-- **Rollout (headline):** autoregressively feed model’s own predictions — matches deployment; reported as **forecast ADE**
-
-**Forecast ADE (pixels):**
-- Match predicted vs GT player centers per frame (Hungarian/match within threshold); mean L2 distance over matched visible pairs across forecast horizon
-- Also report **FDE** if you use it; median over seeds for robustness
-
-**Detection-stage ADE:** separate metric on augmented tracks vs GT (pre-LSTM)
-
-**“Clean seeds”:** exclude `offset_0s`, `offset_5s`, `offset_15s` where SAM collapse breaks all models — document as upstream failure, not LSTM-specific
-
-**Baselines to compare in Methods (not Results):**
-- Linear (fair)
-- A0, A1, A3, A1 residual
-- SAM augmented **future** tracks — label as **oracle/detection ceiling**, not fair forecaster
-
----
-
-## I. Why this approach overall (course website: “right thing to do?”)
-
-- Decomposes hard broadcast problem into **perception → cleanup → forecasting**, each measurable against SportsMOT GT
-- Uses **CS231N tools** appropriately: RNN sequence modeling, masked losses, scheduled sampling, residual learning, ablations, train/val protocol, rollout eval
-- **Geometry-free** design matches data constraints (no court calibration)
-- **Residual + rule features** tests whether basketball-specific inductive bias helps beyond a physics prior
-- **Multi-seed + multi-clip** protocol reduces overfitting to one camera moment
-
----
-
-## J. Alternatives & negative results worth mentioning in Methods
-
-- Game-rule augmentation on **tracks** and **A2 post-refine on predictions** — considered, rejected for headline pipeline (hurt ADE)
-- Plain A1 without residual — considered, insufficient vs linear under rollout
-- Pooled training across clips — considered, deferred for time/engineering
-- Point prompts vs text prompts for SAM3 — text prompt used in final pipeline
-- Using SAM future-frame tracks as forecast baseline — rejected as unfair/oracle
-
----
-
-## K. Existing codebase attribution (Ed requirement — be explicit)
-
-| Component | Existing / third-party | Your implementation |
-|-----------|------------------------|---------------------|
-| SAM3.1 weights & predictor | Meta `sam3` repo, HF checkpoint | Wrapper, Modal jobs, JSON I/O, patches |
-| PyTorch LSTM | `nn.LSTM` | Custom heads, rule/graph variants, training loop |
-| SportsMOT data | Public dataset | Registration, extraction, extra clips, aligned GT |
-| MOT metrics conventions | Standard ADE/FDE | `trajectory_metrics.py`, forecast rollout eval |
-| **Original project code** | N/A | `augmentation.py`, `rule_features.py`, `trajectory_lstm.py`, `trajectory_graph_lstm.py`, `train_lstm.py`, `eval_lstm_ablations.py`, multi-seed infra, docs/figures pipeline |
-
-- **No CS231N assignment starter code** for this final project — this is your team repo built on public libraries + dataset
-
----
-
-## L. Suggested figures / tables for Methods (~2 pages)
-
-- **Figure 1:** End-to-end pipeline (SAM3 → augment → tensors → LSTM variants → metrics)
-- **Figure 2:** Sliding-window forecasting setup (obs 8 / pred 4, fixed slots, visibility mask)
-- **Figure 3 (optional):** Residual formulation diagram: linear path + learned Δ
-- **Table 1:** Model variants (A0/A1/A3/residual/linear) with input dim, output, #params order-of-magnitude
-- **Table 2:** Rule feature groups (15-D breakdown) — compact, not full list needed
-- **Table 3 (optional):** Train/val split & multi-seed schedule
-
----
-
-## M. Length / emphasis guide for ~2 pages
-
-- **~¼ page:** Data protocol + notation
-- **~¼ page:** SAM3 + augmentation (brief; perception is not the learning focus)
-- **~1 page:** Forecasting models, loss, training, rollout eval (main CS231N content)
-- **~¼ page:** Multi-clip train/transfer + codebase attribution + alternatives paragraph
-
----
-
-If you want, I can next give the same style bullet list for **Results** or **Introduction** so the three sections stay consistent. (Ask mode — synthesis only, no prose blocks to paste.)
-
-_Tools used: Read, Grep_
-
----
-
-## Turn 134
-
-### User
-
-provide the bullets that would go in each of these 4 sections
-
-### Assistant
-
-Pulling current results and report structure so the four section bullet lists match your project.
-
-Assuming the four main report sections are **Introduction**, **Related Work**, **Methods**, and **Experiments/Results** (matching your `RESEARCH_REPORT.md` §1–4). Bullets only — for you to synthesize.
-
----
-
-# Section 1: Introduction
-
-**Problem & motivation**
-- Broadcast basketball needs reliable **player tracks** and **short-term motion forecasts** (tactics, graphics, analytics).
-- Modern segmentation models (SAM family) detect well but broadcast footage has occlusion, crowd, fast cuts → track breaks.
-- Question: Can a **CS231N-style forecasting stack** (LSTM + inductive biases) beat a simple physics baseline on real SportsMOT GT?
-
-**What you built (one-sentence pipeline)**
-- SAM3.1 tracking → geometry-free augmentation → rule-conditioned **residual LSTM** forecasting, evaluated on SportsMOT basketball with multi-seed protocol.
-
-**Concrete goals / research questions**
-- How strong is SAM3.1 on SportsMOT basketball vs aligned GT?
-- Does lightweight **geometry-free augmentation** help (or hurt) track quality?
-- Do **basketball rule features** improve forecasting over plain LSTM?
-- Does **residual learning** over constant-velocity linear close the gap to a strong baseline?
-- Does the model **generalize** to other clips (transfer vs per-clip retrain)?
-
-**Problem formulation (preview notation)**
-- Input: past player positions (and optional rule features) over 8 frames.
-- Output: predict 4 future frames for up to 10 fixed player slots.
-- Metric: **rollout forecast ADE** (px) — model feeds its own predictions.
-
-**Dataset scope**
-- Primary: `sportsmot_example` (500 frames, 12 seeds @ 2s).
-- Extension: 3 additional basketball clips (16 + 8 + 23 seeds); one held out for generalization narrative.
-
-**Headline result (tease — details in Experiments)**
-- Residual rule-LSTM **ties linear** on primary clip (~5.8 px median).
-- Rule features help A1 vs A0 (~7.5 vs ~10.7 px) but need residual head to match linear.
-- Per-clip retrain flips one clip to beat linear; not universal across all clips.
-
-**Contributions (bullet list for reader)**
-- End-to-end reproducible pipeline (Modal SAM3 + local LSTM).
-- Geometry-free augmentation ablations on **real** SportsMOT GT.
-- Rule-feature LSTM variants (A0/A1/A3) with **residual formulation** aligned to rollout eval.
-- Multi-seed + multi-clip evaluation with honest failure-seed analysis.
-
-**Report roadmap**
-- §2 Related work → §3 Methods → §4 Experiments.
-
-**What NOT to claim in intro**
-- “Rule weights never help” — they help A1 vs A0; residual+rules ties linear on primary clip.
-- “Beat linear everywhere” — mixed on multi-clip.
-
----
-
-# Section 2: Related Work
-
-**Multi-object tracking (MOT)**
-- SportsMOT (Yang et al., ICCV 2023): 240 clips, basketball/football/volleyball; MOTChallenge format.
-- Classic MOT: detect-then-track (SORT, DeepSORT, ByteTrack) — contrast with your **foundation-model** tracking choice.
-
-**Segmentation-based / promptable tracking**
-- SAM / SAM2 / SAM3: promptable masks, video propagation.
-- Your use: SAM3.1 text prompt “basketball players on the court” + multiplex video predictor — **no custom detector training**.
-
-**Trajectory forecasting**
-- Social LSTM / graph-based motion models: encode neighbor interactions.
-- Your A3 graph LSTM is a **lightweight** relative-offset encoder + LSTM (not full ST-GNN).
-
-**Physics / kinematic baselines**
-- Constant-velocity / linear extrapolation — strong for short horizons; you treat as **primary fair baseline**.
-
-**Residual / prior + correction learning**
-- Predicting residuals over a strong prior (related to lecture themes: good inductive bias + learned correction).
-- Your headline: \(\hat{Y} = Y_{\text{linear}} + f_\theta(X,R)\).
-
-**Domain-specific sports analytics**
-- Court homography, calibrated coordinates — common in NBA pipelines.
-- Your deliberate contrast: **geometry-free** rule features (phase, spacing, speed) without court map.
-
-**Exposure bias / scheduled sampling**
-- Autoregressive training vs rollout inference mismatch (RNN lecture).
-- You use scheduled sampling + forecast-ADE checkpointing — cite as methodological precedent.
-
-**Gap your project fills (positioning sentence)**
-- Few student projects combine **modern SAM tracking + rigorous MOT GT ablations + rule-aware residual LSTM** on broadcast basketball without calibration.
-
-**References to include**
-- SportsMOT paper
-- SAM3 / Meta segmentation models
-- MOTChallenge metrics (ADE/FDE conventions)
-- Optional: Social LSTM or Trajectron++ if you want graph-forecast context
-
----
-
-# Section 3: Methods
-
-*(Condensed from prior list — same content, section-scoped.)*
-
-**3.1 Data & evaluation protocol**
-- SportsMOT basketball; aligned `gt.txt` → per-seed `gt_aligned.json`.
-- Multi-seed: 45-frame SAM windows, 2s step, resize 0.5 for seed tensors.
-- Fixed slots P=10; normalize positions by frame W×H.
-- obs_len=8, pred_len=4; visibility masks in loss/metrics.
-- Clean seeds: exclude offset_0s, offset_5s, offset_15s (SAM collapse).
-
-**3.2 SAM3.1 tracking**
-- HF checkpoint; text prompt frame 0; propagate through clip.
-- Modal A10G jobs; output `baseline_tracks.json`.
-- **You wrote:** `run_sam3.py`, Modal orchestration, JSON I/O, API patches. **Existing:** Meta sam3 repo + weights.
-
-**3.3 Augmentation**
-- `sanitize_plus_velocity_cap` headline policy.
-- Geometry-free rules: size/aspect filters, velocity cap, optional game-state detectors.
-- Ablation-ranked; full game-rule stack **hurts** detection ADE on real GT.
-
-**3.4 Tensor export & rule features**
-- Export to `trajectory_tensors.json`; validation gate before LSTM.
-- 15-D rule features per (frame, player): kinematic + social + game-state groups.
-
-**3.5 Forecasting models**
-- **Linear:** \(\hat{x}_{t+k} = x_t + k(x_t - x_{t-1})\).
-- **A0:** plain LSTM on positions.
-- **A1:** LSTM on [position; rule features].
-- **A3:** neighbor relative-offset encoder + LSTM.
-- **A1 residual (headline):** \(\hat{Y} = Y_{\text{linear}} + f_\theta\).
-
-**3.6 Training**
-- Masked MSE + optional pixel L1; Adam 1e-3; 80 epochs; batch 16.
-- Scheduled sampling p: 0→0.3; best checkpoint by **val rollout ADE**.
-- Split: `held_out_seed`, val `offset_0s`.
-
-**3.7 Inference & metrics**
-- **Rollout** forecast ADE (headline) vs teacher-forced (diagnostic).
-- ADE: mean L2 on matched pred/GT centers; median over seeds.
-- SAM future tracks = oracle ceiling only.
-
-**3.8 Multi-clip protocol**
-- Per-clip residual retrain (same hyperparams).
-- Transfer baseline: example checkpoint, no fine-tune.
-- Pooled training deferred.
-
-**3.9 Alternatives considered**
-- Point vs text SAM prompts; A2 post-refine; game-rule track stack; pooled multi-seq training; SAM-as-forecaster baseline.
-
-**3.10 Suggested figures**
-- Pipeline diagram; sliding window; residual schematic; model comparison table.
-
----
-
-# Section 4: Experiments / Results
-
-**4.1 Experimental setup (repeat briefly — don’t re-derive methods)**
-- Hardware: Modal A10G for SAM3; local CPU for LSTM (~2–5 min/clip).
-- Primary eval clip: `sportsmot_example`, 12 seeds.
-- Training: residual rule-LSTM, held_out_seed, 80 epochs.
-- Report **median** forecast ADE (robust to outlier seeds).
-
-**4.2 Detection-stage results (pre-LSTM)**
-- SAM3.1 baseline vs augmented (`sanitize_plus_velocity_cap`):
-  - Mean players/frame: **10.76 → 10.42**
-  - ID switches: **0 → 0**
-  - Mean track streak: **32.3 → 27.9**
-- Baseline detection ADE vs GT ~**7.16 px**; augmented ~**7.34 px** on primary window.
-- Sanitize grid best ~**5.87 px** (mention as ablation, not headline input).
-- **Takeaway:** Augmentation mainly **prunes false positives**; does not fix catastrophic seeds.
-
-**4.3 Primary-clip forecasting (`sportsmot_example`, 12 seeds)**
-
-| Model | Median ADE (all) | Median ADE (clean) |
-|-------|------------------|--------------------|
-| Linear | 5.81 | 5.94 |
-| A0 plain | 10.68 | 10.43 |
-| A1 rule | 7.51 | 7.22 |
-| **A1 residual** | **5.81** | **5.95** |
-| A3 graph | 8.67 | 8.47 |
-
-- A1 beats A0 on **10/12** seeds.
-- Residual **ties linear** on median; beats linear on **5/12** seeds individually.
-- Teacher-forced A1 median ~**4.97 px** vs rollout ~**7.5 px** → exposure bias gap.
-
-**4.4 Failure-seed analysis**
-- `offset_0s`, `offset_5s`, `offset_15s`: ADE catastrophic for **all** models (A0, A1, residual, linear).
-- Interpretation: **upstream SAM tracking failure**, not LSTM-specific.
-- Justifies clean-seed reporting alongside all-seed medians.
-
-**4.5 Ablations worth one paragraph or table**
-- Rule feature **group** ablation (kinematic vs game_state vs full 15-D).
-- A2 post-refine on predictions — **hurts** ADE (negative result).
-- Autoregressive rule recompute vs fixed rules — mixed, not uniform win.
-- Residual vs non-residual A1 — residual required to match linear.
-
-**4.6 Multi-clip results (per-clip trained residual)**
-
-| Dataset | Seeds | Residual | Linear | Winner |
-|---------|-------|----------|--------|--------|
-| sportsmot_example | 12 | 5.81 | 5.81 | tie |
-| v_6os86hzwcs_c001 | 16 | **4.82** | 4.84 | **residual** |
-| v_6os86hzwcs_c003 | 8 | 5.48 | 5.41 | linear |
-| v_00hrwkvvjtq_c001 (holdout) | 23 | 5.16 | 5.01 | linear |
-
-**4.7 Transfer vs per-clip (comparison experiment)**
-
-| Clip | Transfer residual | Per-clip residual | Δ |
-|------|-------------------|-------------------|---|
-| c001 | 4.94 | 4.82 | −0.12 (per-clip better) |
-| c003 | 5.56 | 5.48 | −0.08 (per-clip better) |
-| holdout | 4.99 | 5.16 | +0.17 (transfer better) |
-
-- Per-clip training helps train-split clips modestly; holdout favors **transfer** on median ADE.
-- Neither transfer nor per-clip universally beats linear.
-
-**4.8 Figures to include**
-- `lstm_comparison.png` / `lstm_ade_bar.png` — primary clip model comparison.
-- `multiseq_perclip_bar.png` — 4-clip residual vs linear.
-- `multiseq_train_vs_transfer.png` — per-clip vs transfer residual.
-- `PRE_LSTM_GAUGE.md` figures — detection-stage gauge (optional).
-
-**4.9 Key experimental findings (synthesis bullets)**
-- Plain LSTM (A0) is far below linear → sequence model alone is insufficient.
-- Rule features improve over A0 but not enough without residual head.
-- Residual + rules **matches linear** on primary clip — learned correction captures what plain LSTM misses.
-- Linear is a **strong, hard-to-beat** baseline for 4-frame horizons.
-- Multi-clip: modest gains from per-clip training; generalization is clip-dependent.
-- End-to-end ceiling set by SAM quality on hard seeds.
-
-**4.10 Honest limitations (can preview Discussion)**
-- No pooled multi-sequence training.
-- A0/A1 not retrained on new clips (only residual).
-- Short horizon (4 frames); broadcast-specific.
-- Some end-of-clip seeds fail tensor validation.
-
-**4.11 What NOT to over-claim in Results**
-- Do not say rules “don’t help” — they help A1 vs A0.
-- Do not say you “solved” forecasting — you **tie** linear on one clip, mixed elsewhere.
-- Do not compare fairly to SAM future tracks as a forecaster peer.
-
----
-
-If your four sections were meant to be different (e.g. **Methods / Experiments / Discussion / Conclusion**), say which four and I’ll remap the bullets. I can also do the same bullet style for **Discussion + Conclusion** as a follow-up.
-
-_Tools used: Read_
-
----
-
-## Turn 135
-
-### User
-
-now your job is to help me write the methods portion specifically. What should be the subsections considering we only have 2 pages to work with i cant have 10 subsection headers even if i need to incorporate all of that information
-
-### Assistant
-
-For **2 pages**, aim for **4 subsection headers** (5 at most). Anything more reads like an outline, not Methods.
-
----
-
-## Recommended structure (4 subsections)
-
-### **3.1 Problem formulation and data protocol** (~0.4 page)
-Merge: notation, datasets, multi-seed windows, train/val split, metrics.
-
-**Covers:**
-- Task: forecast 4 frames from 8 observed frames, P=10 fixed slots
-- Inputs/outputs notation (positions, visibility mask, optional 15-D rules)
-- SportsMOT clips (primary + 3 extension clips)
-- Multi-seed protocol (2s step, 45-frame SAM context, resize 0.5)
-- Evaluation: **rollout forecast ADE** (px); clean vs all seeds; held_out_seed split
-
-**Skip or one sentence:** full SportsMOT dataset description (cite paper).
-
----
-
-### **3.2 Perception pipeline: SAM3.1 tracking and augmentation** (~0.45 page)
-Merge: SAM3 + geometry-free augmentation + codebase attribution for this stage.
-
-**Covers:**
-- SAM3.1: text prompt, video propagation, JSON tracks
-- **Existing vs yours:** Meta sam3 + weights vs your `run_sam3.py`, Modal orchestration
-- Augmentation: `sanitize_plus_velocity_cap`; why geometry-free
-- Brief negative result: heavy game-rule stack hurts detection ADE → not used for LSTM inputs
-
-**Skip:** sanitize grid search details, per-rule ablation table (→ Experiments).
-
----
-
-### **3.3 Trajectory forecasting models** (~0.85 page) — **main CS231N content**
-Merge: linear baseline, A0/A1/A3, residual, rule features, loss, training.
-
-**Covers:**
-- Linear baseline math (constant velocity)
-- A0 plain LSTM, A1 rule-conditioned LSTM, A3 graph LSTM (2–3 sentences each)
-- **Headline:** A1 residual — \(\hat{Y} = Y_{\text{linear}} + f_\theta(X,R)\)
-- 15-D rule features (one compact sentence + optional tiny table of 3 groups)
-- Architecture: 2-layer LSTM, hidden 128, obs=8, pred=4
-- Loss: masked MSE + optional pixel L1; visibility mask
-- Training: Adam, 80 epochs, scheduled sampling (0→0.3), checkpoint by val rollout ADE
-
-**Skip:** A2 post-refine, autoregressive rules, A1b penalty (one clause: “explored, not headline”).
-
----
-
-### **3.4 Multi-clip training and evaluation** (~0.3 page)
-Merge: per-clip retrain, transfer baseline, inference protocol.
-
-**Covers:**
-- Per-clip residual retrain (same hyperparams, local checkpoint per clip)
-- Transfer eval: example checkpoint on other clips without fine-tuning
-- Rollout vs teacher-forced (one sentence each)
-- What you **did not** do: pooled multi-sequence training (one sentence → Limitations)
-
-**Skip:** seed-by-seed tables, full transfer delta table (→ Results).
-
----
-
-## Optional 5th header (only if 3.3 feels cramped)
-
-### **3.5 Implementation notes** (~0.15 page)
-- SAM3 on Modal A10G; LSTM on CPU
-- No CS231N starter code; built on PyTorch + public SAM3 + SportsMOT
-
-Otherwise fold this into **3.2** (one short paragraph).
-
----
-
-## What NOT to make subsections
-
-| Topic | Where it goes |
-|-------|----------------|
-| Alternatives considered | 1 short paragraph at end of 3.3 or 3.4 |
-| Ablations (A2, feature groups) | Experiments |
-| Detection ADE numbers | Experiments |
-| Failure seeds | Experiments (brief forward reference in 3.1) |
-| Figures list | Write the figures; don’t dedicate a subsection |
-
----
-
-## Page budget (visual)
-
-```
-3.1 Problem & data     [====]     ~25%
-3.2 SAM + augment      [=====]    ~25%
-3.3 Forecasting        [=========] ~45%  ← bulk of CS231N grading
-3.4 Multi-clip         [===]      ~15%
-```
-
----
-
-## Suggested figures (2 max in Methods)
-
-1. **Pipeline figure** (SAM → augment → tensors → LSTM variants → ADE) — supports 3.1–3.2  
-2. **Residual schematic** (linear path + learned Δ) — supports 3.3  
-
-Put model-comparison bar charts in **Results**.
-
----
-
-## One-paragraph “alternatives” closer (no header)
-
-End of 3.3 or 3.4 with something like: considered plain A1 without residual, game-rule post-refine, pooled multi-clip training, and SAM future tracks as a forecast baseline; residual formulation + rollout-aligned training chosen based on validation ADE.
-
----
-
-**Bottom line:** Use **4 headers** — **Problem/Data → Perception → Forecasting → Multi-clip**. That fits 2 pages and still hits Ed’s requirements (notation, algorithms, loss, codebase attribution) without looking like a 10-part checklist.
-
-If you want, I can next give **paragraph-by-paragraph outline** (e.g. “¶1 of 3.3 = linear math, ¶2 = A0/A1/A3 table…”) for drafting.
-
----
-
-## Turn 136
-
-### User
-
-Define and clarify each bullet in the Method section more clearly and in simpler terms as I attempt to start synthesizing everything
-
-### Assistant
-
-Here is each Methods bullet **defined in plain language**, grouped under the **4 subsections** we agreed on. Use this as a drafting glossary — not text to paste verbatim.
-
----
-
-# 3.1 Problem formulation and data protocol
-
-### **Task: forecast 4 frames from 8 observed frames**
-- **What it means:** The model sees **8 past time steps** of player positions and must predict **4 future time steps**.
-- **In time:** At 25 FPS, 4 frames ≈ **0.16 seconds** ahead — a very short horizon.
-- **Why short:** Matches your SAM window size and keeps rollout error manageable.
-
-### **P = 10 fixed player slots**
-- **What it means:** Every frame is stored as a tensor with **10 “slots”** for players, even if fewer than 10 are on court.
-- **Why:** LSTM needs fixed input size. Variable roster size is handled by **padding + visibility masks**.
-- **Say in report:** “We cap at 10 players per frame following export policy.”
-
-### **Inputs: past positions (and optional rule features)**
-- **Position input:** \((x, y)\) mask center per player per frame, in **pixels**, then **normalized** by frame width/height so different resolutions are comparable.
-- **Rule input (A1 only):** Extra **15 numbers per player per frame** describing motion and game context (speed, spacing, fast break, etc.).
-
-### **Outputs: future positions for all slots**
-- **What the model predicts:** Future \((x, y)\) for each of the 10 slots for 4 frames.
-- **Residual model twist:** It predicts a **correction** on top of linear motion, not always raw coordinates (see 3.3).
-
-### **Visibility mask**
-- **What it means:** A boolean flag per (frame, player): **visible or not**.
-- **Why it matters:** Loss and metrics **ignore missing players** — you don’t penalize empty slots.
-- **Simple analogy:** Only grade predictions for players actually on the court that frame.
-
-### **SportsMOT basketball clips**
-- **What it is:** Public multi-player tracking dataset with **ground-truth boxes/IDs** in MOT format.
-- **Your clips:**
-  - **Primary:** `sportsmot_example` (main training/eval story)
-  - **Three more:** extra basketball sequences for generalization
-  - **Holdout:** `sportsmot_v_00hrwkvvjtq_c001` — treated as “didn’t train the main story on this one” for transfer narrative (per-clip train still happens only on that clip’s own seeds)
-
-### **Aligned ground truth (`gt.txt` → `gt_aligned.json`)**
-- **What it means:** Official labels are converted into the **same frame numbering and format** as your SAM tracks so ADE is meaningful.
-- **Why:** Misaligned GT would make every model look bad or good for the wrong reason.
-
-### **Multi-seed protocol (2s step, 45-frame SAM context)**
-- **What it means:** Instead of one video start time, you run the **same pipeline** on **12 windows** starting at 0s, 2s, 4s, … up the clip.
-- **Why:** One window might be lucky/unlucky (camera cut, collapse). Many seeds = **more honest evaluation**.
-- **45 frames:** SAM3 is run on a **short chunk** (VRAM/stability), not always all 500 frames at once.
-
-### **resize_scale 0.5 for seed tensors**
-- **What it means:** Frames fed to SAM for seed runs are **half resolution** vs some other exports.
-- **Why say it:** Mixing different resize scales in one LSTM dataset would confuse the model. **Be consistent within training.**
-
-### **Rollout forecast ADE (headline metric)**
-- **What it means:** Model predicts step 1, then uses **its own prediction** to predict step 2, etc. (like real deployment). Average pixel error vs GT over those future frames.
-- **Contrast — teacher-forced:** Give the model **true past positions** during multi-step prediction (easier, optimistic).
-- **Report rollout as main number;** teacher-forced only to explain train/eval gap.
-
-### **Clean seeds vs all seeds**
-- **All seeds:** All 12 windows, including bad ones.
-- **Clean seeds:** Drop `offset_0s`, `offset_5s`, `offset_15s` where **SAM tracking collapsed** (huge error for every model).
-- **Why both:** All seeds = honest end-to-end; clean seeds = “when tracking works, how does LSTM do?”
-
-### **Train/val split: `held_out_seed`, val = `offset_0s`**
-- **What it means:** Train on **11 seeds**; validate on **`offset_0s` only**.
-- **Caveat to mention:** `offset_0s` is often a **hard seed** — good for honest val, but that seed may look bad at test time.
-
----
-
-# 3.2 Perception pipeline: SAM3.1 tracking and augmentation
-
-### **SAM3.1 tracking stage**
-- **Role:** Turn raw frames into **who is where** each frame (IDs + boxes + mask centers).
-- **Output file:** `baseline_tracks.json` per seed.
-
-### **Text prompt: “basketball players on the court”**
-- **What it means:** On **frame 0**, you tell SAM3 **what to segment** using language, not a point grid.
-- **Then:** SAM propagates those player masks/IDs through the rest of the clip.
-
-### **Video propagation (`propagate_in_video`)**
-- **Plain terms:** SAM **tracks forward in time** — same players (mostly) keep IDs frame to frame.
-- **Failure mode:** Occlusion, crowd, cuts → **lost players, wrong counts** (your failure seeds).
-
-### **Modal A10G GPU jobs**
-- **What it means:** SAM3 runs in the **cloud** (Modal) because it’s heavy; LSTM trains **locally on CPU**.
-- **Why mention:** Practical constraint, not a modeling choice.
-
-### **Existing codebase vs what you wrote (SAM)**
-- **Not yours:** SAM3 model weights, core predictor from Meta `facebookresearch/sam3`.
-- **Yours:** Wrapper script (`run_sam3.py`), JSON export format, Modal batching (`run_modal.py`, `run_all_seeds_modal.py`), bug patch for session API, multi-seed orchestration.
-
-### **Geometry-free augmentation**
-- **What it means:** Clean tracks using **relative motion and heuristics** — **no court map**, no basket coordinates, no homography.
-- **Why:** Broadcast angles vary; calibrated court model is hard and wasn’t your focus.
-
-### **`sanitize_plus_velocity_cap` (headline policy)**
-- **Sanitize:** Remove detections that look wrong (too big, wrong aspect ratio, too many players, etc.).
-- **Velocity cap:** Limit how far a player can jump between frames (when rule actually fires).
-- **Net effect on primary clip:** Slightly fewer players/frame; **doesn’t fix catastrophic seeds**.
-
-### **Why heavy game rules on tracks were rejected**
-- **What you tried:** Rich basketball phase rules applied directly to tracks.
-- **What happened:** **Detection ADE got worse** vs simpler sanitize stack on real GT.
-- **Methods point:** LSTM inputs use **minimal** augmentation, not the full rule stack.
-
-### **Detection ADE (pre-LSTM) — mention briefly**
-- **What it is:** Track quality vs GT **before** any forecasting.
-- **Don’t fill Methods with numbers** — one sentence that you score tracks vs GT; details in Results.
-
----
-
-# 3.3 Trajectory forecasting models
-
-### **Tensor export (bridge from tracks to LSTM)**
-- **What it means:** Convert JSON tracks → numeric arrays: positions, visibility, optional rule features.
-- **Validation gate:** Export must pass checks (enough visible data) before training.
-- **Say:** “We only train on seeds that pass export validation.”
-
-### **15-D rule features (what they are, simply)**
-Per player per frame, hand-crafted signals, e.g.:
-- **Motion:** how fast, which direction, sudden direction change, stationary flag
-- **Spacing:** how close to nearest teammate, team spread, hull margin
-- **Game-ish phase flags:** fast break, transition, half-court, clustering, dead ball, etc.
-- **Important:** These are **computed from track history**, not from a drawn court map.
-
-### **Linear baseline (constant velocity)**
-- **Idea:** “Players keep moving the same way they just were.”
-- **Math in words:** velocity = last position minus previous position; future position = last position + k × velocity for step k.
-- **Why it’s central:** Surprisingly strong for 0.16s; your **fair** baseline.
-
-### **A0 — Plain LSTM**
-- **Input:** Only normalized positions (no rules).
-- **Mechanism:** One LSTM reads the last 8 frames of **all players jointly** (flattened), outputs all future positions.
-- **Role in story:** Shows **raw sequence learning alone is not enough** (much worse than linear in results).
-
-### **A1 — Rule-conditioned LSTM**
-- **Input:** Positions **+** 15 rule features each frame.
-- **Hypothesis:** Basketball context helps beyond raw coordinates.
-- **Result preview:** Beats A0, still **loses to linear** unless you use residual head.
-
-### **A3 — Graph-style LSTM**
-- **Idea:** Before LSTM, each player gets a small encoding of **self position + average offset to visible neighbors** (lightweight “social” cue).
-- **Role:** Ablation / alternative social model; **not your best model**.
-
-### **A1 Residual (headline model)**
-- **Key idea:** Don’t predict absolute future positions. Predict **how wrong linear would be**, then add that fix.
-- **Formula in words:** final prediction = linear prediction + LSTM correction.
-- **Why it works better:** LSTM only learns **what physics-style baseline misses**; easier than reinventing motion from scratch.
-
-### **Architecture details (shared)**
-- **2-layer LSTM**, hidden size **128**
-- **Adam** optimizer, learning rate **1e-3**
-- **80 epochs**, batch size **16**
-- **Masked MSE loss** on visible future positions (in normalized coords)
-
-### **Pixel L1 add-on + forecast-ADE checkpoint**
-- **Pixel L1:** Extra loss term in **real pixels** so training aligns better with ADE.
-- **Checkpoint selection:** Save the model with **best validation rollout ADE**, not just lowest training loss.
-- **Why:** Training loss can look good while **rollout** (what you care about) is bad — classic exposure bias issue.
-
-### **Scheduled sampling (simple explanation)**
-- **Problem:** At train time model often sees **true** past frames; at test time it sees **its own** past predictions → mismatch.
-- **Fix:** Gradually replace some input frames with **model’s own predictions** during training (probability ramps up to 0.3).
-- **CS231N link:** Standard trick for autoregressive sequence models.
-
-### **Variants you explored but don’t headline**
-- **A2:** Apply game rules **after** LSTM predicts → hurt performance.
-- **A1b:** Extra penalty on unrealistic speeds/spacing in loss → optional mention.
-- **Autoregressive rule features:** Recompute rules from predicted positions during rollout → mixed; not main method.
-
----
-
-# 3.4 Multi-clip training and evaluation
-
-### **Per-clip retrain**
-- **What it means:** For each new basketball clip, train a **fresh residual LSTM** using **only that clip’s seeds** (same recipe as primary clip).
-- **Why:** Fair question: “Does the model work on **this** footage?” not just zero-shot transfer.
-
-### **Transfer evaluation**
-- **What it means:** Take the checkpoint trained on **`sportsmot_example` only**, run it on other clips **without fine-tuning**.
-- **Why:** Tests **generalization** across camera/teams/pace.
-
-### **Comparison you report**
-- Per-clip training usually **helps a bit** on train-split clips vs transfer.
-- **Holdout clip:** transfer was actually **slightly better** on median ADE than per-clip train — worth stating as nuance, not failure.
-
-### **What you did NOT do (one sentence)**
-- **Pooled training:** One LSTM trained on **all clips’ tensors together** — deferred (would need extra dataloader code).
-
-### **SAM augmented future tracks (not a fair forecaster)**
-- **What it is:** If SAM had access to **future video**, its tracks on future frames are very accurate.
-- **Why exclude as baseline:** That’s **cheating** for forecasting — oracle sees the future. Compare only to **causal** linear + LSTM.
-
-### **Implementation note (fold in here or 3.2)**
-- SAM3: Meta repo + your glue code.
-- LSTM: **your** PyTorch models and training/eval scripts.
-- No CS231N assignment starter codebase for this project.
-
----
-
-# Cross-cutting: “Alternatives considered” (one closing paragraph, no header)
-
-When you synthesize, you can end Methods with **4–5 sentences** covering:
-- Considered point prompts vs **text prompt** for SAM3 → used text.
-- Considered **full game-rule augmentation** on tracks → hurt ADE → dropped.
-- Considered **plain A1** without residual → couldn’t match linear under rollout.
-- Considered **pooled multi-clip training** → deferred.
-- Chose **residual rule-LSTM + rollout-aligned training** because validation ADE improved and it matches deployment.
-
----
-
-# Quick “when writing, don’t forget” checklist
-
-- [ ] Define **rollout** vs **teacher-forced** once, clearly  
-- [ ] State **linear baseline** math in one line  
-- [ ] State **residual** as linear + correction  
-- [ ] Say **geometry-free** = no court calibration  
-- [ ] Credit **SAM3** vs **your code** explicitly  
-- [ ] Mention **multi-seed** = robustness, not one lucky crop  
-- [ ] Keep **numbers** mostly in Results; Methods = definitions + protocol  
-
----
-
-If helpful next step: I can give you a **paragraph skeleton** for each of the 4 subsections (“Open with… then… then…”) so you can draft in order without staring at a blank page.
-
----
-
-## Turn 137
-
-### User
-
-how many total seeds and how many total frames were used and trained on and used in this model. I am writing the 3.1 section about multi seeing before starting on the ADE, clean seed vs all seed, and train/val split
-
-### Assistant
-
-Gathering exact seed counts, frame totals, and train/val splits from the project artifacts.
-
-Here are the **exact numbers** for §3.1, with plain-language definitions so you can write multi-seeding before ADE / clean / train-val.
-
----
-
-## Two different “seed” counts (important)
-
-Your project uses **two related but different** seed counts:
-
-| Concept | What it counts |
-|--------|----------------|
-| **Scheduled seeds** | Windows in `seed_manifest.json` (official 2s grid per clip) |
-| **Eval seeds** | Any folder under `seeds/` that has `trajectory_tensors.json` (used in `--all-seeds` eval) |
-
-For **`sportsmot_example` only**, eval has **12 seeds** but the manifest has **10** — the extra two are legacy **`offset_5s`** and **`offset_15s`** (not on the 2s grid).
-
----
-
-## Per-clip breakdown
-
-### **`sportsmot_example` (primary clip)**
-- **Full clip length:** **500 frames** @ 25 FPS  
-- **Official scheduled seeds:** **10** (offsets 0s, 2s, …, 18s every **2 s**)  
-- **Eval seeds (forecast metrics):** **12** (adds `offset_5s`, `offset_15s`)  
-- **SAM window per seed:** **45 frames** each (half-res `resize_scale=0.5`)  
-- **Tensor length per seed:** **45 frames**  
-- **Tensor validation:** **12/12 passed**
-
-**LSTM training (headline residual model):**
-- **Train seeds:** **9** (`offset_2s` … `offset_18s` — every scheduled seed except val)  
-- **Val seed:** **1** (`offset_0s`)  
-- **Not used in training:** `offset_0s` (val only); `offset_5s` & `offset_15s` exist for eval but are **not** in the manifest-based train split  
-
-**Sliding training windows** (obs=8, pred=4 → window length 12, stride 1):
-- **34 windows per seed** (= 45 − 12 + 1)  
-- **~306 train windows** (9 × 34)  
-- **~34 val windows** (1 × 34)
-
----
-
-### **`sportsmot_v_6os86hzwcs_c001`**
-- **Clip length:** **825 frames**  
-- **Scheduled / eval seeds:** **16** (0s–30s every 2s)  
-- **45 frames per seed**  
-- **Tensor validation:** **14/16 passed** (failed: `offset_26s`, `offset_30s`)  
-- **LSTM train:** **15 seeds** (all except `offset_0s`) → **~510 train windows**  
-- **LSTM val:** **1 seed** (`offset_0s`) → **~34 val windows**
-
----
-
-### **`sportsmot_v_6os86hzwcs_c003`**
-- **Clip length:** **403 frames**  
-- **Scheduled / eval seeds:** **8** (0s–14s every 2s)  
-- **45 frames per seed**  
-- **Tensor validation:** **7/8 passed** (failed: `offset_14s`)  
-- **LSTM train:** **7 seeds** (2s–14s)  
-- **LSTM val:** **1 seed** (`offset_0s`)  
-- **~238 train windows**, **~34 val windows**
-
----
-
-### **`sportsmot_v_00hrwkvvjtq_c001` (holdout)**
-- **Clip length:** **1162 frames**  
-- **Scheduled / eval seeds:** **23** (0s–44s every 2s)  
-- **45 frames per seed**  
-- **Tensor validation:** **22/23 passed** (failed: `offset_2s`)  
-- **LSTM train:** **22 seeds** (2s–44s)  
-- **LSTM val:** **1 seed** (`offset_0s`)  
-- **~748 train windows**, **~34 val windows**
-
----
-
-## Project-wide totals (for one sentence in §3.1)
-
-| Quantity | Total |
-|----------|-------|
-| **Clips** | **4** |
-| **Source footage (unique frames across clips)** | **2,890** (= 500 + 825 + 403 + 1162) |
-| **Eval seeds with tensors (all clips)** | **59** (= 12 + 16 + 8 + 23) |
-| **Official scheduled seeds (manifest only)** | **57** (= 10 + 16 + 8 + 23) |
-| **SAM-processed window frames** | **59 × 45 = 2,655** (overlapping crops, not unique timeline coverage) |
-| **Per-clip LSTM models trained** | **4** separate residual checkpoints (one per clip) |
-
-**Do not say** “we trained on 2,890 frames” — the LSTM sees **sliding windows** from **45-frame tensors**, not full clips end-to-end.
-
----
-
-## What “multi-seeding” means (for your paragraph)
-
-- Same full clip, but **many start times** (every 2 s).  
-- Each seed = one **45-frame** SAM tracking job + one tensor file.  
-- Windows **overlap in real time** (e.g. 0s–1.8s and 2s–3.8s both covered).  
-- Purpose: avoid judging the pipeline from **one lucky or unlucky** crop.
-
-**Simple sentence you can use:**  
-“We evaluate 59 overlapping 45-frame windows (2 s stride) across four SportsMOT clips, rather than a single crop per video.”
-
----
-
-## Train/val split (before ADE subsection)
-
-- **Split name:** `held_out_seed`  
-- **Rule:** Hold out **`offset_0s`** for validation; **all other scheduled seeds with tensors** train.  
-- **Per clip:** 1 val seed, rest train (see counts above).  
-- **Important nuance for `sportsmot_example`:** Training uses **9** manifest seeds; eval reports **12** seeds (includes `offset_5s`, `offset_15s` that were **not** in training).  
-- **Checkpoint:** Best model by **validation rollout ADE** on `offset_0s`, not lowest train loss.
-
----
-
-## Clean seeds vs all seeds (preview — full detail next)
-
-**Only defined for primary-clip failure analysis:**
-
-- **All seeds:** Every eval seed with a tensor (12 on `sportsmot_example`; 59 project-wide).  
-- **Clean seeds (example clip):** Drop **`offset_0s`, `offset_5s`, `offset_15s`** — SAM collapse / catastrophic ADE on every model.  
-- **Clean count on example:** **12 − 3 = 9** seeds  
-- **Why:** Separates “LSTM bad” from “tracking already broken.”
-
-For other clips, the same three IDs are excluded in `median_*_clean` columns only **if those seed folders exist** (usually just `offset_0s` on new clips).
-
----
-
-## Suggested order for your §3.1 draft
-
-1. **4 clips, frame counts, SportsMOT GT**  
-2. **Multi-seed protocol:** 2 s step, 45-frame SAM/tensor window, 0.5 resize  
-3. **59 eval seeds / 2,655 SAM window-frames** (overlapping)  
-4. **LSTM tensor:** 45 frames/seed → **34 sliding windows** per seed  
-5. **Train/val:** `held_out_seed`, val = `offset_0s`  
-6. **Primary clip:** train **9**, eval **12**  
-7. Then lead into ADE, rollout, clean vs all
-
----
-
-## One correction vs older docs
-
-Some docs say **“train 11 seeds, val offset_0s”** on `sportsmot_example`. Your actual `train_config.json` has **9 train seeds** (2s–18s grid). Use **9 train / 1 val / 12 eval** for accuracy.
-
-If you want, I can give you **2–3 ready-to-adapt sentences** just for the multi-seeding paragraph (still bullets, not a full section).
-
-_Tools used: Read, Grep, Glob_
-
----
-
-## Turn 138
-
-### User
-
-Here is what i have so far for 3. Methods, 3.1 Problem and Data Formulation
-
-To approach predicting player trajectories from the locations gathered by SAM3.1, we first needed to define the prediction range, inputs, and constraints. We decided to focus on short-horizon predictions as these would be the most practical to be used in game analysis. Given the positions of players from the eight previously observed frames, our aim was to predict the corresponding positions for the next four frames, matching the SAM window size. We defined $P=10$ due to the fact that only ten players are allowed on the court at a time, and for any frames with $P < 10$ we padded the tensor.
-
-When passing the locations into the model, we normalized the values by the width and height of the frame to accommodate different resolution videos. With each player within each frame, we included 15 \textit{optional} rule values as the data augmentation to numerically represent the game rules and situations. We defined a visibility mask to ensure the prediction of players visible on the court.
-
-Basketball footage with ground truth player positions was used from SportsMOT. We evaluate 59 overlapping 45-frame windows (2s stride) across 4 separate SportsMOT basketball clips, rather than a single crop per video.
-
-### Assistant
-
-Here is focused feedback on your §3.1 draft — what works, what to fix, and what to add before ADE / train-val.
-
----
-
-## What’s working well
-
-- **Short-horizon framing** (8 → 4 frames) is clear and motivated.
-- **P = 10 fixed slots + padding** is the right idea.
-- **Normalization by frame W×H** is correct.
-- **Visibility mask** — good concept; needs one sharper sentence.
-- **59 overlapping 45-frame windows, 2 s stride, 4 clips** — accurate and strong.
-
----
-
-## Fixes (important)
-
-### 1. “Matching the SAM window size” — imprecise
-- **SAM** runs on **45-frame** chunks (full tracking window).
-- **LSTM** uses **8 observed + 4 predicted = 12 frames** from inside each 45-frame tensor.
-- **Say something like:** “Each seed provides a 45-frame SAM track; the forecaster uses an 8-frame history to predict the next 4 frames.”
-
-### 2. “15 optional rule values as **data augmentation**” — wrong term
-- **Data augmentation** in your project = **track post-processing** (`sanitize_plus_velocity_cap` on SAM outputs).
-- The **15-D rule features** are **extra input channels** for the **rule-conditioned LSTM (A1)**, not augmentation.
-- They are **not optional for all models** — A0 ignores them; A1/A1-residual use them.
-- **Rephrase:** “15-dimensional rule **features** (game/kinematic signals) condition the rule-aware LSTM.”
-
-### 3. “Only ten players allowed on the court” — soft justification
-- True for basketball, but your pipeline reason is **fixed-size tensors** (export caps at 10 player **slots**).
-- **Safer:** “We use P = 10 fixed player slots per frame; empty slots are padded and masked out.”
-
-### 4. Visibility mask — clarify what it does
-- Not only “ensure prediction of visible players” — it also **excludes empty/padded slots from loss and metrics**.
-- **Add:** “Loss and ADE are computed only where the visibility mask is true.”
-
----
-
-## Missing pieces (add 1–2 sentences each)
-
-### **What is a “seed”?**
-Before “59 overlapping windows,” define:
-- A **seed** = one temporal crop starting at offset 0s, 2s, 4s, … with its own SAM tracks and tensor file.
-
-### **Train vs eval seed counts (preview)**
-- **59 seeds** = **evaluation** across 4 clips.
-- **Training** is per clip with **`held_out_seed`**: validate on `offset_0s`, train on all other scheduled seeds (e.g. **9 train / 1 val** on `sportsmot_example`; **12 eval** there because of two extra legacy seeds).
-
-### **Positions are mask centers**
-- One phrase: inputs are **mask center (x, y)** in pixel space, then normalized.
-
-### **Four clips (optional one line)**
-| Clip | Frames | Eval seeds |
-|------|--------|------------|
-| sportsmot_example | 500 | 12 |
-| v_6os86hzwcs_c001 | 825 | 16 |
-| v_6os86hzwcs_c003 | 403 | 8 |
-| v_00hrwkvvjtq_c001 | 1162 | 23 |
-
-You don’t need the full table in §3.1 — one sentence (“four clips totaling 2,890 frames”) is enough.
-
----
-
-## Suggested paragraph flow (for your rewrite)
-
-1. **Task:** 8 → 4 frame short-horizon forecast; why short horizon.  
-2. **Representation:** P = 10 slots, mask centers, normalize, visibility mask.  
-3. **Rule features:** 15-D conditioning for A1 (not augmentation).  
-4. **Data:** SportsMOT, 4 clips, multi-seed crops.  
-5. **Protocol:** 45-frame SAM windows, 2 s stride, 59 eval seeds.  
-6. **(Next subsection)** ADE, rollout, clean vs all, train/val.
-
----
-
-## Small wording tweaks (optional)
-
-| Your phrase | Consider |
-|-------------|----------|
-| “locations gathered by SAM3.1” | “mask-center tracks from SAM3.1” |
-| “optional rule values” | “15 rule **features** (A1 model only)” |
-| “data augmentation to represent game rules” | “hand-crafted **rule features** encoding motion and phase cues” |
-
----
-
-## Accuracy check on your last sentence
-
-> “59 overlapping 45-frame windows (2s stride) across 4 separate SportsMOT basketball clips”
-
-**Correct** for **evaluation**. Add that these windows **overlap in time** within each clip (not 59 independent full videos).
-
----
-
-## What to write next (§3.1 remainder)
-
-After this paragraph, add short sub-blocks (no new headers needed):
-
-- **Train/val:** `held_out_seed`, val = `offset_0s`  
-- **Metrics preview:** rollout forecast ADE (px); median over seeds  
-- **Clean seeds:** on primary clip, exclude `offset_0s`, `offset_5s`, `offset_15s` where SAM fails  
-
----
-
-**Bottom line:** Your structure is solid. The main fix is **rule features ≠ data augmentation**, and **8+4 ≠ 45-frame SAM window** — clarify that relationship once. Everything else is tightening and adding seed/train-val context before ADE.
-
-If you paste your next paragraph (ADE / train-val), I can review it the same way.
-
----
-
-## Turn 139
-
-### User
-
-provide feedback, and necessary changes in the order of the paragraph
-
-### Assistant
-
-Here is feedback with **necessary changes in the order your §3.1 paragraphs should follow**. Each block is one paragraph in your final text, with **what to keep, move, fix, or add**.
-
----
-
-## Paragraph 1 — Task and forecasting window (open here)
-
-**Purpose:** Define the prediction problem before SAM, tensors, or datasets.
-
-**Order & content:**
-1. Start with the goal: short-horizon player trajectory forecasting from SAM3.1 tracks.
-2. State the window: **8 observed frames → 4 future frames** (~0.16 s at 25 FPS).
-3. Motivate short horizon: practical for live/broadcast analysis.
-
-**Changes from your draft:**
-- **Move up** your first two sentences (they belong here).
-- **Remove** “matching the SAM window size” from this paragraph.
-- **Replace with:** each evaluation **seed** contains a **45-frame** SAM track; the LSTM uses an **8+4 sub-window** inside that tensor (via sliding windows — you can mention briefly or save for ¶4).
-
-**Do not mention yet:** rule features, normalization, SportsMOT, 59 seeds.
-
----
-
-## Paragraph 2 — Input representation (positions, slots, mask)
-
-**Purpose:** Define *what* goes into the model mathematically.
-
-**Order & content:**
-1. Inputs are **mask-center positions** \((x, y)\) in pixels per player per frame.
-2. **P = 10** fixed player **slots** per frame (fixed tensor size for the LSTM).
-3. Fewer than 10 detected players → **padding** in unused slots.
-4. **Visibility mask** \(m_{t,p}\): true only for real, visible players; **loss and metrics ignore** padded/missing slots.
-
-**Changes from your draft:**
-- **Move** P=10 and padding here (from your ¶1).
-- **Fix justification:** say “fixed-size tensor” / “up to 10 tracked slots,” not only “10 players allowed on court.”
-- **Fix visibility mask:** not just “ensure prediction of visible players” — it **gates training and evaluation**.
-
-**Do not mention yet:** rule features (next paragraph), dataset scale.
-
----
-
-## Paragraph 3 — Normalization and rule features (separate from augmentation)
-
-**Purpose:** Preprocessing + A1-specific inputs.
-
-**Order & content:**
-1. Normalize \((x,y)\) by frame width and height for resolution invariance.
-2. For the **rule-conditioned model (A1 / A1-residual)**, append **15 hand-crafted rule features** per player per frame (speed, spacing, phase flags — geometry-free, no court map).
-3. Clarify: these are **conditioning inputs**, not **data augmentation**. Augmentation (sanitize, velocity cap) happens earlier on **tracks** (§3.2).
-
-**Changes from your draft:**
-- **Move** normalization here (from start of your ¶2).
-- **Rewrite** “15 optional rule values as data augmentation” → **“15-dimensional rule features for the rule-aware LSTM.”**
-- **Remove** “optional” unless you say “used by A1 variants only; A0 uses positions alone.”
-
----
-
-## Paragraph 4 — Data source and multi-seed protocol
-
-**Purpose:** Where data comes from and how you sample time.
-
-**Order & content:**
-1. **SportsMOT** basketball clips with MOT ground-truth player positions.
-2. **Four clips** (2,890 total frames across videos — optional one phrase).
-3. Define a **seed**: a temporal crop starting at 0 s, 2 s, 4 s, … with its own 45-frame SAM run and tensor export.
-4. **59 seeds** total for evaluation; **2 s stride**; windows **overlap** within each clip (not 59 independent videos).
-
-**Changes from your draft:**
-- **Move** your SportsMOT + 59-windows sentence here (from your ¶3).
-- **Add** one-sentence definition of “seed” *before* “59 overlapping windows.”
-- **Add** “overlap” so readers don’t think you have 59 disjoint clips.
-
-**Do not put train/val here** unless one short forward pointer: “Training split is described below.”
-
----
-
-## Paragraph 5 — Training windows and train/val split (close §3.1)
-
-**Purpose:** Bridge to ADE / metrics subsection.
-
-**Order & content:**
-1. From each 45-frame tensor, build **sliding windows** (length 12 = 8+4, stride 1) → **34 training samples per seed**.
-2. **Split:** `held_out_seed` — validate on **`offset_0s`**, train on all other scheduled seeds in that clip.
-3. **Primary clip example:** **9 train seeds**, **1 val seed**, **12 eval seeds** (two extra eval-only seeds: `offset_5s`, `offset_15s`).
-4. One sentence preview: forecast **rollout ADE** (px), report **median over seeds**; **clean seeds** exclude SAM-failure crops (detail next).
-
-**Changes:**
-- **New paragraph** — not in your draft yet; needed before ADE subsection.
-- **Correct** any “11 train seeds” language → **9 train** on `sportsmot_example`.
-
----
-
-## What to cut or defer
-
-| Current text | Action |
-|--------------|--------|
-| “matching the SAM window size” | Cut or fix in ¶1 (8+4 ≠ 45) |
-| “data augmentation” for 15 rule values | Cut — wrong term (¶3) |
-| “optional rule values” | Fix → “A1-only rule features” |
-| Full per-clip seed table | Optional; one sentence in ¶4 is enough |
-| ADE definition | Next subsection, not this opening block |
-
----
-
-## Your three paragraphs → reordered map
-
-| Your current paragraph | Goes to |
-|------------------------|---------|
-| ¶1 (task, 8→4, P=10, padding) | Split: task → **¶1**; P=10/padding → **¶2** |
-| ¶2 (normalize, 15 rules, mask) | Split: mask → **¶2**; normalize + rules → **¶3** |
-| ¶3 (SportsMOT, 59 windows) | **¶4** (+ seed definition + overlap) |
-
-**Add:** **¶5** (sliding windows + train/val).
-
----
-
-## Quick quality checklist before you move to §3.1b (metrics)
-
-- [ ] 8 → 4 forecast stated before SAM 45-frame context  
-- [ ] Rule features ≠ data augmentation  
-- [ ] Visibility mask gates loss/metrics  
-- [ ] “Seed” defined before “59 seeds”  
-- [ ] Overlap mentioned  
-- [ ] Train/val (`offset_0s` held out) stated  
-- [ ] 9 train / 12 eval on primary clip (if you cite numbers)
-
----
-
-If you want, paste your **next draft of all 5 paragraphs** and I’ll do a line-level pass the same way.
-
----
-
-## Turn 140
-
-### User
-
-explain paragraph 5 in more detail explaining why we did everything, and what each one means, then provide the same style of broken down concepts for the final part of 3.1
-
-### Assistant
-
-Here is **Paragraph 5** in depth, then the **final part of §3.1** (metrics / evaluation protocol) in the same style.
-
----
-
-# Paragraph 5 — Training windows & train/val split (detailed)
-
-This paragraph answers: *“How exactly do we turn 45-frame seed files into LSTM training? How do we split train vs validation without cheating?”*
-
----
-
-## Concept 1: Sliding windows (why not one sample per seed?)
-
-**What it means:**
-- Each seed file has **45 frames** of track data.
-- The model needs **12 consecutive frames** per example: **8 past + 4 future**.
-- With **stride = 1**, you slide that 12-frame window across the 45-frame sequence.
-
-**Math:**
-- Number of windows per seed = \(45 - 12 + 1 = 34\).
-
-**Why you did this:**
-- One seed would only give **1 training example** — far too little data for an LSTM.
-- Sliding windows **multiply** data from each temporal crop (data-efficient).
-- Overlapping windows are **standard** in sequence forecasting (like sliding patches in vision).
-
-**What to say in the report:**
-- “Each 45-frame seed yields 34 overlapping (8+4) supervision examples.”
-
-**What NOT to imply:**
-- You are **not** training on 45 independent predictions per seed in one shot; you’re training on **many overlapping 12-frame snippets** from the same seed.
-
----
-
-## Concept 2: `held_out_seed` split (why hold out a whole seed?)
-
-**What it means:**
-- **Train:** all scheduled seeds **except** one designated validation seed.
-- **Val:** exactly **one** seed — always **`offset_0s`** (clip start).
-
-**Why you did this:**
-- Holding out **random frames** from the same seed would leak temporal structure (neighboring windows overlap heavily).
-- Holding out an **entire seed** = validation on a **different time segment** of the video (starts at 0 s vs 2 s, 4 s, …).
-- Tests whether the model generalizes to a **new crop** of the same game, not just new frames inside crops it already saw.
-
-**Tradeoff to acknowledge:**
-- `offset_0s` is often a **hard seed** (tracking issues at clip start), so validation ADE can look pessimistic — that’s intentional honesty.
-
----
-
-## Concept 3: Train vs eval seed counts (why 9 train but 12 eval on primary clip?)
-
-**What it means:**
-
-| Role | Primary clip (`sportsmot_example`) | Meaning |
-|------|-----------------------------------|---------|
-| **Train seeds** | **9** (offsets 2s–18s on 2s grid) | Used to fit LSTM weights |
-| **Val seed** | **1** (`offset_0s`) | Used to pick best checkpoint |
-| **Eval seeds** | **12** | Used to report final forecast ADE |
-
-**Why 12 eval but only 9 train:**
-- Official schedule has **10** seeds on the 2s grid (0s–18s).
-- Eval also includes **2 extra folders** (`offset_5s`, `offset_15s`) with tensors from an older/extra schedule.
-- Those **2 extra seeds were not in the manifest-based training split** → eval is slightly broader than training.
-
-**Why you did this:**
-- Training follows the **clean, documented 2s manifest**.
-- Evaluation scans **all tensor folders** (`--all-seeds`) for a complete picture including legacy crops.
-
-**What to say:**
-- “We train on nine temporal crops (excluding `offset_0s`); we evaluate on twelve crops including two additional offsets.”
-
----
-
-## Concept 4: Per-clip training (why not one model on all 59 seeds?)
-
-**What it means:**
-- You train a **separate residual LSTM checkpoint per clip** (same hyperparameters).
-- You did **not** pool all clips into one training set (deferred).
-
-**Why you did this:**
-- Different clips = different camera, pace, team style → **distribution shift**.
-- Per-clip training answers: “Does the model work **on this footage**?”
-- Pooled training needs extra infrastructure (`registry.json`, combined dataloader) you didn’t build in time.
-
-**For §3.1:** one sentence is enough; full transfer vs per-clip comparison lives in Results.
-
----
-
-## Concept 5: Checkpoint selection (why val rollout ADE, not train loss?)
-
-**What it means:**
-- Best model = lowest **validation rollout ADE** on `offset_0s`, not lowest training MSE.
-
-**Why you did this:**
-- Training loss uses **teacher forcing** (true past frames).
-- Deployment metric is **rollout** (model feeds itself).
-- Train loss can look good while rollout is bad (**exposure bias**).
-- Picking checkpoint by rollout ADE **aligns training selection with evaluation**.
-
----
-
-## Paragraph 5 — suggested content order (when you write it)
-
-1. Sliding windows: 34 examples per seed from 45-frame tensors.  
-2. `held_out_seed`: val = `offset_0s`, train = other scheduled seeds.  
-3. Primary clip: 9 train / 1 val / 12 eval (note 2 eval-only seeds).  
-4. Separate checkpoint per clip (same recipe).  
-5. Best checkpoint by **val rollout ADE**.
-
----
-
-# Final part of §3.1 — Evaluation protocol (same breakdown)
-
-This block answers: *“How do we score models fairly? What do ADE, rollout, clean vs all mean?”*
-
-You can use **one subsection** (e.g. **3.1.1 Evaluation**) or finish §3.1 with 2–3 short paragraphs. Below is each concept.
-
----
-
-## Concept A: Ground-truth alignment (why aligned GT?)
-
-**What it means:**
-- SportsMOT labels (`gt.txt`) are converted to **`gt_aligned.json`** per seed so frame IDs match your tracks.
-
-**Why:**
-- Without alignment, ADE compares predictions to labels on the **wrong frames** → meaningless numbers.
-
-**One sentence for Methods:**
-- “Forecast error is computed against per-seed ground truth aligned to our track frame numbering.”
-
----
-
-## Concept B: Forecast ADE in pixels (what ADE measures)
-
-**What it means:**
-- **ADE (Average Displacement Error):** mean **Euclidean distance in pixels** between predicted and GT player positions.
-- For each forecast frame, match pred players to GT (within distance threshold), average errors over matches, then aggregate over horizon and seeds.
-
-**Why pixels:**
-- Your pipeline is in **image coordinates** (mask centers), not calibrated court meters.
-- Keeps SAM → augment → LSTM stack consistent.
-
-**Why median over seeds (in Results):**
-- A few catastrophic seeds (SAM collapse) inflate the mean; **median** is more robust.
-
----
-
-## Concept C: Rollout evaluation (headline metric — why it matters)
-
-**What it means:**
-- **Rollout (autoregressive):** predict step 1, feed prediction back, predict step 2, … for all 4 future frames.
-- Mimics **real deployment** where future GT is unavailable.
-
-**Why you did this:**
-- **Teacher-forced** eval feeds **true** past positions during multi-step prediction → easier, optimistic.
-- You still report teacher-forced sometimes to show **exposure bias gap** (train ~5 px teacher-forced vs ~7–8 px rollout for A1).
-
-**What to say:**
-- “Primary metric: **rollout forecast ADE** over 4 steps.”
-
----
-
-## Concept D: Linear baseline (why it’s the main comparator)
-
-**What it means:**
-- Constant-velocity extrapolation from last two observed positions.
-- **No learnable parameters.**
-
-**Why you compare to it:**
-- Strong **physics prior** for 0.16 s horizons.
-- **Causal** and fair — doesn’t see the future.
-
-**Why NOT SAM-augmented future tracks as baseline:**
-- SAM on **future video frames** is an **oracle** (sees the future) → not a fair forecaster.
-
-**One sentence:**
-- “We compare against a constant-velocity linear baseline; SAM tracks on future frames are reported only as an oracle ceiling.”
-
----
-
-## Concept E: All seeds vs clean seeds (why two reporting modes)
-
-**What it means:**
-
-| Term | Definition |
-|------|------------|
-| **All seeds** | Every eval seed with a tensor (12 on primary clip; 59 project-wide). |
-| **Clean seeds** | Exclude seeds where **SAM tracking failed** — on primary clip: `offset_0s`, `offset_5s`, `offset_15s`. |
-
-**Why you did this:**
-- On failure seeds, **all models** (A0, A1, residual, linear) have huge ADE.
-- Including them blurs whether LSTM failed or **tracking already broke**.
-- **Clean seeds** isolate forecasting when perception is usable.
-
-**What to say:**
-- “We report both end-to-end (all seeds) and clean-seed medians excluding SAM-collapse crops.”
-
-**Nuance:**
-- Clean exclusion is **most meaningful on `sportsmot_example`** where those three seeds are documented failures. Other clips may only share `offset_0s` in that exclusion set.
-
----
-
-## Concept F: Per-seed vs aggregated reporting
-
-**What it means:**
-- **Per-seed:** ADE for each temporal crop separately.
-- **Aggregated:** **median** (and optionally mean) ADE across seeds per clip.
-
-**Why:**
-- Shows **stability** across time segments (some seeds easy, some hard).
-- Supports claims like “residual beats linear on 5/12 seeds” vs “median tie.”
-
----
-
-## Concept G: Detection ADE vs forecast ADE (don’t mix them in §3.1)
-
-**What it means:**
-
-| Metric | What it measures | Stage |
-|--------|------------------|--------|
-| **Detection/track ADE** | Augmented SAM tracks vs GT on **observed** frames | Pre-LSTM |
-| **Forecast ADE** | LSTM (or linear) vs GT on **future** 4 frames | LSTM eval |
-
-**Why separate:**
-- Bad **tracking** caps forecast performance (garbage in → garbage out).
-- Your story: sanitize helps detection slightly; LSTM evaluated **after** tracks are fixed.
-
-**For §3.1:** define **forecast ADE** here; mention detection ADE only as “upstream track quality scored separately (§4).”
-
----
-
-## Concept H: Transfer vs per-clip eval (one sentence in §3.1)
-
-**What it means:**
-- **Transfer:** `sportsmot_example` checkpoint evaluated on other clips without retraining.
-- **Per-clip:** retrain residual LSTM on each clip’s seeds, then eval on that clip.
-
-**Why mention in §3.1:**
-- Clarifies you have **two evaluation modes** for generalization — details in Results.
-
----
-
-# Final part of §3.1 — suggested paragraph order
-
-**Paragraph 6 — Metrics definition**
-- Forecast ADE (px), rollout over 4 steps, aligned GT, median over seeds.
-
-**Paragraph 7 — Baselines & fairness**
-- Linear = primary baseline; SAM-future = oracle only.
-
-**Paragraph 8 — All vs clean seeds**
-- Define failure seeds on primary clip; why both reporting modes.
-
-**Optional one-liner**
-- Teacher-forced ADE used only to diagnose exposure bias.
-
----
-
-# Quick “why we did everything” summary (closing §3.1)
-
-| Choice | Why |
-|--------|-----|
-| 8 → 4 frames | Short, practical broadcast horizon |
-| P = 10 slots | Fixed LSTM input size |
-| Normalize by W×H | Cross-resolution consistency |
-| Rule features | Test if basketball cues help A1 |
-| 45-frame seeds, 2s stride | SAM VRAM + temporal robustness |
-| Sliding windows | Enough training samples per seed |
-| Hold out `offset_0s` | Val on unseen temporal crop |
-| Rollout ADE | Matches deployment; avoids teacher-forcing optimism |
-| Clean seeds | Separate tracking failure from LSTM failure |
-| Per-clip training | Fair clip-specific eval; no pooled loader yet |
-
----
-
-If you draft Paragraphs 5–8 in prose, paste them and I’ll review for accuracy and flow the same way as your first §3.1 pass.
-
----
-
-## Turn 141
-
-### User
-
-We will iterate the entirety of 3.1 at the end. but right now i want you to read through what I have right now and note my style of writing. I then want you to provide the sentences for each bullet point, but do not provide a copy/paste prose
-
-### Assistant
-
-Checking for an updated §3.1 draft in the repo beyond what you shared in chat.
-
-Your draft isn’t in a repo file yet — this is based on the **three paragraphs you shared in chat**. Below: your style notes, then **one or two sentence options per bullet** (not assembled prose).
-
----
-
-## Your writing style (what to keep)
-
-- **Opens with purpose:** “To approach X, we first needed to define…”
-- **Motivation before mechanics:** “We decided to focus on… because…”
-- **Given → aim:** “Given …, our aim was to …”
-- **Voice:** first-person plural **we**, declarative, not overly hedged
-- **Math:** inline LaTeX ($P=10$)
-- **Tone:** formal report, readable, short paragraphs (2–4 sentences)
-- **Practical framing:** ties choices to game analysis / usability
-- **Patterns to tighten:** avoid vague links (“matching the SAM window”); use precise terms (rule **features** vs **augmentation**); one idea per sentence
-
----
-
-# Paragraph 1 — Task & forecast window
-
-**Bullet: Open with forecasting goal from SAM3.1 tracks**
-- To forecast player trajectories from SAM3.1 mask-center tracks, we first defined the prediction horizon, model inputs, and evaluation constraints.
-- Our goal was to predict short-term player motion from automatically tracked broadcast footage.
-
-**Bullet: Short-horizon motivation**
-- We focused on short-horizon prediction because it is the most practical setting for live game analysis and broadcast tools.
-- We restricted the forecast to a brief future window rather than full possession-length paths.
-
-**Bullet: 8 observed → 4 future frames**
-- Given the player positions from the eight previously observed frames, we aimed to predict the corresponding positions for the next four frames.
-- At 25 FPS export, this corresponds to roughly 0.16 seconds of future motion.
-
-**Bullet: Clarify vs 45-frame SAM chunk (fix)**
-- Each evaluation seed contains a 45-frame SAM3.1 tracking segment; the forecaster operates on 8+4 frame subsequences drawn from that segment.
-- The LSTM does not consume all 45 frames as a single input–output pair; it uses shorter sliding windows inside each seed.
-
----
-
-# Paragraph 2 — Slots, positions, visibility
-
-**Bullet: Mask-center positions**
-- Model inputs are player mask-center coordinates $(x, y)$ in pixel space.
-- These locations come directly from the SAM3.1 tracking output for each frame.
-
-**Bullet: P = 10 fixed slots**
-- We used $P = 10$ fixed player slots per frame so that the LSTM input size remains constant across examples.
-- Ten slots match the maximum number of on-court players and the export cap used in our tensor pipeline.
-
-**Bullet: Padding**
-- For frames with fewer than ten detected players, the remaining slots were padded in the tensor.
-- Padded slots were marked as not visible rather than treated as real players.
-
-**Bullet: Visibility mask (fix)**
-- We defined a visibility mask to indicate which player slots correspond to real detections on the court.
-- Training loss and forecast error were computed only at positions where the visibility mask was true.
-
----
-
-# Paragraph 3 — Normalization & rule features
-
-**Bullet: Normalize by frame size**
-- Before training, we normalized each coordinate by the frame width and height.
-- This allowed the same model to handle videos at different resolutions without retuning scale-specific parameters.
-
-**Bullet: 15-D rule features — what they are (fix term)**
-- For the rule-conditioned LSTM, we appended fifteen hand-crafted rule features per player per frame.
-- These features encode motion, spacing, and coarse game-phase cues without using court geometry or homography.
-
-**Bullet: Not augmentation (fix)**
-- These rule values are conditioning inputs to the rule-aware model, not data augmentation in the track-processing stage.
-- The plain LSTM variant used positions only; the rule features were included only in the A1 and A1-residual models.
-
-**Bullet: Why rule features (optional motivation)**
-- We included them to test whether basketball-specific contextual signals improve forecasting beyond raw coordinates.
-
----
-
-# Paragraph 4 — SportsMOT & multi-seed protocol
-
-**Bullet: Dataset**
-- We used basketball broadcast clips from SportsMOT, which provides ground-truth player positions in MOTChallenge format.
-- Evaluations were performed on four separate SportsMOT basketball sequences.
-
-**Bullet: Define “seed”**
-- We define a seed as one temporal crop of the video, starting at offsets such as 0 s, 2 s, 4 s, and so on.
-- Each seed has its own SAM3.1 tracking run and exported trajectory tensor.
-
-**Bullet: 45 frames, 2 s stride, overlap**
-- For each seed, SAM3.1 tracked a 45-frame window at half-resolution scale.
-- Seeds were spaced every two seconds, so neighboring windows overlap in time rather than covering disjoint segments of the clip.
-
-**Bullet: 59 seeds total**
-- In total, we evaluated fifty-nine overlapping 45-frame windows across the four clips instead of relying on a single crop per video.
-- This multi-seed design reduces sensitivity to one particular starting point in each game clip.
-
-**Bullet: Optional scale sentence**
-- Together, the four clips contain 2,890 labeled frames of basketball footage.
-
----
-
-# Paragraph 5 — Sliding windows & train/val split
-
-**Bullet: Sliding windows**
-- From each 45-frame seed tensor, we constructed overlapping training examples using a sliding window of length twelve (eight observed plus four future frames).
-- With stride one, each seed produced thirty-four supervised forecasting examples.
-
-**Bullet: Why sliding windows**
-- We used sliding windows so that each temporal crop contributed many training samples rather than a single sequence.
-- This increased effective dataset size without collecting additional videos.
-
-**Bullet: `held_out_seed` split**
-- We split data by entire seeds rather than random frames within a seed.
-- The seed starting at offset 0 s was held out for validation; all other scheduled seeds in that clip were used for training.
-
-**Bullet: Why hold out one seed**
-- Holding out a full seed tests generalization to a new temporal segment of the same clip and avoids leakage from overlapping windows in the training seeds.
-
-**Bullet: Primary clip counts (accurate)**
-- On our primary clip, we trained on nine seeds, validated on offset 0 s, and reported evaluation on twelve seeds that had exported tensors.
-- Two additional evaluation seeds (offset 5 s and offset 15 s) were included in testing but were not part of the manifest-based training split.
-
-**Bullet: Per-clip checkpoints**
-- We trained a separate residual LSTM checkpoint for each clip using the same hyperparameters.
-- We did not pool training data across clips into a single joint model in this work.
-
-**Bullet: Checkpoint selection**
-- The best checkpoint was selected by validation rollout ADE on offset 0 s rather than by training loss alone.
-- This choice aligns model selection with the autoregressive evaluation protocol used at test time.
-
----
-
-# Paragraph 6 — Forecast ADE & rollout (final §3.1 block)
-
-**Bullet: Aligned GT**
-- Forecast error was measured against per-seed ground truth aligned to our track frame numbering.
-- This alignment ensures that predicted and labeled player positions refer to the same frames.
-
-**Bullet: What forecast ADE is**
-- We report forecast ADE as the mean Euclidean distance in pixels between predicted and ground-truth player positions over the four-step horizon.
-- Predictions and labels were matched within a standard distance threshold on each frame.
-
-**Bullet: Rollout evaluation**
-- Our primary metric uses rollout evaluation, in which the model’s own predictions are fed back when forecasting subsequent steps.
-- This matches deployment conditions where future ground-truth positions are unavailable.
-
-**Bullet: Median over seeds**
-- We summarize performance using the median ADE across seeds to reduce the influence of a small number of catastrophic temporal crops.
-
-**Bullet: Teacher-forced (one sentence, diagnostic)**
-- We also measured teacher-forced ADE during analysis to quantify the gap between training-time conditioning and rollout inference.
-
----
-
-# Paragraph 7 — Baselines & fairness
-
-**Bullet: Linear baseline**
-- Our main learned-model comparison is a constant-velocity linear baseline extrapolated from the last two observed frames.
-- This baseline is parameter-free and provides a strong short-horizon physics prior.
-
-**Bullet: Why linear is primary**
-- We treat the linear baseline as the primary reference because it is causal and does not require learning from additional training data.
-
-**Bullet: SAM future tracks not fair baseline**
-- We did not use SAM3.1 tracks on future frames as a fair forecasting competitor because those tracks depend on observing future video.
-- Such tracks are useful only as an oracle detection ceiling, not as a causal forecast baseline.
-
----
-
-# Paragraph 8 — All seeds vs clean seeds
-
-**Bullet: All-seed reporting**
-- We report results on all seeds that passed tensor export so that end-to-end performance includes difficult temporal segments.
-
-**Bullet: Clean-seed definition**
-- We additionally report clean-seed results on our primary clip by excluding offset 0 s, offset 5 s, and offset 15 s.
-- On these seeds, SAM3.1 tracking failure produced high error for every model, including the linear baseline.
-
-**Bullet: Why clean seeds**
-- The clean-seed subset separates forecasting error from upstream tracking collapse.
-- It shows model behavior when the perception stage remains usable.
-
-**Bullet: Forward pointer**
-- Detection-stage track quality against ground truth is reported separately in our experiments section.
-
----
-
-## How to use this
-
-- Pick **one sentence per bullet** (or merge two if they flow in your voice).
-- Keep your openings (“To approach…”, “We decided…”, “Given…”).
-- Swap in the **corrected** phrases: rule **features**, 8+4 vs 45-frame, visibility mask gates **loss/metrics**, 9 train / 12 eval.
-- When you have a full §3.1 draft, paste it and we can iterate the whole section in one pass.
-
-_Tools used: Grep, Glob_
-
----
-
-## Turn 142
-
-### User
-
-Here is what I have as 3.1 right now
-
-\subsection{Problem and Data Formulation}
-Using the tracks resulting from executing SAM3.1 on the input video feed, we aimed to create short-horizon trajectory predictions for each player. Given the prior 8 frames of positional data, we predicted the next 4 frames of positions, creating a trajectory prediction for the next 0.16s (at 25fps). 
-
-The principal input of our model are the mask-center positions (x,y) in pixels per-player per-frame. We used a fixed tensor size of $P=10$ for a consistent LSTM input size, padding up to 10 whenever needed. A visibility mask: \textit{$m_{t, p}$} was used to prevent penalizing predictions of players not within frame.
-
-Normalizing the (x,y) positions by the width and height permitted more resilience for input video resolution. For the two rule-aware models: \textit{$A_1$} and \textit{$A_1$-Residual}, we appended 15 geometry-free rule features for each player within the frame as conditioning inputs. 
-
-We used 4 total Basketball clips from the SportsMOT database which contains MOT ground-truth player locations. Across all videos, there were a total of 2,890 frames used for training and testing. Consider a \textit{seed} as a video crop with a 2s offset, each with its own 45-frame SAM run and tensor. We ran 59 total seeds with a 2s stride, allowing for overlap between windows within each clip.
-
-For every seed there is a 12 frame (8 past, 4 future) window, resulting in 34 total windows per seed (considering stride=1). Assigning \textit{offset_0} as the validation seed allowed for consistency in evaluation, and prevented inflation of the ADE. We trained the LSTM on 9 total temporal crops (excluding \textit{offset_0)}, and evaluated on 12 crops including two additional offsets. Per-clip, we trained a separate residual LSTM checkpoint to prevent camera variation, pace difference, or possible occlusions.We classified the best model as having the lowest validation rollout ADE on \textit{offset_0}.
-
-### Assistant
-
-Here is a direct review of your current §3.1: what works, what to fix, and what’s still missing before you move on.
-
----
-
-## Overall
-
-You’ve incorporated most of the earlier corrections: **8→4**, **rule features (not augmentation)**, **seed definition**, **9 train / 12 eval**, **per-clip checkpoints**, **val rollout ADE**. The section reads as one coherent §3.1 rather than disconnected bullets.
-
-**Main gaps:** (1) **2,890 frames** is stated in a misleading way, (2) **visibility mask** wording is still imprecise, (3) **evaluation protocol** (rollout ADE, linear baseline, clean seeds) is mostly absent, (4) a few **notation/grammar** fixes.
-
----
-
-## Paragraph-by-paragraph
-
-### ¶1 (task & horizon) — **strong**
-
-**Works:**
-- Clear opening from SAM3.1 tracks → short-horizon forecast.
-- 8 past / 4 future and 0.16 s @ 25 FPS are correct.
-
-**Small tweaks:**
-- “prior 8 frames of **positional data**” → could say “**mask-center positions**” here once (you define it in ¶2 anyway).
-- Optional: one phrase that each **seed** is a 45-frame SAM segment; LSTM uses 8+4 **inside** that (you say this later — fine as is).
-
----
-
-### ¶2 (inputs, P=10, mask) — **good, one fix**
-
-**Works:**
-- Mask-center (x,y) in pixels.
-- P = 10 fixed tensor, padding.
-
-**Fix visibility mask:**
-- Current: “prevent penalizing predictions of players **not within frame**.”
-- Problem: sounds like off-screen players; you really mean **padded / missing slots** and **loss/metrics only on real detections**.
-- **Aim for:** visibility mask marks valid player slots; **training loss and forecast ADE are computed only where** \(m_{t,p}\) is true.
-
-**Tiny style:**
-- “principal” → “primary” (optional).
-- “per-player per-frame” → “per player per frame” or “per-player, per-frame.”
-
----
-
-### ¶3 (normalize + rule features) — **strong**
-
-**Works:**
-- Normalization by W×H.
-- Rule features for **A₁ and A₁-Residual only** — correct and clear.
-- “Geometry-free” and “conditioning inputs” — good.
-
-**Optional add (half sentence):**
-- Plain LSTM (A₀) uses positions only — makes the A₁-only rule line clearer.
-
----
-
-### ¶4 (SportsMOT, seeds, 59 windows) — **needs one important fix**
-
-**Works:**
-- 4 SportsMOT clips, MOT GT.
-- Seed = crop + 45-frame SAM + tensor.
-- 59 seeds, 2 s stride, overlap.
-
-**Fix “2,890 frames used for training and testing”:**
-- **2890** = total labeled frames **across the four full clips** (500+825+403+1162).
-- The LSTM does **not** train on all 2,890 frames end-to-end.
-- Training uses **sliding 12-frame windows** from **45-frame seed tensors** (34 per seed × train seeds per clip).
-- SAM processes **59 × 45** window-frames (overlapping), not 2,890 unique independent samples.
-
-**Suggested meaning:**
-- “The four clips contain 2,890 labeled frames in total; we evaluate on fifty-nine overlapping 45-frame seeds sampled every 2 s.”
-
-**Fix seed wording:**
-- “crop with a **2s offset**” sounds like every crop starts at 2 s.
-- **Better:** “temporal crop starting at 0 s, 2 s, 4 s, …” or “seeds spaced every 2 s.”
-
----
-
-### ¶5 (sliding windows, train/val, per-clip) — **good, two fixes**
-
-**Works:**
-- 12-frame window, 34 per seed, stride 1.
-- `offset_0` as val seed.
-- 9 train / 12 eval — **accurate**.
-- Per-clip residual checkpoint + camera/pace/occlusion motivation.
-- Best model = lowest **validation rollout ADE** on `offset_0`.
-
-**Fix “prevented inflation of the ADE”:**
-- Holding out a **whole seed** avoids **train/val leakage** from overlapping sliding windows, and picks a checkpoint on an **unseen temporal crop**.
-- It’s not mainly about “inflating ADE” — it’s **honest validation / generalization**.
-
-**Grammar:**
-- “occlusions.We” → space after period.
-- “excluding \textit{offset_0)}” → extra `)` ; use `offset\_0s` consistently (you mix `offset_0` and need `s` for seed IDs).
-
-**Notation consistency:**
-- Use one form: `offset\_0s` (matches your codebase), not `offset_0`.
-
----
-
-## What’s still missing for a complete §3.1
-
-You merged train/val into the same subsection as problem formulation — that’s fine. You still need **~1 short paragraph** (or 3–4 sentences) on **evaluation**:
-
-| Missing piece | One sentence worth of content |
-|---------------|-----------------------------|
-| **Rollout ADE** | Primary metric: mean pixel error over 4-step **rollout** (model feeds its own predictions). |
-| **Aligned GT** | Errors vs per-seed aligned SportsMOT labels. |
-| **Median over seeds** | Report median ADE across seeds for robustness. |
-| **Linear baseline** | Main comparator is constant-velocity linear (fair, causal). |
-| **Clean vs all seeds** | All 12 eval seeds; clean subset drops three SAM-failure crops on primary clip. |
-| **SAM-future not fair** | Optional one clause: future-frame SAM tracks = oracle only. |
-
-Without this, §3.1 defines data and training split but not **how you score** models — graders expect that in Problem/Data + protocol.
-
----
-
-## Style notes (your voice — keep these)
-
-- Opens with **we aimed to** / **Given** / **We used** — consistent.
-- `\textit{}` for variables and model names — fine for LaTeX report.
-- Short paragraphs, no heavy jargon — good.
-- Motivation snippets (resolution resilience, camera variation) — good; stay factual.
-
-**Watch:**
-- Don’t over-claim causality (“prevented inflation”) — tie claims to **leakage / checkpoint selection / fairness**.
-- Distinguish **full-clip frame count** vs **seed windows** vs **training samples**.
-
----
-
-## Suggested order (minimal reorder)
-
-Your order is already logical. Only tweak:
-
-1. Task (¶1)  
-2. Inputs + mask (¶2)  
-3. Normalize + rules (¶3)  
-4. Dataset + seeds + 2890 **reworded** (¶4)  
-5. Sliding windows + train/val + per-clip + checkpoint (¶5)  
-6. **New ¶6:** rollout ADE, linear baseline, all vs clean (3–5 sentences)
-
----
-
-## Quick accuracy checklist
-
-| Statement | OK? |
-|-----------|-----|
-| 8 → 4, 0.16 s @ 25 FPS | Yes |
-| P=10, padding | Yes |
-| 15 rule features for A₁ / A₁-Residual | Yes |
-| 4 clips, 2890 **as training+testing frames** | **Reword** |
-| 59 seeds, 2 s stride, overlap | Yes |
-| 34 windows per seed | Yes |
-| 9 train, 12 eval (primary) | Yes |
-| Val = offset_0s, rollout ADE checkpoint | Yes (fix notation) |
-| Per-clip residual LSTM | Yes |
-
----
-
-When you add the evaluation paragraph, paste the full §3.1 again and we can do one full pass for flow, length (~2 pages), and consistency with §3.2 Methods.
-
----
-
-## Turn 143
-
-### User
-
-Lets move into 3.2 the Perception Pipeline, again using my writing style before we transition this into a more professional/research sounding vocabulary
-
-\subsection{Problem and Data Formulation}
-Using the tracks resulting from executing SAM3.1 on the input video feed, we aimed to create short-horizon trajectory predictions for each player. Given the prior 8 frames of positional data, we predicted the next 4 frames of positions, creating a trajectory prediction for the next 0.16s (at 25fps). 
-
-The principal input of our model are the mask-center positions $(x,y)$ in pixels per-player per-frame. We used a fixed tensor size of $P=10$ for a consistent LSTM input size, padding up to 10 whenever needed. A visibility mask: \textit{$m_{t, p}$} was used to prevent penalizing predictions of players not within frame.
-
-Normalizing the $(x,y)$ positions by the width and height permitted more resilience for input video resolution. For the two rule-aware models: \textit{$A_1$} and \textit{$A_1$-Residual}, we appended 15 geometry-free rule features for each player within the frame as conditioning inputs. 
-
-We used 4 total Basketball clips from the SportsMOT database which contains MOT ground-truth player locations. Across all videos, there were a total of 2,890 frames used for training and testing. Consider a \textit{seed} as a video crop with a 2s offset, each with its own 45-frame SAM run and tensor. We ran 59 total seeds with a 2s stride, allowing for overlap between windows within each clip.
-
-For every seed there is a 12 frame (8 past, 4 future) window, resulting in 34 total windows per seed (considering stride=1). Assigning \textit{offset_0} as the validation seed allowed for consistency in evaluation, and prevented inflation of the ADE. We trained the LSTM on 9 total temporal crops (excluding \textit{offset_0)}, and evaluated on 12 crops including two additional offsets. Per-clip, we trained a separate residual LSTM checkpoint to prevent camera variation, pace difference, or possible occlusions.We classified the best model as having the lowest validation rollout ADE on \textit{offset_0}. We summarize performance using the median ADE across seeds to reduce the influence of a small number of invalid temporal crops.
-
-Our main learned-model comparison is a constant-velocity linear baseline extrapolated from the last two observed frame, providing a strong short-horizon physics, prior. Linear is the primary as it does not require additional learning or training data.
-
-Reporting results on all seeds that passed tensor export permits the inclusion of particularly difficult temporal segments. Beyond all-seed reporting, we report clean-seed results on the primary clip by excluding \textit{offset_0}, \textit{offset_5}, and \textit{offset_15} as these seeds produced high tracking error from SAM3.1.
-
-### Assistant
-
-Matching your §3.1 voice and pulling accurate perception-pipeline details from the repo for §3.2.
-
-Here is **§3.2 Perception Pipeline** in the same mode as before: your style, broken into paragraphs and bullets, with **sentence options** (not copy-paste prose). I also note **quick §3.1 fixes** at the end since you pasted the updated version.
-
----
-
-## Your style (carry into §3.2)
-
-- Start with **what we did and why** (“To obtain…”, “We used…”, “Given…”).
-- Short paragraphs, **we** voice, practical motivation.
-- `\textit{}` for model/policy names.
-- Connect each step to **downstream LSTM** (“before forecasting”, “inputs to §3.3”).
-- One **existing vs our code** sentence (Ed requirement).
-
----
-
-## §3.2 structure (~3–4 paragraphs, ~½ page)
-
-| ¶ | Topic |
-|---|--------|
-| **1** | Role of perception + SAM3.1 overview |
-| **2** | How SAM3.1 runs (prompt, propagate, outputs, Modal) |
-| **3** | Third-party vs your implementation |
-| **4** | Geometry-free augmentation + headline policy |
-
-Optional **¶5** (one sentence): what you **did not** use (full game-rule stack on tracks) — or fold into ¶4.
-
----
-
-# Paragraph 1 — Why a perception stage exists
-
-**Bullet: Bridge from §3.1**
-- Before forecasting player motion, we first obtained per-frame player locations from raw video using SAM3.1.
-- The LSTM in §3.3 consumes mask-center tracks produced by this perception pipeline, not raw pixels.
-
-**Bullet: What perception outputs**
-- For each seed, SAM3.1 produced a JSON track file with player IDs, bounding boxes, and mask-center coordinates for every frame in the 45-frame window.
-- These \textit{baseline\_tracks} files served as the starting point for augmentation and tensor export.
-
-**Bullet: Why SAM3.1 (one motivation sentence)**
-- We used a foundation-model tracker so we could evaluate strong open-vocabulary detection without training a custom basketball detector within the project timeline.
-
----
-
-# Paragraph 2 — SAM3.1 tracking procedure
-
-**Bullet: Where it runs**
-- SAM3.1 tracking was executed on Modal using A10G GPUs, with one seed job processed at a time due to memory constraints.
-- Each job read the JPEG frames for a single temporal crop and wrote results under that seed’s run directory.
-
-**Bullet: How prompting works**
-- On the first frame of each seed, we prompted SAM3.1 with the text phrase describing basketball players on the court.
-- SAM3.1 then propagated those detections and identities forward through the remaining frames in the clip segment.
-
-**Bullet: What gets saved**
-- For each frame, we stored the frame index, assigned player ID, bounding box $(x, y, w, h)$, and mask-center $(x, y)$.
-- This format matched the downstream augmentation and LSTM export scripts.
-
-**Bullet: Link to seeds**
-- Each of the fifty-nine seeds described in §3.1 had its own independent SAM3.1 tracking run over a forty-five-frame window.
-
----
-
-# Paragraph 3 — Existing codebase vs your work (required)
-
-**Bullet: What is not yours**
-- The SAM3.1 model weights and core video predictor API come from Meta’s public \textit{sam3} repository and Hugging Face checkpoint.
-- We did not train or fine-tune SAM3.1 on SportsMOT in this project.
-
-**Bullet: What you implemented**
-- We implemented the project-specific tracking wrapper, JSON export, Modal orchestration, multi-seed batching, and small compatibility patches for the multiplex predictor API.
-- Our scripts connect SportsMOT frames to SAM3.1 and organize outputs into the seed-based directory structure used for evaluation.
-
-**Bullet: One-line split (good for graders)**
-- In summary, SAM3.1 provides the detector/tracker; our codebase provides the SportsMOT pipeline, I/O format, and experiment automation around it.
-
----
-
-# Paragraph 4 — Geometry-free augmentation
-
-**Bullet: Why augment at all**
-- Raw SAM3.1 output sometimes included spurious detections or unstable boxes, so we applied a lightweight post-processing stage before LSTM training.
-- We designed this stage to improve track usability without requiring court calibration or homography.
-
-**Bullet: What “geometry-free” means**
-- Our augmentation rules used only relative player motion, box shape, and simple spacing cues in image coordinates.
-- We did not map players onto a calibrated basketball court model.
-
-**Bullet: Headline policy name + what it does**
-- For LSTM inputs we used the \textit{sanitize\_plus\_velocity\_cap} policy as our default augmented track stack.
-- \textit{Sanitize} removed detections with implausible size, aspect ratio, or crowd-style over-count; \textit{velocity\_cap} limited unrealistic frame-to-frame jumps when the rule activated.
-
-**Bullet: Output**
-- Augmented tracks were saved separately from baseline SAM output and used for trajectory tensor export and rule-feature computation.
-
-**Bullet: What you tried but did not headline (negative result)**
-- We also experimented with heavier game-rule stacks applied directly to tracks, but these increased detection error against SportsMOT ground truth on our primary clip.
-- For the headline forecasting pipeline we therefore kept augmentation minimal rather than applying the full rule-based track refinement stack.
-
-**Bullet: Optional forward link**
-- Detection-quality metrics for baseline versus augmented tracks are reported in §4; forecast ADE in §3.1 is computed after this stage.
-
----
-
-# Paragraph 5 (optional, one sentence) — Alternatives considered
-
-**Bullet: Brief contrast**
-- We considered classical detect-and-track pipelines and point-grid SAM prompting, but adopted text-prompted SAM3.1 multiplex tracking for multi-player instance propagation across frames.
-
----
-
-## Suggested §3.2 paragraph order (when you draft)
-
-1. Perception role + baseline tracks  
-2. SAM3.1 procedure (Modal, text prompt, propagate, per-seed)  
-3. Meta vs your code  
-4. Augmentation (geometry-free, sanitize+velocity cap, why not full rules)  
-5. (Optional) one-line alternatives  
-
----
-
-## Vocabulary you can keep casual now, polish later
-
-| Your casual phrasing | Later research phrasing |
-|----------------------|-------------------------|
-| “executing SAM3.1 on the input video feed” | “SAM3.1 video segmentation and propagation” |
-| “spurious detections” | “false-positive instance masks / over-segmentation” |
-| “lightweight post-processing” | “geometry-free track refinement” |
-| “prevent camera variation” (§3.1) | “mitigate inter-clip distribution shift” |
-| “invalid temporal crops” | “catastrophic tracking failures” |
-
----
-
-## Tiny §3.1 fixes (from your latest paste)
-
-Fix these when you iterate §3.1 as a whole:
-
-| Line | Issue | Direction |
-|------|--------|-----------|
-| “2,890 frames used for training and testing” | Misleading | Total labeled frames in four clips; LSTM trains on sliding windows from 45-frame seeds |
-| “offset\_0” | Inconsistent | Use `offset\_0s` everywhere |
-| “prevented inflation of the ADE” | Weak reason | Prefer train/val leakage / unseen temporal crop |
-| “last two observed frame” | Grammar | “frames” |
-| “physics, prior” | Typo | “physics prior” |
-| Visibility mask | Still vague | Loss/metrics only where \(m_{t,p}\) is true |
-
----
-
-## What to **not** put in §3.2 (save for §3.3 / §4)
-
-- LSTM architecture, residual head, training loss  
-- Forecast ADE numbers  
-- Full ablation tables for every augmentation rule  
-- Per-clip LSTM retrain (that’s forecasting / eval)
-
----
-
-When you draft `\subsection{Perception Pipeline}` in prose, paste it here and we can do the same line-level pass as §3.1. If you want, next step can be **§3.3 Forecasting models** in this same bullet + sentence format.
-
-_Tools used: Read, Grep_
-
----
-
-## Turn 144
-
-### User
-
-Now repeat the same process for 3.3 Trajectory Forcasting models. Ensure to keep my writing style and vocab, and include where to put specific math formulas and/or a figure when applicable
-
-### Assistant
-
-Pulling model architectures and training details so §3.3 bullets match the codebase.
-
-Here is **§3.3 Trajectory Forecasting Models** in the same format: your voice, paragraph plan, **sentence options per bullet**, and **where to put math / figures**.
-
----
-
-## Your style (keep for §3.3)
-
-- Open with **what we built and why** (“Given augmented tracks from §3.2, we trained…”).
-- Name variants as **\textit{$A_0$}, \textit{$A_1$}, \textit{$A_3$}, \textit{$A_1$-Residual}**.
-- 2–3 sentences per model, then training block.
-- Motivate **residual** and **linear baseline** in plain language before formal math.
-- Headline model = **\textit{$A_1$-Residual}**; others = ablations.
-
----
-
-## §3.3 structure (~1 page — largest subsection)
-
-| ¶ | Topic | Math? | Figure? |
-|---|--------|-------|---------|
-| **1** | Forecasting overview + variant list | — | Optional small **Table 1** (variants) |
-| **2** | Linear baseline | **Eq. 1** | — |
-| **3** | \textit{$A_0$} plain LSTM | — | — |
-| **4** | \textit{$A_1$} rule-conditioned LSTM | — | — |
-| **5** | \textit{$A_3$} graph LSTM | — | — |
-| **6** | \textit{$A_1$-Residual} (headline) | **Eq. 2** | **Figure 1** (residual diagram) |
-| **7** | Training objective & procedure | **Eq. 3** (optional 4) | — |
-| **8** | What we did not headline + alternatives | — | — |
-
----
-
-# Paragraph 1 — Overview
-
-**Bullet: Bridge from §3.2**
-- Given the augmented per-seed track tensors from §3.2, we trained several forecasting models to predict the four-frame horizon defined in §3.1.
-- All learned models shared the same observation length, prediction length, and player-slot layout.
-
-**Bullet: List variants**
-- We compared a constant-velocity linear baseline, a plain LSTM (\textit{$A_0$}), a rule-conditioned LSTM (\textit{$A_1$}), a graph-style social LSTM (\textit{$A_3$}), and a rule-conditioned residual LSTM (\textit{$A_1$-Residual}).
-- Our headline model is \textit{$A_1$-Residual}, which predicts corrections on top of the linear baseline rather than absolute positions alone.
-
-**Bullet: Shared backbone (one sentence)**
-- Each learned variant used a two-layer LSTM with hidden dimension 128 and a linear readout head that predicts all future player positions at once.
-
-**📊 TABLE (optional, end of ¶1 or margin):**  
-| Variant | Input per frame | Predicts |
-|---------|-----------------|----------|
-| Linear | last 2 positions | absolute $\hat{y}$ |
-| $A_0$ | $P \times 2$ positions | absolute |
-| $A_1$ | $P \times (2+15)$ pos + rules | absolute |
-| $A_3$ | encoded neighbors + pos | absolute |
-| $A_1$-Residual | same as $A_1$ | residual $\Delta$ |
-
----
-
-# Paragraph 2 — Linear baseline
-
-**Bullet: What it is**
-- Our non-learned comparator extrapolates each player’s position using constant velocity estimated from the last two observed frames.
-- This baseline requires no training and provides a strong short-horizon physics prior for basketball motion.
-
-**Bullet: Why it matters in your story**
-- We treated the linear baseline as the primary reference for judging whether learned models add value beyond simple inertia.
-
-**📐 MATH — place as Equation (1) here:**
-
-Per player $p$, velocity from the last two observations:
-\[
-\mathbf{v}_{t,p} = \mathbf{x}_{t,p} - \mathbf{x}_{t-1,p}
-\]
-
-Forecast for step $k = 1,\ldots,H$ with $H=4$:
-\[
-\hat{\mathbf{x}}_{t+k,p} = \mathbf{x}_{t,p} + k \,\mathbf{v}_{t,p}
-\]
-
-(Use normalized coordinates in training; same formula in pixel space after denormalization for ADE.)
-
----
-
-# Paragraph 3 — \textit{$A_0$} plain LSTM
-
-**Bullet: Input/output**
-- \textit{$A_0$} consumes only normalized mask-center positions from the past eight frames for all ten player slots.
-- At each time step, the ten player positions are flattened and passed through the LSTM; the final hidden state is mapped to all four future frames.
-
-**Bullet: How it works (2–3 sentences for Ed)**
-- The LSTM encodes the joint movement history of all players in the observation window.
-- A single linear head outputs the full four-step future trajectory for every slot simultaneously.
-
-**Bullet: Role in ablation**
-- \textit{$A_0$} tests whether sequence modeling alone is sufficient without rule features or social encoding.
-
----
-
-# Paragraph 4 — \textit{$A_1$} rule-conditioned LSTM
-
-**Bullet: Input**
-- \textit{$A_1$} uses the same position history as \textit{$A_0$}, but concatenates the fifteen geometry-free rule features from §3.1 at each frame and player.
-- This increases the per-frame input from player positions alone to positions plus basketball-context signals.
-
-**Bullet: How it works**
-- For each timestep, the model reads the flattened multi-player tensor of positions and rule features through the same LSTM backbone used in \textit{$A_0$}.
-- The readout head again predicts all four future frames in one forward pass.
-
-**Bullet: Hypothesis**
-- We included \textit{$A_1$} to test whether explicit rule and phase cues improve forecasting beyond raw coordinates.
-
-**Bullet: Result preview (optional half-sentence)**
-- \textit{$A_1$} improved over \textit{$A_0$} but still underperformed the linear baseline under rollout evaluation until the residual formulation was used.
-
----
-
-# Paragraph 5 — \textit{$A_3$} graph-style LSTM
-
-**Bullet: Idea**
-- \textit{$A_3$} adds a lightweight social encoding step before the temporal LSTM.
-- At each frame, every player is represented by its own position plus the mean relative offset to visible neighboring players.
-
-**Bullet: How it works**
-- A small MLP encodes each player node; encoded nodes are flattened across players and fed into the LSTM over time.
-- The output head predicts the same four-frame future as \textit{$A_0$} and \textit{$A_1$}.
-
-**Bullet: Role**
-- \textit{$A_3$} tests whether explicit neighbor-relative features help compared with the simpler rule-conditioned design in \textit{$A_1$}.
-
----
-
-# Paragraph 6 — \textit{$A_1$-Residual} (headline model)
-
-**Bullet: Motivation**
-- Because the linear baseline is already strong for 0.16 s horizons, we trained \textit{$A_1$-Residual} to predict only the deviation from constant-velocity motion.
-- This lets the LSTM focus on corrections that physics-style extrapolation cannot capture.
-
-**Bullet: Mechanism**
-- \textit{$A_1$-Residual} uses the same rule-conditioned LSTM backbone as \textit{$A_1$}, but its output is added to the linear forecast instead of replacing it.
-
-**Bullet: Why headline**
-- Checkpoint selection and our main experimental comparisons use \textit{$A_1$-Residual} because it aligned best with rollout ADE and matched or approached the linear baseline on the primary clip.
-
-**📐 MATH — place as Equation (2) here:**
-
-Let $\mathbf{y}^{\mathrm{lin}}_{t+1:t+H}$ be the linear baseline forecast and $f_\theta$ the rule-LSTM:
-\[
-\hat{\mathbf{y}}_{t+1:t+H} = \mathbf{y}^{\mathrm{lin}}_{t+1:t+H} + f_\theta(\mathbf{x}_{t-T+1:t}, \mathbf{r}_{t-T+1:t})
-\]
-with observation length $T=8$, horizon $H=4$, positions $\mathbf{x}$, rule features $\mathbf{r}$.
-
-**🖼️ FIGURE — place after Eq. (2):**
-
-**Figure X: Residual forecasting formulation**  
-Diagram: observed 8 frames → linear branch → $\mathbf{y}^{\mathrm{lin}}$; parallel rule-LSTM branch → $\Delta$; sum → $\hat{\mathbf{y}}$.  
-Caption: “\textit{$A_1$-Residual} predicts a correction $\Delta$ on top of constant-velocity linear extrapolation.”
-
----
-
-# Paragraph 7 — Training objective & procedure
-
-**Bullet: Loss**
-- We trained all learned models using a masked mean-squared error between predicted and ground-truth future positions.
-- The mask ensures padded or invisible player slots do not contribute to the loss.
-
-**📐 MATH — place as Equation (3):**
-
-\[
-\mathcal{L}_{\mathrm{MSE}} = \frac{1}{\sum_{k,p} m_{t+k,p}} \sum_{k=1}^{H} \sum_{p=1}^{P} m_{t+k,p} \left\| \hat{\mathbf{x}}_{t+k,p} - \mathbf{x}_{t+k,p} \right\|_2^2
-\]
-
-**Bullet: Pixel L1 add-on (headline training)**
-- For \textit{$A_1$-Residual}, we added a weighted pixel-space L1 term so optimization better matched rollout ADE in pixels.
-- The best checkpoint was chosen by lowest validation rollout ADE on \textit{offset\_0s}, not by training loss alone.
-
-**Bullet: Scheduled sampling**
-- During training, we gradually replaced a fraction of observed input frames with the model’s own predictions to reduce exposure bias at rollout time.
-- The replacement probability ramped from 0 to 0.3 over the first forty epochs.
-
-**📐 MATH (optional, Equation 4 — only if space):**
-
-\[
-p_{\mathrm{sched}}(\mathrm{epoch}) = \min\left(0.3,\; 0.3 \times \frac{\mathrm{epoch}}{40}\right)
-\]
-
-**Bullet: Optimizer & hyperparameters**
-- We optimized with Adam at learning rate $10^{-3}$ for eighty epochs using batch size sixteen.
-- Each clip used the held-out-seed split and per-clip residual checkpoint described in §3.1.
-
-**Bullet: What you implemented**
-- The LSTM architectures, training loop, scheduled sampling, residual composition, and evaluation scripts were implemented in our repository on top of PyTorch’s \texttt{nn.LSTM}.
-
----
-
-# Paragraph 8 — Variants not headline + alternatives (short)
-
-**Bullet: A2 post-refine (negative)**
-- We also tested applying game-rule post-refinement directly to LSTM predictions, but this hurt forecast error and was not used in the headline pipeline.
-
-**Bullet: Alternatives considered (one paragraph, no subheader)**
-- We considered absolute-position \textit{$A_1$} as the final model, graph-only social modeling without rules, and pooled training across clips; we adopted \textit{$A_1$-Residual} with per-clip training because it best matched our rollout metric and experimental setup.
-
----
-
-## Suggested draft order for §3.3
-
-1. Overview + optional table  
-2. Linear + **Eq. 1**  
-3. $A_0$  
-4. $A_1$  
-5. $A_3$  
-6. $A_1$-Residual + **Eq. 2** + **Figure (residual)**  
-7. Training + **Eq. 3** (+ optional sched. sampling)  
-8. Non-headline / alternatives  
-
----
-
-## Figures & tables — what goes in Methods vs Results
-
-| Asset | Section | Notes |
-|-------|---------|--------|
-| **Residual schematic** | **§3.3 Methods** | New simple diagram (recommended) |
-| **Variant comparison table** | §3.3 Methods | Input dims / predicts absolute vs residual |
-| `lstm_comparison.png` | **§4 Results** | Bar chart with ADE numbers |
-| `lstm_ade_bar.png` | §4 Results | Per-model bars |
-| Pipeline figure (SAM→aug→LSTM) | §3.2 or §3 intro | If not already in §3.2 |
-
----
-
-## Vocabulary — your tone now, polish later
-
-| Your style | Research polish (later) |
-|------------|---------------------------|
-| “strong short-horizon physics prior” | “strong inductive bias for inertial motion” |
-| “deviation from constant-velocity” | “residual correction over kinematic extrapolation” |
-| “joint movement history” | “joint multi-agent temporal encoding” |
-| “corrections on top of linear” | “learned residual over a linear prior” |
-| “exposure bias at rollout time” | “train–test mismatch under autoregressive rollout” |
-
----
-
-## What not to put in §3.3
-
-- Per-seed ADE numbers (§4)  
-- Multi-clip transfer tables (§4)  
-- SAM3 prompting details (§3.2)  
-- Full 15-feature rule list (§3.1 one sentence is enough)  
-- Long proof-style derivations  
-
----
-
-## Quick §3.1 cross-check (still fix when you iterate)
-
-- `offset\_0` → `offset\_0s`  
-- “2,890 frames used for training and testing” → reword  
-- “last two observed frame” → “frames”  
-- “physics, prior” → “physics prior”  
-
----
-
-Paste your drafted `\subsection{Trajectory Forecasting Models}` when ready and we can do a full pass like §3.1. If useful next: **§3.4** in the same format (only if you split multi-clip / transfer from §3.1; otherwise fold into §4).
-
-_Tools used: Read_
-
----
-
-## Turn 145
-
-### User
-
-Does the repo have everything needed to start writing the experiments section of the report as outlined below by the website and the Ed Post?
-
-Did i just mix methods and Experiments? Here is the Experiments from the website followed by the ed post
-
-* Experiments (30%): Discuss the experiments that you performed to demonstrate that your approach solves the problem. The exact experiments will vary depending on the project, but you might compare with previously published methods, perform an ablation study to determine the impact of various components of your system, experiment with different hyperparameters or architectural choices, use visualization techniques to gain insight into how your model works, discuss common failure modes of your model, etc. You should include graphs, tables, or other figures to illustrate your experimental results.
-
-Section 5: Experiments/Results/Discussion (2-3 pages)
-You should also briefly give details about what hyperparameters you chose (e.g. why did you use X learning rate for gradient descent, which optimizer did you pick, what was your mini-batch size and why) and how you chose them. Did you do cross-validation, and if so, how many folds? This should not take more than 1-2 paragraphs. If you want to list more details, please do so in the supplemental material.
-Before you list your results, make sure to list and explain what your primary metrics are: accuracy, mAP, inception/mode scores, etc. Provide equations for the metrics if necessary. You can typically find suitable metrics in prior works that study a similar or same topic.
-For results, you want to have a mixture of tables and plots. Both quantitative and qualitative results are necessary. To reiterate, you must have both quantitative and qualitative results (unless given prior consent of your TA mentor for certain special cases)! Include visualizations of results, heatmaps, saliency maps, examples of failure cases and a discussion of why certain algorithms failed or succeeded. In addition, explain whether you think you have overfitted to your training set and what, if anything, you did to mitigate that. Make sure to discuss the figures/tables in your main text throughout this section. Your plots should include legends, axis labels, and have font sizes that are readable when printed.
-Here’s a list of qualitative & quantitative methods for analysis that might be helpful in your project. None of these are necessary nor will be explicitly looked for by graders – rather, we wanted to provide some (non-exhaustive) guidance on analysis methods:
-
-* Saliency maps
-* Class visualization
-* t-SNE
-* Confusion matrices
-* Common qualitative errors
-* GANs: compare the generated output to NN in training set (quantitative and qualitative)
-* GANs: image quality metrics like Inception and Mode scores
-* VAE: Reporting measures like Annealed Importance Sampling (AIS)
-
-### Assistant
-
-Checking which quantitative tables/plots and qualitative visualizations already exist in the repo so you can write Experiments/Results confidently.
-
-Yes — the repo has **everything you need to start writing Experiments/Results/Discussion** now (tables, plots, qualitative visuals, ablations, failure modes, and multi-clip comparisons). And yes: you **did mix a bit of Methods into Experiments** in your current §3.1 (not fatally — you just need to relocate a few items).
-
-## 1) Does the repo have what you need for Experiments?
-
-### **Quantitative results (tables + plots)**
-- **Auto-generated master table**: `docs/PAPER_RESULTS.md`
-  - Detection metrics (pre-LSTM)
-  - Forecast metrics across models (A0/A1/A3/A1-residual vs linear)
-  - Per-seed breakdown
-  - Multi-clip per-clip trained summary + transfer baseline deltas
-- **Multi-clip CSV summaries**
-  - `data/runs/multiseq_perclip_summary.csv`
-  - `data/runs/multiseq_transfer_baseline.csv`
-- **Plots already generated**
-  - Primary clip forecasting:  
-    - `data/runs/sportsmot_example/figures/lstm_comparison.png`  
-    - `data/runs/sportsmot_example/figures/lstm_ade_bar.png`  
-    - `data/runs/sportsmot_example/figures/lstm_rule_ablation_bar.png`  
-    - `data/runs/sportsmot_example/figures/multi_seed_ade_bar.png`
-  - Multi-clip:  
-    - `data/runs/figures/multiseq_perclip_bar.png`  
-    - `data/runs/figures/multiseq_train_vs_transfer.png`
-  - Attribution-ish / diagnostic:  
-    - `data/runs/sportsmot_example/figures/lstm_per_rule_delta_ade.png`
-
-### **Ablation studies**
-- **Augmentation ablations** are captured in the “pre-LSTM gauge” and ablation plots:  
-  - `data/runs/sportsmot_example/figures/ablation_ade_bar.png`  
-  - `data/runs/sportsmot_example/figures/PRE_LSTM_GAUGE.md`
-- **Model ablations**: A0 vs A1 vs A3 vs residual are all evaluated and plotted.
-
-### **Qualitative results (required by Ed post)**
-You already have qualitative outputs:
-- `data/runs/sportsmot_example/figures/summary_figure.png` (baseline vs augmented visual comparison)
-- `utils/visualize.py` supports annotated frames and side-by-side comparisons (so you can include “good case” and “failure case” panels).
-- You also have per-seed predicted JSONs under `data/runs/*/lstm/.../predicted_*.json` to visualize forecasts vs GT/baseline.
-
-So you **do have both quantitative and qualitative**.
-
-### **Failure modes**
-- You have documented failure seeds: `offset_0s`, `offset_5s`, `offset_15s` on the primary clip, and “tensor validation failed” seeds in new clips.
-- You can show failure qualitatively by visualizing those seeds.
-
-### **Hyperparameters & how chosen**
-- Hyperparameters are logged in `train_config.json` under each model folder, and described in `docs/RESEARCH_REPORT.md` + `README.md`.
-- You can summarize: lr=1e-3, batch=16, epochs=80, scheduled sampling ramp, checkpoint by val rollout ADE.
-
-Bottom line: **yes**, experiments section is ready to draft from repo artifacts.
-
----
-
-## 2) Did you mix Methods and Experiments?
-
-### **Mostly Methods (correct in §3.1)**
-These are fine in Methods:
-- 8→4 forecasting setup, P=10, mask/normalization
-- Seed definition, 45-frame windows, stride, overlap
-- Train/val split and rollout-vs-teacher-forced definition
-- Linear baseline definition
-
-### **These items belong more in Experiments/Results**
-You currently include them in §3.1; they fit better in Experiments:
-
-- **Specific clean-seed exclusions** (`offset_0s`, `offset_5s`, `offset_15s`)
-  - In Methods you can say “we report all-seed and a clean-seed subset excluding SAM-collapse crops”; the *specific* seeds + justification belongs in Results/Failure Modes.
-- **“Median ADE across seeds to reduce invalid crops”**
-  - Methods: define that you aggregate by median; Experiments: explain why median matters and show the effect.
-- **Any mention of “best model”** chosen by lowest val rollout ADE
-  - Methods: how checkpoint is selected; Experiments: report that result and show comparison.
-
-So: you didn’t “break” anything — you just have **some early Results framing inside Methods**.
-
----
-
-## 3) How to structure Experiments/Results/Discussion (2–3 pages) using existing artifacts
-
-### **A. 1 paragraph: Hyperparameters & selection**
-- Brief list: optimizer Adam, lr 1e-3, batch 16, 80 epochs, scheduled sampling ramp, checkpoint by val rollout ADE.
-- Mention held_out_seed split (val offset_0s).
-- Keep short (Ed says 1–2 paragraphs).
-
-### **B. 1 paragraph: Primary metrics**
-- Define **forecast rollout ADE (px)** as primary metric; optionally teacher-forced as diagnostic.
-- Define detection ADE separately if you report it.
-
-### **C. Quantitative results: tables + plots**
-Use existing plots/tables:
-- Table: `docs/PAPER_RESULTS.md` Section 2
-- Plot: `lstm_comparison.png` + `lstm_ade_bar.png`
-- Multi-seed stability: `multi_seed_ade_bar.png`
-- Multi-clip: `multiseq_perclip_bar.png` + `multiseq_train_vs_transfer.png`
-
-### **D. Ablations**
-- Augmentation ablation plot: `ablation_ade_bar.png`
-- Model ablation: A0/A1/A3/residual
-- Optional: per-rule delta: `lstm_per_rule_delta_ade.png`
-
-### **E. Qualitative section (must-have)**
-- Show baseline vs augmented: `summary_figure.png`
-- Show one “good tracking seed” vs one failure seed (offset_0s / offset_5s / offset_15s) with overlays
-- Show one forecast overlay vs linear (if you want)
-
-### **F. Failure modes + discussion**
-- “Tracking collapse dominates error on some seeds” (evidence: all models bad, including linear)
-- “Linear is strong on 0.16s horizon” (why hard to beat)
-- “Residual helps close gap; rule features help vs A0”
-
-### **G. Overfitting**
-- You can argue you mitigated overfit via:
-  - multi-seed within clip
-  - transfer baseline vs per-clip retrain comparison
-  - holdout seed validation
-- But also state limitations: no pooled multi-clip training, small clip set.
-
----
-
-## 4) Quick answer
-
-- **Repo readiness:** **Yes**, you have sufficient tables, plots, and qualitative figures to write Experiments now.
-- **Methods vs Experiments mixing:** **Slightly yes** — clean-seed specifics and some aggregation rationale are drifting into Methods; move the detailed justification + examples into Experiments/Failure Modes.
-
-If you want, paste your planned Experiments outline headings (e.g. 4.1–4.5) and I’ll map each to the exact existing files/figures and what claims they support.
-
-_Tools used: Glob, Grep, Read_
-
----
-
-## Turn 146
-
-### User
-
 explain the top 5 augmentation ablations that had the best effect
 
 ### Assistant
@@ -12648,7 +10073,7 @@ _Tools used: Glob, Grep, Read_
 
 ---
 
-## Turn 147
+## Turn 134
 
 ### User
 
@@ -12701,7 +10126,7 @@ _Tools used: Grep, Read_
 
 ---
 
-## Turn 148
+## Turn 135
 
 ### User
 
@@ -12709,7 +10134,7 @@ do we have qualitative visuals of our model working
 
 ---
 
-## Turn 149
+## Turn 136
 
 ### User
 
@@ -12776,7 +10201,7 @@ _Tools used: Glob, Grep, Read_
 
 ---
 
-## Turn 150
+## Turn 137
 
 ### User
 
@@ -12828,7 +10253,7 @@ _Tools used: Read, Grep, Glob, Write, Shell, ReadLints, StrReplace_
 
 ---
 
-## Turn 151
+## Turn 138
 
 ### User
 
@@ -12858,7 +10283,7 @@ _Tools used: Read, StrReplace, Shell_
 
 ---
 
-## Turn 152
+## Turn 139
 
 ### User
 
@@ -12925,7 +10350,7 @@ _Tools used: Grep, Glob, Read_
 
 ---
 
-## Turn 153
+## Turn 140
 
 ### User
 
@@ -13036,7 +10461,7 @@ _Tools used: Glob, Grep, Read_
 
 ---
 
-## Turn 154
+## Turn 141
 
 ### User
 
@@ -13046,6 +10471,611 @@ I want you to implement all changes to ensure ALL use of generative AI is explic
 
 Implementing comprehensive AI-use documentation: auditing the repo structure, then adding manifests, indexes, and artifact markings.
 
-_Tools used: Glob_
+Implemented full generative-AI attribution documentation across the repo. Here’s what you now have:
+
+## Hub (start here)
+
+**[docs/GENERATIVE_AI_USE.md](docs/GENERATIVE_AI_USE.md)** — central index linking transcripts, prompts, plans, registry, and figures. Notes that the **formal AI use statement** belongs in your external final report (not written here).
+
+Root pointer: **[GENERATIVE_AI_USE.md](GENERATIVE_AI_USE.md)**
+
+## Policy materials
+
+| Material | File |
+|----------|------|
+| **Transcripts** | [docs/AI_TRANSCRIPTS.md](docs/AI_TRANSCRIPTS.md) · canonical: [docs/CONVERSATION_TRANSCRIPT.md](docs/CONVERSATION_TRANSCRIPT.md) (154 turns) · secondary: [CURSOR_TRANSCRIPT.md](CURSOR_TRANSCRIPT.md) |
+| **Prompts** | [docs/AI_PROMPT_INDEX.md](docs/AI_PROMPT_INDEX.md) — all 154 user prompts indexed |
+| **Plans** | [docs/AI_PLANS.md](docs/AI_PLANS.md) + existing [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.md) |
+| **Artifact registry** | [docs/AI_ARTIFACT_REGISTRY.md](docs/AI_ARTIFACT_REGISTRY.md) — every AI-assisted file |
+| **Machine manifest** | [docs/ai_manifest.json](docs/ai_manifest.json) |
+| **Figures** | [docs/AI_FIGURES.md](docs/AI_FIGURES.md) + [data/runs/FIGURES_AI_ATTRIBUTION.md](data/runs/FIGURES_AI_ATTRIBUTION.md) |
+
+## Artifact marking
+
+- **50** Python files (`scripts/`, `utils/`, `models/`) listed in registry + directory markers:
+  - `scripts/CODE_AI_ATTRIBUTION.md`
+  - `utils/CODE_AI_ATTRIBUTION.md`
+  - `models/CODE_AI_ATTRIBUTION.md`
+- **22** Markdown docs tagged with AI-attribution banners
+- **16** figure paths mapped to generator scripts
+- **Excluded** (not AI authorship): checkpoints, tracks, tensors, CSVs, SportsMOT data — listed in manifest `not_ai_generated`
+
+## Regeneration
+
+```powershell
+py scripts/export_conversation_transcript.py
+py scripts/generate_ai_attribution_docs.py
+```
+
+## README updated
+
+Section **§8 Generative AI attribution** points to the hub.
+
+---
+
+**For your external final report:** cite `docs/GENERATIVE_AI_USE.md`, attach or reference `CONVERSATION_TRANSCRIPT.md` + `AI_PROMPT_INDEX.md`, and write your own responsibility statement there. The repo now holds the evidence; the prose statement is intentionally left to you.
+
+_Tools used: Glob, Read, Write, StrReplace, Grep, Shell_
+
+---
+
+## Turn 142
+
+### User
+
+provide a list of all libraries and other sources that need cited as per this references policy:
+
+This section should include citations for: (1) Any papers mentioned in the related work section. (2) Papers describing algorithms that you used which were not covered in class. (3) Code or libraries you downloaded and used. This includes libraries such as scikit-learn, TensorFlow, PyTorch, etc. For simplicity, please use the provided BibTeX file in the template (see our "Section 2" suggestions for how to easily get BibTeX citations from Google Scholar). Main body text, figures, and any discussions are strictly forbidden from this section. We are excluding the references section from the page limit to encourage students to perform a thorough literature review/related work section without being space-penalized if they include more references. The citations must be in the same format as provided in the template. We will deduct points if they are missing or have inconsistent formatting.
+
+### Assistant
+
+Scanning dependencies, docs, and code imports to build a complete citation list.
+
+Here is a **references checklist** tailored to your repo and `docs/RESEARCH_REPORT.md` related-work bullets. Paste BibTeX from Google Scholar into the course template; keys below are suggestions only.
+
+---
+
+## 1. Papers for related work (mentioned or implied in your report)
+
+These should appear if you discuss them in Related Work / Methods (not in the references section body text per policy):
+
+| # | What | Why cite | BibTeX search hint |
+|---|------|----------|-------------------|
+| 1 | **SportsMOT** — Cui et al., ICCV 2023 | Primary dataset; MOT benchmark you evaluate on | `SportsMOT Cui ICCV 2023` |
+| 2 | **SAM 3** — Carion et al., 2025 (arXiv:2511.16719) | Core perception model (`facebook/sam3.1`, multiplex tracker) | `SAM 3 Segment Anything with Concepts` |
+| 3 | **SAM** — Kirillov et al., ICCV 2023 | If related work says “SAM and successors” | `Segment Anything Kirillov` |
+| 4 | **SAM 2** — Ravi et al., 2024 | If you position SAM3 as successor to SAM 2 | `SAM 2 Ravi` |
+| 5 | **MOTChallenge** — Milan et al. (MOT16) or Bernardin & Stiefelhagen | You use MOT `gt.txt` format and MOT-style metrics | `MOT16 Milan` or `MOTChallenge` |
+
+**Optional (only if you name them in related work or methods):**
+
+| # | What | Why |
+|---|------|-----|
+| 6 | **Social LSTM** — Alahi et al., CVPR 2016 | `TrajectoryGraphLSTM` (A3) is a social/graph-style forecaster |
+| 7 | **Scheduled sampling** — Bengio et al., NeurIPS 2015 | You train with `--scheduled-sampling` (`train_lstm.py`) |
+| 8 | **Deep residual learning** — He et al., CVPR 2016 | If you formally describe the residual-over-linear LSTM head |
+| 9 | **TrajNet / other trajectory forecasting surveys** | Only if you cite prior sports trajectory work beyond SportsMOT |
+
+**Usually omit (covered in CS231N):** vanilla LSTM (Hochreiter & Schmidhuber), Adam, MSE — unless your related work explicitly discusses them as prior art.
+
+---
+
+## 2. Algorithms / models you downloaded (not “papers” but need attribution)
+
+| Asset | Source | Cite as |
+|-------|--------|---------|
+| **SAM 3.1 multiplex checkpoint** | Hugging Face `facebook/sam3.1` | SAM 3 paper + model card / HF repo |
+| **SAM 3 Python package** | `git clone https://github.com/facebookresearch/sam3` (see `run_modal.py`) | SAM 3 paper + GitHub URL in BibTeX `howpublished`/`url` |
+| **SportsMOT frames & GT** | SportsMOT release (`sportsmot_publish.zip` / example clip) | SportsMOT paper (same as #1) |
+
+---
+
+## 3. Libraries & code you used (required per policy)
+
+From `README.md`, `CONTEXT.md`, and imports across the repo:
+
+### Directly used in your code
+
+| Library | Used for | In repo |
+|---------|----------|---------|
+| **PyTorch** (`torch`) | LSTM training/inference, SAM3 on GPU | `train_lstm.py`, `run_sam3.py`, all `models/` |
+| **NumPy** | Tensors, metrics, arrays | Throughout `utils/`, `scripts/` |
+| **OpenCV** (`cv2`) | Frame I/O, overlays | `run_sam3.py`, `visualize.py`, `forecast_visualize.py`, `video_utils.py` |
+| **Matplotlib** | All bar charts / summary figures | `plot_*.py`, `eval_lstm_ablations.py`, `visualize.py` |
+
+### Cloud / model hosting
+
+| Library | Used for |
+|---------|----------|
+| **Modal** (`modal`) | GPU SAM3 jobs | `run_modal.py`, `run_all_seeds_modal.py` |
+| **Hugging Face Hub** (`huggingface_hub`) | SAM3.1 checkpoint auth/download | `run_modal.py`, `run_sam3.py` |
+
+### Bundled with SAM3 on Modal (indirect; cite if you want to be thorough)
+
+Installed in `run_modal.py` image but **not imported by your project code**:
+
+- `torchvision`
+- `einops`, `timm`, `hydra-core`, `omegaconf`, `pycocotools`, `psutil`, `iopath`, `hf_transfer`
+
+**Practical approach:** cite **PyTorch, NumPy, OpenCV, Matplotlib, Modal, Hugging Face Hub, and SAM3**; optionally add “SAM3 dependencies include timm, einops, …” in one footnote or omit unless the course wants exhaustive transitive deps.
+
+### Not used (do not cite)
+
+- scikit-learn, TensorFlow, pandas, scipy, seaborn — **not** in your Python codebase.
+
+---
+
+## 4. Suggested BibTeX entries (verify against course template)
+
+Use Google Scholar → BibTeX for exact formatting. Starting points:
+
+**SportsMOT**
+```bibtex
+@inproceedings{cui2023sportsmot,
+  title={SportsMOT: A Large Multi-Object Tracking Dataset in Multiple Sports Scenes},
+  author={Cui, Yutao and Zeng, Chenkai and Zhao, Xiaoyu and Yang, Yichun and Wu, Gangshan and Wang, Limin},
+  booktitle={ICCV},
+  year={2023},
+  pages={9921--9931}
+}
+```
+
+**SAM 3** (official from [facebookresearch/sam3](https://github.com/facebookresearch/sam3))
+```bibtex
+@misc{carion2025sam3,
+  title={SAM 3: Segment Anything with Concepts},
+  author={Carion, Nicolas and others},
+  year={2025},
+  eprint={2511.16719},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV}
+}
+```
+
+**PyTorch**
+```bibtex
+@inproceedings{paszke2019pytorch,
+  title={PyTorch: An Imperative Style, High-Performance Deep Learning Library},
+  author={Paszke, Adam and others},
+  booktitle={NeurIPS},
+  year={2019}
+}
+```
+
+**NumPy**
+```bibtex
+@article{harris2020numpy,
+  title={Array programming with {NumPy}},
+  author={Harris, Charles R and others},
+  journal={Nature},
+  year={2020}
+}
+```
+
+**OpenCV**
+```bibtex
+@article{bradski2000opencv,
+  title={The OpenCV Library},
+  author={Bradski, Gary},
+  journal={Dr. Dobb's Journal of Software Tools},
+  year={2000}
+}
+```
+
+**Matplotlib**
+```bibtex
+@article{hunter2007matplotlib,
+  title={Matplotlib: A 2D graphics environment},
+  author={Hunter, J. D.},
+  journal={Computing in Science \& Engineering},
+  year={2007}
+}
+```
+
+**Modal** (software; use their docs citation or `@misc`)
+```bibtex
+@misc{modal2024,
+  title={Modal: Serverless infrastructure for AI and data},
+  author={{Modal Labs}},
+  howpublished={\url{https://modal.com}},
+  year={2024}
+}
+```
+
+**Hugging Face Hub** (for checkpoint distribution)
+```bibtex
+@inproceedings{wolf2020huggingface,
+  title={Transformers: State-of-the-Art Natural Language Processing},
+  author={Wolf, Thomas and others},
+  booktitle={EMNLP Demos},
+  year={2020}
+}
+```
+*(Often used as the standard HF ecosystem citation even when only `huggingface_hub` is used.)*
+
+**SAM3 code**
+```bibtex
+@misc{sam3github,
+  title={SAM 3: Segment Anything with Concepts (code)},
+  author={{Meta AI}},
+  howpublished={\url{https://github.com/facebookresearch/sam3}},
+  year={2025}
+}
+```
+
+**Optional — scheduled sampling** (if named in methods)
+```bibtex
+@inproceedings{bengio2015scheduled,
+  title={Scheduled Sampling for Sequence Prediction with Recurrent Neural Networks},
+  author={Bengio, Samy and others},
+  booktitle={NeurIPS},
+  year={2015}
+}
+```
+
+**Optional — Social LSTM** (if A3 discussed in related work)
+```bibtex
+@inproceedings{alahi2016social,
+  title={Social LSTM: Human Trajectory Prediction in Crowded Spaces},
+  author={Alahi, Alexandre and others},
+  booktitle={CVPR},
+  year={2016}
+}
+```
+
+**Optional — MOTChallenge**
+```bibtex
+@inproceedings{milan2016mot16,
+  title={{MOT16}: A Benchmark for Multi-Object Tracking},
+  author={Milan, Anton and others},
+  booktitle={arXiv},
+  year={2016}
+}
+```
+
+---
+
+## 5. Minimum set for your project (recommended)
+
+**Must-have (8–10 entries):**
+1. SportsMOT  
+2. SAM 3  
+3. PyTorch  
+4. NumPy  
+5. OpenCV  
+6. Matplotlib  
+7. Modal  
+8. Hugging Face (hub / transformers citation)  
+9. SAM3 GitHub (code)  
+10. MOTChallenge or MOT16 (if you cite MOT format in related work)
+
+**Add if discussed in prose:**
+- SAM / SAM 2 (related work lineage)  
+- Bengio scheduled sampling (training section)  
+- Alahi Social LSTM (A3 / graph related work)  
+- He residual learning (residual LSTM formulation)
+
+---
+
+## 6. What your draft already lists (`RESEARCH_REPORT.md` §References)
+
+Currently only three informal bullets:
+- SportsMOT  
+- SAM / SAM3  
+- MOTChallenge  
+
+Expand that into proper BibTeX entries in the **external** report template; keep the references section to citations only (no figures/discussion per policy).
+
+If you want, I can map each entry to the exact sentence in your Related Work draft so nothing is cited without being mentioned in the main text (switch to Agent mode for a `docs/REFERENCES_CHECKLIST.md` file in the repo).
+
+_Tools used: Glob, Read, Grep, WebSearch_
+
+---
+
+## Turn 143
+
+### User
+
+the forecast_qualitative.png overlay has lots of multicolored lines that do not match the legend.
+
+### Assistant
+
+The overlay colors likely diverge from the legend because observed paths use per-player colors. I'll read the visualizer and align drawing with the legend.
+
+Aligning overlay colors with the legend: observed paths will use gray instead of per-player colors, and I'll limit drawn players to reduce clutter.
+
+Fixed. The mismatch was because **observed history** used per-player rainbow colors (`get_player_color`) while the legend showed **gray** for observed paths.
+
+### Changes
+1. **Legend-aligned colors** for all trail types:
+   - Observed → gray (`#d0d0d0`)
+   - Ground truth → green
+   - LSTM forecast → cyan dashed
+   - Linear baseline → orange dashed
+
+2. **Anchor markers** → small white dots (no per-player colors)
+
+3. **Less clutter** → only the **4 highest-motion players** per window (instead of all ~10)
+
+4. **Draw order** → linear (back) → observed → GT → LSTM (front)
+
+Regenerated: `data/runs/sportsmot_example/figures/forecast_qualitative.png`
+
+To show more/fewer players:
+```powershell
+py scripts/plot_forecast_qualitative.py --dataset sportsmot_example --seed-id offset_0s
+```
+(`--max-players` can be added to the script if you want it exposed on the CLI.)
+
+_Tools used: Read, StrReplace, Grep, Shell, ReadLints_
+
+---
+
+## Turn 144
+
+### User
+
+I dont see the linear baseline predictions. are the orange lines just under the ground-truth?
+
+### Assistant
+
+Checking how linear, GT, and LSTM paths relate in the overlay and whether draw order hides the orange lines.
+
+Confirming: linear paths are ~1 px from GT and LSTM is ~0.6 px from linear, so orange dashed lines drawn underneath get covered. Improving visibility by drawing linear on top with thicker dashes and distinct endpoint markers.
+
+Yes — that's mostly what's happening, and there are two reasons:
+
+### 1. Draw order (fixed now)
+Linear was drawn **first** (bottom layer), then gray observed, then **solid green GT** (thickness 3), then cyan LSTM. Orange dashed lines under solid green get covered wherever paths are close.
+
+### 2. Paths are extremely close (~1 px)
+In the three windows shown:
+
+| Window | Median \|linear − GT\| | Median \|LSTM − linear\| |
+|--------|------------------------|---------------------------|
+| t=11   | **1.07 px**            | 0.62 px                   |
+| t=22   | **1.02 px**            | 0.75 px                   |
+| t=29   | **0.86 px**            | 0.60 px                   |
+
+Your **residual LSTM is trained to stay near the linear baseline**, so cyan and orange are often sub-pixel apart. Green GT is also only ~1 px from linear on this clip — at 640×360 on a full court, that's visually almost the same line.
+
+So orange wasn't missing; it was **under green** and **nearly identical** to cyan/GT.
+
+### What we changed
+- Linear is now drawn **on top** (after GT and LSTM)
+- **Hollow orange circles** at each linear forecast step so you can see it even when the dashed segment overlaps green
+
+Regenerated: `data/runs/sportsmot_example/figures/forecast_qualitative.png`
+
+### How to read the figure
+- **Green filled dots** = ground truth future positions  
+- **Cyan dashed + dots** = LSTM forecast  
+- **Orange dashed + hollow rings** = linear baseline  
+
+When residual ≈ linear (your headline result), cyan and orange should look almost the same; both should track near green. That's expected for this model — the figure is showing "LSTM ≈ linear ≈ GT" rather than a large separation.
+
+If you want a panel where linear clearly diverges from GT, pick a higher-error window, e.g.:
+
+```powershell
+py scripts/plot_forecast_qualitative.py --dataset sportsmot_example --seed-id offset_0s --window-starts 4,11,22
+```
+
+(`t=4` had higher window ADE ~6 px in earlier runs.)
+
+_Tools used: Read, Shell, StrReplace_
+
+---
+
+## Turn 145
+
+### User
+
+create a table/chart with all 15 geometry free rule features for my to include in the Methods section
+
+### Assistant
+
+Creating a Methods-ready feature table and a publication figure from `utils/rule_features.py`.
+
+Created a Methods-ready table and figure for all **15 geometry-free rule features** (from `utils/rule_features.py`).
+
+## Artifacts
+
+| Asset | Path |
+|--------|------|
+| **Full write-up + LaTeX** | `docs/RULE_FEATURES_TABLE.md` |
+| **Figure (PNG)** | `data/runs/sportsmot_example/figures/rule_features_table.png` |
+| **Regenerate** | `py scripts/plot_rule_features_table.py` |
+
+## Feature groups (15-D total)
+
+| Group | Count | Features |
+|-------|------:|----------|
+| **Kinematic** | 5 | speed, vel\_x, vel\_y, is\_stationary, direction\_change |
+| **Social geometry** | 3 | hull\_margin, nearest\_neighbor, min\_pair\_spacing |
+| **Game state** | 7 | fast\_break, transition, half\_court, convergence, divergence, dead\_ball, cluster |
+
+Indices **8–14 are frame-level** (same value for all 10 player slots at time \(t\)).
+
+## Methods wording (one sentence)
+
+> We encode each observed frame with a 15-dimensional geometry-free rule vector derived from mask-center trajectories: five kinematic scalars, three social-relational distances, and seven binary game-state flags computed from roster-wide motion patterns (no court map or homography).
+
+## Note for the report
+
+These 15 features are **LSTM inputs (A1 / A1-residual)**, not the separate **track augmentation rules** (`velocity_cap`, `sanitize`, etc. in `utils/augmentation.py`). Your headline pipeline uses `sanitize_plus_velocity_cap` for tracks; rule features are an additional conditioning signal at forecast time.
+
+Copy the LaTeX `table` block from `docs/RULE_FEATURES_TABLE.md` into your external report, or include the PNG as a figure.
+
+_Tools used: Read, Grep, Write, Shell_
+
+---
+
+## Turn 146
+
+### User
+
+instead of turning it into a png, turn this chart into a copy/paste md for LaTeX upload for me to put in the report
+
+### Assistant
+
+Creating a dedicated LaTeX copy-paste document and updating the existing doc to point to it instead of the PNG.
+
+Created **`docs/RULE_FEATURES_LATEX.md`** — copy/paste LaTeX for your report (no PNG needed).
+
+### What’s in the file
+
+| Section | Use |
+|--------|-----|
+| **Intro paragraph** | 1–2 sentences before the table |
+| **Table 1** | Main Methods table (all 15 features) |
+| **Table 2** | Optional group summary (kinematic / social / game) |
+| **Table 3** | Optional appendix with full computation details |
+| **Single combined block** | Fastest paste: intro + Table 1 only |
+
+Open `docs/RULE_FEATURES_LATEX.md` and copy the block you want into Overleaf or your `.tex` file. The CS231N template already includes `booktabs`.
+
+**Recommended minimum for Methods:** use the **“Single combined block”** at the bottom of that file — it’s one intro paragraph plus `\begin{table}...\end{table}` with all 15 rows.
+
+Markdown reference (same content, non-LaTeX): `docs/RULE_FEATURES_TABLE.md`
+
+_Tools used: Read, Write, StrReplace_
+
+---
+
+## Turn 147
+
+### User
+
+Why was A2 so bad? why did adding rule features after the LSTM cause higher ADE than adding before the LSTM or not at all
+
+_Tools used: Grep, Read_
+
+---
+
+## Turn 148
+
+### User
+
+Why was A2 so bad? why did adding rule features after the LSTM cause higher ADE than adding before the LSTM or not at all
+
+### Assistant
+
+A2 failed for a structural reason: it uses the **wrong mechanism for the wrong problem**. Your numbers and code both point to the same story.
+
+## What A2 actually is
+
+A2 is **not** “rule features after the LSTM.” It is **hard post-processing** on the LSTM’s output tracks:
+
+```230:252:c:\Users\63npi\OneDrive\Desktop\CS231N\cs231n-player-trajectories\utils\lstm_predict.py
+def post_refine_tracks(tracks, rules_preset="game", gap_fill=False):
+    """Apply augmentation rules to predicted tracks JSON (A2)."""
+    ...
+    aug_frames, _log = apply_augmentation(
+        frames,
+        fw,
+        fh,
+        enabled_rules=enabled,
+        sanitize=False,
+        gap_fill=gap_fill,
+    )
+```
+
+That calls the **same** `apply_augmentation()` pipeline built for cleaning noisy SAM detections — rules like `velocity_cap`, `cluster_cohesion`, `convergence_pull`, etc. that **directly rewrite (x, y)** per player per frame.
+
+A1, by contrast, feeds **15-dim rule descriptors** into the LSTM as inputs; the network learns how (and whether) to use them.
+
+---
+
+## The numbers
+
+On your primary ablation run (`offset_0s`):
+
+| Variant | Forecast ADE |
+|---------|----------------|
+| A0 plain LSTM | **40.15 px** |
+| A2 post (game) | **45.27 px** (+5.1) |
+| A2 post (physical) | **45.00 px** (+4.8) |
+| A1 residual (learned, rules as input) | **7.25 px** |
+| Linear baseline | **6.35 px** |
+
+Per-rule attribution on plain LSTM forecasts is unambiguous: **every single rule hurts**, by roughly **+4.7 to +6.4 px**. Worst offender: `cluster_cohesion` (+6.38 px). None improve forecast ADE.
+
+That matches the multi-seed pattern in your docs: A2 post-refine consistently **increases** ADE; A1 (especially residual) **decreases** it vs A0.
+
+---
+
+## Why post-hoc rules hurt forecasts
+
+### 1. Rules were built for tracking cleanup, not forecasting
+
+Augmentation rules assume the input is **noisy SAM output** — merged boxes, impossible jumps, crowd artifacts. For example:
+
+- `velocity_cap` clamps motion above 75 px/frame (tracker glitch fix)
+- `spacing_push` separates overlapping detections
+- `hull_containment` pulls outliers back toward the group
+
+On LSTM forecasts, those “errors” often **aren’t errors** — they’re legitimate fast cuts, close defense, or screen actions. Hard-correcting them moves predictions **away from ground truth**.
+
+You already saw this at the **detection** layer: full game-rule stack on real GT hurt detection ADE (~7 px baseline → ~17–20 px with `full`). A2 applies the same philosophy to **future** positions.
+
+### 2. Hard edits vs soft conditioning
+
+| | A1 (before LSTM) | A2 (after LSTM) |
+|--|------------------|-----------------|
+| Mechanism | Rule **features** as extra inputs | Rule **functions** that move coordinates |
+| Learning | Trained end-to-end with forecast loss | No gradients; fixed heuristics |
+| When rules are wrong | Network can down-weight or ignore | Positions are forcibly moved |
+| Objective | Minimize ADE on training windows | “Look like plausible basketball” |
+
+A1 lets the model treat rules as **context** (“we’re in transition”, “player is stationary”). A2 treats them as **constraints** (“pull toward centroid”, “freeze on dead ball”, “blend toward collective angle”) — with no check against GT.
+
+### 3. Game heuristics conflict with short-horizon truth
+
+Your LSTM predicts **4 frames** (~0.16 s). Rules like `collective_momentum`, `convergence_pull`, `cluster_cohesion`, and `mirror_prediction` encode **team-level patterns** that are useful for stabilizing 45-frame tracks but often **wrong** for the immediate next few frames:
+
+- A player may **cut** while the detector says “convergence”
+- A **fast break** heuristic may flatten individual motion that GT shows diverging
+- `stationary_persistence` / `dead_ball_freeze` can lock players who are about to move
+
+Per-rule attribution shows game rules aren’t uniquely bad — **physical** rules also hurt (+4.7–5.0 px). Even `velocity_cap`, which helps on glitchy tracks, can **truncate valid fast motion** in forecasts.
+
+### 4. Error compounding on predicted trajectories
+
+`apply_augmentation` runs **sequentially** and builds history from already-corrected frames. On LSTM rollout:
+
+1. Forecast frame 1 gets nudged by a heuristic  
+2. That nudged position enters history  
+3. State detectors (`detect_fast_break`, `detect_convergence`, …) fire on **predicted** geometry  
+4. Frame 2’s rule fires from corrupted state → another nudge  
+
+There is no feedback loop to GT. Small heuristic errors **accumulate** over the 4-step horizon.
+
+### 5. A2 isn’t comparable to “rules help A1”
+
+A1’s rule **features** (from `utils/rule_features.py`) are related to the same basketball concepts but are:
+
+- **Continuous** (speed, hull margin, confidence flags), not discrete position edits  
+- Computed from **observed history** during training, aligned with what the LSTM sees  
+- Combined with **residual formulation** so the network predicts corrections to linear extrapolation — which is what made A1 actually beat linear (~5.8 px median vs ~6.4 px)
+
+A2 skips all of that: plain LSTM output → same augmentation engine → worse ADE.
+
+---
+
+## One-sentence summary for your report
+
+**A2 failed because geometry-free augmentation rules are deterministic track correctors tuned for SAM artifacts; applying them as hard post-hoc edits to learned forecasts pushes positions toward generic basketball plausibility rather than toward ground-truth future motion, and every rule in isolation increased forecast ADE by ~5 px — whereas A1 succeeds by letting the LSTM learn soft rule context inside the model.**
+
+---
+
+## How to frame it in the paper
+
+- **Negative result, same family as detection ablations:** “Rules that stabilize noisy detections do not transfer to forecast refinement.”  
+- **Design lesson:** Rule **information** (features) ≠ rule **enforcement** (post-processing).  
+- **Positive contrast:** A1 + residual shows rules help when **learned**, not when **imposed**.
+
+If you want, I can help draft a short “Ablation: A2 post-refine” paragraph for Methods/Results in Ask mode, or switch to Agent mode to pull the exact multi-seed median A2 numbers from `lstm_ablation_multi_seed.json`.
+
+_Tools used: Read, Grep_
 
 ---
